@@ -60,6 +60,36 @@ app.get('/catalogue/:id', function(req,res){
     })
 })
 
+//Get for admin purposes
+app.get('/admin/:table', function(req,res){
+    function tableselect(){
+        return(
+            {
+            catalogue: () => {
+                return(
+                    sql = `SELECT * FROM catalogue ORDER BY id DESC` )
+                },
+            cases: () => {
+                return(
+                    sql = `SELECT b.name as brands, b.id as brand_id, t.id as type_id,
+                    t.name as case_name, soft, hard FROM brands b JOIN type t ON b.id = t.brand_id ` )
+                }
+            }
+        )
+    }
+    sql1 = `SELECT * FROM brands ORDER BY name`
+    sql2 = `SELECT * FROM type ORDER BY name`
+    conn.query(tableselect()[req.params.table](), (err,results)=>{
+        if(err) throw err;
+        console.log(results)
+        conn.query(sql1, (err,results1)=>{
+            conn.query(sql2, (err,results2)=>{
+                res.send({items:results, brands: results1, type: results2})
+            })
+        })
+    })
+})
+
 
 
 

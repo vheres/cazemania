@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import Admin from './components/Admin'
 import Header from './components/Header';
 import Footer from './components/Footer';
 import HomePage from './components/HomePage';
@@ -44,6 +45,7 @@ class App extends Component {
           <Row>
             <Col xs={12} >
               <Route exact path="/" component={HomePage}/>
+              <Route exact path="/Admin" component={Admin}/>
               <Route path="/login" component={LoginPage}/>
               <Route path="/register" component={RegisterPage}/>
             </Col>
