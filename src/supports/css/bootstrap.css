@@ -6764,6 +6764,9 @@ button.close {
   -o-transition: background-color ease-in-out .3s;
      transition: background-color ease-in-out .3s;
 }
+.homepage-banner {
+  width: 100%;
+}
 .orange-text {
   color: rgb(255,165,39);
 }

@@ -7,7 +7,7 @@ class HomePage extends Component {
         <section>
             <Grid fluid>
                 <Row>
-                    <h1>This is Homepage</h1>
+                    <img src ="https://cdn.shopify.com/s/files/1/2689/9614/files/BANNER_COFFEE_LOVERS.jpg?v=1537540529" alt="banner" className="homepage-banner"></img>
                 </Row>
             </Grid>
         </section>
