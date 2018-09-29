@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import Header from './components/Header';
+import Footer from './components/Footer';
 import HomePage from './components/HomePage';
 import LoginPage from './components/LoginPage';
 import RegisterPage from './components/RegisterPage';
@@ -36,10 +37,10 @@ class App extends Component {
   render() {
     if (this.props.auth.cookieCheck === true) {
       return (
-        <div>
-        <Header />
-        <div>
         <Grid fluid>
+          <Row>
+            <Header />
+          </Row>
           <Row>
             <Col xs={12} >
               <Route exact path="/" component={HomePage}/>
@@ -47,9 +48,10 @@ class App extends Component {
               <Route path="/register" component={RegisterPage}/>
             </Col>
           </Row>
+          <Row>
+            <Footer />
+          </Row>
         </Grid>
-        </div>
-        </div>
       );
     }
     else {

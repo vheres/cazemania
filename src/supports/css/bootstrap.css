@@ -6774,6 +6774,20 @@ button.close {
 .orange-text {
   color: rgb(255,165,39);
 }
+.carousel-image {
+  padding-left: 5px;
+  padding-right: 5px;
+}
+.carousel-text {
+  text-align: center;
+}
+.Footer-css {
+  background-color: rgb(4,161,183);
+  margin-left: 15px;
+}
+.facebook-text {
+  margin-left: 10px;
+}
 .NavItemMargin {
   margin-left: 20px;
 }
