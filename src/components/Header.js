@@ -11,6 +11,8 @@ import { withRouter } from 'react-router-dom';
 const cookies = new Cookies();
 
 class Header extends Component { //kalo gak pake destructuring, tulisnya React.Component
+
+    //asdasdasdasdasdasds
     componentWillMount() {
         const theCookie = cookies.get('myCookie');
         if(theCookie !== undefined) {
