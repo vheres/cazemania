@@ -12,7 +12,7 @@ const cookies = new Cookies();
 
 class Header extends Component { //kalo gak pake destructuring, tulisnya React.Component
 
-    //asdasdasdasdasdasds
+    //ini william
     componentWillMount() {
         const theCookie = cookies.get('myCookie');
         if(theCookie !== undefined) {
