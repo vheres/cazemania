@@ -6767,6 +6767,10 @@ button.close {
 .homepage-banner {
   width: 100%;
 }
+.homepage-button {
+  width: 100%;
+  margin: 10px;
+}
 .orange-text {
   color: rgb(255,165,39);
 }

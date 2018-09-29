@@ -8,7 +8,10 @@ import { connect } from 'react-redux';
 import { keepLogin, onLogout, cookieChecked } from './actions';
 import { Route, withRouter } from 'react-router-dom';
 import Cookies from 'universal-cookie';
+import './supports/css/bootstrap.css';
 import './App.css';
+import './supports/css/app.css';
+
 
 const cookies = new Cookies();
 
@@ -35,7 +38,6 @@ class App extends Component {
       return (
         <div>
         <Header />
-        <br/><br/><br/>
         <div>
         <Grid fluid>
           <Row>

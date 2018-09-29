@@ -9,6 +9,8 @@ body {
   background-color: transparent;
   -webkit-font-smoothing: antialiased;
   line-height: 1.40;
+  margin: -15px;
+  padding-top: 100px;
 }
 .h1,
 .h2,
@@ -786,7 +788,7 @@ body.container {
   }
 }
 .navbar-header {
-  position: relative;
+  position: static-top;
 }
 .navbar-header > .btn {
   position: absolute;
@@ -815,8 +817,8 @@ body.container {
   text-decoration: none;
 }
 .navbar-brand img {
-  max-height: 20px;
-  margin-top: -4px;
+  max-height: 100px;
+  margin-top: 5px;
   vertical-align: middle;
 }
 .nav-primary li > a > i {

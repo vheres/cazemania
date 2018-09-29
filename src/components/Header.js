@@ -85,9 +85,9 @@ class Header extends Component { //kalo gak pake destructuring, tulisnya React.C
             <Grid fluid className="no-margin">
                 <Row>
                     <Navbar fixedTop={true} collapseOnSelect>
-                        <Navbar.Header style={{height:"100px"}}>
+                        <Navbar.Header>
                             <Navbar.Brand>
-                                <Link to="/"><img src="https://lh4.googleusercontent.com/k-yGYjiEqNwiYU-Dmc7wLVUSPaCd22hLU-CYmIHBaK7cfXYeKQJa4oUoQWWaQaskQzWK6WzHDIh-e4eTnsY=w1920-h969" alt="Caze Mania" style={{height:"400%"}}></img></Link>
+                                <Link to="/"><img src="https://lh4.googleusercontent.com/k-yGYjiEqNwiYU-Dmc7wLVUSPaCd22hLU-CYmIHBaK7cfXYeKQJa4oUoQWWaQaskQzWK6WzHDIh-e4eTnsY=w1920-h969" alt="Caze Mania" className="img.responsive"></img></Link>
                             </Navbar.Brand>
                             <Navbar.Toggle />
                         </Navbar.Header>
