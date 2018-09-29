@@ -33,13 +33,11 @@ class App extends Component {
   render() {
     if (this.props.auth.cookieCheck === true) {
       return (
+        <div>
+        <Header />
+        <br/><br/><br/>
+        <div>
         <Grid fluid>
-          <Row>
-            <Col xs={12} >
-              <Header />
-            </Col>
-          </Row>
-          <br />
           <Row>
             <Col xs={12} >
               <Route exact path="/" component={HomePage}/>
@@ -48,6 +46,8 @@ class App extends Component {
             </Col>
           </Row>
         </Grid>
+        </div>
+        </div>
       );
     }
     else {

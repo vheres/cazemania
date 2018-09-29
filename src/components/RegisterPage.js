@@ -25,7 +25,7 @@ class RegisterPage extends Component {
 
     render() {
         console.log(this.props.auth)
-        if(this.props.auth.username == "") {
+        if(this.props.auth.username === "") {
             return(
                 <div>
                     <Grid fluid>

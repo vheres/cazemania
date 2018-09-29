@@ -6,8 +6,8 @@ import { connect } from 'react-redux';
 import { onLogout } from '../actions';
 import Cookies from 'universal-cookie';
 import { keepLogin, cookieChecked } from '../actions';
+import { withRouter } from 'react-router-dom';
 
-var hello = "Hello, ";
 const cookies = new Cookies();
 
 class Header extends Component { //kalo gak pake destructuring, tulisnya React.Component
@@ -32,98 +32,96 @@ class Header extends Component { //kalo gak pake destructuring, tulisnya React.C
         this.props.onLogout();
     }
 
+    onLinkClick = (target) => {
+        this.props.history.push(target)
+    }
+
     renderNavbar = () => {   
         if(this.props.auth.username !== "") {
-            hello = "Hello, ";
-            hello += this.props.auth.username;
             return(
-                <Grid fluid>
-                    <Row className="show-grid">
-                        <Navbar fixedTop={true} inverse collapseOnSelect>
-                        <Navbar.Header>
+                <Grid fluid className="no-margin">
+                <Row>
+                    <Navbar fixedTop={true} collapseOnSelect>
+                        <Navbar.Header style={{height:"100px"}}>
                             <Navbar.Brand>
-                            <Link to="/">Caze Mania</Link>
+                                <Link to="/"><img src="https://lh4.googleusercontent.com/k-yGYjiEqNwiYU-Dmc7wLVUSPaCd22hLU-CYmIHBaK7cfXYeKQJa4oUoQWWaQaskQzWK6WzHDIh-e4eTnsY=w1920-h969" alt="Caze Mania" style={{height:"400%"}}></img></Link>
                             </Navbar.Brand>
                             <Navbar.Toggle />
                         </Navbar.Header>
-                        <Navbar.Collapse>
-                            <Nav>
-                            <NavItem eventKey={2}>
-                                <Link to="/">Reseller/Dropshipper</Link>
-                            </NavItem>
-                            <NavItem eventKey={2}>
-                                <Link to="/">Contact Us</Link>
-                            </NavItem>
-                            {/* <NavDropdown eventKey={3} title="Gym" id="basic-nav-dropdown">
-                                <MenuItem eventKey={3.1}>Free Weight</MenuItem>
-                                <MenuItem eventKey={3.2}>Body Weight</MenuItem>
-                                <MenuItem eventKey={3.3}></MenuItem>
-                                <MenuItem divider />
-                                <MenuItem eventKey={3.3}>Separated link</MenuItem>
-                            </NavDropdown> */}
-                            <NavItem eventKey={4}>
-                            <Link to="/cart">Cart</Link>
-                            </NavItem>
-                            <NavItem eventKey={4}>
-                            <Link to="/admin">Admin</Link>
-                            </NavItem>
-                            </Nav>
-                            <Nav pullRight>
-                            <NavDropdown eventKey={1} title={hello} id="basic-nav-dropdown">
-                                <Link to="/"><input type="button" onClick={this.onLogoutClick} value="logout"/></Link>
-                            </NavDropdown>
-                            </Nav>
-                        </Navbar.Collapse>
-                        </Navbar>
-                    </Row>
-                </Grid>
+                        <Navbar.Collapse>                       
+                                <Nav>
+                                    <NavItem eventKey={1} className="header-button" onClick={()=>this.onLinkClick("/")}>
+                                        <h4 className="orange-text">Shop</h4>
+                                    </NavItem>
+                                    <NavItem eventKey={2} className="header-button" onClick={()=>this.onLinkClick("/")}>
+                                        <h4 className="orange-text">Reseller/Dropshipper</h4>
+                                    </NavItem>
+                                    <NavItem eventKey={3} className="header-button" onClick={()=>this.onLinkClick("/")}>
+                                        <h4 className="orange-text">Contact Us</h4>
+                                    </NavItem>
+                                    <NavItem eventKey={4} className="header-button" onClick={()=>this.onLinkClick("/")}>
+                                        <h4 className="orange-text">Admin</h4>
+                                    </NavItem>
+                                </Nav>
+                                <Nav pullRight>
+                                    <NavItem eventKey={5} className="header-button" onClick={()=>this.onLinkClick("/")}>
+                                        <h4 className="orange-text">Cart</h4>
+                                    </NavItem>
+                                    <NavDropdown eventKey={6} title={"Hello, " + this.props.auth.username} className="header-button">
+                                        <MenuItem eventKey={6.1} onClick={()=>this.onLogoutClick()}>
+                                        <h4>Logout</h4>
+                                        </MenuItem>
+                                    </NavDropdown>
+                                </Nav>
+                        </Navbar.Collapse>       
+                    </Navbar> 
+                </Row>
+            </Grid>
             );
         }
 
         return(
             <Grid fluid className="no-margin">
-                <Row className="show-grid">
-                    <Navbar fixedTop={true} inverse collapseOnSelect>
-                        <Navbar.Header>
+                <Row>
+                    <Navbar fixedTop={true} collapseOnSelect>
+                        <Navbar.Header style={{height:"100px"}}>
                             <Navbar.Brand>
-                                <Link to="/">Caze Mania</Link>
+                                <Link to="/"><img src="https://lh4.googleusercontent.com/k-yGYjiEqNwiYU-Dmc7wLVUSPaCd22hLU-CYmIHBaK7cfXYeKQJa4oUoQWWaQaskQzWK6WzHDIh-e4eTnsY=w1920-h969" alt="Caze Mania" style={{height:"400%"}}></img></Link>
                             </Navbar.Brand>
                             <Navbar.Toggle />
                         </Navbar.Header>
-                        <Navbar.Collapse>
-                            <Nav>
-                            <NavItem eventKey={2}>
-                                <Link to="/">Reseller/Dropshipper</Link>
-                            </NavItem>
-                            <NavItem eventKey={2}>
-                                <Link to="/">Contact Us</Link>
-                            </NavItem>
-                            {/* <NavDropdown eventKey={3} title="Gym" id="basic-nav-dropdown">
-                                <MenuItem eventKey={3.1}>Free Weight</MenuItem>
-                                <MenuItem eventKey={3.2}>Body Weight</MenuItem>
-                                <MenuItem eventKey={3.3}></MenuItem>
-                                <MenuItem divider />
-                                <MenuItem eventKey={3.3}>Separated link</MenuItem>
-                            </NavDropdown> */}
-                            <NavItem eventKey={2}>
-                            <Link to="/cart">Cart</Link>
-                            </NavItem>
-                            <NavItem eventKey={4}>
-                            <Link to="/admin">Admin</Link>
-                            </NavItem>
-                            </Nav>
-                            <Nav pullRight>
-                            <NavItem eventKey={1}>
-                                <Link to="/login">Login</Link>
-                            </NavItem>
-                            <NavItem eventKey={2}>
-                                <Link to="/register">Register</Link>
-                            </NavItem>
-                            </Nav>
-                        </Navbar.Collapse>
-                        </Navbar>
-                    </Row>
-                </Grid>
+                        <Navbar.Collapse>                       
+                                <Nav>
+                                    <NavItem eventKey={1} className="header-button" onClick={()=>this.onLinkClick("/")}>
+                                        <h4 className="orange-text">Shop</h4>
+                                    </NavItem>
+                                    <NavItem eventKey={2} className="header-button" onClick={()=>this.onLinkClick("/")}>
+                                        <h4 className="orange-text">Reseller/Dropshipper</h4>
+                                    </NavItem>
+                                    <NavItem eventKey={3} className="header-button" onClick={()=>this.onLinkClick("/")}>
+                                        <h4 className="orange-text">Contact Us</h4>
+                                    </NavItem>
+                                    <NavItem eventKey={4} className="header-button" onClick={()=>this.onLinkClick("/")}>
+                                        <h4 className="orange-text">Admin</h4>
+                                    </NavItem>
+                                </Nav>
+                                <Nav pullRight>
+                                    <NavItem eventKey={5} className="header-button" onClick={()=>this.onLinkClick("/")}>
+                                        <h4 className="orange-text">Cart</h4>
+                                    </NavItem>
+                                    <NavDropdown eventKey={6} title="Account" className="header-button">
+                                        <MenuItem eventKey={6.1} onClick={()=>this.onLinkClick("/login")}>
+                                        <h4>Login</h4>
+                                        </MenuItem>
+                                        <MenuItem eventKey={6.2} onClick={()=>this.onLinkClick("/register")}>
+                                        <h4>Register</h4>
+                                        </MenuItem>
+                                    </NavDropdown>
+                                </Nav>
+                        </Navbar.Collapse>       
+                    </Navbar> 
+                </Row>
+            </Grid>
         );
     }
     render() {
@@ -139,4 +137,4 @@ const mapStateToProps = (state) => {
     return { auth };
 }
 
-export default connect(mapStateToProps, { onLogout, keepLogin, cookieChecked })(Header);
+export default withRouter(connect(mapStateToProps, { onLogout, keepLogin, cookieChecked })(Header));
