@@ -6781,12 +6781,38 @@ button.close {
 .carousel-text {
   text-align: center;
 }
+.HomePage-css {
+  margin-right: -15px;
+  background-color: white;
+}
 .Footer-css {
   background-color: rgb(4,161,183);
   margin-left: 15px;
 }
 .facebook-text {
   margin-left: 10px;
+}
+.bestseller-css {
+  background-color: rgb(255, 184, 109);
+}
+.instagram-css {
+  background-color: rgb(255, 184, 109);
+  padding-top: 15px;
+}
+.padding-15p {
+  padding-top: 15px;
+  padding-bottom: 15px;
+}
+.margin-15 {
+  margin-left: -15px;
+  margin-right: -15px;
+}
+.margin-15p {
+  margin-left: 15px;
+  margin-right: 15px;
+}
+.instagram-title {
+  font-size: 24px;
 }
 .NavItemMargin {
   margin-left: 20px;
