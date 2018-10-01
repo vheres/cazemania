@@ -3,6 +3,8 @@ import Admin from './components/Admin'
 import Header from './components/Header';
 import Footer from './components/Footer';
 import HomePage from './components/HomePage';
+import ShopPage from './components/ShopPage';
+import CartPage from './components/CartPage';
 import LoginPage from './components/LoginPage';
 import RegisterPage from './components/RegisterPage';
 import { Grid, Row, Col } from 'react-bootstrap';
@@ -45,7 +47,9 @@ class App extends Component {
           <Row>
             <Col xs={12} >
               <Route exact path="/" component={HomePage}/>
-              <Route exact path="/Admin" component={Admin}/>
+              <Route path="/shop" component={ShopPage}/>
+              <Route path="/cart" component={CartPage}/>
+              <Route path="/Admin" component={Admin}/>
               <Route path="/login" component={LoginPage}/>
               <Route path="/register" component={RegisterPage}/>
             </Col>

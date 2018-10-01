@@ -51,7 +51,7 @@ class Header extends Component { //kalo gak pake destructuring, tulisnya React.C
                         </Navbar.Header>
                         <Navbar.Collapse>                       
                                 <Nav>
-                                    <NavItem eventKey={1} className="header-button" onClick={()=>this.onLinkClick("/")}>
+                                    <NavItem eventKey={1} className="header-button" onClick={()=>this.onLinkClick("/shop")}>
                                         <h4 className="orange-text">Shop</h4>
                                     </NavItem>
                                     <NavItem eventKey={2} className="header-button" onClick={()=>this.onLinkClick("/")}>
@@ -65,7 +65,7 @@ class Header extends Component { //kalo gak pake destructuring, tulisnya React.C
                                     </NavItem>
                                 </Nav>
                                 <Nav pullRight>
-                                    <NavItem eventKey={5} className="header-button" onClick={()=>this.onLinkClick("/")}>
+                                    <NavItem eventKey={5} className="header-button" onClick={()=>this.onLinkClick("/cart")}>
                                         <h4 className="orange-text">Cart</h4>
                                     </NavItem>
                                     <NavDropdown eventKey={6} title={"Hello, " + this.props.auth.username} className="header-button">
@@ -93,7 +93,7 @@ class Header extends Component { //kalo gak pake destructuring, tulisnya React.C
                         </Navbar.Header>
                         <Navbar.Collapse>                       
                                 <Nav>
-                                    <NavItem eventKey={1} className="header-button" onClick={()=>this.onLinkClick("/")}>
+                                    <NavItem eventKey={1} className="header-button" onClick={()=>this.onLinkClick("/shop")}>
                                         <h4 className="orange-text">Shop</h4>
                                     </NavItem>
                                     <NavItem eventKey={2} className="header-button" onClick={()=>this.onLinkClick("/")}>
@@ -107,7 +107,7 @@ class Header extends Component { //kalo gak pake destructuring, tulisnya React.C
                                     </NavItem>
                                 </Nav>
                                 <Nav pullRight>
-                                    <NavItem eventKey={5} className="header-button" onClick={()=>this.onLinkClick("/")}>
+                                    <NavItem eventKey={5} className="header-button" onClick={()=>this.onLinkClick("/cart")}>
                                         <h4 className="orange-text">Cart</h4>
                                     </NavItem>
                                     <NavDropdown eventKey={6} title="Account" className="header-button">
