@@ -6755,9 +6755,6 @@ button.close {
   }
 }
 /*# sourceMappingURL=bootstrap.css.map */
-.header-button {
-  
-}
 .header-button:hover {
   background-color: rgb(4,161,183);
   -webkit-transition: background-color ease-in-out .3s;
@@ -6769,7 +6766,8 @@ button.close {
 }
 .homepage-button {
   width: 100%;
-  margin: 10px;
+  margin-top: 10px;
+  margin-bottom: 10px;
 }
 .orange-text {
   color: rgb(255,165,39);
@@ -6782,7 +6780,6 @@ button.close {
   text-align: center;
 }
 .HomePage-css {
-  margin-right: -15px;
   background-color: white;
 }
 .Footer-css {

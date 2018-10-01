@@ -40,9 +40,9 @@ class Header extends Component { //kalo gak pake destructuring, tulisnya React.C
     renderNavbar = () => {   
         if(this.props.auth.username !== "") {
             return(
-                <Grid fluid className="no-margin">
+                <Grid fluid>
                 <Row>
-                    <Navbar fixedTop={true} collapseOnSelect>
+                    <Navbar fixedTop={true} collapseOnSelect fluid>
                         <Navbar.Header style={{height:"100px"}}>
                             <Navbar.Brand>
                                 <Link to="/"><img src="https://lh4.googleusercontent.com/k-yGYjiEqNwiYU-Dmc7wLVUSPaCd22hLU-CYmIHBaK7cfXYeKQJa4oUoQWWaQaskQzWK6WzHDIh-e4eTnsY=w1920-h969" alt="Caze Mania" style={{height:"400%"}}></img></Link>
@@ -82,9 +82,9 @@ class Header extends Component { //kalo gak pake destructuring, tulisnya React.C
         }
 
         return(
-            <Grid fluid className="no-margin">
+            <Grid fluid>
                 <Row>
-                    <Navbar fixedTop={true} collapseOnSelect>
+                    <Navbar fixedTop={true} collapseOnSelect fluid>
                         <Navbar.Header>
                             <Navbar.Brand>
                                 <Link to="/"><img src="https://lh4.googleusercontent.com/k-yGYjiEqNwiYU-Dmc7wLVUSPaCd22hLU-CYmIHBaK7cfXYeKQJa4oUoQWWaQaskQzWK6WzHDIh-e4eTnsY=w1920-h969" alt="Caze Mania" className="img.responsive"></img></Link>
