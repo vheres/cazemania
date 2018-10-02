@@ -60,7 +60,7 @@ class Header extends Component { //kalo gak pake destructuring, tulisnya React.C
                                     <NavItem eventKey={3} className="header-button" onClick={()=>this.onLinkClick("/")}>
                                         <h4 className="orange-text">Contact Us</h4>
                                     </NavItem>
-                                    <NavItem eventKey={4} className="header-button" onClick={()=>this.onLinkClick("/")}>
+                                    <NavItem eventKey={4} className="header-button" onClick={()=>this.onLinkClick("/Admin?table=cases")}>
                                         <h4 className="orange-text">Admin</h4>
                                     </NavItem>
                                 </Nav>
@@ -102,7 +102,7 @@ class Header extends Component { //kalo gak pake destructuring, tulisnya React.C
                                     <NavItem eventKey={3} className="header-button" onClick={()=>this.onLinkClick("/")}>
                                         <h4 className="orange-text">Contact Us</h4>
                                     </NavItem>
-                                    <NavItem eventKey={4} className="header-button" onClick={()=>this.onLinkClick("/")}>
+                                    <NavItem eventKey={4} className="header-button" onClick={()=>this.onLinkClick("/Admin?table=cases")}>
                                         <h4 className="orange-text">Admin</h4>
                                     </NavItem>
                                 </Nav>

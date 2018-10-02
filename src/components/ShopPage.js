@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import { Grid, Row, Col  } from 'react-bootstrap';
 import axios from 'axios'
 import {API_URL_1} from '../supports/api-url/apiurl'
+import ItemDetail from './ItemDetail';
 
 class ShopPage extends Component {
     state = { catalogue: [] }
@@ -13,8 +14,7 @@ class ShopPage extends Component {
     getCatalogueList() {
         axios.get(API_URL_1 + "/catalogue")
         .then((response)=>{
-            this.setState({ catalogue: response.data})
-            console.log(this.state.catalogue)
+            this.setState({ catalogue: response.data.catalogue})
         })
     }
 
@@ -36,6 +36,16 @@ class ShopPage extends Component {
                 </Row>
             </section>
         );
+    }
+
+    renderCatalogue() {
+        console.log(this.state.catalogue)
+        var arrJSX = this.state.catalogue.map(item => {
+            return (
+                <ItemDetail id={item.id} name={item.name} image={item.image} sales={item.sales}/>
+            );
+        })
+        return arrJSX
     }
 
     renderShopPage() {
@@ -63,7 +73,7 @@ class ShopPage extends Component {
                             </Row>
                             <hr/>
                             <Row>
-                                render items
+                                {this.renderCatalogue()}
                             </Row>
                         </Grid>        
                     </Col>

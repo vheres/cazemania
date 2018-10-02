@@ -69,7 +69,7 @@ class Admin extends Component {
         for(var num in data){
             console.log(data[num].brand_id)
             console.log(this.refs.brand_select.value)
-            if(data[num].brand_id === this.refs.brand_select.value){
+            if(data[num].brand_id === parseInt(this.refs.brand_select.value)){
                 tempArr.push(data[num])
             }
         }
@@ -112,7 +112,7 @@ class Admin extends Component {
         var data = this.state.type
         var tempVar = {soft: 0, hard: 0}
         for(var num in data){
-            if(data[num].id === this.refs.type_select.value){
+            if(data[num].id === parseInt(this.refs.type_select.value)){
                 tempVar = data[num]
             }
         }
