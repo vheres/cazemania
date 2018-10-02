@@ -1,8 +1,23 @@
 import React, { Component } from 'react';
 import { Grid, Row, Col  } from 'react-bootstrap';
+import axios from 'axios'
+import {API_URL_1} from '../supports/api-url/apiurl'
 
 class ShopPage extends Component {
-    
+    state = { catalogue: [] }
+
+    componentWillMount() {
+        this.getCatalogueList();
+    }
+
+    getCatalogueList() {
+        axios.get(API_URL_1 + "/catalogue")
+        .then((response)=>{
+            this.setState({ catalogue: response.data})
+            console.log(this.state.catalogue)
+        })
+    }
+
     renderFilterMenu() {
         return(
             <section>
@@ -12,27 +27,8 @@ class ShopPage extends Component {
                     <br/>
                 </Row>
                 <Row>
-                    <p>Brand</p>
-                    <select ref="searchBrand" class="form-control">
-                        <option value="">Brand</option>
-                        //renderBrandOption
-                    </select>
-                    <br/>
-                </Row>
-                <Row>
-                    <p>Model</p>
-                    <select ref="searchModel" class="form-control">
-                        <option value="">Model</option>
-                        //renderModelOption
-                    </select>
-                    <br/>
-                </Row>
-                <Row>
-                    <p>Case</p>
-                    <select ref="searchCase" class="form-control">
-                        <option value="">Case</option>
-                        //renderCaseOption
-                    </select>
+                    <p>Product's Name</p>
+                    <input type="text" ref="searchName" class="form-control" id="inputSearchName" placeholder="Product's Name" />
                     <br/>
                 </Row>
                 <Row>

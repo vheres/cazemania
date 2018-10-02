@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import Admin from './components/Admin'
 import Header from './components/Header';
 import Footer from './components/Footer';
-import HomePage from './components/HomePage';
+import HomePage from './components/Homepage';
 import ShopPage from './components/ShopPage';
 import CartPage from './components/CartPage';
 import LoginPage from './components/LoginPage';
@@ -19,7 +19,7 @@ import './supports/css/app.css';
 
 const cookies = new Cookies();
 
-class App extends Component {
+class App extends Component {  
   componentWillMount() {
     const theCookie = cookies.get('myCookie');
     if (theCookie !== undefined) {
@@ -56,6 +56,9 @@ class App extends Component {
           </Row>
           <Row>
             <Footer />
+          </Row>
+          <Row>
+              
           </Row>
         </Grid>
       );

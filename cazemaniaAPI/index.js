@@ -13,10 +13,10 @@ app.use(url)
 app.use(bodyParser.json())
 
 const conn = mysql.createConnection({
-    host : 'localhost',
-    user : 'root',
-    password : '031998',
-    database : 'cazemania',
+    host : 'us-cdbr-iron-east-01.cleardb.net',
+    user : 'bde441d3eff40c',
+    password : '7d59e0bc',
+    database : 'heroku_a67561992c3e45d',
     port: 3306
     });
 
