@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import Admin from './components/Admin'
 import Header from './components/Header';
 import Footer from './components/Footer';
-import HomePage from './components/HomePage';
+import HomePage from './components/Homepage';
 import ShopPage from './components/ShopPage';
 import CartPage from './components/CartPage';
 import LoginPage from './components/LoginPage';
