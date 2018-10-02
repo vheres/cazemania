@@ -19,7 +19,7 @@ import './supports/css/app.css';
 
 const cookies = new Cookies();
 
-class App extends Component {
+class App extends Component {  
   componentWillMount() {
     const theCookie = cookies.get('myCookie');
     if (theCookie !== undefined) {
@@ -56,6 +56,9 @@ class App extends Component {
           </Row>
           <Row>
             <Footer />
+          </Row>
+          <Row>
+              
           </Row>
         </Grid>
       );
