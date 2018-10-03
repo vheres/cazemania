@@ -25,7 +25,7 @@ class DetailPage extends Component {
         })
         return(
             <select ref="brand_select" className="form-control" style={{width:"80%"}} onChange={()=>this.typeFilter()}>
-                <option value={0}>--SELECT BRAND--</option>
+                <option value={0}>SELECT BRAND</option>
                 {arrJSX}
             </select>
         )
@@ -54,7 +54,7 @@ class DetailPage extends Component {
         console.log(this.state.typeselect)
         return(
         <select ref="type_select" className="form-control" style={{width:"80%"}} onChange={()=>this.onModelSelect()}>
-            <option value={0}>----------SELECT TYPE----------</option>
+            <option value={0}>SELECT MODEL</option>
             {arrJSX}
         </select>
         )
@@ -76,24 +76,24 @@ class DetailPage extends Component {
             [
                 [
                     <select ref="case_select" className="form-control" style={{width:"80%"}}>
-                        <option value={0}>----------SELECT CASE----------</option>
+                        <option value={0}>SELECT CASE</option>
                         <option value="hard" disabled>HARD CASE -- unavailable</option>
                         <option value="soft" disabled>SOFT CASE -- unavailable</option>
                     </select>,
                     <select ref="case_select" className="form-control" style={{width:"80%"}}>
-                        <option value={0}>----------SELECT CASE----------</option>
+                        <option value={0}>SELECT CASE</option>
                         <option value="hard" disabled>HARD CASE -- unavailable</option>
                         <option value="soft" >SOFT CASE</option>
                     </select>
                 ],
                 [
                     <select ref="case_select" className="form-control" style={{width:"80%"}}>
-                        <option value={0}>----------SELECT CASE----------</option>
+                        <option value={0}>SELECT CASE</option>
                         <option value="hard">HARD CASE</option>
                         <option value="soft"  disabled>SOFT CASE -- unavailable</option>
                     </select>,
                     <select ref="case_select" className="form-control" style={{width:"80%"}}>
-                        <option value={0}>----------SELECT CASE----------</option>
+                        <option value={0}>SELECT CASE</option>
                         <option value="hard">HARD CASE</option>
                         <option value="soft">SOFT CASE</option>
                     </select>
