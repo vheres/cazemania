@@ -90,6 +90,20 @@ app.get('/admin/:table', function(req,res){
     })
 })
 
+app.get('/item/:id', function(req,res){
+    sql  = `SELECT * FROM catalogue WHERE id=${req.params.id}`
+    sql1 = `SELECT * FROM brands ORDER BY name`
+    sql2 = `SELECT * FROM type ORDER BY name`
+    conn.query(sql, (err,results)=>{
+        if(err) throw err;
+        console.log(results)
+        conn.query(sql1, (err,results1)=>{
+            conn.query(sql2, (err,results2)=>{
+                res.send({item:results, brands: results1, type: results2})
+            })
+        })
+    })
+})
 
 
 
