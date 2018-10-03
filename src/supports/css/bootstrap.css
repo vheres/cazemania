@@ -6833,6 +6833,16 @@ button.close {
 .login-error {
   margin-right: 20px;
 }
+.price-text {
+  color: rgb(255, 102, 0);
+  font-weight: bold;
+}
+.no-margin {
+  margin: 0;
+}
+.center-item {
+
+}
 
 
 
