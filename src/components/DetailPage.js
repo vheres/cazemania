@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { Grid, Row, Col  } from 'react-bootstrap';
+import { Grid, Row, Col, FormGroup, InputGroup, Button, FormControl  } from 'react-bootstrap';
 import axios from 'axios'
 import {API_URL_1} from '../supports/api-url/apiurl'
 import { connect } from 'react-redux';
@@ -21,6 +21,11 @@ class DetailPage extends Component {
     //         console.log(err);
     //     });
     // }
+
+    onPlusClick() {
+        this.refs.quantity.value += 1;
+        console.log(this.refs.quantity.value)
+    }
 
     renderDetailPage() {
         return(
@@ -76,24 +81,28 @@ class DetailPage extends Component {
                                         <h4>Quantity</h4>
                                     </Row>
                                 </Col>
-                                <Col md={1}>
+                                <Col md={3}>
                                     <br/>
-                                    <input type="button" className="btn btn-danger no-margin" value="-" style={{width:"35px"}}></input>
-                                </Col>
-                                <Col md={1}>
-                                    <br/>
-                                    <input type="text" ref="quantity" className="form-control center-item no-margin text-center" defaultValue={1} style={{width:"50px"}}></input>
-                                </Col>
-                                <Col md={1}>
-                                    <br/>
-                                    <input type="button" className="btn btn-success no-margin" value="+" style={{width:"35px"}}></input>
+                                    <FormGroup>
+                                        <InputGroup>
+                                        <InputGroup.Button>
+                                            <Button className="btn btn-danger">-</Button>
+                                        </InputGroup.Button>
+                                        <FormControl type="text" ref="quantity" className="form-control text-center" defaultValue="1"/>
+                                        <InputGroup.Button>
+                                            <Button className="btn btn-danger" onClick={()=>this.onPlusClick()}>+</Button>
+                                        </InputGroup.Button>
+                                        </InputGroup>
+                                    </FormGroup>
                                 </Col>
                             </Row>
                             <Row>
                                 <Col md={3}>
                                     <Row>
                                         <br/>
-                                        <input type="button" className="btn btn-primary" value="Add to Cart" style={{width:"100%"}}></input>
+                                        <input type="button" className="btn btn-success" value="Add to Cart" style={{width:"100%"}}></input>
+                                    </Row>
+                                    <Row>
                                     </Row>
                                 </Col>
                             </Row>
