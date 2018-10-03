@@ -8,7 +8,7 @@ class Admin extends Component {
 
     state={data: [], brands: [], types: [], typeselect: [""], caseselect: {soft: 0, hard: 0}}
     componentWillMount(){
-        axios.get("http://localhost:1994"+ "/admin/cases")
+        axios.get(API_URL_1 + "/admin/cases")
         .then((res)=>{
             console.log(res.data)
             this.setState({data:res.data.items, brands: res.data.brands, type: res.data.type})
@@ -30,7 +30,7 @@ class Admin extends Component {
 
     onTableSelect(TABLE_NAME){
         var url = "/Admin?table=" + TABLE_NAME
-        axios.get("http://localhost:1994" + "/admin/" + TABLE_NAME)
+        axios.get(API_URL_1 + "/admin/" + TABLE_NAME)
         .then((response)=>{
             console.log(response.data)
             this.setState({data: response.data})
@@ -69,7 +69,7 @@ class Admin extends Component {
         for(var num in data){
             console.log(data[num].brand_id)
             console.log(this.refs.brand_select.value)
-            if(data[num].brand_id == this.refs.brand_select.value){
+            if(data[num].brand_id === parseInt(this.refs.brand_select.value)){
                 tempArr.push(data[num])
             }
         }
@@ -112,7 +112,7 @@ class Admin extends Component {
         var data = this.state.type
         var tempVar = {soft: 0, hard: 0}
         for(var num in data){
-            if(data[num].id == this.refs.type_select.value){
+            if(data[num].id === parseInt(this.refs.type_select.value)){
                 tempVar = data[num]
             }
         }
