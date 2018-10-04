@@ -105,6 +105,46 @@ app.get('/item/:id', function(req,res){
     })
 })
 
+app.get('/cart/:id', function(req,res){
+    sql  = `SELECT car.id, cat.code, cat.name, cat.image,  car.brand_id, car.model_id, car.case_type, car.amount, br.name as brand_name, ty.name as model_name, pr.price as price FROM catalogue cat JOIN cart car ON cat.id=car.catalogue_id JOIN brands br ON br.id = car.brand_id 
+    JOIN type ty ON ty.id = car.model_id JOIN price pr ON pr.case_type = car.case_type WHERE car.user_id=${req.params.id}`
+
+    conn.query(sql, (err,results)=>{
+        if(err) throw err;
+        console.log(results)
+        
+    })
+})
+app.post('/transaction', function(req,res){
+
+    data = {
+        user_id = req.body.id,
+        date = req.body.date,
+        time = req.body.time,
+        total_price = req.body.total_price,
+        account_holder = req.body.account_holder,
+        source_bank = req.body.source_bank,
+        target_bank = req.body.target_bank
+    }
+
+    sql = `INSERT INTO transactions SET ?`
+    sql1 = `SELECT id FROM transactions WHERE user_id = ${data.user_id}`
+    sql2 = `INSERT INTO transaction_details (transaction_id, catalogue_id, case_type, price) VALUES`
+    
+
+    conn.query(sql, (err,results)=>{
+        conn.query(sql1, (err,results1)=>{
+            for(var index in array){
+                sql1 += `(${results1[0]}, ${array[index].catalogue.id}, )` 
+            }
+
+            conn.query(sql2, (err,results1)=>{
+                res.send({results1})
+            })
+        })
+    })
+})
+
 
 
 app.listen(port, () => console.log(`Example app listening on port ${port}!`));
