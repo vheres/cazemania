@@ -17,7 +17,6 @@ import './supports/css/bootstrap.css';
 import './App.css';
 import './supports/css/app.css';
 
-
 const cookies = new Cookies();
 
 class App extends Component {  

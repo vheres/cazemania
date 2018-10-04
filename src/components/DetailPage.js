@@ -3,6 +3,7 @@ import { Grid, Row, Col, FormGroup, InputGroup, Button, FormControl  } from 'rea
 import axios from 'axios'
 import {API_URL_1} from '../supports/api-url/apiurl'
 import { connect } from 'react-redux';
+import Magnifier from 'react-magnifier';
 
 class DetailPage extends Component {
     state={item: [], brands: [], types: [], typeselect: [""], caseselect: {soft: 0, hard: 0}}
@@ -114,7 +115,7 @@ class DetailPage extends Component {
                     <Row>
                         <Col md={2}></Col>
                         <Col md={3}>
-                            <img src="https://cf.shopee.co.id/file/d5d8b0b37ff26c33d554b48cf24bf7b4" alt="product's image" style={{width:"100%"}}></img>
+                            <Magnifier src="https://cf.shopee.co.id/file/d5d8b0b37ff26c33d554b48cf24bf7b4" width={"100%"} />
                         </Col>
                         <Col md={4}>
                             <Row>

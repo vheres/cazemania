@@ -133,9 +133,9 @@ class Header extends Component { //kalo gak pake destructuring, tulisnya React.C
     }
     render() {
         return (
-            this.renderNavbar()
-    );
-}
+            this.renderNavbar()              
+        );
+    }
 }
 
 const mapStateToProps = (state) => {
@@ -143,5 +143,7 @@ const mapStateToProps = (state) => {
 
     return { auth };
 }
+
+
 
 export default withRouter(connect(mapStateToProps, { onLogout, keepLogin, cookieChecked })(Header));
