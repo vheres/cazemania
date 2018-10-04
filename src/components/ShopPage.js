@@ -26,17 +26,23 @@ class ShopPage extends Component {
         return(
             <section>
                 <Row>
-                    <p>Product's Code</p>
-                    <input type="text" ref="searchCode" class="form-control" id="inputSearchCode" placeholder="Product's Code" />
-                    <br/>
+                    <Col xsOffset={1} xs={10} mdOffset={0} md={12}>
+                        <p>Product's Code</p>
+                        <input type="text" ref="searchCode" class="form-control" id="inputSearchCode" placeholder="Product's Code" />
+                        <br/>
+                    </Col>
                 </Row>
                 <Row>
-                    <p>Product's Name</p>
-                    <input type="text" ref="searchName" class="form-control" id="inputSearchName" placeholder="Product's Name" />
-                    <br/>
+                    <Col xsOffset={1} xs={10} mdOffset={0} md={12}>
+                        <p>Product's Name</p>
+                        <input type="text" ref="searchName" class="form-control" id="inputSearchName" placeholder="Product's Name" />
+                        <br/>
+                    </Col>
                 </Row>
                 <Row>
-                    <input type="button" class="btn btn-success" style={{width:100}} value="A P P L Y"/>
+                    <Col xsOffset={1} xs={10} mdOffset={0}>
+                        <input type="button" class="btn btn-success" style={{width:100}} value="A P P L Y"/>
+                    </Col>
                 </Row>
             </section>
         );
@@ -60,26 +66,15 @@ class ShopPage extends Component {
                         {this.renderFilterMenu()}
                     </Col>
                     <Col md={8}>
-                        <Grid fluid>
                             <Row>
-                                <Col md={8}>
-                                <p className="padding-text">Menampilkan ### produk</p>
-                                </Col>
-                                <Col md={2}>
-                                    <p className="text-right padding-text">Urutkan: </p>
-                                </Col>
-                                <Col md={2}>
-                                    <select ref="urutkan" class="form-control">
-                                        <option value="">Paling Sesuai</option>
-                                        //renderUrutkan
-                                    </select>
+                                <Col xsHidden md={12}>
+                                    <p className="padding-text">Menampilkan ### produk</p>
                                 </Col>
                             </Row>
                             <hr/>
                             <Row>
                                 {this.renderCatalogue()}
-                            </Row>
-                        </Grid>        
+                            </Row>      
                     </Col>
                 </Grid>
             );

@@ -119,31 +119,31 @@ class DetailPage extends Component {
                         </Col>
                         <Col md={4}>
                             <Row>
-                                <h3>Flamingo</h3>    
+                                <Col xsOffset={1} mdOffset={0} md={12}><h3>Flamingo</h3></Col>  
                             </Row>
                             <Row>
-                                <h2 className="price-text">Rp50.000 - Rp150.000</h2>    
+                                <Col xsOffset={1} mdOffset={0} md={12}><h2 className="price-text">Rp50.000 - Rp150.000</h2></Col> 
                             </Row>
                             <Row>
-                                <Col md={4}>
+                                <Col xsOffset={1} mdOffset={0} md={4}>
                                     <Row>
-                                        <h4>Brand</h4>
+                                        <h4><strong>Brand</strong></h4>
                                     </Row>
                                     <Row>
                                         {this.brandSelectOptions()}
                                     </Row>     
                                 </Col>
-                                <Col md={4}>
+                                <Col xsOffset={1} mdOffset={0} md={4}>
                                     <Row>
-                                        <h4>Model</h4>
+                                        <h4><strong>Model</strong></h4>
                                     </Row>
                                     <Row>
                                         {this.modelSelectOptions()}
                                     </Row>   
                                 </Col>
-                                <Col md={4}>
+                                <Col xsOffset={1} mdOffset={0} md={4}>
                                     <Row>
-                                        <h4>Type</h4>
+                                        <h4><strong>Type</strong></h4>
                                     </Row>
                                     <Row>
                                         {this.caseSelectOptions()[this.state.caseselect.hard][this.state.caseselect.soft]}
@@ -151,26 +151,27 @@ class DetailPage extends Component {
                                 </Col>
                             </Row>
                             <Row>
-                                <Col md={1}>
-                                    <Row>
+                                <Row>
+                                    <Col xsOffset={1} mdOffset={0} md={1}>
                                         <br/>
-                                        <h4>Quantity</h4>
-                                    </Row>
+                                        <h4><strong>Quantity</strong></h4>
+                                    </Col>
+                                </Row>
+                                <Row>
+                                <Col xsOffset={1} xs={4} mdOffset={0} md={3}>
+                                        <FormGroup>
+                                            <InputGroup>
+                                            <InputGroup.Button>
+                                                <Button className="btn btn-danger">-</Button>
+                                            </InputGroup.Button>
+                                            <FormControl type="text" ref="quantity" className="form-control text-center" defaultValue="1"/>
+                                            <InputGroup.Button>
+                                                <Button className="btn btn-danger" onClick={()=>this.onPlusClick()}>+</Button>
+                                            </InputGroup.Button>
+                                            </InputGroup>
+                                        </FormGroup>
                                 </Col>
-                                <Col md={3}>
-                                    <br/>
-                                    <FormGroup>
-                                        <InputGroup>
-                                        <InputGroup.Button>
-                                            <Button className="btn btn-danger">-</Button>
-                                        </InputGroup.Button>
-                                        <FormControl type="text" ref="quantity" className="form-control text-center" defaultValue="1"/>
-                                        <InputGroup.Button>
-                                            <Button className="btn btn-danger" onClick={()=>this.onPlusClick()}>+</Button>
-                                        </InputGroup.Button>
-                                        </InputGroup>
-                                    </FormGroup>
-                                </Col>
+                                </Row>
                             </Row>
                             <Row>
                                 <Col md={3}>

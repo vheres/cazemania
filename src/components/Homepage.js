@@ -16,32 +16,24 @@ class HomePage extends Component {
                         <img src ="https://cdn.shopify.com/s/files/1/2689/9614/files/BANNER_COFFEE_LOVERS.jpg?v=1537540529" alt="banner" className="homepage-banner"></img>
                     </Row>
                         <Row>
-                            <Col xs={2}></Col>
-                            <Col xs={8}>
+                            <Col xsOffset={0} mdOffset={2} md={8}>
                                 <Row>
-                                    <Col xs={4}>
+                                    <Col xs={4} md={4}>
                                         <img src ="https://cdn.shopify.com/s/files/1/2689/9614/files/3-3_400x400_crop_center.jpg?v=1528277381" alt="banner" className="homepage-button"></img>
                                     </Col>
-                                    <Col xs={4}>
+                                    <Col xs={4} md={4}>
                                         <img src="https://cdn.shopify.com/s/files/1/2689/9614/files/3-3_400x400_crop_center.jpg?v=1528277381" alt="banner" className="homepage-button"></img>
                                     </Col>
-                                    <Col xs={4}>
+                                    <Col xs={4} md={4}>
                                         <img src ="https://cdn.shopify.com/s/files/1/2689/9614/files/3-3_400x400_crop_center.jpg?v=1528277381" alt="banner" className="homepage-button"></img>
                                     </Col>
-                                </Row>
-                            </Col>         
-                        </Row>
-                        <Row>
-                            <Col xs={2}></Col>
-                            <Col xs={8}>
-                                <Row>
-                                    <Col xs={4}>
+                                    <Col xs={4} md={4}>
                                         <img src ="https://cdn.shopify.com/s/files/1/2689/9614/files/3-3_400x400_crop_center.jpg?v=1528277381" alt="banner" className="homepage-button"></img>
                                     </Col>
-                                    <Col xs={4}>
+                                    <Col xs={4} md={4}>
                                         <img src ="https://cdn.shopify.com/s/files/1/2689/9614/files/3-3_400x400_crop_center.jpg?v=1528277381" alt="banner" className="homepage-button"></img>
                                     </Col>
-                                    <Col xs={4}>
+                                    <Col xs={4} md={4}>
                                         <img src ="https://cdn.shopify.com/s/files/1/2689/9614/files/3-3_400x400_crop_center.jpg?v=1528277381" alt="banner" className="homepage-button"></img>
                                     </Col>
                                 </Row>

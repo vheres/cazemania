@@ -1,9 +1,12 @@
 import React, { Component } from 'react';
 import { Grid, Row, Col  } from 'react-bootstrap';
+import CartDetail from './CartDetail';
 
 class CartPage extends Component {
     renderCartList() {
-
+        return(
+            <CartDetail></CartDetail>
+        )
     }
 
     renderTransactionSummary() {
@@ -28,11 +31,18 @@ class CartPage extends Component {
         return(
                 <Grid fluid className="HomePage-css margin-15 padding-15p">
                     <Col md={2}></Col>
-                    <Col md={6}>
-                    {this.renderCartList()}
+                    <Col md={5}>
+                        <Row>
+                            <Col md={12}>
+                            <h3>Keranjang Anda</h3>
+                            <hr/>
+                            </Col>
+                        </Row>
+                        {this.renderCartList()}
+                        {this.renderCartList()}
                     </Col>
-                    <Col md={2}>
-                    {this.renderTransactionSummary()}
+                    <Col mdOffset={1} md={2}>
+                        {this.renderTransactionSummary()}
                     </Col>
                 </Grid>
             );
