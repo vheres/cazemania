@@ -19,19 +19,19 @@ class Footer extends Component { //kalo gak pake destructuring, tulisnya React.C
                             <h2 className="text-white">Support</h2>
                         </Row>
                         <Row>
-                            <Link to="/"><h5 className="text-white">FAQ</h5></Link>
+                            <Link to="/information"><h5 className="text-white">FAQ</h5></Link>
                         </Row>
                         <Row>
-                            <Link to="/"><h5 className="text-white">Cara Order</h5></Link>
+                            <Link to="/information"><h5 className="text-white">Cara Order</h5></Link>
                         </Row>
                         <Row>
-                            <Link to="/"><h5 className="text-white"Konfirmasi>Pembayaran</h5></Link>
+                            <Link to="/information"><h5 className="text-white"Konfirmasi>Pembayaran</h5></Link>
                         </Row>
                         <Row>
-                            <Link to="/"><h5 className="text-white">Informasi Pengiriman</h5></Link>
+                            <Link to="/information"><h5 className="text-white">Informasi Pengiriman</h5></Link>
                         </Row>
                         <Row>
-                            <Link to="/"><h5 className="text-white">Penukaran dan Pengembalian</h5></Link>
+                            <Link to="/information"><h5 className="text-white">Penukaran dan Pengembalian</h5></Link>
                         </Row>
                     </Col>
                     <Col xs={1}></Col>

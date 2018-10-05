@@ -1,14 +1,7 @@
 import React, { Component } from 'react';
-import { Grid, Row, Col  } from 'react-bootstrap';
-import CartDetail from './CartDetail';
+import { Grid, Row, Col } from 'react-bootstrap';
 
-class CartPage extends Component {
-    renderCartList() {
-        return(
-            <CartDetail></CartDetail>
-        )
-    }
-
+class PaymentPage extends Component {
     renderTransactionSummary() {
         return (
             <Row>
@@ -27,9 +20,9 @@ class CartPage extends Component {
         )     
     }
 
-    renderCartPage() {
+    renderPaymentPage() {
         return(
-                <Grid fluid className="HomePage-css margin-15 padding-15p">
+            <Grid fluid className="HomePage-css margin-15 padding-15p">
                     <Col md={2}></Col>
                     <Col md={5}>
                         <Row>
@@ -38,21 +31,19 @@ class CartPage extends Component {
                             <hr/>
                             </Col>
                         </Row>
-                        {this.renderCartList()}
-                        {this.renderCartList()}
                     </Col>
                     <Col mdOffset={1} md={2}>
                         {this.renderTransactionSummary()}
                     </Col>
                 </Grid>
-            );
-        }
+        )
+    }
 
     render() {
         return (
-        this.renderCartPage()
+            this.renderPaymentPage()
         );   
     }
 }
 
-export default CartPage;
+export default PaymentPage;

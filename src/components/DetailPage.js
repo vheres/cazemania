@@ -6,15 +6,16 @@ import { connect } from 'react-redux';
 import Magnifier from 'react-magnifier';
 
 class DetailPage extends Component {
-    state={item: [], brands: [], types: [], typeselect: [""], caseselect: {soft: 0, hard: 0}}
+    state={item: [], brands: [], types: [], typeselect: [""], caseselect: {soft: 0, hard: 0}, price: [], selected_price: "", selected_case: 0}
 
     componentWillMount(){
         const params = new URLSearchParams(this.props.location.search);
         const id = params.get('id')
+        console.log(id)
         axios.get(API_URL_1 + "/item/" + id)
         .then((res)=>{
             console.log(res.data)
-            this.setState({item:res.data.item[0], brands: res.data.brands, type: res.data.type})
+            this.setState({item:res.data.item[0], brands: res.data.brands, type: res.data.type, price: res.data.price})
         })
     }
 
@@ -38,15 +39,11 @@ class DetailPage extends Component {
         console.log(data)
         var tempArr = new Array
         for(var num in data){
-            console.log(data[num].brand_id)
-            console.log(this.refs.brand_select.value)
             if(data[num].brand_id === parseInt(this.refs.brand_select.value)){
                 tempArr.push(data[num])
             }
         }
-        this.setState({typeselect: tempArr})
-        
-        
+        this.setState({typeselect: tempArr})      
     }
     modelSelectOptions(){
         var arrJSX = this.state.typeselect.map((item)=>{ return(
@@ -76,24 +73,24 @@ class DetailPage extends Component {
         return(
             [
                 [
-                    <select ref="case_select" className="form-control" style={{width:"80%"}}>
-                        <option value={0}>SELECT CASE</option>
+                    <select ref="case_select" className="form-control" onChange={()=>this.onTypeSelect()} style={{width:"80%"}}>
+                        <option value={0} selected>SELECT CASE</option>
                         <option value="hard" disabled>HARD CASE -- unavailable</option>
                         <option value="soft" disabled>SOFT CASE -- unavailable</option>
                     </select>,
-                    <select ref="case_select" className="form-control" style={{width:"80%"}}>
+                    <select ref="case_select" className="form-control" onChange={()=>this.onTypeSelect()} style={{width:"80%"}}>
                         <option value={0}>SELECT CASE</option>
-                        <option value="hard" disabled>HARD CASE -- unavailable</option>
+                        <option value={0} disabled>HARD CASE -- unavailable</option>
                         <option value="soft" >SOFT CASE</option>
                     </select>
                 ],
                 [
-                    <select ref="case_select" className="form-control" style={{width:"80%"}}>
+                    <select ref="case_select" className="form-control" onChange={()=>this.onTypeSelect()} style={{width:"80%"}}>
                         <option value={0}>SELECT CASE</option>
                         <option value="hard">HARD CASE</option>
-                        <option value="soft"  disabled>SOFT CASE -- unavailable</option>
+                        <option value={0}  disabled>SOFT CASE -- unavailable</option>
                     </select>,
-                    <select ref="case_select" className="form-control" style={{width:"80%"}}>
+                    <select ref="case_select" className="form-control" onChange={()=>this.onTypeSelect()} style={{width:"80%"}}>
                         <option value={0}>SELECT CASE</option>
                         <option value="hard">HARD CASE</option>
                         <option value="soft">SOFT CASE</option>
@@ -101,6 +98,21 @@ class DetailPage extends Component {
                 ]
             ]
         )
+    }
+
+    onTypeSelect() {
+        if (this.refs.case_select.value === 'hard') {
+            this.setState({selected_price: this.state.price[1].price, selected_case: this.refs.case_select.value})
+        }
+        else if (this.refs.case_select.value === 'soft') {
+            this.setState({selected_price: this.state.price[0].price , selected_case: this.refs.case_select.value})
+        }
+        else if (this.refs.case_select.value == 0) {
+            this.setState({selected_price: "", selected_case: 0})
+        }
+    }
+
+    onAddToCart() {
 
     }
 
@@ -109,21 +121,70 @@ class DetailPage extends Component {
         console.log(this.refs.quantity.value)
     }
 
+    renderImageMagnifier() {
+        if(this.state.item.length === 0) {
+            return
+        }
+        else {
+            return <Magnifier src={this.state.item.image} width={"100%"} />
+        }
+    }
+
+    renderProductDetail() {
+        if(this.state.item.length === 0) {
+            return
+        }
+        else {
+            if(this.state.selected_price.length === 0) {
+                return (
+                    <section>
+                        <Row>
+                            <Col xsOffset={1} mdOffset={0} md={12}><h3>{this.state.item.code}</h3></Col>  
+                        </Row>
+                        <Row>
+                            <Col xsOffset={1} mdOffset={0} md={12}><h2 className="price-text">Rp 50000 - Rp 75000</h2></Col> 
+                        </Row>
+                    </section>
+                )
+            }
+            else {
+                return (
+                    <section>
+                        <Row>
+                            <Col xsOffset={1} mdOffset={0} md={12}><h3>{this.state.item.code}</h3></Col>  
+                        </Row>
+                        <Row>
+                            <Col xsOffset={1} mdOffset={0} md={12}><h2 className="price-text">Rp {this.state.selected_price}</h2></Col> 
+                        </Row>
+                    </section>
+                )
+            }
+        }
+    }
+
+    renderAddToCartButton() {
+        console.log(this.state.selected_case)
+        if(this.state.selected_case === undefined || this.state.selected_case === 0) {
+            return <input type="button" className="btn btn-success" value="Add to Cart" onClick={()=>this.onAddToCart()} style={{width:"100%"}} disabled></input>
+        }
+        else {
+            return (
+                <input type="button" className="btn btn-success" value="Add to Cart" onClick={()=>this.onAddToCart()} style={{width:"100%"}}></input>
+            )
+            
+        }
+    }
+
     renderDetailPage() {
         return(
                 <Grid fluid className="HomePage-css margin-15 padding-15p">
                     <Row>
                         <Col md={2}></Col>
                         <Col md={3}>
-                            <Magnifier src="https://cf.shopee.co.id/file/d5d8b0b37ff26c33d554b48cf24bf7b4" width={"100%"} />
+                            {this.renderImageMagnifier()}
                         </Col>
                         <Col md={4}>
-                            <Row>
-                                <Col xsOffset={1} mdOffset={0} md={12}><h3>Flamingo</h3></Col>  
-                            </Row>
-                            <Row>
-                                <Col xsOffset={1} mdOffset={0} md={12}><h2 className="price-text">Rp50.000 - Rp150.000</h2></Col> 
-                            </Row>
+                            {this.renderProductDetail()}
                             <Row>
                                 <Col xsOffset={1} mdOffset={0} md={4}>
                                     <Row>
@@ -177,7 +238,7 @@ class DetailPage extends Component {
                                 <Col md={3}>
                                     <Row>
                                         <br/>
-                                        <input type="button" className="btn btn-success" value="Add to Cart" style={{width:"100%"}}></input>
+                                        {this.renderAddToCartButton()}
                                     </Row>
                                     <Row>
                                     </Row>

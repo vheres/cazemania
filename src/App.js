@@ -6,6 +6,8 @@ import HomePage from './components/Homepage';
 import ShopPage from './components/ShopPage';
 import CartPage from './components/CartPage';
 import DetailPage from './components/DetailPage';
+import InformationPage from './components/InformationPage';
+import PaymentPage from './components/PaymentPage';
 import LoginPage from './components/LoginPage';
 import RegisterPage from './components/RegisterPage';
 import { Grid, Row, Col } from 'react-bootstrap';
@@ -50,6 +52,8 @@ class App extends Component {
               <Route path="/shop" component={ShopPage}/>
               <Route path="/cart" component={CartPage}/>
               <Route path="/product" component={DetailPage}/>
+              <Route path="/information" component={InformationPage}/>
+              <Route path="/payment" component={PaymentPage}/>
               <Route path="/Admin" component={Admin}/>
               <Route path="/login" component={LoginPage}/>
               <Route path="/register" component={RegisterPage}/>
