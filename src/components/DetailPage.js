@@ -42,7 +42,10 @@ class DetailPage extends Component {
                 tempArr.push(data[num])
             }
         }
-        this.setState({typeselect: tempArr})
+        this.setState({typeselect: tempArr})   
+        document.getElementById("model_select").selectedIndex = "0";  
+        document.getElementById("case_select").selectedIndex = "0";
+        this.state.selected_case = 0; 
     }
     modelSelectOptions(){
         var arrJSX = this.state.typeselect.map((item)=>{ return(
@@ -50,7 +53,7 @@ class DetailPage extends Component {
         })
         console.log(this.state.typeselect)
         return(
-        <select ref="type_select" className="form-control" style={{width:"80%"}} onChange={()=>this.onModelSelect()}>
+        <select id="model_select" ref="type_select" className="form-control" style={{width:"80%"}} onChange={()=>this.onModelSelect()}>
             <option value={0}>SELECT MODEL</option>
             {arrJSX}
         </select>
@@ -66,30 +69,32 @@ class DetailPage extends Component {
             }
         }
         this.setState({caseselect: tempVar})
+        document.getElementById("case_select").selectedIndex = "0";
+        this.state.selected_case = 0;
     }
 
     caseSelectOptions(){
         return(
             [
                 [
-                    <select ref="case_select" className="form-control" style={{width:"80%"}}>
-                        <option value={0}>SELECT CASE</option>
+                    <select id="case_select" ref="case_select" className="form-control" onChange={()=>this.onTypeSelect()} style={{width:"80%"}}>
+                        <option value={0} selected>SELECT CASE</option>
                         <option value="hard" disabled>HARD CASE -- unavailable</option>
                         <option value="soft" disabled>SOFT CASE -- unavailable</option>
                     </select>,
-                    <select ref="case_select" className="form-control" style={{width:"80%"}}>
+                    <select id="case_select" ref="case_select" className="form-control" onChange={()=>this.onTypeSelect()} style={{width:"80%"}}>
                         <option value={0}>SELECT CASE</option>
                         <option value="hard" disabled>HARD CASE -- unavailable</option>
                         <option value="soft" >SOFT CASE</option>
                     </select>
                 ],
                 [
-                    <select ref="case_select" className="form-control" style={{width:"80%"}}>
+                    <select id="case_select" ref="case_select" className="form-control" onChange={()=>this.onTypeSelect()} style={{width:"80%"}}>
                         <option value={0}>SELECT CASE</option>
                         <option value="hard">HARD CASE</option>
                         <option value="soft"  disabled>SOFT CASE -- unavailable</option>
                     </select>,
-                    <select ref="case_select" className="form-control" style={{width:"80%"}}>
+                    <select id="case_select" ref="case_select" className="form-control" onChange={()=>this.onTypeSelect()} style={{width:"80%"}}>
                         <option value={0}>SELECT CASE</option>
                         <option value="hard">HARD CASE</option>
                         <option value="soft">SOFT CASE</option>
@@ -97,12 +102,87 @@ class DetailPage extends Component {
                 ]
             ]
         )
-
     }
 
-    onPlusClick() {
-        this.refs.quantity.value += 1;
-        console.log(this.refs.quantity.value)
+    onTypeSelect() {
+        if (this.refs.case_select.value === 'hard') {
+            this.setState({selected_price: this.state.price[1].price, selected_case: this.refs.case_select.value})
+        }
+        else if (this.refs.case_select.value === 'soft') {
+            this.setState({selected_price: this.state.price[0].price , selected_case: this.refs.case_select.value})
+        }
+        else if (this.refs.case_select.value == 0) {
+            this.setState({selected_price: "", selected_case: 0})
+        }
+    }
+
+    onAddToCart() {
+        console.log(this.state.selected_case)
+    }
+
+    PlusMinus(action) {
+        if (action == "plus") {
+            document.getElementById("quantity").value = parseInt(document.getElementById("quantity").value) + 1;
+        }
+        else if (action == "minus") {
+            if(document.getElementById("quantity").value > 1) {
+                document.getElementById("quantity").value = parseInt(document.getElementById("quantity").value) - 1;
+            }         
+        }
+    }
+
+    renderImageMagnifier() {
+        if(this.state.item.length === 0) {
+            return
+        }
+        else {
+            return <Magnifier src={this.state.item.image} width={"100%"} />
+        }
+    }
+
+    renderProductDetail() {
+        if(this.state.item.length === 0) {
+            return
+        }
+        else {
+            if(this.state.selected_price.length === 0 || this.state.selected_case == 0) {
+                return (
+                    <section>
+                        <Row>
+                            <Col xsOffset={1} mdOffset={0} md={12}><h3>{this.state.item.code}</h3></Col>  
+                        </Row>
+                        <Row>
+                            <Col xsOffset={1} mdOffset={0} md={12}><h2 className="price-text">Rp 50000 - Rp 75000</h2></Col> 
+                        </Row>
+                    </section>
+                )
+            }
+            else {
+                return (
+                    <section>
+                        <Row>
+                            <Col xsOffset={1} mdOffset={0} md={12}><h3>{this.state.item.code}</h3></Col>  
+                        </Row>
+                        <Row>
+                            <Col xsOffset={1} mdOffset={0} md={12}><h2 className="price-text">Rp {this.state.selected_price}</h2></Col> 
+                        </Row>
+                    </section>
+                )
+            }
+        }
+    }
+
+    renderAddToCartButton() {
+        console.log(this.state.selected_case)
+        if(this.state.selected_case === undefined || this.state.selected_case === 0) {
+            return <input type="button" className="btn btn-success" value="Add to Cart" onClick={()=>this.onAddToCart()} style={{width:"100%"}} disabled></input>
+        }
+        else {
+            return (
+                <input type="button" className="btn btn-success" value="Add to Cart" onClick={()=>this.onAddToCart()} style={{width:"100%"}}></input>
+            )
+            
+        }
     }
 
     renderDetailPage() {
@@ -158,11 +238,11 @@ class DetailPage extends Component {
                                         <FormGroup>
                                             <InputGroup>
                                             <InputGroup.Button>
-                                                <Button className="btn btn-danger">-</Button>
+                                                <Button className="btn btn-danger" onClick={()=>this.PlusMinus("minus")}>-</Button>
                                             </InputGroup.Button>
-                                            <FormControl type="text" ref="quantity" className="form-control text-center" defaultValue="1"/>
+                                            <FormControl type="text" readOnly id="quantity" ref="quantity" className="form-control text-center" defaultValue="1" style={{background:"white"}}/>
                                             <InputGroup.Button>
-                                                <Button className="btn btn-danger" onClick={()=>this.onPlusClick()}>+</Button>
+                                                <Button className="btn btn-danger" onClick={()=>this.PlusMinus("plus")}>+</Button>
                                             </InputGroup.Button>
                                             </InputGroup>
                                         </FormGroup>
