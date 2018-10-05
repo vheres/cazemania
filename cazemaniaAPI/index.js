@@ -1,17 +1,30 @@
 const express = require('express');
 var bodyParser = require('body-parser');
 const mysql = require('mysql');
+const cors = require('cors');
+const nodemailer = require('nodemailer');
 
 var app = express();
 const port = 1994;
 var url = bodyParser.urlencoded({extended:false})
-const cors = require('cors');
-app.use(cors())
 
+var transporter = nodemailer.createTransport({
+    service: 'gmail',
+    auth: {
+           user: 'cazemania.official@gmail.com',
+           pass: 'Tambunbekasi123'
+       },
+    tls: {
+        rejectUnauthorized: false
+    }
+});
+
+app.use(cors())
 app.set('view engine' , 'ejs');
 app.use(url)
 app.use(bodyParser.json())
 
+//Connect to MySQL database
 const conn = mysql.createConnection({
     host : 'us-cdbr-iron-east-01.cleardb.net',
     user : 'bde441d3eff40c',
@@ -20,7 +33,7 @@ const conn = mysql.createConnection({
     port: 3306
     });
 
-//Get list of bestsellers from catalogue, sorted by sales, limit TO
+//Get list of bestsellers from catalogue, sorted by sales, limit TO 10
 app.get('/bestsellers', function(req,res){
     var sql = 'SELECT * FROM catalogue ORDER BY sales ASC LIMIT 10'
     conn.query(sql, (err,results)=>{
@@ -115,16 +128,17 @@ app.get('/cart/:id', function(req,res){
         
     })
 })
-app.post('/transaction', function(req,res){
 
+
+app.post('/transaction', function(req,res){
     data = {
-        user_id = req.body.id,
-        date = req.body.date,
-        time = req.body.time,
-        total_price = req.body.total_price,
-        account_holder = req.body.account_holder,
-        source_bank = req.body.source_bank,
-        target_bank = req.body.target_bank
+        user_id : req.body.id,
+        date : req.body.date,
+        time : req.body.time,
+        total_price : req.body.total_price,
+        account_holder : req.body.account_holder,
+        source_bank : req.body.source_bank,
+        target_bank : req.body.target_bank
     }
 
     sql = `INSERT INTO transactions SET ?`
@@ -145,6 +159,19 @@ app.post('/transaction', function(req,res){
     })
 })
 
-
+app.post('/spam' , function(req,res){
+    const mailOptions = {
+        from: 'cazemania.official@gmail.com', // sender address
+        to: 'william.gunawan@live.com', // list of receivers
+        subject: 'PREPARE FOR SPAM', // Subject line
+        html: '<p>PLEASE BUY ME STUFF</p>'// plain text body
+      };
+      transporter.sendMail(mailOptions, function (err, info) {
+        if(err)
+          console.log(err)
+        else
+          console.log(info);
+     })
+})
 
 app.listen(port, () => console.log(`Example app listening on port ${port}!`));
