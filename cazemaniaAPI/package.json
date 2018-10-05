@@ -11,7 +11,8 @@
     "cors": "^2.8.4",
     "ejs": "^2.6.1",
     "express": "^4.16.3",
-    "mysql": "github:mysqljs/mysql"
+    "mysql": "github:mysqljs/mysql",
+    "nodemailer": "^4.6.8"
   },
   "description": ""
 }
