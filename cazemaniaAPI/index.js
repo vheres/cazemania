@@ -94,12 +94,14 @@ app.get('/item/:id', function(req,res){
     sql  = `SELECT * FROM catalogue WHERE id=${req.params.id}`
     sql1 = `SELECT * FROM brands ORDER BY name`
     sql2 = `SELECT * FROM type ORDER BY name`
+    sql3 = `SELECT * FROM price`
     conn.query(sql, (err,results)=>{
         if(err) throw err;
-        console.log(results)
         conn.query(sql1, (err,results1)=>{
             conn.query(sql2, (err,results2)=>{
-                res.send({item:results, brands: results1, type: results2})
+                conn.query(sql3, (err,results3) => {
+                    res.send({item:results, brands: results1, type: results2, price: results3})
+                })
             })
         })
     })
@@ -118,13 +120,13 @@ app.get('/cart/:id', function(req,res){
 app.post('/transaction', function(req,res){
 
     data = {
-        user_id = req.body.id,
-        date = req.body.date,
-        time = req.body.time,
-        total_price = req.body.total_price,
-        account_holder = req.body.account_holder,
-        source_bank = req.body.source_bank,
-        target_bank = req.body.target_bank
+        user_id: req.body.id,
+        date: req.body.date,
+        time: req.body.time,
+        total_price: req.body.total_price,
+        account_holder: req.body.account_holder,
+        source_bank: req.body.source_bank,
+        target_bank: req.body.target_bank
     }
 
     sql = `INSERT INTO transactions SET ?`

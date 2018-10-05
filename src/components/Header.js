@@ -111,6 +111,9 @@ class Header extends Component { //kalo gak pake destructuring, tulisnya React.C
                                     <NavItem eventKey={4} className="header-button" onClick={()=>this.onLinkClick("/product")}>
                                         <h4 className="orange-text">Detail</h4>
                                     </NavItem>
+                                    <NavItem eventKey={4} className="header-button" onClick={()=>this.onLinkClick("/payment")}>
+                                        <h4 className="orange-text">Payment</h4>
+                                    </NavItem>
                                 </Nav>
                                 <Nav pullRight>
                                     <NavItem eventKey={5} className="header-button" onClick={()=>this.onLinkClick("/cart")}>
