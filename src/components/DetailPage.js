@@ -43,7 +43,10 @@ class DetailPage extends Component {
                 tempArr.push(data[num])
             }
         }
-        this.setState({typeselect: tempArr})      
+        this.setState({typeselect: tempArr})   
+        document.getElementById("model_select").selectedIndex = "0";  
+        document.getElementById("case_select").selectedIndex = "0";
+        this.state.selected_case = 0; 
     }
     modelSelectOptions(){
         var arrJSX = this.state.typeselect.map((item)=>{ return(
@@ -51,7 +54,7 @@ class DetailPage extends Component {
         })
         console.log(this.state.typeselect)
         return(
-        <select ref="type_select" className="form-control" style={{width:"80%"}} onChange={()=>this.onModelSelect()}>
+        <select id="model_select" ref="type_select" className="form-control" style={{width:"80%"}} onChange={()=>this.onModelSelect()}>
             <option value={0}>SELECT MODEL</option>
             {arrJSX}
         </select>
@@ -67,30 +70,32 @@ class DetailPage extends Component {
             }
         }
         this.setState({caseselect: tempVar})
+        document.getElementById("case_select").selectedIndex = "0";
+        this.state.selected_case = 0;
     }
 
     caseSelectOptions(){
         return(
             [
                 [
-                    <select ref="case_select" className="form-control" onChange={()=>this.onTypeSelect()} style={{width:"80%"}}>
+                    <select id="case_select" ref="case_select" className="form-control" onChange={()=>this.onTypeSelect()} style={{width:"80%"}}>
                         <option value={0} selected>SELECT CASE</option>
                         <option value="hard" disabled>HARD CASE -- unavailable</option>
                         <option value="soft" disabled>SOFT CASE -- unavailable</option>
                     </select>,
-                    <select ref="case_select" className="form-control" onChange={()=>this.onTypeSelect()} style={{width:"80%"}}>
+                    <select id="case_select" ref="case_select" className="form-control" onChange={()=>this.onTypeSelect()} style={{width:"80%"}}>
                         <option value={0}>SELECT CASE</option>
                         <option value={0} disabled>HARD CASE -- unavailable</option>
                         <option value="soft" >SOFT CASE</option>
                     </select>
                 ],
                 [
-                    <select ref="case_select" className="form-control" onChange={()=>this.onTypeSelect()} style={{width:"80%"}}>
+                    <select id="case_select" ref="case_select" className="form-control" onChange={()=>this.onTypeSelect()} style={{width:"80%"}}>
                         <option value={0}>SELECT CASE</option>
                         <option value="hard">HARD CASE</option>
                         <option value={0}  disabled>SOFT CASE -- unavailable</option>
                     </select>,
-                    <select ref="case_select" className="form-control" onChange={()=>this.onTypeSelect()} style={{width:"80%"}}>
+                    <select id="case_select" ref="case_select" className="form-control" onChange={()=>this.onTypeSelect()} style={{width:"80%"}}>
                         <option value={0}>SELECT CASE</option>
                         <option value="hard">HARD CASE</option>
                         <option value="soft">SOFT CASE</option>
@@ -113,12 +118,18 @@ class DetailPage extends Component {
     }
 
     onAddToCart() {
-
+        console.log(this.state.selected_case)
     }
 
-    onPlusClick() {
-        this.refs.quantity.value += 1;
-        console.log(this.refs.quantity.value)
+    PlusMinus(action) {
+        if (action == "plus") {
+            document.getElementById("quantity").value = parseInt(document.getElementById("quantity").value) + 1;
+        }
+        else if (action == "minus") {
+            if(document.getElementById("quantity").value > 1) {
+                document.getElementById("quantity").value = parseInt(document.getElementById("quantity").value) - 1;
+            }         
+        }
     }
 
     renderImageMagnifier() {
@@ -135,7 +146,7 @@ class DetailPage extends Component {
             return
         }
         else {
-            if(this.state.selected_price.length === 0) {
+            if(this.state.selected_price.length === 0 || this.state.selected_case == 0) {
                 return (
                     <section>
                         <Row>
@@ -223,11 +234,11 @@ class DetailPage extends Component {
                                         <FormGroup>
                                             <InputGroup>
                                             <InputGroup.Button>
-                                                <Button className="btn btn-danger">-</Button>
+                                                <Button className="btn btn-danger" onClick={()=>this.PlusMinus("minus")}>-</Button>
                                             </InputGroup.Button>
-                                            <FormControl type="text" ref="quantity" className="form-control text-center" defaultValue="1"/>
+                                            <FormControl type="text" readOnly id="quantity" ref="quantity" className="form-control text-center" defaultValue="1" style={{background:"white"}}/>
                                             <InputGroup.Button>
-                                                <Button className="btn btn-danger" onClick={()=>this.onPlusClick()}>+</Button>
+                                                <Button className="btn btn-danger" onClick={()=>this.PlusMinus("plus")}>+</Button>
                                             </InputGroup.Button>
                                             </InputGroup>
                                         </FormGroup>
