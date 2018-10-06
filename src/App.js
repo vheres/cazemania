@@ -7,6 +7,7 @@ import ShopPage from './components/ShopPage';
 import CartPage from './components/CartPage';
 import DetailPage from './components/DetailPage';
 import InformationPage from './components/InformationPage';
+import ResellerPage from './components/ResellerPage';
 import PaymentPage from './components/PaymentPage';
 import LoginPage from './components/LoginPage';
 import RegisterPage from './components/RegisterPage';
@@ -54,6 +55,7 @@ class App extends Component {
               <Route path="/product" component={DetailPage}/>
               <Route path="/information" component={InformationPage}/>
               <Route path="/payment" component={PaymentPage}/>
+              <Route path="/reseller-dropshipper" component={ResellerPage}/>
               <Route path="/Admin" component={Admin}/>
               <Route path="/login" component={LoginPage}/>
               <Route path="/register" component={RegisterPage}/>

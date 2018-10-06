@@ -6849,10 +6849,11 @@ button.close {
   margin-bottom: 15px;
 }
 .pointer {
-  width: 200px;
-  height: 40px;
+  width: 180px;
+  height: 10px;
   position: relative;
-  background: red;
+  background: rgb(255, 255, 255);
+  margin-bottom: 15px;
 }
 .pointer:after {
   content: "";
@@ -6861,20 +6862,10 @@ button.close {
   bottom: 0;
   width: 0;
   height: 0;
-  border-left: 20px solid white;
-  border-top: 20px solid transparent;
-  border-bottom: 20px solid transparent;
-}
-.pointer:before {
-  content: "";
-  position: absolute;
-  right: -20px;
-  bottom: 0;
-  width: 0;
-  height: 0;
-  border-left: 20px solid red;
-  border-top: 20px solid transparent;
-  border-bottom: 20px solid transparent;
+  border-left: 20px solid rgb(255, 181, 44);
+  border-top: 5px solid rgb(255, 181, 44);
+  border-bottom: 5px solid rgb(255, 181, 44);
+  border-right: 20px solid rgb(255, 181, 44)
 }
 
 

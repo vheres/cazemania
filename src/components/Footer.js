@@ -19,6 +19,9 @@ class Footer extends Component { //kalo gak pake destructuring, tulisnya React.C
                             <h2 className="text-white">Support</h2>
                         </Row>
                         <Row>
+                            <div className="pointer"></div>
+                        </Row>
+                        <Row>
                             <Link to="/information"><h5 className="text-white">FAQ</h5></Link>
                         </Row>
                         <Row>
@@ -53,6 +56,9 @@ class Footer extends Component { //kalo gak pake destructuring, tulisnya React.C
                     <Col xs={3}>
                         <Row>
                             <h2 className="text-white">Contact Us</h2>        
+                        </Row>
+                        <Row>
+                            <div className="pointer"></div>
                         </Row>
                         <Row>
                             <a href="https://www.instagram.com/cazemania/?hl=en" target="_blank"><img src="http://www.stickpng.com/assets/images/580b57fcd9996e24bc43c523.png" alt="line" style={{width:"50px"}}></img></a>
