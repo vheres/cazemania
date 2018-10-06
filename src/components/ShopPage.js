@@ -53,7 +53,11 @@ class ShopPage extends Component {
         this.state.pagination.push(0, 5)
         this.state.active.shift();
         this.state.active.push(0);
-        this.props.history.push(`/shop?code=${this.refs.searchCode.value}&name=${this.refs.searchName.value}`)
+        this.pushPage();
+    }
+
+    async pushPage() {
+        await (this.props.history.push(`/shop?code=${this.refs.searchCode.value}&name=${this.refs.searchName.value}`));
         this.getCatalogueList();
     }
 
@@ -114,7 +118,7 @@ class ShopPage extends Component {
                             <Row>
                                 {this.renderCatalogue()}
                             </Row>
-                            <Row>
+                            <Row className="text-center">
                             <PaginationClass count={this.state.pagecount} PageClick={(page, active)=>this.onPageClick(page, active)} active={this.state.active[0]}/>
                             </Row>      
                     </Col>

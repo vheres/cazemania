@@ -4,6 +4,7 @@ import { onRegister } from '../actions';
 import { Redirect } from 'react-router-dom';
 import { connect } from 'react-redux';
 import Cookies from 'universal-cookie';
+import { Link } from 'react-router-dom';
 
 const cookies = new Cookies();
 
@@ -16,9 +17,11 @@ class RegisterPage extends Component {
 
     onRegisterClick = () => {
         this.props.onRegister({
-            username: this.refs.username.value,
+            firstname: this.refs.firstName.value,
+            lastname: this.refs.lastName.value,
             email: this.refs.email.value,
             password: this.refs.password.value,
+            address: this.refs.address.value
         });
     }
 
@@ -27,55 +30,63 @@ class RegisterPage extends Component {
         console.log(this.props.auth)
         if(this.props.auth.username === "") {
             return(
-                <div>
-                    <Grid fluid>
-                        <Row className="show-grid">
-                            <Col xs={2}>
-                            </Col>
-                            <Col xs={8}>
-                                <PageHeader>
-                                REGISTER
-                                </PageHeader>
-                            </Col>
-                        </Row>
-                        </Grid>
-                        <Grid>
+                    <Grid fluid className="margin-15p margin-bot-15">
                         <Row>
-                            <Col xs={12}>
-                                <form id="Login" className="login-form">
-                                <Row>
-                                    <Col xs={2}>
-                                    Username: 
+                            <img src="https://www.dtn.com.vn/skin/frontend/dtn_website/default/images/banner-package1.jpg" alt="banner" style={{width:"100%"}}/>
+                        </Row>
+                        <Row className="margin-top-15">
+                            <Col mdOffset={2} md={8}>
+                            <Row>             
+                                <span>Already has an account? </span><span><Link to="/login">Login here</Link></span>
+                                <h1>Create Account</h1> 
+                            </Row>
+                            <Row className="margin-top-15">
+                                <Col xs={10}>
+                                        <form id="Login">
+                                            <Row>
+                                                <Col xs={2}>
+                                                <p className="text-right">Name:</p> 
+                                                </Col>
+                                                <Col xs={5}>
+                                                    <input type="text" ref="firstName" class="form-control" id="inputUsername" placeholder="First Name" /><br/>
+                                                </Col>
+                                                <Col xs={5}>
+                                                    <input type="text" ref="lastName" class="form-control" id="inputUsername" placeholder="Last Name" /><br/>
+                                                </Col>
+                                            </Row>
+                                            <Row>
+                                                <Col xs={2}>
+                                                <p className="text-right">Email:</p> 
+                                                </Col>
+                                                <Col xs={10}>
+                                                    <input type="email" ref="email" class="form-control" id="inputEmail" placeholder="Email Address" /><br/>
+                                                </Col>
+                                            </Row>
+                                            <Row>
+                                                <Col xs={2}>
+                                                <p className="text-right">Password:</p>  
+                                                </Col>
+                                                <Col xs={10}>
+                                                    <input type="password" ref="password" class="form-control" id="inputPassword" placeholder="Password" /><br/>
+                                                </Col>
+                                            </Row>
+                                            <Row>
+                                                <Col xs={2}>
+                                                <p className="text-right">Address:</p>  
+                                                </Col>
+                                                <Col xs={10}>
+                                                    <textarea type="text" ref="address" class="form-control" id="inputAdress" placeholder="Address" /><br/>
+                                                </Col>
+                                            </Row>
+                                            <Row>
+                                                <input type="button" class="btn btn-primary login-button" value="Register" onClick={this.onRegisterClick}/>
+                                            </Row>                              
+                                        </form>
                                     </Col>
-                                    <Col xs={10}>
-                                        <input type="text" ref="username" class="form-control" id="inputUsername" placeholder="Username" /><br/>
-                                    </Col>
-                                </Row>
-                                <Row>
-                                    <Col xs={2}>
-                                    Email: 
-                                    </Col>
-                                    <Col xs={10}>
-                                        <input type="email" ref="email" class="form-control" id="inputEmail" placeholder="Email Address" /><br/>
-                                    </Col>
-                                </Row>
-                                <Row>
-                                    <Col xs={2}>
-                                    Password: 
-                                    </Col>
-                                    <Col xs={10}>
-                                        <input type="password" ref="password" class="form-control" id="inputPassword" placeholder="Password" /><br/>
-                                    </Col>
-                                </Row>
-                                <Row>
-                                    <input type="button" class="btn btn-primary login-button" value="Register" onClick={this.onRegisterClick}/>
-                                </Row>                              
-                                </form>
+                                </Row> 
                             </Col>
                         </Row>
-                        <hr />
                     </Grid>
-                </div>
             );
         }
         return <Redirect to="/" />; 

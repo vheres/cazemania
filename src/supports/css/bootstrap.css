@@ -6802,6 +6802,9 @@ button.close {
 .margin-top-15 {
   margin-top: 15px;
 }
+.margin-bot-15 {
+  margin-bottom: 15px;
+}
 .margin-15 {
   margin-left: -15px;
   margin-right: -15px;
@@ -6821,9 +6824,6 @@ button.close {
 }
 .badge-danger {
   background-color: rgb(187, 59, 59);
-}
-.login-form {
-  padding-top: 20%;
 }
 .login-button {
   float: right;
