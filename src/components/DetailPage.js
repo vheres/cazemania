@@ -6,16 +6,15 @@ import { connect } from 'react-redux';
 import Magnifier from 'react-magnifier';
 
 class DetailPage extends Component {
-    state={item: [], brands: [], types: [], typeselect: [""], caseselect: {soft: 0, hard: 0}, price: [], selected_price: "", selected_case: 0}
+    state={item: [], brands: [], types: [], typeselect: [""], caseselect: {soft: 0, hard: 0}}
 
     componentWillMount(){
         const params = new URLSearchParams(this.props.location.search);
         const id = params.get('id')
-        console.log(id)
         axios.get(API_URL_1 + "/item/" + id)
         .then((res)=>{
             console.log(res.data)
-            this.setState({item:res.data.item[0], brands: res.data.brands, type: res.data.type, price: res.data.price})
+            this.setState({item:res.data.item[0], brands: res.data.brands, type: res.data.type})
         })
     }
 
@@ -85,7 +84,7 @@ class DetailPage extends Component {
                     </select>,
                     <select id="case_select" ref="case_select" className="form-control" onChange={()=>this.onTypeSelect()} style={{width:"80%"}}>
                         <option value={0}>SELECT CASE</option>
-                        <option value={0} disabled>HARD CASE -- unavailable</option>
+                        <option value="hard" disabled>HARD CASE -- unavailable</option>
                         <option value="soft" >SOFT CASE</option>
                     </select>
                 ],
@@ -93,7 +92,7 @@ class DetailPage extends Component {
                     <select id="case_select" ref="case_select" className="form-control" onChange={()=>this.onTypeSelect()} style={{width:"80%"}}>
                         <option value={0}>SELECT CASE</option>
                         <option value="hard">HARD CASE</option>
-                        <option value={0}  disabled>SOFT CASE -- unavailable</option>
+                        <option value="soft"  disabled>SOFT CASE -- unavailable</option>
                     </select>,
                     <select id="case_select" ref="case_select" className="form-control" onChange={()=>this.onTypeSelect()} style={{width:"80%"}}>
                         <option value={0}>SELECT CASE</option>
@@ -192,10 +191,15 @@ class DetailPage extends Component {
                     <Row>
                         <Col md={2}></Col>
                         <Col md={3}>
-                            {this.renderImageMagnifier()}
+                            <Magnifier src="https://cf.shopee.co.id/file/d5d8b0b37ff26c33d554b48cf24bf7b4" width={"100%"} />
                         </Col>
                         <Col md={4}>
-                            {this.renderProductDetail()}
+                            <Row>
+                                <Col xsOffset={1} mdOffset={0} md={12}><h3>Flamingo</h3></Col>  
+                            </Row>
+                            <Row>
+                                <Col xsOffset={1} mdOffset={0} md={12}><h2 className="price-text">Rp50.000 - Rp150.000</h2></Col> 
+                            </Row>
                             <Row>
                                 <Col xsOffset={1} mdOffset={0} md={4}>
                                     <Row>
@@ -249,7 +253,7 @@ class DetailPage extends Component {
                                 <Col md={3}>
                                     <Row>
                                         <br/>
-                                        {this.renderAddToCartButton()}
+                                        <input type="button" className="btn btn-success" value="Add to Cart" style={{width:"100%"}}></input>
                                     </Row>
                                     <Row>
                                     </Row>
