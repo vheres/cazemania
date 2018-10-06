@@ -139,18 +139,6 @@ app.get('/cart/:id', function(req,res){
     })
 })
 
-app.post('/cart', function(req,res){
-
-
-    sql  = `INSERT INTO cart SET ?`
-
-    conn.query(sql, (err,results)=>{
-        if(err) throw err;
-        console.log(results)
-        
-    })
-})
-
 app.post('/transaction', function(req,res){
     data = {
         user_id : req.body.id,
@@ -169,7 +157,6 @@ app.post('/transaction', function(req,res){
 
     conn.query(sql, (err,results)=>{
         conn.query(sql1, (err,results1)=>{
-
             for(var index in array){
                 sql1 += `(${results1[0]}, ${array[index].catalogue.id}, )` 
             }
@@ -194,63 +181,6 @@ app.post('/spam' , function(req,res){
         else
           console.log(info);
      })
-})
-
-var secret = "아이즈원"
-
-app.get('/users', function(req,res){
-    const cipher = crypto.createHmac("sha256", secret)
-    .update(req.query.password)
-    .digest("hex");
-
-    sql = `SELECT id, firstname, email FROM users WHERE email = "${req.query.email}" AND password = "${cipher}"`
-    conn.query(sql, (err,results)=>{
-        if(err) throw err;
-        console.log(results)
-        res.send(results)
-    })
-})
-
-app.get('/keeplogin', function(req,res){
-    sql = `SELECT id, firstname, email FROM users WHERE email = "${req.query.email}"`
-    conn.query(sql, (err,results)=>{
-        console.log(results)
-        res.send(results)
-    })
-})
-
-app.post('/users', function(req,res){
-    const cipher = crypto.createHmac("sha256", secret)
-    .update(req.body.password)
-    .digest("hex");
-
-    var data = {
-        email : req.body.email,
-        password : cipher,
-        firstname: req.body.firstname,
-        lastname: req.body.lastname,
-        address: req.body.address
-    }
-
-    sql = `SELECT * FROM users WHERE email = '${data.email}'`
-    sql1 = `INSERT INTO users SET ?`
-    
-    conn.query(sql, (err,results)=>{
-        console.log(results.length)
-        if(results.length == 0){
-            conn.query(sql1, data, (err1,results1)=>{
-
-                conn.query(sql, (err2,results2)=>{
-                    if(err2) throw err2;
-                    console.log(results2)
-                    res.send({id: results2[0].id, firstname:results2[0].firstname, email: results2[0].email, error:0})
-                })
-            })
-        }
-        else{
-            res.send({error:1})
-        }
-    })
 })
 
 app.listen(port, () => console.log(`Example app listening on port ${port}!`));
