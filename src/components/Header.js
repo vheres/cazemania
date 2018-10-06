@@ -68,7 +68,7 @@ class Header extends Component {
                                     <NavItem eventKey={5} className="header-button" onClick={()=>this.onLinkClick("/cart")}>
                                         <h4 className="orange-text">Cart</h4>
                                     </NavItem>
-                                    <NavDropdown eventKey={6} title={"Hello, " + this.props.auth.username} className="header-button">
+                                    <NavDropdown eventKey={6} title={"Hello, " + this.props.auth.firstname} className="header-button">
                                         <MenuItem eventKey={6.1} onClick={()=>this.onLogoutClick()}>
                                         <h4>Logout</h4>
                                         </MenuItem>

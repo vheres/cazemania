@@ -221,6 +221,8 @@ app.get('/keeplogin', function(req,res){
 })
 
 app.post('/users', function(req,res){
+
+    console.log(req.body)
     const cipher = crypto.createHmac("sha256", secret)
     .update(req.body.password)
     .digest("hex");
@@ -243,7 +245,7 @@ app.post('/users', function(req,res){
 
                 conn.query(sql, (err2,results2)=>{
                     if(err2) throw err2;
-                    console.log(results2)
+                    console.log(results2[0])
                     res.send({id: results2[0].id, firstname:results2[0].firstname, email: results2[0].email, error:0})
                 })
             })
