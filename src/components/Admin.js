@@ -14,7 +14,6 @@ class Admin extends Component {
             this.setState({data:res.data.items, brands: res.data.brands, type: res.data.type})
         })
     }
-}
 
     onTableSelect(TABLE_NAME){
         var url = "/Admin?table=" + TABLE_NAME
