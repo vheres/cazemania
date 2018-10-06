@@ -34,7 +34,7 @@ class App extends Component {
   }
 
   componentWillReceiveProps(newProps) {
-    if(newProps.auth.username === "") {
+    if(newProps.auth.email === "") {
       cookies.remove('myCookie');
     }
   }

@@ -6,29 +6,36 @@ import { connect } from 'react-redux';
 import Cookies from 'universal-cookie';
 import { Link } from 'react-router-dom';
 
+
 const cookies = new Cookies();
 
 class RegisterPage extends Component {
     componentWillReceiveProps(newProps) {
-        if(newProps.auth.username !== "") {
+        if(newProps.auth.email !== "") {
             cookies.set('myCookie', newProps.auth.email, { path: '/' })
         }
     }
 
     onRegisterClick = () => {
-        this.props.onRegister({
-            firstname: this.refs.firstName.value,
-            lastname: this.refs.lastName.value,
-            email: this.refs.email.value,
-            password: this.refs.password.value,
-            address: this.refs.address.value
-        });
+        if(this.refs.firstName.value == '' || this.refs.lastName.value == '' || this.refs.email.value == '' || this.refs.password.value == '' || this.refs.address.value == '') {
+            alert('Please fill everything!');
+        }
+        else {
+            this.props.onRegister({
+                firstname: this.refs.firstName.value,
+                lastname: this.refs.lastName.value,
+                email: this.refs.email.value,
+                password: this.refs.password.value,
+                address: this.refs.address.value
+            });
+        }
+        
     }
 
 
     render() {
         console.log(this.props.auth)
-        if(this.props.auth.username === "") {
+        if(this.props.auth.email === "") {
             return(
                     <Grid fluid className="margin-15p margin-bot-15">
                         <Row>

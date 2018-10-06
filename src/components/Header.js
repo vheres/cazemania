@@ -24,7 +24,7 @@ class Header extends Component {
     }
 
     componentWillReceiveProps(newProps) {
-        if(newProps.auth.username === "") {
+        if(newProps.auth.email === "") {
             cookies.remove('myCookie');
         }
     }
@@ -38,7 +38,7 @@ class Header extends Component {
     }
 
     renderNavbar = () => {   
-        if(this.props.auth.username !== "") {
+        if(this.props.auth.email !== "") {
             return(
                 <Grid fluid>
                 <Row>

@@ -9,7 +9,7 @@ const cookies = new Cookies();
 
 class LoginPage extends Component {
     componentWillReceiveProps(newProps) {
-        if(newProps.auth.username !== "") {
+        if(newProps.auth.email !== "") {
             cookies.set('myCookie', newProps.auth.email, { path: '/' });
         }
     }
@@ -23,7 +23,7 @@ class LoginPage extends Component {
 
     render() {
         console.log(this.props.auth)
-        if(this.props.auth.username == "") {
+        if(this.props.auth.email == "") {
             return(
                 <div>
                     <Grid fluid>

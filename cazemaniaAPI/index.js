@@ -3,6 +3,7 @@ var bodyParser = require('body-parser');
 const mysql = require('mysql');
 const cors = require('cors');
 const nodemailer = require('nodemailer');
+const crypto = require('crypto')
 
 var app = express();
 const port = 1994;
@@ -184,7 +185,7 @@ app.post('/transaction', function(req,res){
 app.post('/spam' , function(req,res){
     const mailOptions = {
         from: 'cazemania.official@gmail.com', // sender address
-        to: 'william.gunawan@live.com', // list of receivers
+        to: 'billy_irianto@live.com', // list of receivers
         subject: 'PREPARE FOR SPAM', // Subject line
         html: '<p>PLEASE BUY ME STUFF</p>'// plain text body
       };
