@@ -45,29 +45,37 @@ app.get('/bestsellers', function(req,res){
 
 //Get list of catalogue, sorted by ID
 app.get('/catalogue', function(req,res){
-    var sql = 'SELECT * FROM catalogue ORDER BY id DESC'
+    var sql = `SELECT * FROM catalogue 
+                WHERE code LIKE "%${req.query.code}%"
+                ORDER BY id DESC  limit ${req.query.pagination[0]}, ${req.query.pagination[1]}`
+    var sql1 = `SELECT count(*) as count FROM catalogue
+                WHERE code LIKE "%${req.query.code}%"`
+                console.log(sql)
     conn.query(sql, (err,results)=>{
         if(err) throw err;
-        console.log(results)
-        res.send({catalogue: results})
+        // console.log(results)
+        conn.query(sql1, (err,results1) => {
+            if(err) throw err;
+            res.send({catalogue: results, pagecount: results1})
+        })     
     })
 })
 
 //Get data needed for Catalogue item page
-app.get('/catalogue/:id', function(req,res){
+app.get('/product/:id', function(req,res){
     var sql = `SELECT * FROM catalogue where id=${req.params.id}`
     var sql1 = `SELECT * FROM brands ORDER BY name`
-    var sql2 = `SELECT * FROM type ORDER BY name`
+    var sql2 = `SELECT * FROM type ORDER BY name`   
     conn.query(sql, (err,results)=>{
         if(err) throw err;
-        console.log(results)
+        // console.log(results)
         conn.query(sql1, (err,results1)=>{
             if(err) throw err;
-            console.log(results1)
+            // console.log(results1)
             conn.query(sql2, (err,results2)=>{
                 if(err) throw err;
-                console.log(results2)
-                res.send({item: results, brands: results1, type: results2})
+                // console.log(results2)
+                res.send({item: results, brands: results1, type: results2 })
             })
         })
     })
