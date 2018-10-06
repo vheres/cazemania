@@ -14,19 +14,7 @@ class Admin extends Component {
             this.setState({data:res.data.items, brands: res.data.brands, type: res.data.type})
         })
     }
-
-
-    // sortType(brand){
-    //     var tempArr = []
-    //     for(var type in this.state.types){
-    //         if(type.name === brand){
-    //             tempArr.push(this.state.type)
-    //         }
-    //     }
-    //     console.log(tempArr)
-
-    //     return tempArr
-    // }
+}
 
     onTableSelect(TABLE_NAME){
         var url = "/Admin?table=" + TABLE_NAME

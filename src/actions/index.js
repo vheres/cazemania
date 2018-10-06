@@ -12,7 +12,7 @@ export const onLogin = (user) => {
                 console.log(user);
                 dispatch ({
                     type: "USER_LOGIN_SUCCESS",
-                    payload: { username: user.data[0].username, email: user.data[0].email, error: "", id: user.data[0].id, password: user.data[0].password, cookieCheck: true }
+                    payload: { firstname: user.data[0].firstname, email: user.data[0].email, error: "", id: user.data[0].id, cookieCheck: true }
                 })       
             }).catch(err => {
                 console.log(err);
@@ -34,7 +34,7 @@ export const keepLogin = (email) => {
             }).then(user => {
                 dispatch ({
                     type: "USER_LOGIN_SUCCESS",
-                    payload: { username: user.data[0].username, email: user.data[0].email, error: "", id: user.data[0].id, password: user.data[0].password, cookieCheck: true }
+                    payload: { firstname: user.data[0].firstname, email: user.data[0].email, error: "", id: user.data[0].id, cookieCheck: true  }
                 })
                 dispatch ({
                     type: "COOKIES_CHECKED"
@@ -65,15 +65,22 @@ export const onLogout = () => {
     }
 }
 
-export const onRegister = (user) => {
+export const onRegister = (user) =>{
     return(dispatch) => {
-        axios.post(API_URL_1 + '/users', user)
+        axios.post(API_URL_1 + "/users", user)
         .then((res) => {
-            console.log(res);
-            dispatch({
-                type: "USER_LOGIN_SUCCESS",
-                payload: { username: res.data.username, email: res.data.email, error: "", cookieCheck: true}
-            })
+            console.log(res)
+            if(res.data.error === 1){
+                dispatch({
+                    type: "USER_REGISTER_FAIL"
+                })
+            }
+            else{
+                dispatch ({
+                    type: "USER_LOGIN_SUCCESS",
+                    payload: { firstname: user.data[0].firstname, email: user.data[0].email, error: "", id: user.data[0].id, cookieCheck: true }
+                })
+            }
         })
         .catch((err) => {
             console.log(err);
