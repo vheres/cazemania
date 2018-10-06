@@ -40,6 +40,9 @@ class Footer extends Component { //kalo gak pake destructuring, tulisnya React.C
                             <h2 className="text-white">Follow Us</h2>
                         </Row>
                         <Row>
+                            <div className="pointer"></div>
+                        </Row>
+                        <Row>
                             <a href="https://www.instagram.com/cazemania/?hl=en" target="_blank"><img src="https://diylogodesigns.com/wp-content/uploads/2016/05/instagram-Logo-PNG-Transparent-Background-download-768x768.png" alt="instagram" style={{width:"50px"}}></img></a> <span className="text-white">@cazemania</span>
                         </Row>
                         <Row>

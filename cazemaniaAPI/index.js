@@ -203,6 +203,9 @@ app.get('/users', function(req,res){
     const cipher = crypto.createHmac("sha256", secret)
     .update(req.query.password)
     .digest("hex");
+    console.log(req.query.email)
+    console.log(req.query.password)
+    console.log(cipher)
 
     sql = `SELECT id, firstname, email FROM users WHERE email = "${req.query.email}" AND password = "${cipher}"`
     conn.query(sql, (err,results)=>{
