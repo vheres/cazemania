@@ -19,7 +19,6 @@ class CartPage extends Component {
             }
           }
 
-        axios
         axios.post("https://api.rajaongkir.com/starter/cost", data, axiosConfig)
         .then((res)=>{
             console.log(res.data)
@@ -30,7 +29,11 @@ class CartPage extends Component {
             <CartDetail></CartDetail>
         )
     }
-    
+
+    onPaymentClick() {
+        this.props.history.push('/payment')
+    }
+
     renderTransactionSummary() {
         return (
             <Row>
@@ -43,7 +46,7 @@ class CartPage extends Component {
                 </Row>
                 <Row>
                     <hr/>
-                    <input type="button" className="btn btn-primary" style={{width:"100%"}} value="Proceed to Payment"/>
+                    <input type="button" className="btn btn-primary" style={{width:"100%"}} value="Proceed to Payment" onClick={()=>this.onPaymentClick()}/>
                 </Row>
             </Row>
         )     

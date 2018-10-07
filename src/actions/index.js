@@ -25,13 +25,13 @@ export const onLogin = (user) => {
 
 export const keepLogin = (email) => {
     console.log(email);
-    console.log('here');
     return(dispatch) => {
-            axios.get(API_URL_1 +'/users', {
+            axios.get(API_URL_1 +'/keeplogin', {
                 params: {
                     email: email
                 }
             }).then(user => {
+                console.log(user)
                 dispatch ({
                     type: "USER_LOGIN_SUCCESS",
                     payload: { firstname: user.data[0].firstname, email: user.data[0].email, error: "", id: user.data[0].id, cookieCheck: true  }

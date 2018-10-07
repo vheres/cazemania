@@ -54,7 +54,7 @@ class Header extends Component {
                                     <NavItem eventKey={1} className="header-button" onClick={()=>this.onLinkClick("/shop")}>
                                         <h4 className="orange-text">Shop</h4>
                                     </NavItem>
-                                    <NavItem eventKey={2} className="header-button" onClick={()=>this.onLinkClick("/")}>
+                                    <NavItem eventKey={2} className="header-button" onClick={()=>this.onLinkClick("/reseller-dropshipper")}>
                                         <h4 className="orange-text">Reseller/Dropshipper</h4>
                                     </NavItem>
                                     <NavItem eventKey={3} className="header-button" onClick={()=>this.onLinkClick("/")}>
@@ -62,6 +62,9 @@ class Header extends Component {
                                     </NavItem>
                                     <NavItem eventKey={4} className="header-button" onClick={()=>this.onLinkClick("/Admin?table=cases")}>
                                         <h4 className="orange-text">Admin</h4>
+                                    </NavItem>
+                                    <NavItem eventKey={4} className="header-button" onClick={()=>this.onLinkClick("/payment")}>
+                                        <h4 className="orange-text">Payment</h4>
                                     </NavItem>
                                 </Nav>
                                 <Nav pullRight>
@@ -96,7 +99,7 @@ class Header extends Component {
                                     <NavItem eventKey={1} className="header-button" onClick={()=>this.onLinkClick("/shop")}>
                                         <h4 className="orange-text">Shop</h4>
                                     </NavItem>
-                                    <NavItem eventKey={2} className="header-button" onClick={()=>this.onLinkClick("/")}>
+                                    <NavItem eventKey={2} className="header-button" onClick={()=>this.onLinkClick("/reseller-dropshipper")}>
                                         <h4 className="orange-text">Reseller/Dropshipper</h4>
                                     </NavItem>
                                     <NavItem eventKey={3} className="header-button" onClick={()=>this.onLinkClick("/")}>
