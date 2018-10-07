@@ -144,12 +144,28 @@ app.get('/cart/:id', function(req,res){
 
 app.post('/cart', function(req,res){
     data = req.body
-    sql  = `INSERT INTO cart SET ?`
+    sql  = `SELECT * FROM cart WHERE user_id = ${data.user_id} AND catalogue_id = ${data.catalogue_id}
+            AND brand_id = ${data.brand_id} AND model_id = ${data.model_id} AND case_type = '${data.case_type}'`
+    sql1 = `INSERT INTO cart SET ?`
 
     conn.query(sql, data, (err,results)=>{
-        if(err) throw err;
         console.log(results)
-        res.send({results})
+        if(results.length === 0){
+            conn.query(sql1, data, (err,results1)=>{
+                if(err) throw err;
+                console.log(results1)
+                res.send({results1})
+            })
+        }
+        else{
+            var newAmount = parseInt(req.body.amount) + parseInt(results[0].amount)
+            sql2 = `UPDATE cart SET amount = ${newAmount} WHERE id = ${results[0].id}`
+            conn.query(sql2, (err,results2)=>{
+                if(err) throw err;
+                console.log(results2)
+                res.send({results2})
+            })
+        }
     })
 })
 
