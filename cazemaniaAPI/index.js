@@ -138,7 +138,7 @@ app.get('/cart/:id', function(req,res){
     conn.query(sql, (err,results)=>{
         if(err) throw err;
         console.log(results)
-        
+        res.send({results})
     })
 })
 
@@ -149,7 +149,7 @@ app.post('/cart', function(req,res){
     conn.query(sql, data, (err,results)=>{
         if(err) throw err;
         console.log(results)
-        
+        res.send({results})
     })
 })
 

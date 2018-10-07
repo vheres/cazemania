@@ -3,8 +3,11 @@ import { Grid, Row, Col  } from 'react-bootstrap';
 import CartDetail from './CartDetail';
 import {API_URL_1} from '../supports/api-url/apiurl'
 import axios from 'axios'
+import { connect } from 'react-redux';
 
 class CartPage extends Component {
+    state = ({cart: []})
+
     componentWillMount(){
         let data = { origin: '501',
         destination: '114',
@@ -23,7 +26,17 @@ class CartPage extends Component {
         .then((res)=>{
             console.log(res.data)
         })
+        this.getCartList();
     }
+
+    getCartList() {
+        axios.get(API_URL_1 + `/cart/` + this.props.auth.id)
+        .then((response) => {
+            this.setState({cart: response.results.data})
+            console.log(response)
+        })
+    }
+
     renderCartList() {
         return(
             <CartDetail></CartDetail>
@@ -80,4 +93,12 @@ class CartPage extends Component {
     }
 }
 
-export default CartPage;
+const mapStateToProps = (state) => {
+    const auth = state.auth;
+  
+    return { auth };
+  }
+
+
+  
+export default connect(mapStateToProps, {})(CartPage);

@@ -6,7 +6,7 @@ import { connect } from 'react-redux';
 import Magnifier from 'react-magnifier';
 
 class DetailPage extends Component {
-    state={item: [], brands: [], types: [], typeselect: [""], caseselect: {soft: 0, hard: 0}}
+    state={item: [], brands: [], types: [], typeselect: [""], caseselect: {soft: 0, hard: 0}, price: [], selected_price: ""}
 
     componentWillMount(){
         const params = new URLSearchParams(this.props.location.search);
@@ -14,7 +14,7 @@ class DetailPage extends Component {
         axios.get(API_URL_1 + "/item/" + id)
         .then((res)=>{
             console.log(res.data)
-            this.setState({item:res.data.item[0], brands: res.data.brands, type: res.data.type})
+            this.setState({item:res.data.item[0], brands: res.data.brands, type: res.data.type, price: res.data.price})
         })
     }
 
@@ -46,6 +46,7 @@ class DetailPage extends Component {
         document.getElementById("model_select").selectedIndex = "0";  
         document.getElementById("case_select").selectedIndex = "0";
         this.state.selected_case = 0; 
+        this.state.selected_price = ""
     }
     modelSelectOptions(){
         var arrJSX = this.state.typeselect.map((item)=>{ return(
@@ -71,6 +72,7 @@ class DetailPage extends Component {
         this.setState({caseselect: tempVar})
         document.getElementById("case_select").selectedIndex = "0";
         this.state.selected_case = 0;
+        this.state.selected_price = ""
     }
 
     caseSelectOptions(){
@@ -114,10 +116,34 @@ class DetailPage extends Component {
         else if (this.refs.case_select.value == 0) {
             this.setState({selected_price: "", selected_case: 0})
         }
+        console.log(this.state.selected_price)
     }
 
     onAddToCart() {
-        console.log(this.state.selected_case)
+        console.log('user id')
+        console.log(this.props.auth.id)
+        console.log('catalogue id')
+        console.log(this.state.item.id)
+        console.log('brand id')
+        console.log(this.refs.brand_select.value)
+        console.log('model id')
+        console.log(this.refs.type_select.value)
+        console.log('case type')
+        console.log(this.refs.case_select.value)
+        console.log('quantity')
+        console.log(document.getElementById("quantity").value)
+        axios.post(API_URL_1 + `/cart`, {
+            user_id: this.props.auth.id,
+            catalogue_id: this.state.item.id,
+            brand_id: this.refs.brand_select.value,
+            model_id: this.refs.type_select.value,
+            case_type: this.refs.case_select.value,
+            amount: document.getElementById("quantity").value
+        }).then((res) => {
+            alert('add to cart successful!')
+        }).catch((err) => {
+            alert(err);
+        })
     }
 
     PlusMinus(action) {
@@ -145,11 +171,11 @@ class DetailPage extends Component {
             return
         }
         else {
-            if(this.state.selected_price.length === 0 || this.state.selected_case == 0) {
+            if(this.state.selected_price.length === 0) {
                 return (
                     <section>
                         <Row>
-                            <Col xsOffset={1} mdOffset={0} md={12}><h3>{this.state.item.code}</h3></Col>  
+                            <Col xsOffset={1} mdOffset={0} md={12}><h3>{this.state.item.code}</h3></Col>
                         </Row>
                         <Row>
                             <Col xsOffset={1} mdOffset={0} md={12}><h2 className="price-text">Rp 50000 - Rp 75000</h2></Col> 
@@ -161,7 +187,7 @@ class DetailPage extends Component {
                 return (
                     <section>
                         <Row>
-                            <Col xsOffset={1} mdOffset={0} md={12}><h3>{this.state.item.code}</h3></Col>  
+                            <Col xsOffset={1} mdOffset={0} md={12}><h3>{this.state.item.code}</h3></Col>
                         </Row>
                         <Row>
                             <Col xsOffset={1} mdOffset={0} md={12}><h2 className="price-text">Rp {this.state.selected_price}</h2></Col> 
@@ -191,15 +217,10 @@ class DetailPage extends Component {
                     <Row>
                         <Col md={2}></Col>
                         <Col md={3}>
-                            <Magnifier src="https://cf.shopee.co.id/file/d5d8b0b37ff26c33d554b48cf24bf7b4" width={"100%"} />
+                            {this.renderImageMagnifier()}
                         </Col>
                         <Col md={4}>
-                            <Row>
-                                <Col xsOffset={1} mdOffset={0} md={12}><h3>Flamingo</h3></Col>  
-                            </Row>
-                            <Row>
-                                <Col xsOffset={1} mdOffset={0} md={12}><h2 className="price-text">Rp50.000 - Rp150.000</h2></Col> 
-                            </Row>
+                                {this.renderProductDetail()}
                             <Row>
                                 <Col xsOffset={1} mdOffset={0} md={4}>
                                     <Row>
@@ -253,7 +274,7 @@ class DetailPage extends Component {
                                 <Col md={3}>
                                     <Row>
                                         <br/>
-                                        <input type="button" className="btn btn-success" value="Add to Cart" style={{width:"100%"}}></input>
+                                        {this.renderAddToCartButton()}
                                     </Row>
                                     <Row>
                                     </Row>

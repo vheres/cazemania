@@ -1,7 +1,23 @@
 import React, { Component } from 'react';
-import { Grid, Row, Col } from 'react-bootstrap';
+import { Grid, Row, Col, Panel } from 'react-bootstrap';
+import axios from 'axios';
+import {API_URL_1} from '../supports/api-url/apiurl'
+import { connect } from 'react-redux';
 
 class PaymentPage extends Component {
+    state = ({ user_info: [], cart: [] })
+
+    componentWillMount() {
+        this.getUserInfo()
+    }
+
+    getUserInfo() {
+        axios.get(API_URL_1 + "/checkout/" + this.props.auth.id)
+        .then((response) => {
+            this.setState({})
+        })
+    }
+
     renderTransactionSummary() {
         return (
             <Row>
@@ -26,10 +42,18 @@ class PaymentPage extends Component {
                     <Col md={2}></Col>
                     <Col md={5}>
                         <Row>
-                            <Col md={12}>
-                            <h3>Keranjang Anda</h3>
+                            <h3>Checkout</h3>
                             <hr/>
-                            </Col>
+                        </Row>
+                        <Row>
+                            <h4>Alamat Pengiriman</h4>
+                        </Row>
+                        <Row>
+                            <Panel>
+                                <Panel.Body>
+
+                                </Panel.Body>
+                            </Panel>
                         </Row>
                     </Col>
                     <Col mdOffset={1} md={2}>
@@ -46,4 +70,12 @@ class PaymentPage extends Component {
     }
 }
 
-export default PaymentPage;
+const mapStateToProps = (state) => {
+    const auth = state.auth;
+  
+    return { auth };
+  }
+
+
+  
+export default connect(mapStateToProps, {})(PaymentPage);
