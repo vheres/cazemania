@@ -3,6 +3,7 @@ import { Grid, Row, Col, Panel } from 'react-bootstrap';
 import axios from 'axios';
 import {API_URL_1} from '../supports/api-url/apiurl'
 import { connect } from 'react-redux';
+import CartDetail from './CartDetail';
 
 class PaymentPage extends Component {
     state = ({ user_info: [], cart: [] })
@@ -14,8 +15,26 @@ class PaymentPage extends Component {
     getUserInfo() {
         axios.get(API_URL_1 + "/checkout/" + this.props.auth.id)
         .then((response) => {
-            this.setState({})
+            console.log(response)
+            this.setState({user_info: response.data.user[0], cart: response.data.cart})
         })
+    }
+
+    renderUserInfo() {
+        return (
+            <Row>
+                <p>{this.state.user_info.firstname} {this.state.user_info.lastname}</p>
+            </Row>
+        )
+    }
+
+    renderCartList() {
+        var arrJSX = [];
+        arrJSX = this.state.cart.map((item,count) => {
+            return <CartDetail key={item.id} id={item.id} count={count} name={item.code} image={item.image} brand={item.brand_name} model={item.model_name} type={item.case_type} quantity={item.amount} price={item.price}></CartDetail>
+        })
+        console.log(arrJSX)
+        return arrJSX
     }
 
     renderTransactionSummary() {
@@ -51,7 +70,17 @@ class PaymentPage extends Component {
                         <Row>
                             <Panel>
                                 <Panel.Body>
-
+                                    {this.renderUserInfo()}
+                                </Panel.Body>
+                            </Panel>
+                        </Row>
+                        <Row>
+                            <h4>Keranjang Anda</h4>
+                        </Row>
+                        <Row>
+                            <Panel>
+                                <Panel.Body>
+                                    {this.renderCartList()}
                                 </Panel.Body>
                             </Panel>
                         </Row>

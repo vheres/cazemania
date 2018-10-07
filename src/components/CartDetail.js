@@ -4,6 +4,17 @@ import axios from 'axios'
 import {API_URL_1} from '../supports/api-url/apiurl'
 
 class CartDetail extends Component {
+    renderDeleteButton() {
+        if (this.props.DeleteClick != undefined) {
+            return (
+                <Col md={2}>
+                        <input type="button" className="btn btn-danger" value="delete" onClick={()=>this.props.DeleteClick(this.props.id)}/>
+                </Col>   
+            )
+        }
+        return
+    }
+
     render() {
         return (
             <Row>
@@ -29,9 +40,7 @@ class CartDetail extends Component {
                         <h3>Rp50000</h3>
                     </Col>
                 </Col>
-                <Col md={2}>
-                    <input type="button" className="btn btn-danger" value="delete" onClick={()=>this.props.DeleteClick(this.props.id)}/>
-                </Col>          
+                {this.renderDeleteButton()}         
             </Row>  
         );   
     }

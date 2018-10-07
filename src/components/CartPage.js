@@ -50,6 +50,26 @@ class CartPage extends Component {
         })
     }
 
+    onClearCartClick() {
+        var ids = "("
+        this.state.cart.map((item,count) => {
+            if (count < this.state.cart.length - 1) {
+                ids += `${item.id}, `
+            }
+            else {
+                ids += `${item.id})`
+            }
+        })
+        axios.post(API_URL_1 + `/clear_cart`, {
+            ids: ids
+        }).then((response) => {
+            this.setState({cart:[]})
+            alert(`clear cart success!`)
+        }).catch((err) => {
+            console.log(err);
+        })
+    }
+
     renderCartList() {
         var arrJSX = [];
         arrJSX = this.state.cart.map((item,count) => {
@@ -83,10 +103,13 @@ class CartPage extends Component {
                     <Col md={2}></Col>
                     <Col md={5}>
                         <Row>
-                            <Col md={12}>
-                            <h3>Keranjang Anda</h3>
-                            <hr/>
+                            <Col md={10}>
+                                <h3>Keranjang Anda</h3>
                             </Col>
+                            <Col md={2}>
+                                <input type="button" className="btn btn-warning" value="Clear Cart" onClick={()=>this.onClearCartClick()}/>
+                            </Col>
+                            <hr/>
                         </Row>
                             {this.renderCartList()}              
                     </Col>
