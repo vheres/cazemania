@@ -4,6 +4,8 @@ const mysql = require('mysql');
 const cors = require('cors');
 const nodemailer = require('nodemailer');
 const crypto = require('crypto')
+var http = require("https");
+var qs = require("querystring")
 
 var app = express();
 const port = 1994;
@@ -141,9 +143,18 @@ app.get('/cart/:id', function(req,res){
 })
 
 app.post('/cart', function(req,res){
-
-
+    data = req.body
     sql  = `INSERT INTO cart SET ?`
+
+    conn.query(sql, data, (err,results)=>{
+        if(err) throw err;
+        console.log(results)
+        
+    })
+})
+
+app.delete('/cart/:id', function(req,res){
+    sql  = `DELETE FROM cart where id = ${req.params.id}`
 
     conn.query(sql, (err,results)=>{
         if(err) throw err;
@@ -151,6 +162,7 @@ app.post('/cart', function(req,res){
         
     })
 })
+
 
 app.post('/transaction', function(req,res){
     data = {
@@ -254,6 +266,91 @@ app.post('/users', function(req,res){
             res.send({error:1})
         }
     })
+})
+
+app.get('/province', function(req,res){
+    var options = {
+        "method": "GET",
+        "hostname": "api.rajaongkir.com",
+        "port": null,
+        "path": "/starter/province",
+        "headers": {
+          "key": "d8b59afa48a3ecd432b46bad2eda8d07"
+        }
+      };
+    http.request(options, function (res1) {
+        var chunks = [];
+      
+        res1.on("data", function (chunk) {
+          chunks.push(chunk);
+        });
+      
+        res1.on("end", function () {
+          var body = Buffer.concat(chunks);
+          console.log(body.toString());
+          console.log(typeof body)
+          res.send(body)
+        });
+      }).end();
+})
+
+app.get('/province', function(req,res){
+    var options = {
+        "method": "GET",
+        "hostname": "api.rajaongkir.com",
+        "port": null,
+        "path": "/starter/province",
+        "headers": {
+          "key": "d8b59afa48a3ecd432b46bad2eda8d07"
+        }
+      };
+    http.request(options, function (res1) {
+        var chunks = [];
+      
+        res1.on("data", function (chunk) {
+          chunks.push(chunk);
+        });
+      
+        res1.on("end", function () {
+          var body = Buffer.concat(chunks);
+          console.log(body.toString());
+          console.log(typeof body)
+          res.send(body)
+        });
+      }).end();
+})
+
+app.get('/shipping', function(req,res){
+    var options = {
+        "method": "POST",
+        "hostname": "api.rajaongkir.com",
+        "port": null,
+        "path": "/starter/cost",
+        "headers": {
+          "key": "d8b59afa48a3ecd432b46bad2eda8d07",
+          "content-type": "application/x-www-form-urlencoded"
+        }
+      };
+      
+      var req = http.request(options, function (res1) {
+        var chunks = [];
+      
+        res1.on("data", function (chunk) {
+          chunks.push(chunk);
+        });
+      
+        res1.on("end", function () {
+          var body = Buffer.concat(chunks);
+          console.log(body.toString());
+          res.send(body)
+        });
+      });
+      
+      req.write(qs.stringify({ origin: '501',
+        destination: '114',
+        weight: 1700,
+        courier: 'jne' }));
+      req.end();
 })
 
 app.listen(port, () => console.log(`Example app listening on port ${port}!`));

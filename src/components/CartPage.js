@@ -1,14 +1,36 @@
 import React, { Component } from 'react';
 import { Grid, Row, Col  } from 'react-bootstrap';
 import CartDetail from './CartDetail';
+import {API_URL_1} from '../supports/api-url/apiurl'
+import axios from 'axios'
 
 class CartPage extends Component {
+    componentWillMount(){
+        let data = { origin: '501',
+        destination: '114',
+        weight: 1700,
+        courier: 'jne' }
+
+        let axiosConfig = {
+            headers: {
+                "key": "d8b59afa48a3ecd432b46bad2eda8d07",
+                "content-type": "application/x-www-form-urlencoded",
+                "Access-Control-Allow-Origin": "*",
+            }
+          }
+
+        axios
+        axios.post("https://api.rajaongkir.com/starter/cost", data, axiosConfig)
+        .then((res)=>{
+            console.log(res.data)
+        })
+    }
     renderCartList() {
         return(
             <CartDetail></CartDetail>
         )
     }
-
+    
     renderTransactionSummary() {
         return (
             <Row>
