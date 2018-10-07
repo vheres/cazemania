@@ -237,6 +237,20 @@ app.get('/keeplogin', function(req,res){
     })
 })
 
+app.get('/checkout/:id', function(req,res){
+    sql  = `SELECT car.id, cat.code, cat.name, cat.image,  car.brand_id, car.model_id, car.case_type, car.amount, br.name as brand_name, ty.name as model_name, pr.price as price FROM catalogue cat JOIN cart car ON cat.id=car.catalogue_id JOIN brands br ON br.id = car.brand_id 
+    JOIN type ty ON ty.id = car.model_id JOIN price pr ON pr.case_type = car.case_type WHERE car.user_id=${req.params.id}`
+
+    sql1 = `SELECT firstname, lastname, address WHERE id = ${req.params.id}`
+    conn.query(sql, (err,results)=>{
+        conn.query(sql1, (err,results1)=>{
+            if(err) throw err;
+        console.log({cart: results, user:results1})
+            
+        })
+    })
+})
+
 app.post('/users', function(req,res){
 
     console.log(req.body)
@@ -299,32 +313,6 @@ app.get('/province', function(req,res){
       }).end();
 })
 
-app.get('/province', function(req,res){
-    var options = {
-        "method": "GET",
-        "hostname": "api.rajaongkir.com",
-        "port": null,
-        "path": "/starter/province",
-        "headers": {
-          "key": "d8b59afa48a3ecd432b46bad2eda8d07"
-        }
-      };
-    http.request(options, function (res1) {
-        var chunks = [];
-      
-        res1.on("data", function (chunk) {
-          chunks.push(chunk);
-        });
-      
-        res1.on("end", function () {
-          var body = Buffer.concat(chunks);
-          console.log(body.toString());
-          console.log(typeof body)
-          res.send(body)
-        });
-      }).end();
-})
-
 app.get('/shipping', function(req,res){
     var options = {
         "method": "POST",
@@ -333,11 +321,11 @@ app.get('/shipping', function(req,res){
         "path": "/starter/cost",
         "headers": {
           "key": "d8b59afa48a3ecd432b46bad2eda8d07",
-          "content-type": "application/x-www-form-urlencoded"
+          'Content-Type': 'application/json'
         }
       };
       
-      var req = http.request(options, function (res1) {
+      var req2 = http.request(options, function (res1) {
         var chunks = [];
       
         res1.on("data", function (chunk) {
