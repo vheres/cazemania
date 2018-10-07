@@ -17,23 +17,84 @@ class InformationPage extends Component {
                         <PanelGroup accordion id="accordion-example">
                             <Panel eventKey="1">
                                 <Panel.Heading>
-                                <Panel.Title toggle>Collapsible Group Item #1</Panel.Title>
+                                <Panel.Title toggle>FAQ</Panel.Title>
                                 </Panel.Heading>
                                 <Panel.Body collapsible>
-                                Anim pariatur cliche reprehenderit, enim eiusmod high life accusamus terry
-                                richardson ad squid. 3 wolf moon officia aute, non cupidatat skateboard
-                                dolor brunch. Food truck quinoa nesciunt laborum eiusmod. Brunch 3 wolf
-                                moon tempor, sunt aliqua put a bird on it squid single-origin coffee nulla
-                                assumenda shoreditch et. Nihil anim keffiyeh helvetica, craft beer labore
-                                wes anderson cred nesciunt sapiente ea proident. Ad vegan excepteur
-                                butcher vice lomo. Leggings occaecat craft beer farm-to-table, raw denim
-                                aesthetic synth nesciunt you probably haven't heard of them accusamus
-                                labore sustainable VHS.
+                                    <Grid fluid>
+                                        <Row>
+                                            <h4>Barangnya READY atau PO kak?</h4>
+                                        </Row>
+                                        <Row>
+                                            <p>Barang PO ya kak :) kurang lebih 7-14hr ya kak untuk proses cetak casenya (tidak termasuk tgl merah n hari Sabtu Minggu) :) kita usahakan secepatnya, tapi semua tergantung antrian cetak ya kak :)</p>
+                                            <hr/>
+                                        </Row>
+                                        <Row>
+                                            <h4>PO berapa lama kak?</h4>
+                                        </Row>
+                                        <Row>
+                                            <p>kurang lebih 7-14hr ya kak untuk proses cetak casenya (tidak termasuk tgl merah n hari Sabtu Minggu) :) kita usahakan secepatnya, tp semua tergantung antrian cetak ya kak :)</p>
+                                            <hr/>
+                                        </Row>
+                                        <Row>
+                                            <h4>Bisa Custom? Syarat & Ketentuan Custom apa kak?</h4>
+                                        </Row>
+                                        <Row>
+                                            <p>Bisa custom kak :) untuk custom ada biaya tambahan 10rb per case, & file design gambar dari kamu ya kak :)</p>
+                                            <img src="https://lh4.googleusercontent.com/wjKWUzK9ePBaOLCq4pf-1mWiTOPfuy0QtWZ7Fjf8WUfQGbLADYz-Lszie3q2VC8YWNvSNuodqlaC9T_lMnVGUBMTQ9ptSUFp455cqnA" alt="custom"></img>
+                                            <p>File design harus seperti yang kiri ya kak bukan yg kanan. Jadi, harus berupa file design bukan foto case hp yang ada designnya</p>
+                                            <p>Tambahan:</p>
+                                            <ul>
+                                                <li>Sebaiknya file design memiliki resolusi yg tinggi (supaya hasil cetak tidak pecah)</li>
+                                                <li>Sebaiknya bentuk file design memanjang ke bawah seperti bentuk case hp.</li>
+                                            </ul>
+                                            <hr/>
+                                        </Row>
+                                        <Row>
+                                            <h4>Jenis casenya ada apa aja kak?</h4>
+                                        </Row>
+                                        <Row>
+                                            <p>Ada 2 jenis case kak:</p>
+                                            <ul>
+                                                <li>Softcase    : tidak full print, bahan elastis & bisa ditekuk-tekuk</li>
+                                                <li>Hardcase	: full print, bahan kaku & tidak bisa ditekuk-tekuk</li>
+                                            </ul>
+                                            <hr/>
+                                        </Row>
+                                        <Row>
+                                            <h4>Harganya berapa kak?</h4>
+                                        </Row>
+                                        <Row>
+                                            <ul>
+                                                <li>Softcase	: Rp 50.000,-</li>
+                                                <li>Hardcase	: Rp 70.000,-</li>
+                                            </ul>
+                                            <p>Beli 2 Gratis 1, bisa campur tipe hp & design case bisa beda-beda juga</p>
+                                            <hr/>
+                                        </Row>
+                                        <Row>
+                                            <h4>Gratisnya hardcase atau softcase kak?</h4>
+                                        </Row>
+                                        <Row>
+                                            <p>Beli 2 gratis 1</p>
+                                            <ul>
+                                                <li>Gratisnya adalah softcase</li>
+                                                <li>Bisa gratis hardcase kok kak :)  Tapi, semua pesanan hardcase ya kak.</li>
+                                            </ul>
+                                            <p>Contoh: kalau beli 6 pcs campur softcase & hardcase maka yg dianggap sebagai gratisnya adalah softcase, tp kl beli 6pcs dan semua hardcase maka bisa dapat hardcase sebagai freenya. :)</p>
+                                            <hr/>
+                                        </Row>
+                                        <Row>
+                                            <h4>Punya pertanyaan lain?</h4>
+                                        </Row>
+                                        <Row>
+                                            <p>Silahkan chat admin melalui Line / Whatsapp :)</p>
+                                        </Row>
+                                    </Grid>
                                 </Panel.Body>
                             </Panel>
                             <Panel eventKey="2">
                                 <Panel.Heading>
-                                <Panel.Title toggle>Collapsible Group Item #2</Panel.Title>
+                                <Panel.Title toggle>Cara Order</Panel.Title>
                                 </Panel.Heading>
                                 <Panel.Body collapsible>
                                 Anim pariatur cliche reprehenderit, enim eiusmod high life accusamus terry
@@ -49,7 +110,7 @@ class InformationPage extends Component {
                             </Panel>
                             <Panel eventKey="3">
                                 <Panel.Heading>
-                                <Panel.Title toggle>Collapsible Group Item #3</Panel.Title>
+                                <Panel.Title toggle>Pembayaran</Panel.Title>
                                 </Panel.Heading>
                                 <Panel.Body collapsible>
                                 Anim pariatur cliche reprehenderit, enim eiusmod high life accusamus terry
@@ -65,18 +126,15 @@ class InformationPage extends Component {
                             </Panel>
                             <Panel eventKey="4">
                                 <Panel.Heading>
-                                <Panel.Title toggle>Collapsible Group Item #3</Panel.Title>
+                                <Panel.Title toggle>Informasi Pengiriman</Panel.Title>
                                 </Panel.Heading>
                                 <Panel.Body collapsible>
-                                Anim pariatur cliche reprehenderit, enim eiusmod high life accusamus terry
-                                richardson ad squid. 3 wolf moon officia aute, non cupidatat skateboard
-                                dolor brunch. Food truck quinoa nesciunt laborum eiusmod. Brunch 3 wolf
-                                moon tempor, sunt aliqua put a bird on it squid single-origin coffee nulla
-                                assumenda shoreditch et. Nihil anim keffiyeh helvetica, craft beer labore
-                                wes anderson cred nesciunt sapiente ea proident. Ad vegan excepteur
-                                butcher vice lomo. Leggings occaecat craft beer farm-to-table, raw denim
-                                aesthetic synth nesciunt you probably haven't heard of them accusamus
-                                labore sustainable VHS.
+                                <ul>
+                                    <li>Caze Mania menggunakan jasa kurir pengiriman Sicepat Ekspress.</li>
+                                    <li>Setelah case selesai dicetak, kami akan mengirimkan barang pesanan ke alamat yang diberikan dan customer akan mendapatkan e-mail notifikasi bahwa barang telah dikirim serta nomor resi pengiriman.</li>
+                                    <li>Pihak kurir Sicepat Ekspress juga akan memberikan informasi mengenai pengiriman barang melalui SMS ke nomor hp customer.</li>
+                                    <li>Status pengiriman juga dapat dicek melalui http://sicepat.com/cek-resi dengan memasukkan nomor resi yang telah diberikan.</li>
+                                </ul>
                                 </Panel.Body>
                             </Panel>
                             <Panel eventKey="5">
