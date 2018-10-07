@@ -63,6 +63,9 @@ class Header extends Component {
                                     <NavItem eventKey={4} className="header-button" onClick={()=>this.onLinkClick("/Admin?table=cases")}>
                                         <h4 className="orange-text">Admin</h4>
                                     </NavItem>
+                                    <NavItem eventKey={4} className="header-button" onClick={()=>this.onLinkClick("/payment")}>
+                                        <h4 className="orange-text">Payment</h4>
+                                    </NavItem>
                                 </Nav>
                                 <Nav pullRight>
                                     <NavItem eventKey={5} className="header-button" onClick={()=>this.onLinkClick("/cart")}>

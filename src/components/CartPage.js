@@ -9,6 +9,10 @@ class CartPage extends Component {
         )
     }
 
+    onPaymentClick() {
+        this.props.history.push('/payment')
+    }
+
     renderTransactionSummary() {
         return (
             <Row>
@@ -21,7 +25,7 @@ class CartPage extends Component {
                 </Row>
                 <Row>
                     <hr/>
-                    <input type="button" className="btn btn-primary" style={{width:"100%"}} value="Proceed to Payment"/>
+                    <input type="button" className="btn btn-primary" style={{width:"100%"}} value="Proceed to Payment" onClick={()=>this.onPaymentClick()}/>
                 </Row>
             </Row>
         )     

@@ -203,21 +203,23 @@ app.get('/users', function(req,res){
     const cipher = crypto.createHmac("sha256", secret)
     .update(req.query.password)
     .digest("hex");
-    console.log(req.query.email)
-    console.log(req.query.password)
-    console.log(cipher)
+    // console.log(req.query.email)
+    // console.log(req.query.password)
+    // console.log(cipher)
 
     sql = `SELECT id, firstname, email FROM users WHERE email = "${req.query.email}" AND password = "${cipher}"`
     conn.query(sql, (err,results)=>{
         if(err) throw err;
-        console.log(results)
+        // console.log(results)
         res.send(results)
     })
 })
 
 app.get('/keeplogin', function(req,res){
     sql = `SELECT id, firstname, email FROM users WHERE email = "${req.query.email}"`
+    console.log(sql)
     conn.query(sql, (err,results)=>{
+        console.log('keeplogin')
         console.log(results)
         res.send(results)
     })
