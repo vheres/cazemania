@@ -120,18 +120,6 @@ class DetailPage extends Component {
     }
 
     onAddToCart() {
-        console.log('user id')
-        console.log(this.props.auth.id)
-        console.log('catalogue id')
-        console.log(this.state.item.id)
-        console.log('brand id')
-        console.log(this.refs.brand_select.value)
-        console.log('model id')
-        console.log(this.refs.type_select.value)
-        console.log('case type')
-        console.log(this.refs.case_select.value)
-        console.log('quantity')
-        console.log(document.getElementById("quantity").value)
         axios.post(API_URL_1 + `/cart`, {
             user_id: this.props.auth.id,
             catalogue_id: this.state.item.id,

@@ -155,11 +155,15 @@ app.post('/cart', function(req,res){
 
 app.delete('/cart/:id', function(req,res){
     sql  = `DELETE FROM cart where id = ${req.params.id}`
+    sql1 = `SELECT car.id, cat.code, cat.name, cat.image,  car.brand_id, car.model_id, car.case_type, car.amount, br.name as brand_name, ty.name as model_name, pr.price as price FROM catalogue cat JOIN cart car ON cat.id=car.catalogue_id JOIN brands br ON br.id = car.brand_id 
+    JOIN type ty ON ty.id = car.model_id JOIN price pr ON pr.case_type = car.case_type WHERE car.user_id=${req.params.id}`
 
     conn.query(sql, (err,results)=>{
         if(err) throw err;
-        console.log(results)
-        
+        conn.query(sql1, (err,results1) => {
+            if(err) throw err;
+            res.send({results1})
+        })
     })
 })
 

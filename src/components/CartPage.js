@@ -32,19 +32,31 @@ class CartPage extends Component {
     getCartList() {
         axios.get(API_URL_1 + `/cart/` + this.props.auth.id)
         .then((response) => {
-            this.setState({cart: response.results.data})
-            console.log(response)
+            this.setState({cart: response.data.results})
         })
-    }
-
-    renderCartList() {
-        return(
-            <CartDetail></CartDetail>
-        )
     }
 
     onPaymentClick() {
         this.props.history.push('/payment')
+    }
+
+    onDeleteClick(id) {
+        axios.delete(API_URL_1 + `/cart/` + id)
+        .then((response) => {
+            this.setState({cart: response.data.results1})
+            alert(`delete item success!`)
+        }).catch((err) => {
+            console.log(err);
+        })
+    }
+
+    renderCartList() {
+        var arrJSX = [];
+        arrJSX = this.state.cart.map((item,count) => {
+            return <CartDetail key={item.id} id={item.id} count={count} name={item.code} image={item.image} brand={item.brand_name} model={item.model_name} type={item.case_type} quantity={item.amount} price={item.price} DeleteClick={(temp)=>this.onDeleteClick(temp)}></CartDetail>
+        })
+        console.log(arrJSX)
+        return arrJSX
     }
 
     renderTransactionSummary() {
@@ -76,8 +88,7 @@ class CartPage extends Component {
                             <hr/>
                             </Col>
                         </Row>
-                        {this.renderCartList()}
-                        {this.renderCartList()}
+                            {this.renderCartList()}              
                     </Col>
                     <Col mdOffset={1} md={2}>
                         {this.renderTransactionSummary()}
