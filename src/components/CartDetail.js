@@ -37,7 +37,7 @@ class CartDetail extends Component {
                         </Row>
                     </Col>
                     <Col md={3}>
-                        <h3>Rp50000</h3>
+                        <h3>Rp. {this.props.price}</h3>
                     </Col>
                 </Col>
                 {this.renderDeleteButton()}         

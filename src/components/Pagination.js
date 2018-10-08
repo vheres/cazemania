@@ -7,7 +7,7 @@ class PaginationClass extends Component {
         var arrLim = [];
         var arrJSX = [];
         for (let i = 0; i < this.props.count; i++) {
-            arrLim.push(i*5)
+            arrLim.push(i*20)
             if (i > this.props.active-3 && i < this.props.active+3) {
                 if(this.props.active === i) {
                     arrJSX.push(<Pagination.Item onClick={() => this.props.PageClick(arrLim[i], i)} active>{i+1}</Pagination.Item>)

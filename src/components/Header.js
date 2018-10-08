@@ -90,7 +90,7 @@ class Header extends Component {
                     <Navbar fixedTop={true} collapseOnSelect fluid>
                         <Navbar.Header>
                             <Navbar.Brand>
-                                <Link to="/"><img src="https://lh4.googleusercontent.com/k-yGYjiEqNwiYU-Dmc7wLVUSPaCd22hLU-CYmIHBaK7cfXYeKQJa4oUoQWWaQaskQzWK6WzHDIh-e4eTnsY=w1920-h969" alt="Caze Mania" className="img.responsive"></img></Link>
+                                <Link to="/"><img src="https://lh4.googleusercontent.com/tU0KHAw8cvY3y2OCoBTvjrnyAh7hRWvH08ZkhNVTHU2VZUxv0lyMKccadhuf47avMc4VyZhyDy-DZgDKntXp=w2560-h1249" alt="Caze Mania" className="img.responsive"></img></Link>
                             </Navbar.Brand>
                             <Navbar.Toggle />
                         </Navbar.Header>
