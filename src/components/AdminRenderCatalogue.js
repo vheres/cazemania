@@ -2,7 +2,7 @@ import React, {Component} from 'react';
 import axios from 'axios'
 import {API_URL_1} from '../supports/api-url/apiurl'
 
-class AdminRenderCases extends Component {
+class AdminRenderCatalogue extends Component {
     state = {edit: 0}
 
     onEditClick(){
@@ -47,67 +47,16 @@ class AdminRenderCases extends Component {
             })
         }
     }
-
-    renderYN(){
-        return(
-            ["N","Y"]
-        )
-    }
-
-    renderSelectSoft(){
-        if(this.props.soft === 1){
-            return(
-                <td>
-                    <select id="editSoft" ref="editSoft">
-                    <option value={1} selected="selected">Y</option>
-                    <option value={0}>N</option>
-                    </select>
-                </td>
-            )
-        }
-        else{
-            return(
-                <td>
-                    <select id="editSoft" ref="editSoft">
-                    <option value={1}>Y</option>
-                    <option value={0} selected="selected">N</option>
-                    </select>
-                </td>
-            )
-        }
-    }
-
-    renderSelectHard(){
-        if(this.props.hard === 1){
-            return(
-                <td>
-                    <select id="editHard" ref="editHard">
-                    <option value={1} selected="selected">Y</option>
-                    <option value={0}>N</option>
-                    </select>
-                </td>
-            )
-        }
-        else{
-            return(
-                <td>
-                    <select id="editHard" ref="editHard">
-                    <option value={1}>Y</option>
-                    <option value={0} selected="selected">N</option>
-                    </select>
-                </td>
-            )  
-        }
-    }
     
     renderPage(){
         return(
             [
                 <tr>
                 <td>{this.props.id}</td>
+                <td>{this.props.code}</td>
                 <td>{this.props.name}</td>
-                <td>{this.renderYN()[this.props.soft]}</td>
-                <td>{this.renderYN()[this.props.hard]}</td>
+                <td><img src={this.props.image} alt={this.props.image}/></td>
+                <td>{this.props.sales}</td>
                 <td>
                     <input type="button" className="btn btn-success" style={{width: 70}} onClick={()=>this.onEditClick()} value="Edit"/>
                     <br/>
@@ -116,9 +65,10 @@ class AdminRenderCases extends Component {
                 </tr>,
                 <tr>
                 <td>{this.props.id}</td>
-                <td><input type="text" id="editName" ref="editName" defaultValue={this.props.name} style={{width: 220}}/></td>
-                {this.renderSelectSoft()}
-                {this.renderSelectHard()}
+                <td><input type="text" ref="editCode"  defaultValue={this.props.code}/></td>
+                <td><input type="text" ref="editName"  defaultValue={this.props.name}/></td>
+                <td><input type="text" ref="editImage" defaultValue={this.props.image}/></td>
+                <td>{this.props.sales}</td>
                 <td>
                     <input type="button" className="btn btn-primary" style={{width: 70}} onClick={()=>this.onSaveClick()} value="Save"/>
                     <br/>
@@ -136,4 +86,4 @@ class AdminRenderCases extends Component {
     }
 }
 
-export default AdminRenderCases
+export default AdminRenderCatalogue

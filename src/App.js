@@ -56,7 +56,7 @@ class App extends Component {
               <Route path="/information" component={InformationPage}/>
               <Route path="/payment" component={PaymentPage}/>
               <Route path="/reseller-dropshipper" component={ResellerPage}/>
-              <Route path="/Admin" component={Admin}/>
+              <Route path="/Admin/:table" component={Admin}/>
               <Route path="/login" component={LoginPage}/>
               <Route path="/register" component={RegisterPage}/>
             </Col>

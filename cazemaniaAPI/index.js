@@ -114,6 +114,29 @@ app.get('/admin/:table', function(req,res){
     })
 })
 
+app.put('/admin/:table/:id', function(req,res){
+    function tableselect2(){
+        return(
+            {
+            catalogue: () => {
+                return(
+                    sql = `SELECT * FROM catalogue ORDER BY id DESC` )
+                },
+            cases: () => {
+                return(
+                    sql = `UPDATE type SET ? WHERE id = ${req.params.id}` )
+                }
+            }
+        )
+    }
+
+    conn.query(tableselect2()[req.params.table](), req.body, (err,results)=>{
+        if(err) throw err;
+        console.log(results)
+        res.send(results)
+    })
+})
+
 app.get('/item/:id', function(req,res){
     sql  = `SELECT * FROM catalogue WHERE id=${req.params.id}`
     sql1 = `SELECT * FROM brands ORDER BY name`
