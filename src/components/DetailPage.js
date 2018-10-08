@@ -163,7 +163,7 @@ class DetailPage extends Component {
                 return (
                     <section>
                         <Row>
-                            <Col xsOffset={1} mdOffset={0} md={12}><h3>{this.state.item.code}</h3></Col>
+                            <Col xsOffset={1} mdOffset={0} md={12}><h3>{this.state.item.name} | {this.state.item.code}</h3></Col>
                         </Row>
                         <Row>
                             <Col xsOffset={1} mdOffset={0} md={12}><h2 className="price-text">Rp 50000 - Rp 75000</h2></Col> 
@@ -175,7 +175,7 @@ class DetailPage extends Component {
                 return (
                     <section>
                         <Row>
-                            <Col xsOffset={1} mdOffset={0} md={12}><h3>{this.state.item.code}</h3></Col>
+                            <Col xsOffset={1} mdOffset={0} md={12}><h3>{this.state.item.name} | {this.state.item.code}</h3></Col>
                         </Row>
                         <Row>
                             <Col xsOffset={1} mdOffset={0} md={12}><h2 className="price-text">Rp {this.state.selected_price}</h2></Col> 

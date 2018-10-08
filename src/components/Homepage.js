@@ -10,7 +10,6 @@ class HomePage extends Component {
 
     renderHomePage() {
         return(
-            <section>
                 <Grid fluid className="HomePage-css margin-15">
                     <Row>
                         <img src ="https://cdn.shopify.com/s/files/1/2689/9614/files/BANNER_COFFEE_LOVERS.jpg?v=1537540529" alt="banner" className="homepage-banner"></img>
@@ -73,7 +72,6 @@ class HomePage extends Component {
                             </Row>           
                         </Row>
                 </Grid>
-            </section>
             );
     }
 

@@ -48,12 +48,19 @@ app.get('/bestsellers', function(req,res){
 
 //Get list of catalogue, sorted by ID
 app.get('/catalogue', function(req,res){
-    var sql = `SELECT * FROM catalogue 
-                WHERE code LIKE "%${req.query.code}%"
-                ORDER BY id DESC  limit ${req.query.pagination[0]}, ${req.query.pagination[1]}`
-    var sql1 = `SELECT count(*) as count FROM catalogue
-                WHERE code LIKE "%${req.query.code}%"`
-                console.log(sql)
+    if (req.query.code != null && req.query.name != null) {
+        var sql = `SELECT * FROM catalogue WHERE code LIKE "%${req.query.code}%" OR name LIKE "%${req.query.name}%" ORDER BY id DESC  limit ${req.query.pagination[0]}, ${req.query.pagination[1]}`
+        var sql1 = `SELECT count(*) as count FROM catalogue WHERE code LIKE "%${req.query.code}%" OR name LIKE "%${req.query.name}%"`
+    }
+    else if (req.query.code != null && req.query.name == null) {
+        var sql = `SELECT * FROM catalogue WHERE code LIKE "%${req.query.code}%" ORDER BY id DESC  limit ${req.query.pagination[0]}, ${req.query.pagination[1]}`
+        var sql1 = `SELECT count(*) as count FROM catalogue WHERE code LIKE "%${req.query.code}%"`
+    }
+    else if  (req.query.code == null && req.query.name != null) {
+        var sql = `SELECT * FROM catalogue WHERE name LIKE "%${req.query.name}%" ORDER BY id DESC  limit ${req.query.pagination[0]}, ${req.query.pagination[1]}`
+        var sql1 = `SELECT count(*) as count FROM catalogue WHERE name LIKE "%${req.query.name}%"`
+    }
+    
     conn.query(sql, (err,results)=>{
         if(err) throw err;
         // console.log(results)

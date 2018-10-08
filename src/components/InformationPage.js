@@ -40,7 +40,7 @@ class InformationPage extends Component {
                                         </Row>
                                         <Row>
                                             <p>Bisa custom kak :) untuk custom ada biaya tambahan 10rb per case, & file design gambar dari kamu ya kak :)</p>
-                                            <img src="https://lh4.googleusercontent.com/wjKWUzK9ePBaOLCq4pf-1mWiTOPfuy0QtWZ7Fjf8WUfQGbLADYz-Lszie3q2VC8YWNvSNuodqlaC9T_lMnVGUBMTQ9ptSUFp455cqnA" alt="custom"></img>
+                                            <img src="https://lh6.googleusercontent.com/CgnwroILaqAQCxOCZvYWxAUZlT6xBwCRePrNBQkxeBXIp8DveHtgrlzaVYJZWPIa3a-8skA3vWZvC425eHE4rnTjYVhIKdG1uUL5PQk" alt="custom"></img>
                                             <p>File design harus seperti yang kiri ya kak bukan yg kanan. Jadi, harus berupa file design bukan foto case hp yang ada designnya</p>
                                             <p>Tambahan:</p>
                                             <ul>

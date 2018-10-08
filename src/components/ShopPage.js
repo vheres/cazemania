@@ -10,7 +10,7 @@ class ShopPage extends Component {
 
     componentWillMount() {
         if (this.state.pagination.length === 0) {
-            this.state.pagination.push(0, 5)
+            this.state.pagination.push(0, 20)
         }
         this.setState({})
         this.getCatalogueList();
@@ -35,7 +35,7 @@ class ShopPage extends Component {
             }
         })
         .then((response)=>{
-            this.setState({ catalogue: response.data.catalogue, pagecount: Math.ceil((response.data.pagecount[0].count/5)) })
+            this.setState({ catalogue: response.data.catalogue, pagecount: Math.ceil((response.data.pagecount[0].count/20)) })
         })
     }
 
@@ -43,21 +43,32 @@ class ShopPage extends Component {
         this.state.active.shift();
         this.state.active.push(active);
         this.state.pagination.length = 0;
-        this.state.pagination.push(page, 5)
+        this.state.pagination.push(page, 20)
         this.setState({})
         this.getCatalogueList();
     }
 
     onSearchClick() {
         this.state.pagination.length = 0;
-        this.state.pagination.push(0, 5)
+        this.state.pagination.push(0, 20)
         this.state.active.shift();
         this.state.active.push(0);
         this.pushPage();
     }
 
     async pushPage() {
-        await (this.props.history.push(`/shop?code=${this.refs.searchCode.value}&name=${this.refs.searchName.value}`));
+        if( this.refs.searchCode.value != "" && this.refs.searchName.value != "" ) {
+            await (this.props.history.push(`/shop?code=${this.refs.searchCode.value}&name=${this.refs.searchName.value}`));
+        }
+        else if ( this.refs.searchCode.value != "" && this.refs.searchName.value == "" ) {
+            await (this.props.history.push(`/shop?code=${this.refs.searchCode.value}`));
+        }
+        else if ( this.refs.searchCode.value == "" && this.refs.searchName.value != "" ) {
+            await (this.props.history.push(`/shop?name=${this.refs.searchName.value}`));
+        }
+        else {
+            await (this.props.history.push(`/shop`));
+        }
         this.getCatalogueList();
     }
 

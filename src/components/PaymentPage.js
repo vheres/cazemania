@@ -45,15 +45,10 @@ class PaymentPage extends Component {
                 </Row>
                 <Row>
                     <Table responsive>
-                    </Table>
                     {this.renderTransactionDetail()}
+                    </Table>
                 </Row>
                 <Row>
-                    <Col md={6}><h5>Total Harga</h5></Col>
-                    <Col md={6}><h5 className="text-right">Rp. 100000,-</h5></Col>                   
-                </Row>
-                <Row>
-                    <hr/>
                     <input type="button" className="btn btn-primary" style={{width:"100%"}} value="Proceed to Payment"/>
                 </Row>
             </Row>
@@ -62,9 +57,50 @@ class PaymentPage extends Component {
 
     renderTransactionDetail() {
         var arrJSX = [];
+        var subTotal = 0;
+        var totalPrice = 0;
+        var countHardCase = 0;
+        var countSoftCase = 0;
+        var totalCase = 0;
+        var countFree = 0;
+        var freeSoft = 0;
+        var freeHard = 0;
+        var hardPrice = 0;
+        var softPrice = 0;
         this.state.cart.map((item,count) => {
-            arrJSX.push()
+            if (item.case_type == "hard") {
+                countHardCase += parseInt(item.amount);
+                hardPrice = item.price;
+            }
+            else {
+                countSoftCase += parseInt(item.amount)
+                softPrice = item.price;
+            }
+            subTotal += item.amount * item.price;
+            arrJSX.push(<tr><td style={{width:"5%"}}>{count +1}.</td><td style={{width:"20%"}}>{item.code},</td><td style={{width:"20%"}}>{item.model_name},</td><td style={{width:"10%"}}>{item.case_type}</td><td style={{width:"20%"}} className="text-right">(Qty:{item.amount})</td><td style={{width:"25%"}}>Rp.{item.amount * item.price}</td></tr>)
         })
+        arrJSX.push(<br/>)
+        arrJSX.push(<tr><td/><td colSpan="4"><strong>Sub Total</strong></td><td><strong>Rp.{subTotal}</strong></td></tr>)
+        totalCase = countHardCase + countSoftCase;
+        countFree = Math.floor(totalCase/3);
+        for(var i=0; i<countFree; i++) {
+            if(countSoftCase > 0) {
+                countSoftCase--;
+                freeSoft++;
+            }
+            else {
+                freeHard++;
+            }
+        }
+        if(freeSoft>0) {
+            arrJSX.push(<tr><td/><td colSpan="2">Free Soft Case:</td><td className="text-right" colSpan="2">(Qty:{freeSoft}) -</td><td>Rp.{freeSoft*softPrice}</td></tr>)
+        }
+        if(freeHard>0) {
+            arrJSX.push(<tr><td/><td colSpan="2">Free Hard Case:</td><td className="text-right" colSpan="2">(Qty:{freeHard}) -</td><td>Rp.{freeHard*hardPrice}</td></tr>)
+        }
+        totalPrice = subTotal - (freeSoft*softPrice) - (freeHard*hardPrice)
+        arrJSX.push(<br/>)
+        arrJSX.push(<tr><td/><td colSpan="4"><strong>Total Price</strong></td><td><strong>Rp.{totalPrice}</strong></td></tr>)
         return arrJSX
     }
 
