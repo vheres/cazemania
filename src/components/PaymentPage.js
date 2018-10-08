@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { Grid, Row, Col, Panel } from 'react-bootstrap';
+import { Grid, Row, Col, Panel, Table } from 'react-bootstrap';
 import axios from 'axios';
 import {API_URL_1} from '../supports/api-url/apiurl'
 import { connect } from 'react-redux';
@@ -44,6 +44,11 @@ class PaymentPage extends Component {
                     <Col md={12}><h3>Ringkasan Belanja</h3></Col>
                 </Row>
                 <Row>
+                    <Table responsive>
+                    </Table>
+                    {this.renderTransactionDetail()}
+                </Row>
+                <Row>
                     <Col md={6}><h5>Total Harga</h5></Col>
                     <Col md={6}><h5 className="text-right">Rp. 100000,-</h5></Col>                   
                 </Row>
@@ -53,6 +58,14 @@ class PaymentPage extends Component {
                 </Row>
             </Row>
         )     
+    }
+
+    renderTransactionDetail() {
+        var arrJSX = [];
+        this.state.cart.map((item,count) => {
+            arrJSX.push()
+        })
+        return arrJSX
     }
 
     renderPaymentPage() {
@@ -81,6 +94,16 @@ class PaymentPage extends Component {
                             <Panel>
                                 <Panel.Body>
                                     {this.renderCartList()}
+                                </Panel.Body>
+                            </Panel>
+                        </Row>
+                        <Row>
+                            <h4>Biaya Pengiriman</h4>
+                        </Row>
+                        <Row>
+                            <Panel>
+                                <Panel.Body>
+                                    
                                 </Panel.Body>
                             </Panel>
                         </Row>
