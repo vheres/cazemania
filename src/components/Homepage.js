@@ -5,6 +5,7 @@ import CarouselText from './CarouselText';
 import CarouselInsta from './CarouselInsta';
 import InstaSlide from './InstaSlide';
 import axios from 'axios';
+import { Link } from 'react-router-dom';
 
 class HomePage extends Component {      
 
@@ -18,22 +19,40 @@ class HomePage extends Component {
                             <Col xsOffset={0} mdOffset={2} md={8}>
                                 <Row>
                                     <Col xs={4} md={4}>
-                                        <img src ="https://cdn.shopify.com/s/files/1/2689/9614/files/3-3_400x400_crop_center.jpg?v=1528277381" alt="banner" className="homepage-button"></img>
+                                        <Link to="/shop" className="image-holder">
+                                            <img src="https://cdn.shopify.com/s/files/1/2689/9614/files/3-3_400x400_crop_center.jpg?v=1528277381" style={{width:"100%"}}/>
+                                            <div className="overlay"></div>
+                                        </Link>
                                     </Col>
                                     <Col xs={4} md={4}>
-                                        <img src="https://cdn.shopify.com/s/files/1/2689/9614/files/3-3_400x400_crop_center.jpg?v=1528277381" alt="banner" className="homepage-button"></img>
+                                        <Link to="/shop" className="image-holder">
+                                            <img src="https://cdn.shopify.com/s/files/1/2689/9614/files/3-3_400x400_crop_center.jpg?v=1528277381" style={{width:"100%"}}/>
+                                            <div className="overlay"></div>
+                                        </Link>
                                     </Col>
                                     <Col xs={4} md={4}>
-                                        <img src ="https://cdn.shopify.com/s/files/1/2689/9614/files/3-3_400x400_crop_center.jpg?v=1528277381" alt="banner" className="homepage-button"></img>
+                                        <Link to="/shop" className="image-holder">
+                                            <img src="https://cdn.shopify.com/s/files/1/2689/9614/files/3-3_400x400_crop_center.jpg?v=1528277381" style={{width:"100%"}}/>
+                                            <div className="overlay"></div>
+                                        </Link>                                    
                                     </Col>
                                     <Col xs={4} md={4}>
-                                        <img src ="https://cdn.shopify.com/s/files/1/2689/9614/files/3-3_400x400_crop_center.jpg?v=1528277381" alt="banner" className="homepage-button"></img>
+                                        <Link to="/shop" className="image-holder">
+                                            <img src="https://cdn.shopify.com/s/files/1/2689/9614/files/3-3_400x400_crop_center.jpg?v=1528277381" style={{width:"100%"}}/>
+                                            <div className="overlay"></div>
+                                        </Link>                                   
                                     </Col>
                                     <Col xs={4} md={4}>
-                                        <img src ="https://cdn.shopify.com/s/files/1/2689/9614/files/3-3_400x400_crop_center.jpg?v=1528277381" alt="banner" className="homepage-button"></img>
+                                        <Link to="/shop" className="image-holder">
+                                            <img src="https://cdn.shopify.com/s/files/1/2689/9614/files/3-3_400x400_crop_center.jpg?v=1528277381" style={{width:"100%"}}/>
+                                            <div className="overlay"></div>
+                                        </Link>                                    
                                     </Col>
                                     <Col xs={4} md={4}>
-                                        <img src ="https://cdn.shopify.com/s/files/1/2689/9614/files/3-3_400x400_crop_center.jpg?v=1528277381" alt="banner" className="homepage-button"></img>
+                                        <Link to="/shop" className="image-holder">
+                                            <img src="https://cdn.shopify.com/s/files/1/2689/9614/files/3-3_400x400_crop_center.jpg?v=1528277381" style={{width:"100%"}}/>
+                                            <div className="overlay"></div>
+                                        </Link>                                    
                                     </Col>
                                 </Row>
                             </Col>   

@@ -6764,9 +6764,62 @@ button.close {
 .homepage-banner {
   width: 100%;
 }
-.homepage-button {
-  width: 100%;
+/* homepage buttons */
+.image-holder {
   margin-top: 10px;
+  margin-bottom: 10px;
+  position: relative;
+  float: left;
+}
+.overlay {
+  background-color:rgba(0,0,0,0);
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  top: 0;
+  z-index: 2;
+}
+.overlay:hover { 
+  background-color:rgba(0, 0, 0, 0.4);
+  -webkit-transition: background-color ease-in-out .3s;
+  -o-transition: background-color ease-in-out .3s;
+     transition: background-color ease-in-out .3s;
+}
+/* instagram images */
+.instagram-holder {
+  margin-top: 10px;
+  margin-bottom: 10px;
+  position: relative;
+  float: left;
+}
+.instagram-overlay {
+  background-color:rgba(0,0,0,0);
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  top: 0;
+  z-index: 2;
+}
+.instagram-overlay:hover { 
+  background-color:rgba(0, 0, 0, 0.4);
+}
+/* Shop Page images */
+.shop-holder {
+  margin-top: 10px;
+  margin-bottom: 10px;
+  position: relative;
+  float: left;
+}
+.shop-overlay {
+  background-color:rgba(0,0,0,0);
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  top: 0;
+  z-index: 2;
+}
+.shop-overlay:hover { 
+  background-color:rgba(0, 0, 0, 0.4);
 }
 .orange-text {
   color: rgb(255,165,39);
@@ -6866,6 +6919,18 @@ button.close {
   border-top: 5px solid rgb(255, 181, 44);
   border-bottom: 5px solid rgb(255, 181, 44);
   border-right: 20px solid rgb(255, 181, 44)
+}
+.empty-cart{
+  display: block;
+  margin-left: auto;
+  margin-right: auto;
+  width: 15%;
+}
+.gotoshop-button{
+  display: block;
+  margin-left: auto;
+  margin-right: auto;
+  width: 100px;
 }
 
 

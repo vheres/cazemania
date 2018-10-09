@@ -37,7 +37,8 @@ class CarouselClass extends Component {
       galleryItems() {
           var arrJSX = new Array();
         for (var i = 0; i < this.image_url[0].length; i++) {
-            arrJSX.push(<Thumbnail src={this.image_url[0][i]} href={this.image_url[1][i]} target="_blank"></Thumbnail>);
+            arrJSX.push(<Thumbnail src={this.image_url[0][i]} href={this.image_url[1][i]} target="_blank" ></Thumbnail>);
+            // arrJSX.push(<div className="instagram-holder"><Thumbnail src={this.image_url[0][i]} href={this.image_url[1][i]} target="_blank" style={{width:"100%", height:"250px"}}></Thumbnail><div className="instagram-overlay"></div></div>) 
         }
         return arrJSX;
       };

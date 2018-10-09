@@ -4,6 +4,7 @@ import CartDetail from './CartDetail';
 import {API_URL_1} from '../supports/api-url/apiurl'
 import axios from 'axios'
 import { connect } from 'react-redux';
+import { Redirect } from 'react-router-dom';
 
 class CartPage extends Component {
     state = ({cart: []})
@@ -98,10 +99,27 @@ class CartPage extends Component {
     }
 
     renderCartPage() {
-        return(
+        if (this.state.cart.length == 0) {
+            return(
                 <Grid fluid className="HomePage-css margin-15 padding-15p">
-                    <Col md={2}></Col>
-                    <Col md={5}>
+                    <Row>
+                        <Col mdOffset={2} md={8}>
+                            <img src="https://cdn3.iconfinder.com/data/icons/flat-icons-big-sized/64/shopping-card-512.png" alt="empty cart" className="empty-cart"></img>
+                        </Col>
+                    </Row>
+                    <Row>
+                        <h4 className="text-center">Your cart is empty, shop now!</h4>
+                    </Row>
+                    <Row>
+                        <input type="button" className="btn btn-success gotoshop-button" value="Go to shop!" onClick={()=>this.props.history.push('/shop')}/>
+                    </Row>
+                </Grid>
+            )
+        }
+        else {
+            return(
+                <Grid fluid className="HomePage-css margin-15 padding-15p">
+                    <Col mdOffset={2} md={5}>
                         <Row>
                             <Col md={10}>
                                 <h3>Keranjang Anda</h3>
@@ -119,11 +137,17 @@ class CartPage extends Component {
                 </Grid>
             );
         }
+        
+        }
 
     render() {
-        return (
-        this.renderCartPage()
-        );   
+        console.log(this.props.auth.email)
+        if(this.props.auth.email != "") {
+            return (
+            this.renderCartPage()
+            );
+        }
+        return <Redirect to="/login" />;    
     }
 }
 
