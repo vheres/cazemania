@@ -121,13 +121,23 @@ app.get('/admin/:table', function(req,res){
     })
 })
 
+app.get('/adminorders', function(req,res){
+    sql= `SELECT tr.date as date, tr.time as time, tr.proof as proof, tr.target_bank as target_bank, tr.status as status, tr.total_price as total_price, u.firstname as firstname, 
+    u.lastname as lastname, u.id as user_id, u.address as address, u.email as email FROM transactions tr JOIN users u ON tr.user_id = u.id ORDER BY date`
+    conn.query(sql, (err,results)=>{
+        if(err) throw err;
+        console.log(results)
+        res.send(results)
+    })
+})
+
 app.put('/admin/:table/:id', function(req,res){
     function tableselect2(){
         return(
             {
             catalogue: () => {
                 return(
-                    sql = `SELECT * FROM catalogue ORDER BY id DESC` )
+                    sql = `UPDATE catalogue SET ? WHERE id = ${req.params.id}` )
                 },
             cases: () => {
                 return(

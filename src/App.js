@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import Admin from './components/Admin'
+import AdminOrders from './components/AdminOrders'
 import Header from './components/Header';
 import Footer from './components/Footer';
 import HomePage from './components/Homepage';
@@ -57,6 +58,7 @@ class App extends Component {
               <Route path="/payment" component={PaymentPage}/>
               <Route path="/reseller-dropshipper" component={ResellerPage}/>
               <Route path="/Admin/:table" component={Admin}/>
+              <Route path="/Admin2/orders" component={AdminOrders}/>
               <Route path="/login" component={LoginPage}/>
               <Route path="/register" component={RegisterPage}/>
             </Col>

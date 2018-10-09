@@ -15,9 +15,9 @@ class AdminRenderCatalogue extends Component {
     onSaveClick(){
         axios.put(API_URL_1 + "/admin/" + this.props.table + "/" + this.props.id,
             {
+                code: this.refs.editCode.value,
                 name: this.refs.editName.value,
-                soft: this.refs.editSoft.value,
-                hard: this.refs.editHard.value
+                image: this.refs.editImage.value
             }
         )
         .then((res)=>{
