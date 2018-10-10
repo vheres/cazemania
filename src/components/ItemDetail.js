@@ -7,7 +7,7 @@ class ItemDetail extends Component {
     render() {
         return (
             // <Col md={3}><Thumbnail src={this.props.image} onClick={()=>this.props.ItemClick(this.props.id)}></Thumbnail></Col>
-            <Col md={3}><div className="shop-holder" onClick={()=>this.props.ItemClick(this.props.id)}><img src={this.props.image} style={{width:"100%"}}/><div className="shop-overlay"></div></div></Col>
+            <Col md={3}><div className="shop-holder" onClick={()=>this.props.ItemClick(this.props.id)}><img src={API_URL_1+'/'+this.props.image+'.jpg'} style={{width:"100%"}}/><div className="shop-overlay"></div></div></Col>
 
         );   
     }
