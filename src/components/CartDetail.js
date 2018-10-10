@@ -27,7 +27,7 @@ class CartDetail extends Component {
                     </Col>
                     <Col md={5}>
                         <Row>
-                            <h4>{this.props.name}</h4>
+                            <h4>{this.props.name} | {this.props.code}</h4>
                         </Row>
                         <Row>
                             <p>Details: {this.props.model}, {this.props.type} case</p>

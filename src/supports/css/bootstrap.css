@@ -6817,9 +6817,50 @@ button.close {
   height: 100%;
   top: 0;
   z-index: 2;
+  color: transparent;
+  display:flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 22px;
+  text-align: center;
 }
 .shop-overlay:hover { 
+  color: rgb(255, 255, 255);
   background-color:rgba(0, 0, 0, 0.4);
+  -webkit-transition: background-color ease-in-out .3s;
+  -o-transition: background-color ease-in-out .3s;
+     transition: background-color ease-in-out .3s;
+}
+/* Best Seller images */
+.best-holder {
+  margin-top: 10px;
+  margin-bottom: 10px;
+  position: relative;
+  float: left;
+  border: 2px solid white;
+  margin-right: 5px;
+  margin-left: 5px;
+}
+.best-overlay {
+  background-color:rgba(0,0,0,0);
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  top: 0;
+  z-index: 2;
+  color: transparent;
+  display:flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 22px;
+  text-align: center;
+}
+.best-overlay:hover { 
+  color: rgb(255, 255, 255);
+  background-color:rgba(0, 0, 0, 0.4);
+  -webkit-transition: background-color ease-in-out .3s;
+  -o-transition: background-color ease-in-out .3s;
+     transition: background-color ease-in-out .3s;
 }
 .orange-text {
   color: rgb(255,165,39);

@@ -26,6 +26,7 @@ app.use(cors())
 app.set('view engine' , 'ejs');
 app.use(url)
 app.use(bodyParser.json())
+app.use(express.static('public'))
 
 //Connect to MySQL database
 const conn = mysql.createConnection({

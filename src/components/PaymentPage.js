@@ -31,7 +31,7 @@ class PaymentPage extends Component {
     renderCartList() {
         var arrJSX = [];
         arrJSX = this.state.cart.map((item,count) => {
-            return <CartDetail key={item.id} id={item.id} count={count} name={item.code} image={item.image} brand={item.brand_name} model={item.model_name} type={item.case_type} quantity={item.amount} price={item.price}></CartDetail>
+            return <CartDetail key={item.id} id={item.id} count={count} name={item.name} code={item.code} image={item.image} brand={item.brand_name} model={item.model_name} type={item.case_type} quantity={item.amount} price={item.price}></CartDetail>
         })
         console.log(arrJSX)
         return arrJSX
@@ -49,7 +49,7 @@ class PaymentPage extends Component {
                     </Table>
                 </Row>
                 <Row>
-                    <input type="button" className="btn btn-primary" style={{width:"100%"}} value="Proceed to Payment"/>
+                    <input type="button" className="btn btn-primary" style={{width:"100%"}} value="Checkout"/>
                 </Row>
             </Row>
         )     

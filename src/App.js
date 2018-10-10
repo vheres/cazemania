@@ -20,6 +20,7 @@ import Cookies from 'universal-cookie';
 import './supports/css/bootstrap.css';
 import './App.css';
 import './supports/css/app.css';
+import './supports/css/font-awesome.css';
 
 const cookies = new Cookies();
 

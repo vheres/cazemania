@@ -2,6 +2,26 @@ import React, { Component } from 'react';
 import { Grid, Row, Col, PanelGroup, Panel  } from 'react-bootstrap';
 
 class InformationPage extends Component {
+    constructor(props, context) {
+        super(props, context);
+    
+        this.handleSelect = this.handleSelect.bind(this);
+    
+        this.state = {
+          activeKey: '0'
+        };
+    }
+
+    componentWillMount() {
+        const params = new URLSearchParams(this.props.location.search);
+        const active = params.get('active')
+        this.setState({activeKey: active})
+    }
+
+    async handleSelect(activeKey) {
+        await this.setState({ activeKey });
+        this.props.history.push(`/information?active=${this.state.activeKey}`)
+    }
 
     renderInformationPage() {
         return(
@@ -14,7 +34,10 @@ class InformationPage extends Component {
                 <Row className="margin-top-15">
                     <Col md={2}></Col>
                     <Col md={8}>
-                        <PanelGroup accordion id="accordion-example">
+                        <PanelGroup accordion id="information"
+                        activeKey={this.state.activeKey}
+                        onSelect={this.handleSelect}
+                        >
                             <Panel eventKey="1">
                                 <Panel.Heading>
                                 <Panel.Title toggle>FAQ</Panel.Title>

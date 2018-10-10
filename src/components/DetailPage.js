@@ -150,7 +150,7 @@ class DetailPage extends Component {
             return
         }
         else {
-            return <Magnifier src={this.state.item.image} width={"100%"} />
+            return <Magnifier src={API_URL_1+'/'+this.state.item.image+'.jpg'} width={"100%"} />
         }
     }
 
