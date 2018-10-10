@@ -86,8 +86,7 @@ class HomePage extends Component {
                             <img src="https://diylogodesigns.com/wp-content/uploads/2016/05/instagram-Logo-PNG-Transparent-Background-download-768x768.png" alt="instagram" style={{width:"50px"}}></img><span className="instagram-title">@Cazemania</span>
                             </Row>
                             <Row className="padding-15p">
-                            <Col md={2}></Col>
-                            <Col md={8}><CarouselInsta/></Col>
+                            <Col mdOffset={1} md={10}><CarouselInsta/></Col>
                             </Row>           
                         </Row>
                 </Grid>

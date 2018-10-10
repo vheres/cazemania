@@ -72,10 +72,6 @@ class ShopPage extends Component {
         this.getCatalogueList();
     }
 
-    onItemClick(id) {
-        this.props.history.push(`/product?id=${id}`)
-    }
-
     renderFilterMenu() {
         return(
             <section>
@@ -106,7 +102,7 @@ class ShopPage extends Component {
         console.log(this.state.catalogue)
         var arrJSX = this.state.catalogue.map(item => {
             return (
-                <ItemDetail id={item.id} name={item.name} image={item.image} sales={item.sales} ItemClick={(id)=>this.onItemClick(id)}/>
+                <ItemDetail id={item.id} name={item.name} image={item.image} sales={item.sales}/>
             );
         })
         return arrJSX
