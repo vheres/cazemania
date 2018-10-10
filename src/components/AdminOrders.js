@@ -52,12 +52,7 @@ class AdminOrders extends Component {
     render(){
         return(
             <div>
-                <table>
-                    {this.renderOrdersHead()}
-                    <tbody>
                     {this.renderDataTableOrders()}
-                    </tbody>
-                </table>
             </div>
         )
     }

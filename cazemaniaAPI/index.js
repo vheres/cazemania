@@ -131,6 +131,16 @@ app.get('/adminorders', function(req,res){
     })
 })
 
+app.get('/adminordersdetails/:id', function(req,res){
+    sql= `SELECT trd.id, trd.transaction_id as transaction_id, trd.case_type as case_type, trd.price as price, trd.amount as amount, br.name as brand_name, ty.name as type_name, cat.code, cat.name, cat.image
+    FROM transaction_details trd JOIN brands br ON trd.case_brand = br.id JOIN type ty ON trd.case_model=ty.id JOIN catalogue cat ON trd.catalogue_id = cat.id WHERE trd.transaction_id = ${req.params.id}`
+    conn.query(sql, (err,results)=>{
+        if(err) throw err;
+        console.log(results)
+        res.send(results)
+    })
+})
+
 app.put('/admin/:table/:id', function(req,res){
     function tableselect2(){
         return(
