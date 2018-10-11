@@ -1,10 +1,18 @@
 import React, {Component} from 'react';
 import axios from 'axios'
 import {API_URL_1} from '../supports/api-url/apiurl'
-import {Panel, PanelGroup} from 'react-bootstrap'
+import {Panel, PanelGroup, Modal, Button} from 'react-bootstrap'
 
 class AdminRenderOrders extends Component {
-    state = {edit: 0, items: []}
+    state = {show: false, items: []}
+    
+      handleClose() {
+        this.setState({ show: false });
+      }
+    
+      handleShow() {
+        this.setState({ show: true });
+      }
 
 
     componentWillMount(){
@@ -45,19 +53,19 @@ class AdminRenderOrders extends Component {
     }
     
     renderPage(){
+        console.log(this.props.proof)
         return(
-            <div>
-            <PanelGroup accordion id="accordion-uncontrolled-example">
-            <Panel eventKey="1">
+            <Panel eventKey={this.props.transaction_id}>
               <Panel.Heading>
-                <Panel.Title toggle>Order ID: <strong>{this.props.transaction_id}</strong></Panel.Title>
+                <Panel.Title toggle>Order ID: <strong>{this.props.transaction_id}</strong> </Panel.Title>
               </Panel.Heading>
               <Panel.Body collapsible>
                 <section id="content">
                     <section class="vbox bg-white">
                         <header class="header bg-light lter hidden-print">
-                        <a href="#" class="btn btn-sm btn-info pull-right" onClick="window.print();">Print</a>
-                        <p>Invoice</p>
+                        <input type="button" value="Bukti Pembayaran" onClick={()=>this.handleShow()} className="btn btn-sm btn-info pull-right"/>
+                        <p>Invoice</p> 
+                        
                         </header>
                         <section class="scrollable wrapper">
                         <i class="fa fa-apple fa fa-3x"></i>
@@ -120,29 +128,13 @@ class AdminRenderOrders extends Component {
                             </tr>
                             </thead>
                             <tbody>
-                            <tr>
-                                <td>1</td>
-                                <td>iPhone 5 32GB White & Silver (GSM) Unlocked</td>
-                                <td>$749.00</td>
-                                <td>$749.00</td>
-                            </tr>
-                            <tr>
-                                <td>2</td>
-                                <td>iPad mini with Wi-Fi 32GB - White & Silver</td>
-                                <td>$429.00</td>
-                                <td>$858.00</td>
-                            </tr>
                             {this.renderTransactionDetails()}
                             <tr>
                                 <td colspan="3" class="text-right"><strong>Subtotal</strong></td>
-                                <td>$1607.00</td>
+                                <td>Rp. 1607.00</td>
                             </tr>
                             <tr>
                                 <td colspan="3" class="text-right no-border"><strong>Shipping</strong></td>
-                                <td>$0.00</td>
-                            </tr>
-                            <tr>
-                                <td colspan="3" class="text-right no-border"><strong>VAT Included in Total</strong></td>
                                 <td>$0.00</td>
                             </tr>
                             <tr>
@@ -155,15 +147,18 @@ class AdminRenderOrders extends Component {
                     </section>
                 </section>
               </Panel.Body>
+              <Modal show={this.state.show} onHide={()=>this.handleClose()}>
+                <Modal.Header closeButton>
+                    <Modal.Title>Bukti Pembayaran</Modal.Title>
+                </Modal.Header>
+                <Modal.Body>
+                    <img src="http://localhost:1994/ADDS1.jpg" alt="wow" style={{width: "50%"}}/>
+                </Modal.Body>
+                <Modal.Footer>
+                    <Button onClick={()=>this.handleClose()}>Close</Button>
+                </Modal.Footer>
+                </Modal>
             </Panel>
-            <Panel eventKey="2">
-              <Panel.Heading>
-                <Panel.Title toggle>Panel heading 2</Panel.Title>
-              </Panel.Heading>
-              <Panel.Body collapsible>Panel content 2</Panel.Body>
-            </Panel>
-          </PanelGroup>
-          </div>
         )
     }
   
