@@ -4,6 +4,7 @@ import axios from 'axios'
 import {API_URL_1} from '../supports/api-url/apiurl'
 import { connect } from 'react-redux';
 import Magnifier from 'react-magnifier';
+import CarouselSimilar from './CarouselSimilar';
 
 class DetailPage extends Component {
     state={item: [], brands: [], types: [], typeselect: [""], caseselect: {soft: 0, hard: 0}, price: [], selected_price: ""}
@@ -150,7 +151,7 @@ class DetailPage extends Component {
             return
         }
         else {
-            return <Magnifier src={API_URL_1+'/'+this.state.item.image+'.jpg'} width={"100%"} />
+            return <Magnifier src={API_URL_1+'/normal/'+this.state.item.image+'.jpg'} width={"100%"} />
         }
     }
 
@@ -264,11 +265,12 @@ class DetailPage extends Component {
                                         <br/>
                                         {this.renderAddToCartButton()}
                                     </Row>
-                                    <Row>
-                                    </Row>
                                 </Col>
                             </Row>
                         </Col>
+                    </Row>
+                    <Row>
+                        <CarouselSimilar name={this.state.item.name}></CarouselSimilar>
                     </Row>                        
                 </Grid>
             );
