@@ -78,6 +78,7 @@ app.get('/similarproducts', function(req,res){
     conn.query(sql, (err,results)=>{
         if(err) throw err;
         res.send({results})
+    })
 })
 
 //Get data needed for Catalogue item page
