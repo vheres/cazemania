@@ -11,29 +11,34 @@ class CarouselSimilar extends Component {
 
   componentWillMount() {
     this.getSimilarProduct()
+    console.log(this.props.name)
   }
 
   getSimilarProduct() {
-    axios.get(`${API_URL_1}/similarproduct?name=${this.props.name}`)
+    axios.get(`${API_URL_1}/similarproducts?name=${this.props.name}&id=${this.props.id}`)
         .then((response) => {
             this.setState({similar_product: response.data})
+            console.log(response)
+        }).catch((err) => {
+            console.log(err)
         })
   }
 
     responsive = {
         0: { items: 3 },
-        1080: { items: 5 }
+        1080: { items: 3 }
       };
       
       galleryItems() {
           var images = [];
-          this.state.best_seller.map((item, count) => {
+          console.log(this.state.similar_product)
+          this.state.similar_product.map((item, count) => {
             images.push([item.id, item.image, item.name])
           })
         return (
           images.map((item, count) => (
                 // <Link to={"/product?id="+item[0]}><Thumbnail src = {API_URL_1+'/'+item[1]+'.jpg'}></Thumbnail></Link>
-                <Link to={"/product?id="+item[0]} className="best-holder"><img src={API_URL_1+'/normal/'+item[1]+'.jpg'} style={{width:"100%"}}/><div className="best-overlay">{item[2]}</div></Link>
+                <Link to={`/product?id=${item[0]}`} onClick={()=>this.props.SimilarClick(`/product?id=${item[0]}`)} className="similar-product-holder"><img src={API_URL_1+'/normal/'+item[1]+'.jpg'} style={{width:"100%"}}/><div className="similar-product-overlay">{item[2]}</div></Link>
           ))
         )
       };

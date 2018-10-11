@@ -5,6 +5,7 @@ import {API_URL_1} from '../supports/api-url/apiurl'
 import { connect } from 'react-redux';
 import Magnifier from 'react-magnifier';
 import CarouselSimilar from './CarouselSimilar';
+import { withRouter } from 'react-router-dom';
 
 class DetailPage extends Component {
     state={item: [], brands: [], types: [], typeselect: [""], caseselect: {soft: 0, hard: 0}, price: [], selected_price: ""}
@@ -135,6 +136,18 @@ class DetailPage extends Component {
         })
     }
 
+    async onSimilarClick(target) {
+        await this.props.history.push(target)
+        const params = new URLSearchParams(this.props.location.search);
+        const id = params.get('id')
+        console.log(id);
+        axios.get(API_URL_1 + "/item/" + id)
+        .then((res)=>{
+            console.log(res.data)
+            this.setState({item:res.data.item[0], brands: res.data.brands, type: res.data.type, price: res.data.price})
+        })
+    }
+
     PlusMinus(action) {
         if (action == "plus") {
             document.getElementById("quantity").value = parseInt(document.getElementById("quantity").value) + 1;
@@ -152,6 +165,15 @@ class DetailPage extends Component {
         }
         else {
             return <Magnifier src={API_URL_1+'/normal/'+this.state.item.image+'.jpg'} width={"100%"} />
+        }
+    }
+
+    renderCarouselSimilar() {
+        if(this.state.item.length === 0) {
+            return
+        }
+        else {
+            return <CarouselSimilar name={this.state.item.name} id={this.state.item.id} SimilarClick={(temp)=>this.onSimilarClick(temp)}/>
         }
     }
 
@@ -270,7 +292,15 @@ class DetailPage extends Component {
                         </Col>
                     </Row>
                     <Row>
-                        <CarouselSimilar name={this.state.item.name}></CarouselSimilar>
+                        <Row>
+                            <h3 className="text-center">Similar Products</h3>
+                            <div className="block-margin-auto similar-product-pointer"></div>
+                        </Row>
+                        <Row>
+                            <Col mdOffset={3} md={6}>
+                            {this.renderCarouselSimilar()}
+                            </Col>
+                        </Row>
                     </Row>                        
                 </Grid>
             );
@@ -289,4 +319,4 @@ const mapStateToProps = (state) => {
     return { auth };
 }
 
-export default connect(mapStateToProps, {})(DetailPage);
+export default withRouter(connect(mapStateToProps, {})(DetailPage));
