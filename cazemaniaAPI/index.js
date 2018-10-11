@@ -72,6 +72,14 @@ app.get('/catalogue', function(req,res){
     })
 })
 
+app.get('/similarproducts', function(req,res){
+    var sql = `SELECT * FROM catalogue WHERE name LIKE "%${req.query.name}%" ORDER BY id LIMIT 5`
+    
+    conn.query(sql, (err,results)=>{
+        if(err) throw err;
+        res.send({results})
+})
+
 //Get data needed for Catalogue item page
 app.get('/product/:id', function(req,res){
     var sql = `SELECT * FROM catalogue where id=${req.params.id}`
@@ -123,7 +131,7 @@ app.get('/admin/:table', function(req,res){
 })
 
 app.get('/adminorders', function(req,res){
-    sql= `SELECT tr.date as date, tr.time as time, tr.proof as proof, tr.target_bank as target_bank, tr.status as status, tr.total_price as total_price, u.firstname as firstname, 
+    sql= `SELECT tr.id as id, tr.date as date, tr.time as time, tr.proof as proof, tr.target_bank as target_bank, tr.status as status, tr.total_price as total_price, u.firstname as firstname, 
     u.lastname as lastname, u.id as user_id, u.address as address, u.email as email FROM transactions tr JOIN users u ON tr.user_id = u.id ORDER BY date`
     conn.query(sql, (err,results)=>{
         if(err) throw err;

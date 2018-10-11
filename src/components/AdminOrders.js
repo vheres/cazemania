@@ -3,6 +3,7 @@ import React, { Component } from 'react';
 import axios from 'axios'
 import {API_URL_1} from '../supports/api-url/apiurl'
 import AdminRenderOrders from './AdminRenderOrders'
+import {Panel, PanelGroup} from 'react-bootstrap'
 
 
 class AdminOrders extends Component {
@@ -42,7 +43,7 @@ class AdminOrders extends Component {
     renderDataTableOrders(){
         var arrJSX = this.state.orders.map((item)=>{
             return(
-            <AdminRenderOrders key={item.user_id} user_id={item.user_id} name={item.name} date={item.date} time={item.time} total_price={item.total_price} target_bank={item.target_bank}
+            <AdminRenderOrders key={item.user_id} transaction_id={item.id} user_id={item.user_id} proof={item.proof} name={item.name} date={item.date} time={item.time} total_price={item.total_price} target_bank={item.target_bank}
             status={item.status} firstname={item.firstname} lastname={item.lastname} address={item.address} email={item.email}/>
         )})
         return arrJSX
@@ -52,7 +53,9 @@ class AdminOrders extends Component {
     render(){
         return(
             <div>
+                <PanelGroup accordion id="accordion-uncontrolled-example">
                     {this.renderDataTableOrders()}
+                </PanelGroup>
             </div>
         )
     }
