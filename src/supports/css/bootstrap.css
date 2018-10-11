@@ -6862,6 +6862,37 @@ button.close {
   -o-transition: background-color ease-in-out .3s;
      transition: background-color ease-in-out .3s;
 }
+/* Similar Product images */
+.similar-product-holder {
+  margin-top: 10px;
+  margin-bottom: 10px;
+  position: relative;
+  float: left;
+  border: 2px solid white;
+  margin-right: 5px;
+  margin-left: 5px;
+}
+.similar-product-overlay {
+  background-color:rgba(0,0,0,0);
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  top: 0;
+  z-index: 2;
+  color: transparent;
+  display:flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 22px;
+  text-align: center;
+}
+.similar-product-overlay:hover { 
+  color: rgb(255, 255, 255);
+  background-color:rgba(0, 0, 0, 0.4);
+  -webkit-transition: background-color ease-in-out .3s;
+  -o-transition: background-color ease-in-out .3s;
+     transition: background-color ease-in-out .3s;
+}
 .orange-text {
   color: rgb(255,165,39);
 }
@@ -6979,6 +7010,25 @@ button.close {
   border-top: 5px solid rgb(255, 255, 255);
   border-bottom: 5px solid rgb(255, 255, 255);
   border-right: 20px solid rgb(255, 255, 255)
+}
+.similar-product-pointer {
+  width: 200px;
+  height: 10px;
+  position: relative;
+  background: rgb(255, 191, 72);
+  margin-bottom: 15px;
+}
+.similar-product-pointer:after {
+  content: "";
+  position: absolute;
+  left: 0;
+  bottom: 0;
+  width: 0;
+  height: 0;
+  border-left: 20px solid rgb(9, 175, 204);
+  border-top: 5px solid rgb(9, 175, 204);
+  border-bottom: 5px solid rgb(9, 175, 204);
+  border-right: 20px solid rgb(9, 175, 204)
 }
 .block-margin-auto {
   display: block;
