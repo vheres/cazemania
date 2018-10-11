@@ -6961,6 +6961,31 @@ button.close {
   border-bottom: 5px solid rgb(255, 181, 44);
   border-right: 20px solid rgb(255, 181, 44)
 }
+.best-seller-pointer {
+  width: 180px;
+  height: 10px;
+  position: relative;
+  background: rgb(209, 94, 0);
+  margin-bottom: 15px;
+}
+.best-seller-pointer:after {
+  content: "";
+  position: absolute;
+  left: 0;
+  bottom: 0;
+  width: 0;
+  height: 0;
+  border-left: 20px solid rgb(255, 255, 255);
+  border-top: 5px solid rgb(255, 255, 255);
+  border-bottom: 5px solid rgb(255, 255, 255);
+  border-right: 20px solid rgb(255, 255, 255)
+}
+.block-margin-auto {
+  display: block;
+  margin-left: auto;
+  margin-right: auto;
+}
+
 .empty-cart{
   display: block;
   margin-left: auto;

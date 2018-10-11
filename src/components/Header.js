@@ -7,6 +7,7 @@ import { onLogout } from '../actions';
 import Cookies from 'universal-cookie';
 import { keepLogin, cookieChecked } from '../actions';
 import { withRouter } from 'react-router-dom';
+import {API_URL_1} from '../supports/api-url/apiurl'
 
 const cookies = new Cookies();
 
@@ -45,7 +46,7 @@ class Header extends Component {
                     <Navbar fixedTop={true} collapseOnSelect fluid>
                         <Navbar.Header style={{height:"100px"}}>
                             <Navbar.Brand>
-                                <Link to="/"><img src="https://lh4.googleusercontent.com/tU0KHAw8cvY3y2OCoBTvjrnyAh7hRWvH08ZkhNVTHU2VZUxv0lyMKccadhuf47avMc4VyZhyDy-DZgDKntXp=w2560-h1249" alt="Caze Mania" style={{height:"400%"}}></img></Link>
+                                <Link to="/"><img src={`${API_URL_1}/others/logo.png`} alt="Caze Mania" style={{height:"400%"}}></img></Link>
                             </Navbar.Brand>
                             <Navbar.Toggle />
                         </Navbar.Header>
@@ -54,11 +55,11 @@ class Header extends Component {
                                     <NavItem eventKey={1} className="header-button" onClick={()=>this.onLinkClick("/shop")}>
                                         <h4 className="orange-text">Shop</h4>
                                     </NavItem>
+                                    <NavItem eventKey={1} className="header-button" onClick={()=>this.onLinkClick("/premium_cases")}>
+                                        <h4 className="orange-text">Premium Cases</h4>
+                                    </NavItem>
                                     <NavItem eventKey={2} className="header-button" onClick={()=>this.onLinkClick("/reseller-dropshipper")}>
                                         <h4 className="orange-text">Reseller/Dropshipper</h4>
-                                    </NavItem>
-                                    <NavItem eventKey={3} className="header-button" onClick={()=>this.onLinkClick("/")}>
-                                        <h4 className="orange-text">Contact Us</h4>
                                     </NavItem>
                                     <NavItem eventKey={4} className="header-button" onClick={()=>this.onLinkClick("/Admin?table=cases")}>
                                         <h4 className="orange-text">Admin</h4>
@@ -99,11 +100,11 @@ class Header extends Component {
                                     <NavItem eventKey={1} className="header-button" onClick={()=>this.onLinkClick("/shop")}>
                                         <h4 className="orange-text">Shop</h4>
                                     </NavItem>
+                                    <NavItem eventKey={1} className="header-button" onClick={()=>this.onLinkClick("/premium_cases")}>
+                                        <h4 className="orange-text">Premium Cases</h4>
+                                    </NavItem>
                                     <NavItem eventKey={2} className="header-button" onClick={()=>this.onLinkClick("/reseller-dropshipper")}>
                                         <h4 className="orange-text">Reseller/Dropshipper</h4>
-                                    </NavItem>
-                                    <NavItem eventKey={3} className="header-button" onClick={()=>this.onLinkClick("/")}>
-                                        <h4 className="orange-text">Contact Us</h4>
                                     </NavItem>
                                     <NavItem eventKey={4} className="header-button" onClick={()=>this.onLinkClick("/Admin?table=cases")}>
                                         <h4 className="orange-text">Admin</h4>

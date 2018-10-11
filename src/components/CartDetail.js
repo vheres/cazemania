@@ -23,7 +23,7 @@ class CartDetail extends Component {
                         <h4>{this.props.count+1}</h4>
                     </Col>
                     <Col md={3}>
-                        <Thumbnail src={this.props.image}></Thumbnail>
+                        <Thumbnail src={API_URL_1+'/normal/'+this.props.image+'.jpg '}></Thumbnail>
                     </Col>
                     <Col md={5}>
                         <Row>

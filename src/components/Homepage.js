@@ -60,6 +60,7 @@ class HomePage extends Component {
                         <Row className="bestseller-css">
                             <Row>
                                 <h2 className="text-center">Best Seller</h2>
+                                <div className="block-margin-auto best-seller-pointer"></div>
                             </Row>
                             <Row>
                                 <Col md={2}></Col>

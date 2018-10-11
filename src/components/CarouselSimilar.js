@@ -6,17 +6,17 @@ import axios from 'axios';
 import {API_URL_1} from '../supports/api-url/apiurl'
 import { Link } from 'react-router-dom';
 
-class CarouselClass extends Component {
-  state = {best_seller: []}
+class CarouselSimilar extends Component {
+  state = {similar_product: []}
 
   componentWillMount() {
-    this.getBestSellers()
+    this.getSimilarProduct()
   }
 
-  getBestSellers() {
-    axios.get(API_URL_1 + "/bestsellers")
+  getSimilarProduct() {
+    axios.get(`${API_URL_1}/similarproduct?name=${this.props.name}`)
         .then((response) => {
-            this.setState({best_seller: response.data.bestsellers})
+            this.setState({similar_product: response.data})
         })
   }
 
@@ -58,4 +58,4 @@ class CarouselClass extends Component {
     }
 };
 
-export default CarouselClass
+export default CarouselSimilar
