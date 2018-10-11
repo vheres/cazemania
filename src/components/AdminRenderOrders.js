@@ -63,9 +63,9 @@ class AdminRenderOrders extends Component {
                 <section id="content">
                     <section class="vbox bg-white">
                         <header class="header bg-light lter hidden-print">
+                        <p className="pull-left">Invoice</p>
+                        <input type="text" placeholder="Input nomor resi"/><input type="button" value="Complete Order" onClick={()=>this.handleShow()} className="btn btn-sm btn-info"/>
                         <input type="button" value="Bukti Pembayaran" onClick={()=>this.handleShow()} className="btn btn-sm btn-info pull-right"/>
-                        <p>Invoice</p> 
-                        
                         </header>
                         <section class="scrollable wrapper">
                         <i class="fa fa-apple fa fa-3x"></i>
