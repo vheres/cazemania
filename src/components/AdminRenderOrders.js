@@ -64,7 +64,7 @@ class AdminRenderOrders extends Component {
                     <section class="vbox bg-white">
                         <header class="header bg-light lter hidden-print">
                         <p className="pull-left">Invoice</p>
-                        <input type="text" placeholder="Input nomor resi"/><input type="button" value="Complete Order" onClick={()=>this.handleShow()} className="btn btn-sm btn-info"/>
+                        <input type="text" placeholder="Input nomor resi" className="form-control"/><input type="button" value="Complete Order" onClick={()=>this.handleShow()} className="btn btn-sm btn-info"/>
                         <input type="button" value="Bukti Pembayaran" onClick={()=>this.handleShow()} className="btn btn-sm btn-info pull-right"/>
                         </header>
                         <section class="scrollable wrapper">
@@ -152,7 +152,7 @@ class AdminRenderOrders extends Component {
                     <Modal.Title>Bukti Pembayaran</Modal.Title>
                 </Modal.Header>
                 <Modal.Body>
-                    <img src="http://localhost:1994/ADDS1.jpg" alt="wow" style={{width: "50%"}}/>
+                    <img src="http://localhost:1994/normal/ADDS1.jpg" alt="wow" style={{width: "50%"}}/>
                 </Modal.Body>
                 <Modal.Footer>
                     <Button onClick={()=>this.handleClose()}>Close</Button>
