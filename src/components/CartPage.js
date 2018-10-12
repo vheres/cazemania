@@ -10,20 +10,19 @@ class CartPage extends Component {
     state = ({cart: []})
 
     componentWillMount(){
-        let data = { origin: '501',
-        destination: '114',
-        weight: 1700,
-        courier: 'jne' }
+        let data = { origin: 'GKR',
+        destination: 'TGR',
+        weight: 1.7 }
 
         let axiosConfig = {
             headers: {
-                "key": "d8b59afa48a3ecd432b46bad2eda8d07",
+                "key": "54d16bfab958effecbfc849133dc706e",
                 "content-type": "application/x-www-form-urlencoded",
-                "Access-Control-Allow-Origin": "*",
+                "Access-Control-Allow-Origin": "*"
             }
           }
 
-        axios.post("https://api.rajaongkir.com/starter/cost", data, axiosConfig)
+        axios.post("http://api.sicepat.com/customer/tariff", data, axiosConfig)
         .then((res)=>{
             console.log(res.data)
         })

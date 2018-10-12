@@ -378,11 +378,11 @@ app.post('/users', function(req,res){
 app.get('/province', function(req,res){
     var options = {
         "method": "GET",
-        "hostname": "api.rajaongkir.com",
+        "hostname": "api.sicepat.com",
         "port": null,
-        "path": "/starter/province",
+        "path": "/customer/origin",
         "headers": {
-          "key": "d8b59afa48a3ecd432b46bad2eda8d07"
+          "key": "54d16bfab958effecbfc849133dc706e"
         }
       };
     http.request(options, function (res1) {
@@ -404,11 +404,11 @@ app.get('/province', function(req,res){
 app.get('/shipping', function(req,res){
     var options = {
         "method": "POST",
-        "hostname": "api.rajaongkir.com",
+        "hostname": "api.sicepat.com",
         "port": null,
-        "path": "/starter/cost",
+        "path": "/customer/tariff",
         "headers": {
-          "key": "d8b59afa48a3ecd432b46bad2eda8d07",
+          "key": "54d16bfab958effecbfc849133dc706e",
           'Content-Type': 'application/json'
         }
       };
@@ -427,11 +427,10 @@ app.get('/shipping', function(req,res){
         });
       });
       
-      req.write(qs.stringify({ origin: '501',
-        destination: '114',
-        weight: 1700,
-        courier: 'jne' }));
-      req.end();
+      req2.write(qs.stringify({ origin: 'TGR',
+        destination: 'CGK',
+        weight: 1.7}));
+      req2.end();
 })
 
 app.listen(port, () => console.log(`Example app listening on port ${port}!`));
