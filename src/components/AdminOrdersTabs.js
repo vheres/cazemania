@@ -65,14 +65,33 @@ class AdminOrdersTabs extends React.Component {
   }
 
 
-  renderDataTableOrders(){
+  renderDataTableOrders1(){
       var arrJSX = this.state.orders1.map((item)=>{
           return(
-          <AdminRenderOrders key={item.user_id} transaction_id={item.id} user_id={item.user_id} proof={item.proof} name={item.name} date={item.date} time={item.time} total_price={item.total_price} target_bank={item.target_bank}
+          <AdminRenderOrders key={item.user_id} transaction_id={item.id} ordernumber={item.ordernumber} user_id={item.user_id} proof={item.proof} name={item.name} date={item.date} time={item.time} total_price={item.total_price} target_bank={item.target_bank}
           status={item.status} firstname={item.firstname} lastname={item.lastname} address={item.address} email={item.email}/>
       )})
       return arrJSX
   }
+
+  renderDataTableOrders2(){
+    var arrJSX = this.state.orders2.map((item)=>{
+        return(
+        <AdminRenderOrders key={item.user_id} transaction_id={item.id} ordernumber={item.ordernumber} user_id={item.user_id} proof={item.proof} name={item.name} date={item.date} time={item.time} total_price={item.total_price} target_bank={item.target_bank}
+        status={item.status} firstname={item.firstname} lastname={item.lastname} address={item.address} email={item.email}/>
+    )})
+    return arrJSX
+}
+
+renderDataTableOrders3(){
+  var arrJSX = this.state.orders3.map((item)=>{
+      return(
+      <AdminRenderOrders key={item.user_id} transaction_id={item.id} ordernumber={item.ordernumber} user_id={item.user_id} proof={item.proof} name={item.name} date={item.date} time={item.time} total_price={item.total_price} target_bank={item.target_bank}
+      status={item.status} firstname={item.firstname} lastname={item.lastname} address={item.address} email={item.email}/>
+  )})
+  return arrJSX
+}
+
 
 
   render() {
@@ -89,10 +108,16 @@ class AdminOrdersTabs extends React.Component {
           </Tabs>
         </AppBar>
         {value === 0 && <TabContainer><PanelGroup accordion id="accordion-uncontrolled-example">
-                    {this.renderDataTableOrders()}
+                    {this.renderDataTableOrders1()}
                 </PanelGroup></TabContainer>}
-        {value === 1 && <TabContainer>Item Two</TabContainer>}
-        {value === 2 && <TabContainer>Item Three</TabContainer>}
+        {value === 1 && <TabContainer>
+                <PanelGroup accordion id="accordion-uncontrolled-example">
+                    {this.renderDataTableOrders2()}
+                </PanelGroup></TabContainer>}
+        {value === 2 && <TabContainer>
+                <PanelGroup accordion id="accordion-uncontrolled-example">
+                    {this.renderDataTableOrders3()}
+                </PanelGroup></TabContainer>}
       </div>
     );
   }

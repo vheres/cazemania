@@ -23,14 +23,30 @@ class AdminRenderOrders extends Component {
         })
     }
 
+    selectStyle(){
+        if(this.props.status === "pendingPayment"){
+            return "info"
+        }
+        else if(this.props.status === "pendingDelivery"){
+            return "warning"
+        }
+        else if(this.props.status === "complete"){
+            return "success"
+        }
+    }
+
     renderOrderStatus(){
         return(
             {
-                pending: () => {
+                pendingPayment: () => {
                     return(
-                        <span class="label bg-warning">Pending</span> )
+                        <span class="label bg-warning">Pending Payment</span> )
                     },
-                shipped: () => {
+                pendingDelivery: () => {
+                    return(
+                        <span class="label bg-success">Pending Delivery</span> )
+                    },
+                complete : () =>{
                     return(
                         <span class="label bg-success">Shipped</span> )
                     }
@@ -55,9 +71,9 @@ class AdminRenderOrders extends Component {
     renderPage(){
         console.log(this.props.proof)
         return(
-            <Panel eventKey={this.props.transaction_id}>
+            <Panel eventKey={this.props.transaction_id} bsStyle={this.selectStyle()}>
               <Panel.Heading>
-                <Panel.Title toggle>Order ID: <strong>{this.props.transaction_id}</strong> </Panel.Title>
+                <Panel.Title toggle>Order ID: <strong>CMW#{this.props.ordernumber}</strong> </Panel.Title>
               </Panel.Heading>
               <Panel.Body collapsible>
                 <section id="content">
@@ -83,8 +99,8 @@ class AdminRenderOrders extends Component {
                             </p>
                             </div>
                             <div class="col-xs-6 text-right">
-                            <p class="h4">#9048392</p>
-                            <h5>29th Mar 2013</h5>           
+                            <p class="h4">CMW#{this.props.ordernumber}</p>
+                            <h5>{this.props.date}</h5>           
                             </div>
                         </div>          
                         <div class="well bg-light b m-t">
@@ -113,9 +129,9 @@ class AdminRenderOrders extends Component {
                             </div>
                             </div>
                         </div>
-                        <p class="m-t m-b">Order date: <strong>26th Mar 2013</strong><br/>
+                        <p class="m-t m-b">Order date: <strong>{this.props.date}</strong><br/>
                             Order status: {this.renderOrderStatus()[this.props.status]()}<br/>
-                            Order ID: <strong>#9399034</strong>
+                            Order ID: <strong>CMW#{this.props.ordernumber}</strong>
                         </p>
                         <div class="line"></div>
                         <table class="table">

@@ -132,7 +132,7 @@ app.get('/admin/:table', function(req,res){
 })
 
 app.get('/adminorders', function(req,res){
-    sql= `SELECT tr.id as id, tr.date as date, tr.time as time, tr.proof as proof, tr.target_bank as target_bank, tr.status as status, tr.total_price as total_price, u.firstname as firstname, 
+    sql= `SELECT tr.id as id, LPAD( tr.id, 8, '0') as ordernumber, tr.date as date, tr.time as time, tr.proof as proof, tr.target_bank as target_bank, tr.status as status, tr.total_price as total_price, u.firstname as firstname, 
     u.lastname as lastname, u.id as user_id, u.address as address, u.email as email FROM transactions tr JOIN users u ON tr.user_id = u.id ORDER BY date`
     conn.query(sql, (err,results)=>{
         if(err) throw err;
@@ -142,7 +142,7 @@ app.get('/adminorders', function(req,res){
 })
 
 app.get('/adminordersdetails/:id', function(req,res){
-    sql= `SELECT trd.id, trd.transaction_id as transaction_id, trd.case_type as case_type, trd.price as price, trd.amount as amount, br.name as brand_name, ty.name as type_name, cat.code, cat.name, cat.image
+    sql= `SELECT trd.id as id, trd.transaction_id as transaction_id, trd.case_type as case_type, trd.price as price, trd.amount as amount, br.name as brand_name, ty.name as type_name, cat.code, cat.name, cat.image
     FROM transaction_details trd JOIN brands br ON trd.case_brand = br.id JOIN type ty ON trd.case_model=ty.id JOIN catalogue cat ON trd.catalogue_id = cat.id WHERE trd.transaction_id = ${req.params.id}`
     conn.query(sql, (err,results)=>{
         if(err) throw err;
@@ -382,6 +382,7 @@ app.get('/province', function(req,res){
         "port": null,
         "path": "/customer/origin",
         "headers": {
+          "Username" : "Cazemania",
           "key": "54d16bfab958effecbfc849133dc706e"
         }
       };
