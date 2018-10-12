@@ -3929,7 +3929,7 @@ fieldset[disabled] .i-checks input + i:before {
   background-color: #fff;
   background-image: none;
   border: 1px solid #ccc;
-  border-radius: 4px;
+  border-radius: 15px;
   -webkit-box-shadow: inset 0 1px 1px rgba(0, 0, 0, .075);
           box-shadow: inset 0 1px 1px rgba(0, 0, 0, .075);
   -webkit-transition: border-color ease-in-out .15s, -webkit-box-shadow ease-in-out .15s;
@@ -3937,7 +3937,7 @@ fieldset[disabled] .i-checks input + i:before {
           transition: border-color ease-in-out .15s, box-shadow ease-in-out .15s;
 }
 .form-control:focus {
-  border-color: #66afe9;
+  border-color: rgb(30,190,203);
   outline: 0;
   -webkit-box-shadow: inset 0 1px 1px rgba(0,0,0,.075), 0 0 8px rgba(102, 175, 233, .6);
           box-shadow: inset 0 1px 1px rgba(0,0,0,.075), 0 0 8px rgba(102, 175, 233, .6);
@@ -3979,4 +3979,42 @@ textarea.form-control {
 .form-control-static.input-sm {
   padding-right: 0;
   padding-left: 0;
+}
+.btn-tosca {
+  color: #fff !important;
+  background-color: rgb(30,190,203);
+  border-color: rgb(30,190,203);
+  border-radius: 50px;
+}
+.btn-tosca:hover,
+.btn-tosca:focus,
+.btn-tosca:active,
+.btn-tosca.active,
+.open .dropdown-toggle.btn-tosca {
+  color: #fff !important;
+  background-color: rgb(27, 163, 175);
+  border-color: rgb(27, 163, 175);
+}
+.btn-tosca:active,
+.btn-tosca.active,
+.open .dropdown-toggle.btn-tosca {
+  background-image: none;
+}
+.btn-tosca.disabled,
+.btn-tosca.disabled:hover,
+.btn-tosca.disabled:focus,
+.btn-tosca.disabled:active,
+.btn-tosca.disabled.active,
+.btn-tosca[disabled],
+.btn-tosca[disabled]:hover,
+.btn-tosca[disabled]:focus,
+.btn-tosca[disabled]:active,
+.btn-tosca[disabled].active,
+fieldset[disabled] .btn-tosca,
+fieldset[disabled] .btn-tosca:hover,
+fieldset[disabled] .btn-tosca:focus,
+fieldset[disabled] .btn-tosca:active,
+fieldset[disabled] .btn-tosca.active {
+  background-color: rgb(30,190,203);
+  border-color: rgb(30,190,203);
 }

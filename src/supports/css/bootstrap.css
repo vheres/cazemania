@@ -6756,10 +6756,22 @@ button.close {
 }
 /*# sourceMappingURL=bootstrap.css.map */
 .header-button:hover {
-  background-color: rgb(4,161,183);
+  background-color: rgb(30,190,203);
   -webkit-transition: background-color ease-in-out .3s;
   -o-transition: background-color ease-in-out .3s;
      transition: background-color ease-in-out .3s;
+}
+.header-button:focus {
+  background-color: rgb(4,161,183);
+}
+.header-search-container {
+  margin-top: 15px;
+  margin-bottom: 10px;
+  line-height: 4.4;
+}
+.header-search-button {
+  background-color: rgb(30,190,203);
+  color: rgb(30,190,203);
 }
 .homepage-banner {
   width: 100%;
@@ -6807,8 +6819,14 @@ button.close {
 .shop-holder {
   margin-top: 10px;
   margin-bottom: 10px;
+  margin-right: 5px;
+  margin-left: 5px;
+  border: 3px solid rgb(30,190,203);
   position: relative;
   float: left;
+}
+.shop-holder:hover {
+  border: 3px solid rgb(253, 203, 151);
 }
 .shop-overlay {
   background-color:rgba(0,0,0,0);
@@ -6830,6 +6848,17 @@ button.close {
   -webkit-transition: background-color ease-in-out .3s;
   -o-transition: background-color ease-in-out .3s;
      transition: background-color ease-in-out .3s;
+}
+.text-item-detail {
+  color: rgb(70, 70, 70);
+  display:flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 22px;
+  text-align: center;
+}
+.text-item-detail:hover {
+  color: rgb(255, 156, 25);
 }
 /* Best Seller images */
 .best-holder {
@@ -6894,7 +6923,17 @@ button.close {
      transition: background-color ease-in-out .3s;
 }
 .orange-text {
-  color: rgb(255,165,39);
+  margin-top: 10px;
+  margin-bottom: 10px;
+  font-weight: 500;
+  line-height: 4.4;
+  color: rgb(225,112,38);
+  font-size: 18px;
+}
+@media (max-width: 768px) {
+  .orange-text {
+    line-height: 2;
+  }
 }
 .carousel-image {
   padding-left: 5px;
@@ -6907,17 +6946,17 @@ button.close {
   background-color: white;
 }
 .Footer-css {
-  background-color: rgb(4,161,183);
+  background-color: rgb(30,190,203);
   margin-left: 15px;
 }
 .facebook-text {
   margin-left: 10px;
 }
 .bestseller-css {
-  background-color: rgb(255, 184, 109);
+  background-color: rgb(253, 203, 151);
 }
 .instagram-css {
-  background-color: rgb(255, 184, 109);
+  background-color: rgb(253, 203, 151);
   padding-top: 15px;
 }
 .padding-15p {
@@ -6926,6 +6965,15 @@ button.close {
 }
 .margin-top-15 {
   margin-top: 15px;
+}
+.account-css { 
+  font-size: 25px;
+}
+.margin-cart {
+  margin-top: 22px;
+}
+.margin-user {
+  margin-top: 26px;
 }
 .margin-bot-15 {
   margin-bottom: 15px;
