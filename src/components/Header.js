@@ -1,6 +1,6 @@
 
 import React, { Component } from 'react';  // React, { Component } -> destructuring
-import { Nav, Navbar, NavItem, NavDropdown, MenuItem, Grid, Row, Col } from 'react-bootstrap';
+import { Nav, Navbar, NavItem, NavDropdown, MenuItem, Grid, Row, Col, FormGroup, FormControl, Button } from 'react-bootstrap';
 import { Link } from 'react-router-dom';
 import { connect } from 'react-redux';
 import { onLogout } from '../actions';
@@ -44,7 +44,7 @@ class Header extends Component {
                 <Grid fluid>
                 <Row>
                     <Navbar fixedTop={true} collapseOnSelect fluid>
-                        <Navbar.Header style={{height:"100px"}}>
+                        <Navbar.Header>
                             <Navbar.Brand>
                                 <Link to="/"><img src={`${API_URL_1}/others/logo.png`} alt="Caze Mania" style={{height:"400%"}}></img></Link>
                             </Navbar.Brand>
@@ -52,29 +52,34 @@ class Header extends Component {
                         </Navbar.Header>
                         <Navbar.Collapse>                       
                                 <Nav>
-                                    <NavItem eventKey={1} className="header-button" onClick={()=>this.onLinkClick("/shop")}>
-                                        <h4 className="orange-text">Shop</h4>
-                                    </NavItem>
-                                    <NavItem eventKey={1} className="header-button" onClick={()=>this.onLinkClick("/premium_cases")}>
-                                        <h4 className="orange-text">Premium Cases</h4>
-                                    </NavItem>
+                                    <NavDropdown eventKey={3} title={<span className="orange-text">Shop</span>} id="basic-nav-dropdown" className="header-button">
+                                        <MenuItem eventKey={3.1} onClick={()=>this.onLinkClick("/shop")}>Collections</MenuItem>
+                                        <MenuItem eventKey={3.2} onClick={()=>this.onLinkClick("/premium_cases")}>Premium Cases</MenuItem>
+                                        <MenuItem eventKey={3.3}>Custom Cases</MenuItem>
+                                    </NavDropdown>
                                     <NavItem eventKey={2} className="header-button" onClick={()=>this.onLinkClick("/reseller-dropshipper")}>
-                                        <h4 className="orange-text">Reseller/Dropshipper</h4>
+                                        <span className="orange-text">Reseller/Dropshipper</span>
                                     </NavItem>
                                     <NavItem eventKey={4} className="header-button" onClick={()=>this.onLinkClick("/Admin?table=cases")}>
-                                        <h4 className="orange-text">Admin</h4>
+                                        <span className="orange-text">Admin</span>
                                     </NavItem>
                                     <NavItem eventKey={4} className="header-button" onClick={()=>this.onLinkClick("/payment")}>
-                                        <h4 className="orange-text">Payment</h4>
+                                        <span className="orange-text">Payment</span>
                                     </NavItem>
                                 </Nav>
                                 <Nav pullRight>
-                                    <NavItem eventKey={5} className="header-button" onClick={()=>this.onLinkClick("/cart")}>
-                                        <h4 className="orange-text">Cart</h4>
+                                    <Navbar.Form pullLeft>
+                                        <FormGroup className="header-search-container">
+                                        <FormControl type="text" placeholder="Search Code / Name" class="form-control" style={{width:"450px"}}/>{' '}
+                                        <Button type="submit" className="btn btn-tosca"><i class="icon-magnifier"></i></Button>
+                                        </FormGroup>
+                                    </Navbar.Form>
+                                    <NavItem eventKey={5} className="margin-cart">
+                                        <Button type="submit" className="btn btn-tosca"><i class="fa fa-shopping-cart" onClick={()=>this.onLinkClick("/cart")}></i></Button>
                                     </NavItem>
-                                    <NavDropdown eventKey={6} title={"Hello, " + this.props.auth.firstname} className="header-button">
+                                    <NavDropdown eventKey={6} title={<i class="fa fa-user"></i>} id="basic-nav-dropdown" className="margin-user account-css">
                                         <MenuItem eventKey={6.1} onClick={()=>this.onLogoutClick()}>
-                                        <h4>Logout</h4>
+                                            <span>Logout</span>
                                         </MenuItem>
                                     </NavDropdown>
                                 </Nav>
@@ -91,38 +96,43 @@ class Header extends Component {
                     <Navbar fixedTop={true} collapseOnSelect fluid>
                         <Navbar.Header>
                             <Navbar.Brand>
-                                <Link to="/"><img src="https://lh4.googleusercontent.com/tU0KHAw8cvY3y2OCoBTvjrnyAh7hRWvH08ZkhNVTHU2VZUxv0lyMKccadhuf47avMc4VyZhyDy-DZgDKntXp=w2560-h1249" alt="Caze Mania" className="img.responsive"></img></Link>
+                                <Link to="/"><img src={`${API_URL_1}/others/logo.png`} alt="Caze Mania" className="img.responsive"></img></Link>
                             </Navbar.Brand>
                             <Navbar.Toggle />
                         </Navbar.Header>
                         <Navbar.Collapse>                       
                                 <Nav>
-                                    <NavItem eventKey={1} className="header-button" onClick={()=>this.onLinkClick("/shop")}>
-                                        <h4 className="orange-text">Shop</h4>
-                                    </NavItem>
-                                    <NavItem eventKey={1} className="header-button" onClick={()=>this.onLinkClick("/premium_cases")}>
-                                        <h4 className="orange-text">Premium Cases</h4>
-                                    </NavItem>
+                                    <NavDropdown eventKey={3} title={<span className="orange-text">Shop</span>} id="basic-nav-dropdown" className="header-button">
+                                        <MenuItem eventKey={3.1} onClick={()=>this.onLinkClick("/shop")}>Collections</MenuItem>
+                                        <MenuItem eventKey={3.2} onClick={()=>this.onLinkClick("/premium_cases")}>Premium Cases</MenuItem>
+                                        <MenuItem eventKey={3.3}>Custom Cases</MenuItem>
+                                    </NavDropdown>
                                     <NavItem eventKey={2} className="header-button" onClick={()=>this.onLinkClick("/reseller-dropshipper")}>
-                                        <h4 className="orange-text">Reseller/Dropshipper</h4>
+                                        <span className="orange-text">Reseller/Dropshipper</span>
                                     </NavItem>
                                     <NavItem eventKey={4} className="header-button" onClick={()=>this.onLinkClick("/Admin?table=cases")}>
-                                        <h4 className="orange-text">Admin</h4>
+                                        <span className="orange-text">Admin</span>
                                     </NavItem>
                                     <NavItem eventKey={4} className="header-button" onClick={()=>this.onLinkClick("/payment")}>
-                                        <h4 className="orange-text">Payment</h4>
+                                        <span className="orange-text">Payment</span>
                                     </NavItem>
                                 </Nav>
                                 <Nav pullRight>
-                                    <NavItem eventKey={5} className="header-button" onClick={()=>this.onLinkClick("/cart")}>
-                                        <h4 className="orange-text">Cart</h4>
+                                    <Navbar.Form pullLeft>
+                                        <FormGroup className="header-search-container">
+                                        <FormControl type="text" placeholder="Search Code / Name" class="form-control" style={{width:"450px"}}/>{' '}
+                                        <Button type="submit" className="btn btn-tosca"><i class="icon-magnifier"></i></Button>
+                                        </FormGroup>
+                                    </Navbar.Form>
+                                    <NavItem eventKey={5} className="margin-cart">
+                                        <Button type="submit" className="btn btn-tosca"><i class="fa fa-shopping-cart" onClick={()=>this.onLinkClick("/cart")}></i></Button>
                                     </NavItem>
-                                    <NavDropdown eventKey={6} title="Account" className="header-button">
+                                    <NavDropdown eventKey={6} title={<i class="fa fa-user"></i>} id="basic-nav-dropdown" className="margin-user account-css">
                                         <MenuItem eventKey={6.1} onClick={()=>this.onLinkClick("/login")}>
-                                        <h4>Login</h4>
+                                            <span>Login</span>
                                         </MenuItem>
                                         <MenuItem eventKey={6.2} onClick={()=>this.onLinkClick("/register")}>
-                                        <h4>Register</h4>
+                                            <span>Register</span>
                                         </MenuItem>
                                     </NavDropdown>
                                 </Nav>

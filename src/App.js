@@ -22,6 +22,7 @@ import './supports/css/bootstrap.css';
 import './App.css';
 import './supports/css/app.css';
 import './supports/css/font-awesome.css';
+import './supports/css/simple-line-icons.css';
 
 const cookies = new Cookies();
 

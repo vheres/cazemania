@@ -78,14 +78,14 @@ class ShopPage extends Component {
                 <Row>
                     <Col xsOffset={1} xs={10} mdOffset={0} md={12}>
                         <p>Product's Code</p>
-                        <input type="text" ref="searchCode" class="form-control" id="inputSearchCode" placeholder="Product's Code" />
+                        <input type="text" ref="searchCode" className="form-control" id="inputSearchCode" placeholder="Product's Code" />
                         <br/>
                     </Col>
                 </Row>
                 <Row>
                     <Col xsOffset={1} xs={10} mdOffset={0} md={12}>
                         <p>Product's Name</p>
-                        <input type="text" ref="searchName" class="form-control" id="inputSearchName" placeholder="Product's Name" />
+                        <input type="text" ref="searchName" className="form-control" id="inputSearchName" placeholder="Product's Name" />
                         <br/>
                     </Col>
                 </Row>
