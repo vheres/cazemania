@@ -5,24 +5,24 @@ import {Panel, PanelGroup, Modal, Button} from 'react-bootstrap'
 
 class AdminRenderOrders extends Component {
     state = {show: false, items: []}
-    
-      handleClose() {
-        this.setState({ show: false });
-      }
-    
-      handleShow() {
-        this.setState({ show: true });
-      }
-
 
     componentWillMount(){
-        axios.get(API_URL_1 + "/adminordersdetails/" + 1)
+        axios.get(API_URL_1 + "/adminordersdetails/" + this.props.transaction_id)
         .then((res)=>{
             console.log(res.data)
             this.setState({items: res.data})
         })
     }
 
+    handleClose() {
+        this.setState({ show: false });
+    }
+    
+    handleShow() {
+        this.setState({ show: true });
+    }
+
+        
     selectStyle(){
         if(this.props.status === "pendingPayment"){
             return "info"
@@ -35,16 +35,44 @@ class AdminRenderOrders extends Component {
         }
     }
 
+    onCompleteOrderClick(){
+        axios.put(API_URL_1 + "/adminorders/addresi/" + this.props.transaction_id,{
+            resi: this.refs.addNomorResi.value
+        })
+        .then((res)=>{
+            console.log(res)
+            this.props.refresh()
+            alert("Order Complete")
+        })
+        .catch((err)=>{
+            console.log(err)
+            alert("ERROR")
+        })
+    }
+
+    onConfirmOrderClick(){
+        axios.put(API_URL_1 + "/adminorders/confirm/" + this.props.transaction_id)
+        .then((res)=>{
+            console.log(res)
+            this.props.refresh()
+            alert("Order telah dikonfirmasi")
+        })
+        .catch((err)=>{
+            console.log(err)
+            alert("ERROR")
+        })
+    }
+
     renderOrderStatus(){
         return(
             {
                 pendingPayment: () => {
                     return(
-                        <span class="label bg-warning">Pending Payment</span> )
+                        <span class="label bg-info">Pending Payment</span> )
                     },
                 pendingDelivery: () => {
                     return(
-                        <span class="label bg-success">Pending Delivery</span> )
+                        <span class="label bg-warning">Pending Delivery</span> )
                     },
                 complete : () =>{
                     return(
@@ -52,6 +80,38 @@ class AdminRenderOrders extends Component {
                     }
                 }
         )
+    }
+
+    renderHeader(){
+        if(this.props.status === "pendingPayment"){
+            return (
+                <header class="wrapper-md bg-light lter">
+                <div>
+                    <input type="button" value="Konfirmasi Pembayaran" onClick={()=>this.onConfirmOrderClick()} className="btn btn-sm btn-info"/>
+                    <input type="button" value="Bukti Pembayaran" onClick={()=>this.handleShow()} className="btn btn-sm btn-info pull-right"/>
+                </div>
+                </header>
+            )
+        }
+        else if(this.props.status === "pendingDelivery"){
+            return (
+                <header class="wrapper-md bg-light lter">
+                <div>
+                    <input type="text" placeholder="Input nomor resi" ref="addNomorResi" className="form-control"/><input type="button" value="Complete Order" onClick={()=>this.onCompleteOrderClick()} className="btn btn-sm btn-info"/>
+                    <input type="button" value="Bukti Pembayaran" onClick={()=>this.handleShow()} className="btn btn-sm btn-info pull-right"/>
+                </div>
+                </header>
+            )
+        }
+        else if(this.props.status === "complete"){
+            return (
+                <header class="wrapper-md bg-success lter">
+                <div style={{"font-size": "200%"}}>
+                    ORDER SELESAI   ||   <strong>Nomor Resi: {this.props.resi}</strong>
+                </div>
+                </header>
+            )
+        }
     }
 
     renderTransactionDetails(){
@@ -76,63 +136,47 @@ class AdminRenderOrders extends Component {
                 <Panel.Title toggle>Order ID: <strong>CMW#{this.props.ordernumber}</strong> </Panel.Title>
               </Panel.Heading>
               <Panel.Body collapsible>
-                <section id="content">
+                <section id="content" style={{"font-size":"16px"}}> 
                     <section class="vbox bg-white">
-                        <header class="header bg-light lter hidden-print">
-                        <p className="pull-left">Invoice</p>
-                        <input type="text" placeholder="Input nomor resi" className="form-control"/><input type="button" value="Complete Order" onClick={()=>this.handleShow()} className="btn btn-sm btn-info"/>
-                        <input type="button" value="Bukti Pembayaran" onClick={()=>this.handleShow()} className="btn btn-sm btn-info pull-right"/>
-                        </header>
-                        <section class="scrollable wrapper">
-                        <i class="fa fa-apple fa fa-3x"></i>
+                        {this.renderHeader()}
+                        <section class="scrollable wrapper" style={{"line-height":"20px"}}> 
                         <div class="row">
-                            <div class="col-xs-6">
-                            <h4>Cazemania</h4>
-                            <p><a href="http://www.cazemania.com">www.cazemania.com</a></p>
-                            <p>1 Infinite Loop <br/>
-                                95014 Cuperino, CA<br/>
-                                United States
+                            <p class="m-t m-b col-md-3" style={{"line-height":"20px"}}>
+                                Order date: <strong>{this.props.date}</strong><br/>
+                                Order status: {this.renderOrderStatus()[this.props.status]()}<br/>
+                                Order ID: <strong>CMW#{this.props.ordernumber}</strong>
                             </p>
-                            <p>
-                                Telephone:  800-692-7753<br/>
-                                Fax:  800-692-7753
-                            </p>
+                            <div class="well bg-light b m-t col-md-6">
+                                <div class="row">
+                                <div class="col-xs-6">
+                                    <strong>TO:</strong>
+                                    <h4>{this.props.firstname} {this.props.lastname}</h4>
+                                    <p>
+                                    {this.props.address1}<br/>
+                                    {this.props.address2}<br/>
+                                    {this.props.city}, {this.props.province}<br/>
+                                    Phone: {this.props.phone}<br/>
+                                    Email: youemail@gmail.com<br/>
+                                    </p>
+                                </div>
+                                <div class="col-xs-6">
+                                    <strong>SHIP TO:</strong>
+                                    <h4>John Smith</h4>
+                                    <p>
+                                    2nd Floor<br/>
+                                    St John Street, Aberdeenshire 2541<br/>
+                                    United Kingdom<br/>
+                                    Phone: 031-432-678<br/>
+                                    Email: youemail@gmail.com<br/>
+                                    </p>
+                                </div>
+                                </div>
                             </div>
-                            <div class="col-xs-6 text-right">
+                            <div class="col-md-3 text-right">
                             <p class="h4">CMW#{this.props.ordernumber}</p>
                             <h5>{this.props.date}</h5>           
                             </div>
                         </div>          
-                        <div class="well bg-light b m-t">
-                            <div class="row">
-                            <div class="col-xs-6">
-                                <strong>TO:</strong>
-                                <h4>{this.props.firstname} {this.props.lastname}</h4>
-                                <p>
-                                2nd Floor<br/>
-                                St John Street, Aberdeenshire 2541<br/>
-                                United Kingdom<br/>
-                                Phone: 031-432-678<br/>
-                                Email: youemail@gmail.com<br/>
-                                </p>
-                            </div>
-                            <div class="col-xs-6">
-                                <strong>SHIP TO:</strong>
-                                <h4>John Smith</h4>
-                                <p>
-                                2nd Floor<br/>
-                                St John Street, Aberdeenshire 2541<br/>
-                                United Kingdom<br/>
-                                Phone: 031-432-678<br/>
-                                Email: youemail@gmail.com<br/>
-                                </p>
-                            </div>
-                            </div>
-                        </div>
-                        <p class="m-t m-b">Order date: <strong>{this.props.date}</strong><br/>
-                            Order status: {this.renderOrderStatus()[this.props.status]()}<br/>
-                            Order ID: <strong>CMW#{this.props.ordernumber}</strong>
-                        </p>
                         <div class="line"></div>
                         <table class="table">
                             <thead>
@@ -140,7 +184,7 @@ class AdminRenderOrders extends Component {
                                 <th style={{"width": "60px"}}>QTY</th>
                                 <th>DESCRIPTION</th>
                                 <th style={{"width": "140px"}}>UNIT PRICE</th>
-                                <th style={{"width": "110px"}}>TOTAL</th>
+                                <th style={{"width": "130px"}}>TOTAL</th>
                             </tr>
                             </thead>
                             <tbody>
@@ -151,11 +195,11 @@ class AdminRenderOrders extends Component {
                             </tr>
                             <tr>
                                 <td colspan="3" class="text-right no-border"><strong>Shipping</strong></td>
-                                <td>$0.00</td>
+                                <td>Rp. 0.00</td>
                             </tr>
                             <tr>
                                 <td colspan="3" class="text-right no-border"><strong>Total</strong></td>
-                                <td><strong>$1607.00</strong></td>
+                                <td><strong>Rp. {this.props.total_price}</strong></td>
                             </tr>
                             </tbody>
                         </table>              
@@ -165,10 +209,10 @@ class AdminRenderOrders extends Component {
               </Panel.Body>
               <Modal show={this.state.show} onHide={()=>this.handleClose()}>
                 <Modal.Header closeButton>
-                    <Modal.Title>Bukti Pembayaran</Modal.Title>
+                    <Modal.Title>Bukti Pembayaran ORDER: CMW#{this.props.ordernumber} </Modal.Title>
                 </Modal.Header>
                 <Modal.Body>
-                    <img src="http://localhost:1994/normal/ADDS1.jpg" alt="wow" style={{width: "50%"}}/>
+                    <img src="http://localhost:1994/normal/ADDS1.jpg" alt="buktipembayaran" style={{width: "50%"}}/>
                 </Modal.Body>
                 <Modal.Footer>
                     <Button onClick={()=>this.handleClose()}>Close</Button>

@@ -41,8 +41,9 @@ class CartPage extends Component {
     }
 
     onDeleteClick(id) {
-        axios.delete(API_URL_1 + `/cart/` + id)
+        axios.delete(API_URL_1 + `/cart/` + this.props.auth.id + "/" + id, )
         .then((response) => {
+            console.log(response.data)
             this.setState({cart: response.data.results1})
             alert(`delete item success!`)
         }).catch((err) => {
@@ -51,18 +52,8 @@ class CartPage extends Component {
     }
 
     onClearCartClick() {
-        var ids = "("
-        this.state.cart.map((item,count) => {
-            if (count < this.state.cart.length - 1) {
-                ids += `${item.id}, `
-            }
-            else {
-                ids += `${item.id})`
-            }
-        })
-        axios.post(API_URL_1 + `/clear_cart`, {
-            ids: ids
-        }).then((response) => {
+        axios.delete(API_URL_1 + `/clear_cart/` + this.props.auth.id)
+        .then((response) => {
             this.setState({cart:[]})
             alert(`clear cart success!`)
         }).catch((err) => {
@@ -98,6 +89,7 @@ class CartPage extends Component {
     }
 
     renderCartPage() {
+        console.log(this.state.cart)
         if (this.state.cart.length == 0) {
             return(
                 <Grid fluid className="HomePage-css margin-15 padding-15p">

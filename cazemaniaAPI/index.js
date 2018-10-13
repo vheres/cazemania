@@ -132,8 +132,8 @@ app.get('/admin/:table', function(req,res){
 })
 
 app.get('/adminorders', function(req,res){
-    sql= `SELECT tr.id as id, LPAD( tr.id, 8, '0') as ordernumber, tr.date as date, tr.time as time, tr.proof as proof, tr.target_bank as target_bank, tr.status as status, tr.total_price as total_price, u.firstname as firstname, 
-    u.lastname as lastname, u.id as user_id, u.address as address, u.email as email FROM transactions tr JOIN users u ON tr.user_id = u.id ORDER BY date`
+    sql= `SELECT tr.id as id, LPAD( tr.id, 8, '0') as ordernumber, tr.date as date, tr.time as time, tr.proof as proof, tr.target_bank as target_bank, tr.status as status, tr.total_price as total_price, tr.resi as resi, u.firstname as firstname, 
+    u.lastname as lastname, u.id as user_id, u.address1 as address1, u.address2 as address2, u.email as email, u.phone as phone, u.province as province, u.city as city, u.kabupaten as kabupaten FROM transactions tr JOIN users u ON tr.user_id = u.id ORDER BY date`
     conn.query(sql, (err,results)=>{
         if(err) throw err;
         console.log(results)
@@ -145,6 +145,31 @@ app.get('/adminordersdetails/:id', function(req,res){
     sql= `SELECT trd.id as id, trd.transaction_id as transaction_id, trd.case_type as case_type, trd.price as price, trd.amount as amount, br.name as brand_name, ty.name as type_name, cat.code, cat.name, cat.image
     FROM transaction_details trd JOIN brands br ON trd.case_brand = br.id JOIN type ty ON trd.case_model=ty.id JOIN catalogue cat ON trd.catalogue_id = cat.id WHERE trd.transaction_id = ${req.params.id}`
     conn.query(sql, (err,results)=>{
+        if(err) throw err;
+        console.log(results)
+        res.send(results)
+    })
+})
+
+app.put('/adminorders/confirm/:id', function(req,res){
+    sql= `UPDATE transactions SET ? WHERE id = ${req.params.id}`
+    var data = {
+        status: "pendingDelivery"
+    }
+    conn.query(sql, data, (err,results)=>{
+        if(err) throw err;
+        console.log(results)
+        res.send(results)
+    })
+})
+
+app.put('/adminorders/addresi/:id', function(req,res){
+    sql= `UPDATE transactions SET ? WHERE id = ${req.params.id}`
+    var data = {
+        status: "complete",
+        resi : req.body.resi
+    }
+    conn.query(sql, data, (err,results)=>{
         if(err) throw err;
         console.log(results)
         res.send(results)
@@ -229,22 +254,23 @@ app.post('/cart', function(req,res){
     })
 })
 
-app.delete('/cart/:id', function(req,res){
+app.delete('/cart/:user_id/:id', function(req,res){
     sql  = `DELETE FROM cart where id = ${req.params.id}`
     sql1 = `SELECT car.id, cat.code, cat.name, cat.image,  car.brand_id, car.model_id, car.case_type, car.amount, br.name as brand_name, ty.name as model_name, pr.price as price FROM catalogue cat JOIN cart car ON cat.id=car.catalogue_id JOIN brands br ON br.id = car.brand_id 
-    JOIN type ty ON ty.id = car.model_id JOIN price pr ON pr.case_type = car.case_type WHERE car.user_id=${req.params.id}`
-
+    JOIN type ty ON ty.id = car.model_id JOIN price pr ON pr.case_type = car.case_type WHERE car.user_id=${req.params.user_id}`
+    console.log(req.body.user)
+    console.log(typeof req.body.user)
     conn.query(sql, (err,results)=>{
         if(err) throw err;
-        conn.query(sql1, (err,results1) => {
-            if(err) throw err;
+        conn.query(sql1, (err1,results1) => {
+            if(err1) throw err1;
             res.send({results1})
         })
     })
 })
 
-app.post('/clear_cart', function(req,res){
-    sql = `DELETE FROM cart where id in ${req.body.ids}`
+app.delete('/clear_cart/:user_id', function(req,res){
+    sql = `DELETE FROM cart where user_id = ${req.params.user_id}`
     conn.query(sql, (err,results)=> {
         if(err) throw err;
         res.send({results})
