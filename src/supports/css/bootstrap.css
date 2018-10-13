@@ -7096,6 +7096,18 @@ button.close {
   margin-right: auto;
   width: 100px;
 }
+.carousel-best-button {
+  line-height: 210px;
+}
+.carousel-insta-button {
+  line-height: 230px;
+}
+.carousel-similar-button {
+  line-height: 300px;
+}
+.carousel-text-button {
+  line-height: 0px;
+}
 
 
 

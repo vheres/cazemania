@@ -69,10 +69,6 @@ class HomePage extends Component {
                         </Row>
                         <Row>
                             <Row>
-                                <Col md={4}></Col>
-                                <Col md={4}><hr/></Col>
-                            </Row>
-                            <Row>
                                 <Col xs={4}></Col>
                                 <Col xs={4}><h2 className="text-center">Happy Customer</h2></Col>
                                 

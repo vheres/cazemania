@@ -297,15 +297,15 @@ class DetailPage extends Component {
                             <div className="block-margin-auto similar-product-pointer"></div>
                         </Row>
                         <Row>
-                            <Col mdOffset={3} md={6}>
-                            {this.renderCarouselSimilar()}
+                            <Col mdOffset={2} md={8}>
+                                {this.renderCarouselSimilar()}
                             </Col>
                         </Row>
                     </Row>                        
                 </Grid>
             );
         }
-        
+
     render() {
         return (
         this.renderDetailPage()

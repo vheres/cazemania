@@ -73,7 +73,7 @@ app.get('/catalogue', function(req,res){
 })
 
 app.get('/similarproducts', function(req,res){
-    var sql = `SELECT * FROM catalogue WHERE name LIKE "%${req.query.name}%" ORDER BY id LIMIT 5`
+    var sql = `SELECT * FROM catalogue WHERE name LIKE "%${req.query.name}%" AND id !=${req.query.id} ORDER BY id LIMIT 5`
     
     conn.query(sql, (err,results)=>{
         if(err) throw err;
