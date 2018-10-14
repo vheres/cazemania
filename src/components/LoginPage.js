@@ -13,6 +13,13 @@ class LoginPage extends Component {
             cookies.set('myCookie', newProps.auth.email, { path: '/' });
         }
     }
+
+    onKeyPress(x) {
+        if (x.which == 13) {
+            this.onLoginClick()
+        }
+    }
+
     onLoginClick = () => {
         var email = this.refs.email.value;
         var password = this.refs.password.value;
@@ -46,7 +53,7 @@ class LoginPage extends Component {
                                     Email: 
                                     </Col>
                                     <Col xs={10}>
-                                        <input type="email" ref="email" class="form-control" id="inputEmail" placeholder="Email Address" /><br/>
+                                        <input type="email" ref="email" class="form-control" id="inputEmail" placeholder="Email Address" onKeyPress={this.onKeyPress.bind(this)}/><br/>
                                     </Col>
                                 </Row>
                                 <Row>
@@ -54,7 +61,7 @@ class LoginPage extends Component {
                                     Password: 
                                     </Col>
                                     <Col xs={10}>
-                                        <input type="password" ref="password" class="form-control" id="inputPassword" placeholder="Password" /><br/>
+                                        <input type="password" ref="password" class="form-control" id="inputPassword" placeholder="Password" onKeyPress={this.onKeyPress.bind(this)}/><br/>
                                     </Col>
                                 </Row>
                                 <Row>

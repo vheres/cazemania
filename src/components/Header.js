@@ -38,6 +38,17 @@ class Header extends Component {
         this.props.history.push(target)
     }
 
+    onKeyPress (x) {
+        if (x.which == 13) {
+            this.onSearchClick();
+        }
+    }
+
+    onSearchClick() {
+        var search = document.getElementById("search").value;
+        this.props.history.push(`/shop?search=${search}`)
+    }
+
     renderNavbar = () => {   
         if(this.props.auth.email !== "") {
             return(
@@ -70,8 +81,8 @@ class Header extends Component {
                                 <Nav pullRight>
                                     <Navbar.Form pullLeft>
                                         <FormGroup className="header-search-container">
-                                        <FormControl type="text" placeholder="Search Code / Name" class="form-control" style={{width:"450px"}}/>{' '}
-                                        <Button type="submit" className="btn btn-tosca"><i class="icon-magnifier"></i></Button>
+                                        <FormControl type="text" id="search" placeholder="Search Code / Name" class="form-control" style={{width:"450px"}} onKeyPress={this.onKeyPress.bind(this)}/>{' '}
+                                        <Button type="submit" className="btn btn-tosca" onClick={()=>this.onSearchClick()}><i class="icon-magnifier"></i></Button>
                                         </FormGroup>
                                     </Navbar.Form>
                                     <NavItem eventKey={5} className="margin-cart">
@@ -120,8 +131,8 @@ class Header extends Component {
                                 <Nav pullRight>
                                     <Navbar.Form pullLeft>
                                         <FormGroup className="header-search-container">
-                                        <FormControl type="text" placeholder="Search Code / Name" class="form-control" style={{width:"450px"}}/>{' '}
-                                        <Button type="submit" className="btn btn-tosca"><i class="icon-magnifier"></i></Button>
+                                        <FormControl type="text" id="search"placeholder="Search Code / Name" class="form-control" style={{width:"450px"}} onKeyPress={this.onKeyPress.bind(this)}/>{' '}
+                                        <Button type="submit" className="btn btn-tosca" onClick={()=>this.onSearchClick()}><i class="icon-magnifier"></i></Button>
                                         </FormGroup>
                                     </Navbar.Form>
                                     <NavItem eventKey={5} className="margin-cart">

@@ -16,6 +16,12 @@ class RegisterPage extends Component {
         }
     }
 
+    onKeyPress(x) {
+        if (x.which == 13 ) {
+            this.onRegisterClick();
+        }
+    }
+
     onRegisterClick = () => {
         if(this.refs.firstName.value == '' || this.refs.lastName.value == '' || this.refs.email.value == '' || this.refs.password.value == '' || this.refs.address.value == '') {
             alert('Please fill everything!');
@@ -55,10 +61,10 @@ class RegisterPage extends Component {
                                                 <p className="text-right">Name:</p> 
                                                 </Col>
                                                 <Col xs={5}>
-                                                    <input type="text" ref="firstName" class="form-control" id="inputUsername" placeholder="First Name" /><br/>
+                                                    <input type="text" ref="firstName" class="form-control" id="inputUsername" placeholder="First Name" onKeyPress={this.onKeyPress.bind(this)}/><br/>
                                                 </Col>
                                                 <Col xs={5}>
-                                                    <input type="text" ref="lastName" class="form-control" id="inputUsername" placeholder="Last Name" /><br/>
+                                                    <input type="text" ref="lastName" class="form-control" id="inputUsername" placeholder="Last Name" onKeyPress={this.onKeyPress.bind(this)}/><br/>
                                                 </Col>
                                             </Row>
                                             <Row>
@@ -66,7 +72,7 @@ class RegisterPage extends Component {
                                                 <p className="text-right">Email:</p> 
                                                 </Col>
                                                 <Col xs={10}>
-                                                    <input type="email" ref="email" class="form-control" id="inputEmail" placeholder="Email Address" /><br/>
+                                                    <input type="email" ref="email" class="form-control" id="inputEmail" placeholder="Email Address" onKeyPress={this.onKeyPress.bind(this)}/><br/>
                                                 </Col>
                                             </Row>
                                             <Row>
@@ -74,7 +80,7 @@ class RegisterPage extends Component {
                                                 <p className="text-right">Password:</p>  
                                                 </Col>
                                                 <Col xs={10}>
-                                                    <input type="password" ref="password" class="form-control" id="inputPassword" placeholder="Password" /><br/>
+                                                    <input type="password" ref="password" class="form-control" id="inputPassword" placeholder="Password" onKeyPress={this.onKeyPress.bind(this)}/><br/>
                                                 </Col>
                                             </Row>
                                             <Row>
@@ -82,7 +88,7 @@ class RegisterPage extends Component {
                                                 <p className="text-right">Address:</p>  
                                                 </Col>
                                                 <Col xs={10}>
-                                                    <textarea type="text" ref="address" class="form-control" id="inputAdress" placeholder="Address" /><br/>
+                                                    <textarea type="text" ref="address" class="form-control" id="inputAdress" placeholder="Address" onKeyPress={this.onKeyPress.bind(this)}/><br/>
                                                 </Col>
                                             </Row>
                                             <Row>
