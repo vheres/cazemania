@@ -12,25 +12,44 @@ class ShopPage extends Component {
         if (this.state.pagination.length === 0) {
             this.state.pagination.push(0, 20)
         }
-        this.setState({})
         this.getCatalogueList();
+    }
+
+    componentWillReceiveProps(newProps) {
+        if (this.state.pagination.length === 0) {
+            this.state.pagination.push(0, 20)
+        }
+        const search = newProps.location.search;
+        const params = new URLSearchParams(search);
+        if(search.length == 0) {
+            var searchIn = '';
+        }
+        else {
+            var searchIn = params.get('search');
+        }
+        axios.get(API_URL_1 + "/catalogue", {
+            params: {
+                search: searchIn,
+                pagination: this.state.pagination
+            }
+        })
+        .then((response)=>{
+            this.setState({ catalogue: response.data.catalogue, pagecount: Math.ceil((response.data.pagecount[0].count/20)) })
+        })
     }
 
     getCatalogueList() {
         const search = this.props.location.search;
         const params = new URLSearchParams(search);
         if(search.length == 0) {
-            var code = '';
-            var name = '';
+            var searchIn = '';
         }
         else {
-            var code = params.get('code');
-            var name = params.get('name');
+            var searchIn = params.get('search');
         }
         axios.get(API_URL_1 + "/catalogue", {
             params: {
-                code: code,
-                name: name,
+                search: searchIn,
                 pagination: this.state.pagination
             }
         })
@@ -48,55 +67,55 @@ class ShopPage extends Component {
         this.getCatalogueList();
     }
 
-    onSearchClick() {
-        this.state.pagination.length = 0;
-        this.state.pagination.push(0, 20)
-        this.state.active.shift();
-        this.state.active.push(0);
-        this.pushPage();
-    }
+    // onSearchClick() {
+    //     this.state.pagination.length = 0;
+    //     this.state.pagination.push(0, 20)
+    //     this.state.active.shift();
+    //     this.state.active.push(0);
+    //     this.pushPage();
+    // }
 
-    async pushPage() {
-        if( this.refs.searchCode.value != "" && this.refs.searchName.value != "" ) {
-            await (this.props.history.push(`/shop?code=${this.refs.searchCode.value}&name=${this.refs.searchName.value}`));
-        }
-        else if ( this.refs.searchCode.value != "" && this.refs.searchName.value == "" ) {
-            await (this.props.history.push(`/shop?code=${this.refs.searchCode.value}`));
-        }
-        else if ( this.refs.searchCode.value == "" && this.refs.searchName.value != "" ) {
-            await (this.props.history.push(`/shop?name=${this.refs.searchName.value}`));
-        }
-        else {
-            await (this.props.history.push(`/shop`));
-        }
-        this.getCatalogueList();
-    }
+    // async pushPage() {
+    //     if( this.refs.searchCode.value != "" && this.refs.searchName.value != "" ) {
+    //         await (this.props.history.push(`/shop?code=${this.refs.searchCode.value}&name=${this.refs.searchName.value}`));
+    //     }
+    //     else if ( this.refs.searchCode.value != "" && this.refs.searchName.value == "" ) {
+    //         await (this.props.history.push(`/shop?code=${this.refs.searchCode.value}`));
+    //     }
+    //     else if ( this.refs.searchCode.value == "" && this.refs.searchName.value != "" ) {
+    //         await (this.props.history.push(`/shop?name=${this.refs.searchName.value}`));
+    //     }
+    //     else {
+    //         await (this.props.history.push(`/shop`));
+    //     }
+    //     this.getCatalogueList();
+    // }
 
-    renderFilterMenu() {
-        return(
-            <section>
-                <Row>
-                    <Col xsOffset={1} xs={10} mdOffset={0} md={12}>
-                        <p>Product's Code</p>
-                        <input type="text" ref="searchCode" className="form-control" id="inputSearchCode" placeholder="Product's Code" />
-                        <br/>
-                    </Col>
-                </Row>
-                <Row>
-                    <Col xsOffset={1} xs={10} mdOffset={0} md={12}>
-                        <p>Product's Name</p>
-                        <input type="text" ref="searchName" className="form-control" id="inputSearchName" placeholder="Product's Name" />
-                        <br/>
-                    </Col>
-                </Row>
-                <Row>
-                    <Col xsOffset={1} xs={10} mdOffset={0}>
-                        <input type="button" class="btn btn-success" style={{width:100}} value="A P P L Y" onClick={()=>this.onSearchClick()}/>
-                    </Col>
-                </Row>
-            </section>
-        );
-    }
+    // renderFilterMenu() {
+    //     return(
+    //         <section>
+    //             <Row>
+    //                 <Col xsOffset={1} xs={10} mdOffset={0} md={12}>
+    //                     <p>Product's Code</p>
+    //                     <input type="text" ref="searchCode" className="form-control" id="inputSearchCode" placeholder="Product's Code" />
+    //                     <br/>
+    //                 </Col>
+    //             </Row>
+    //             <Row>
+    //                 <Col xsOffset={1} xs={10} mdOffset={0} md={12}>
+    //                     <p>Product's Name</p>
+    //                     <input type="text" ref="searchName" className="form-control" id="inputSearchName" placeholder="Product's Name" />
+    //                     <br/>
+    //                 </Col>
+    //             </Row>
+    //             <Row>
+    //                 <Col xsOffset={1} xs={10} mdOffset={0}>
+    //                     <input type="button" class="btn btn-success" style={{width:100}} value="A P P L Y" onClick={()=>this.onSearchClick()}/>
+    //                 </Col>
+    //             </Row>
+    //         </section>
+    //     );
+    // }
 
     renderCatalogue() {
         console.log(this.state.catalogue)
@@ -111,11 +130,11 @@ class ShopPage extends Component {
     renderShopPage() {
         return(
                 <Grid fluid className="HomePage-css margin-15 padding-15p">
-                    <Col md={1}></Col>
+                    {/* <Col md={1}></Col>
                     <Col md={2}>
                         {this.renderFilterMenu()}
-                    </Col>
-                    <Col md={8}>
+                    </Col> */}
+                    <Col mdOffset={2} md={8}>
                             <Row>
                                 <Col xsHidden md={12}>
                                     <p className="padding-text">Menampilkan ### produk</p>

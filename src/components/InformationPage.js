@@ -18,6 +18,12 @@ class InformationPage extends Component {
         this.setState({activeKey: active})
     }
 
+    componentWillReceiveProps(newProps) {
+        const params = new URLSearchParams(newProps.location.search);
+        const active = params.get('active')
+        this.setState({activeKey: active})
+    }
+
     async handleSelect(activeKey) {
         await this.setState({ activeKey });
         this.props.history.push(`/information?active=${this.state.activeKey}`)

@@ -347,6 +347,7 @@ a.list-group-item:focus {
   box-shadow: 0 2px 6px rgba(0,0,0,0.1);
   border: 1px solid #ddd;
   border: 1px solid rgba(0,0,0,0.1);
+  background-color: rgb(255, 255, 255);
 }
 .dropdown-menu.pull-left {
   left: 100%;
@@ -357,6 +358,8 @@ a.list-group-item:focus {
 }
 .dropdown-menu > li > a {
   padding: 5px 15px;
+  font-weight: normal;
+  line-height: 2; /*1.42857143*/
 }
 .dropdown-menu > li > a:hover,
 .dropdown-menu > li > a:focus,
@@ -365,7 +368,7 @@ a.list-group-item:focus {
 .dropdown-menu > .active > a:focus {
   background-image: none;
   filter: none;
-  background-color: #e8eff0 !important;
+  background-color: rgb(253, 203, 151) !important; /*#e8eff0*/
   color: #303437;
 }
 .dropdown-header {
