@@ -2,6 +2,7 @@ import React, {Component} from 'react';
 import axios from 'axios'
 import {API_URL_1} from '../supports/api-url/apiurl'
 import {Panel, PanelGroup, Modal, Button} from 'react-bootstrap'
+import FileUploader from './FileUploader'
 
 class AdminRenderOrders extends Component {
     state = {show: false, items: []}
@@ -37,7 +38,8 @@ class AdminRenderOrders extends Component {
 
     onCompleteOrderClick(){
         axios.put(API_URL_1 + "/adminorders/addresi/" + this.props.transaction_id,{
-            resi: this.refs.addNomorResi.value
+            resi: this.refs.addNomorResi.value,
+            email: this.props.email 
         })
         .then((res)=>{
             console.log(res)
@@ -51,7 +53,9 @@ class AdminRenderOrders extends Component {
     }
 
     onConfirmOrderClick(){
-        axios.put(API_URL_1 + "/adminorders/confirm/" + this.props.transaction_id)
+        axios.put(API_URL_1 + "/adminorders/confirm/" + this.props.transaction_id,{
+            email: this.props.email 
+        })
         .then((res)=>{
             console.log(res)
             this.props.refresh()
@@ -144,7 +148,7 @@ class AdminRenderOrders extends Component {
                             <p class="m-t m-b col-md-3" style={{"line-height":"20px"}}>
                                 Order date: <strong>{this.props.date}</strong><br/>
                                 Order status: {this.renderOrderStatus()[this.props.status]()}<br/>
-                                Order ID: <strong>CMW#{this.props.ordernumber}</strong>
+                                Order ID: <strong>CMW#{this.props.ordernumber} <FileUploader/></strong>
                             </p>
                             <div class="well bg-light b m-t col-md-6">
                                 <div class="row">
@@ -209,7 +213,7 @@ class AdminRenderOrders extends Component {
               </Panel.Body>
               <Modal show={this.state.show} onHide={()=>this.handleClose()}>
                 <Modal.Header closeButton>
-                    <Modal.Title>Bukti Pembayaran ORDER: CMW#{this.props.ordernumber} </Modal.Title>
+                    <Modal.Title>Bukti Pembayaran ORDER: CMW#{this.props.ordernumber}</Modal.Title>
                 </Modal.Header>
                 <Modal.Body>
                     <img src="http://localhost:1994/normal/ADDS1.jpg" alt="buktipembayaran" style={{width: "50%"}}/>

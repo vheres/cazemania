@@ -6,6 +6,7 @@ const nodemailer = require('nodemailer');
 const crypto = require('crypto')
 var http = require("https");
 var qs = require("querystring")
+var upload = require('express-fileupload')
 
 var app = express();
 const port = 1994;
@@ -27,6 +28,7 @@ app.set('view engine' , 'ejs');
 app.use(url)
 app.use(bodyParser.json())
 app.use(express.static('public'))
+app.use(upload())
 
 //Connect to MySQL database
 const conn = mysql.createConnection({
@@ -153,18 +155,40 @@ app.get('/adminordersdetails/:id', function(req,res){
 
 app.put('/adminorders/confirm/:id', function(req,res){
     sql= `UPDATE transactions SET ? WHERE id = ${req.params.id}`
+
+    const mailOptions = {
+        from: 'cazemania.official@gmail.com', // sender address
+        to: req.body.email, // list of receivers
+        subject: 'Pembayaran Telah Dikonfirmasi', // Subject line
+        html: '<p>Order anda sedang dipersiapkan</p>'// plain text body
+    };
+
     var data = {
         status: "pendingDelivery"
     }
     conn.query(sql, data, (err,results)=>{
         if(err) throw err;
         console.log(results)
+        transporter.sendMail(mailOptions, function (err, info) {
+            if(err)
+                console.log(err)
+            else
+                console.log(info);
+        })
         res.send(results)
     })
 })
 
 app.put('/adminorders/addresi/:id', function(req,res){
     sql= `UPDATE transactions SET ? WHERE id = ${req.params.id}`
+
+    const mailOptions = {
+        from: 'cazemania.official@gmail.com', // sender address
+        to: req.body.email, // list of receivers
+        subject: 'Order anda telah dikirim', // Subject line
+        html: `<p>Nomor resi order anda : ${req.body.resi}</p>`// plain text body
+    };
+
     var data = {
         status: "complete",
         resi : req.body.resi
@@ -172,6 +196,12 @@ app.put('/adminorders/addresi/:id', function(req,res){
     conn.query(sql, data, (err,results)=>{
         if(err) throw err;
         console.log(results)
+        transporter.sendMail(mailOptions, function (err, info) {
+            if(err)
+                console.log(err)
+            else
+                console.log(info);
+        })
         res.send(results)
     })
 })
@@ -458,6 +488,24 @@ app.get('/shipping', function(req,res){
         destination: 'CGK',
         weight: 1.7}));
       req2.end();
+})
+
+app.post('/upload', function(req,res){
+    if(req.files){
+        console.log(req.files)
+        var unggahFile = req.files.file
+        var file = unggahFile.name
+        unggahFile.mv('./public/uploads/'+ "upload1.png", (err)=>{
+            if(err){
+                console.log(err)
+                res.send(err)
+            } else {
+                console.log('File sukses diupload!')
+                res.send('File sukses diupload!')
+                // res.send(file)
+            }
+        })
+    }
 })
 
 app.listen(port, () => console.log(`Example app listening on port ${port}!`));
