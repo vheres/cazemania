@@ -358,6 +358,14 @@ app.post('/spam' , function(req,res){
 
 var secret = "아이즈원"
 
+app.get('/profile', function(req,res){
+    var sql = `SELECT * from users WHERE id = ${req.query.id}`
+    conn.query(sql, (err, result) => {
+        if (err) throw err;
+        res.send({profile: result})
+    })
+})
+
 app.get('/users', function(req,res){
     const cipher = crypto.createHmac("sha256", secret)
     .update(req.query.password)

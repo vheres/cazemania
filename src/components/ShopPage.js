@@ -16,9 +16,10 @@ class ShopPage extends Component {
     }
 
     componentWillReceiveProps(newProps) {
-        if (this.state.pagination.length === 0) {
-            this.state.pagination.push(0, 20)
-        }
+        this.state.active.shift();
+        this.state.active.push(0);
+        this.state.pagination.length = 0;
+        this.state.pagination.push(0, 20)
         const search = newProps.location.search;
         const params = new URLSearchParams(search);
         if(search.length == 0) {
