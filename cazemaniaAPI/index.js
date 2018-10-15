@@ -441,8 +441,35 @@ app.get('/province', function(req,res){
         "port": null,
         "path": "/customer/origin",
         "headers": {
-          "Username" : "Cazemania",
-          "key": "54d16bfab958effecbfc849133dc706e"
+          "api-key": "54d16bfab958effecbfc849133dc706e",
+          "content-Type": "application/json"
+        }
+      };
+    http.request(options, function (res1) {
+        var chunks = [];
+      
+        res1.on("data", function (chunk) {
+          chunks.push(chunk);
+        });
+      
+        res1.on("end", function () {
+          var body = Buffer.concat(chunks);
+          console.log(body.toString());
+          console.log(typeof body)
+          res.send(body)
+        });
+      }).end();
+})
+
+app.get('/destination', function(req,res){
+    var options = {
+        "method": "GET",
+        "hostname": "api.sicepat.com",
+        "port": null,
+        "path": "/customer/destination",
+        "headers": {
+          "api-key": "54d16bfab958effecbfc849133dc706e",
+          "content-Type": "application/json"
         }
       };
     http.request(options, function (res1) {
@@ -463,17 +490,16 @@ app.get('/province', function(req,res){
 
 app.get('/shipping', function(req,res){
     var options = {
-        "method": "POST",
+        "method": "GET",
         "hostname": "api.sicepat.com",
         "port": null,
-        "path": "/customer/tariff",
+        "path": `/customer/tariff/?origin=${req.query.origin}&destination=${req.query.destination}&weight=${req.query.weight}`,
         "headers": {
-          "key": "54d16bfab958effecbfc849133dc706e",
-          'Content-Type': 'application/json'
+          "api-key": "54d16bfab958effecbfc849133dc706e"
         }
       };
       
-      var req2 = http.request(options, function (res1) {
+      http.request(options, function (res1) {
         var chunks = [];
       
         res1.on("data", function (chunk) {
@@ -483,14 +509,10 @@ app.get('/shipping', function(req,res){
         res1.on("end", function () {
           var body = Buffer.concat(chunks);
           console.log(body.toString());
+          console.log(typeof body)
           res.send(body)
         });
-      });
-      
-      req2.write(qs.stringify({ origin: 'TGR',
-        destination: 'CGK',
-        weight: 1.7}));
-      req2.end();
+      }).end();
 })
 
 app.post('/upload', function(req,res){
