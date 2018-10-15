@@ -86,9 +86,12 @@ class Header extends Component {
                                         </FormGroup>
                                     </Navbar.Form>
                                     <NavItem eventKey={5} className="margin-cart">
-                                        <Button type="submit" className="btn btn-tosca"><i class="fa fa-shopping-cart" onClick={()=>this.onLinkClick("/cart")}></i></Button>
+                                        <Button type="submit" className="btn btn-tosca" onClick={()=>this.onLinkClick("/cart")}><i class="fa fa-shopping-cart"></i></Button>
                                     </NavItem>
                                     <NavDropdown eventKey={6} title={<i class="fa fa-user"></i>} id="basic-nav-dropdown" className="margin-user account-css">
+                                        <MenuItem eventKey={6.1} onClick={()=>this.onLinkClick(`/profile`)}>
+                                            <span>Profile</span>
+                                        </MenuItem>
                                         <MenuItem eventKey={6.1} onClick={()=>this.onLogoutClick()}>
                                             <span>Logout</span>
                                         </MenuItem>
@@ -135,8 +138,8 @@ class Header extends Component {
                                         <Button type="submit" className="btn btn-tosca" onClick={()=>this.onSearchClick()}><i class="icon-magnifier"></i></Button>
                                         </FormGroup>
                                     </Navbar.Form>
-                                    <NavItem eventKey={5} className="margin-cart">
-                                        <Button type="submit" className="btn btn-tosca"><i class="fa fa-shopping-cart" onClick={()=>this.onLinkClick("/cart")}></i></Button>
+                                    <NavItem eventKey={5} className="margin-cart" >
+                                        <Button type="submit" className="btn btn-tosca" onClick={()=>this.onLinkClick("/cart")}><i class="fa fa-shopping-cart" ></i></Button>
                                     </NavItem>
                                     <NavDropdown eventKey={6} title={<i class="fa fa-user"></i>} id="basic-nav-dropdown" className="margin-user account-css">
                                         <MenuItem eventKey={6.1} onClick={()=>this.onLinkClick("/login")}>

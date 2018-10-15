@@ -11,6 +11,7 @@ import DetailPage from './components/DetailPage';
 import InformationPage from './components/InformationPage';
 import ResellerPage from './components/ResellerPage';
 import PaymentPage from './components/PaymentPage';
+import ProfilePage from './components/ProfilePage';
 import LoginPage from './components/LoginPage';
 import RegisterPage from './components/RegisterPage';
 import { Grid, Row, Col } from 'react-bootstrap';
@@ -63,6 +64,7 @@ class App extends Component {
               <Route path="/reseller-dropshipper" component={ResellerPage}/>
               <Route path="/Admin/:table" component={Admin}/>
               <Route path="/Admin2/orders" component={AdminOrders}/>
+              <Route path="/profile" component={ProfilePage}/>
               <Route path="/login" component={LoginPage}/>
               <Route path="/register" component={RegisterPage}/>
             </Col>

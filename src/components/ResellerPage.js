@@ -65,7 +65,7 @@ class InformationPage extends Component {
                             </Panel>
                         </Row>
                         <Row>
-                            <h2 style={{color:"#38AFFE"}}><strong>KUOTA TERBATAS! Yuk buruan daftar jadi reseller / dropshipper @cazemania sekarang juga.</strong></h2>
+                            <h3 style={{color:"#38AFFE"}}><strong>KUOTA TERBATAS! Yuk buruan daftar jadi reseller / dropshipper @cazemania sekarang juga.</strong></h3>
                         </Row>
                     </Col>
                 </Row>
