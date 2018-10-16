@@ -469,31 +469,43 @@ app.get('/province', function(req,res){
       }).end();
 })
 
+//SICEPAT API
+// app.get('/destination', function(req,res){
+//     var options = {
+//         "method": "GET",
+//         "hostname": "api.sicepat.com",
+//         "port": null,
+//         "path": "/customer/destination",
+//         "headers": {
+//           "api-key": "54d16bfab958effecbfc849133dc706e",
+//           "content-Type": "application/json"
+//         }
+//       };
+//     http.request(options, function (res1) {
+//         var chunks = [];
+      
+//         res1.on("data", function (chunk) {
+//           chunks.push(chunk);
+//         });
+      
+//         res1.on("end", function () {
+//           var body = Buffer.concat(chunks);
+//           console.log(body.toString());
+//           console.log(typeof body)
+//           res.send(body)
+//         });
+//       }).end();
+// })
+
+//LOCAL API
 app.get('/destination', function(req,res){
-    var options = {
-        "method": "GET",
-        "hostname": "api.sicepat.com",
-        "port": null,
-        "path": "/customer/destination",
-        "headers": {
-          "api-key": "54d16bfab958effecbfc849133dc706e",
-          "content-Type": "application/json"
-        }
-      };
-    http.request(options, function (res1) {
-        var chunks = [];
-      
-        res1.on("data", function (chunk) {
-          chunks.push(chunk);
-        });
-      
-        res1.on("end", function () {
-          var body = Buffer.concat(chunks);
-          console.log(body.toString());
-          console.log(typeof body)
-          res.send(body)
-        });
-      }).end();
+
+    sql = `SELECT * FROM destination WHERE city LIKE '%${req.query.destination}%' OR subdistrict LIKE '%${req.query.destination}%'`
+    
+    conn.query(sql, (err,results)=>{
+        if(err) throw err
+        res.send(results)
+    })
 })
 
 app.get('/shipping', function(req,res){
@@ -523,6 +535,7 @@ app.get('/shipping', function(req,res){
       }).end();
 })
 
+<<<<<<< HEAD
 app.post('/copydata', function(req,res){
     console.log(req.body)
     sql = `INSERT INTO destination (destination_code, subdistrict, city, province) VALUES ? `
@@ -534,6 +547,8 @@ app.post('/copydata', function(req,res){
     })
 })
 
+=======
+>>>>>>> 252d02d9db7bbd55c8c536816c3e80c1f008c89e
 app.post('/upload', function(req,res){
     if(req.files){
         console.log(req.files)
