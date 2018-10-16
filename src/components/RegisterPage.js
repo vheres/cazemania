@@ -12,7 +12,7 @@ import {API_URL_1} from '../supports/api-url/apiurl'
 const cookies = new Cookies();
 
 class RegisterPage extends Component {
-    state = { selectedOption: null, destination: [] }
+    state = { selectedOption: [], destination: [] }
 
     componentWillMount() {
         
@@ -25,10 +25,20 @@ class RegisterPage extends Component {
 
     handleInputChange(selectedOption) {
         if (selectedOption.length >= 3) {
-            axios.get(API_URL_1 + '/destination')
-            .then(response => {
-                console.log(response);
+            axios.get(API_URL_1 + '/destination', {
+                params: {
+                    destination: selectedOption
+                }
             })
+            .then(response => {
+                var arrJSX = [];
+                response.data.map((item, count) => {
+                    arrJSX.push({value:item.destination_code, label:`${item.province}, ${item.city}, ${item.subdistrict}`})
+                })
+                this.setState({destination: arrJSX})
+            })
+        } else if (selectedOption.length < 3) {
+            this.setState({destination: []})
         }
     }
 
@@ -45,25 +55,26 @@ class RegisterPage extends Component {
     }
 
     onRegisterClick = () => {
-        if(this.refs.firstName.value == '' || this.refs.lastName.value == '' || this.refs.email.value == '' || this.refs.password1.value == '' || this.refs.password2.value == '' || this.refs.alamat.value == '' || this.refs.kota.value == '' || this.refs.kodepos.value == '' ) {
-            alert('Please fill everything!');
-        }
-        else if (this.refs.password1.value !== this.refs.password2.value) {
-            alert('Your passwords does not match!')
-        }
-        else {
-            // this.props.onRegister({
-            //     firstname: this.refs.firstName.value,
-            //     gender: ,
-            //     lastname: this.refs.lastName.value,
-            //     email: this.refs.email.value,
-            //     password: this.refs.password.value,
-            //     address: this.refs.address.value,
-            //     province:,
-            //     city:,
-            //     kecamatan:
-            // });
-        }
+        console.log(this.state.selectedOption.label)
+        // if(this.refs.firstName.value == '' || this.refs.lastName.value == '' || this.refs.email.value == '' || this.refs.password1.value == '' || this.refs.password2.value == '' || this.refs.alamat.value == '' || this.refs.kota.value == '' || this.refs.kodepos.value == '' ) {
+        //     alert('Please fill everything!');
+        // }
+        // else if (this.refs.password1.value !== this.refs.password2.value) {
+        //     alert('Your passwords does not match!')
+        // }
+        // else {
+        //     // this.props.onRegister({
+        //     //     firstname: this.refs.firstName.value,
+        //     //     gender: ,
+        //     //     lastname: this.refs.lastName.value,
+        //     //     email: this.refs.email.value,
+        //     //     password: this.refs.password.value,
+        //     //     address: this.refs.address.value,
+        //     //     province:,
+        //     //     city:,
+        //     //     kecamatan:
+        //     // });
+        // }
         
     }
 
@@ -127,7 +138,7 @@ class RegisterPage extends Component {
                                                 <p className="text-right">Alamat:</p>  
                                                 </Col>
                                                 <Col xs={10}>
-                                                    <textarea type="text" ref="alamat" class="form-control" id="inputAdress" placeholder="Alamat" onKeyPress={this.onKeyPress.bind(this)}/><br/>
+                                                    <textarea type="text" ref="alamat" class="form-control" id="inputAdress" placeholder="Alamat" onKeyPress={this.onKeyPress.bind(this)} style={{resize:"none"}} rows= '4' cols= '80'/><br/>
                                                 </Col>
                                             </Row>
                                             <Row>
@@ -135,12 +146,18 @@ class RegisterPage extends Component {
                                                 <p className="text-right">Kota atau Kecamatan:</p>  
                                                 </Col>
                                                 <Col xs={5}>
-                                                <Select
-                                                    value={selectedOption}
-                                                    onChange={this.handleChange}
-                                                    options={this.state.destination}
-                                                    onInputChange={this.handleInputChange}
-                                                />
+                                                <Row>
+                                                    <Select
+                                                        value={selectedOption}
+                                                        onChange={this.handleChange}
+                                                        options={this.state.destination}
+                                                        onInputChange={this.handleInputChange.bind(this)}
+                                                        placeholder={`Pilih Kota/Kecamatan`}
+                                                    />
+                                                </Row>
+                                                <Row>
+                                                    <p>*please input 3 or more characters</p>
+                                                </Row> 
                                                 </Col>
                                                 <Col xs={2}>
                                                 <p className="text-right">Kode Pos:</p>
