@@ -523,6 +523,15 @@ app.get('/shipping', function(req,res){
       }).end();
 })
 
+app.post('/copydata', function(req,res){
+    sql = `INSERT INTO destination (destination_code, subdistrict, city, province) VALUES ? `
+    
+    conn.query(sql, [req.body], (err,results)=>{
+        console.log(results.length)
+        res.send({status: "SUCCES???"})
+    })
+})
+
 app.post('/upload', function(req,res){
     if(req.files){
         console.log(req.files)
