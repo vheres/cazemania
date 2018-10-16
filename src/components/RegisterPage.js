@@ -15,16 +15,7 @@ class RegisterPage extends Component {
     state = { selectedOption: null, destination: [] }
 
     componentWillMount() {
-        axios.get(API_URL_1 + '/destination')
-        .then(response => {
-            // var arrJSX = [];
-            // response.data.sicepat.results.map((item, count) => {
-            //     arrJSX.push({value: item.destination_code, label: `${item.province}, ${item.city}, ${item.subdistrict}`})
-            // })
-            // console.log(arrJSX)
-            // this.setState({destination: arrJSX})
-            this.setState({destination: response.data.sicepat.results})
-        })
+        
     }
 
     handleChange = (selectedOption) => {
@@ -32,11 +23,13 @@ class RegisterPage extends Component {
         console.log(`Option selected:`, selectedOption);
       }
 
-    postToBackEnd() {
-        axios.post(API_URL_1 + '/copydata', this.state.destination)
-        .then(response => {
-            console.log('success')
-        })
+    handleInputChange(selectedOption) {
+        if (selectedOption.length >= 3) {
+            axios.get(API_URL_1 + '/destination')
+            .then(response => {
+                console.log(response);
+            })
+        }
     }
 
     componentWillReceiveProps(newProps) {
@@ -146,7 +139,7 @@ class RegisterPage extends Component {
                                                     value={selectedOption}
                                                     onChange={this.handleChange}
                                                     options={this.state.destination}
-                                                    onKeyPress={()=>console.log('test')}
+                                                    onInputChange={this.handleInputChange}
                                                 />
                                                 </Col>
                                                 <Col xs={2}>
@@ -158,7 +151,6 @@ class RegisterPage extends Component {
                                             </Row>
                                             <Row className="margin-top-15">
                                                 <input type="button" class="btn btn-primary login-button" value="Register" onClick={this.onRegisterClick}/>
-                                                <input type="button" class="btn btn-primary login-button" value="INPUTTTTT" onClick={()=>this.postToBackEnd()}/>
                                             </Row>                              
                                         </form>
                                     </Col>

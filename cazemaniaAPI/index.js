@@ -524,9 +524,11 @@ app.get('/shipping', function(req,res){
 })
 
 app.post('/copydata', function(req,res){
+    console.log(req.body)
     sql = `INSERT INTO destination (destination_code, subdistrict, city, province) VALUES ? `
     
     conn.query(sql, [req.body], (err,results)=>{
+        if (err) throw err;
         console.log(results.length)
         res.send({status: "SUCCES???"})
     })
