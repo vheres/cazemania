@@ -3,11 +3,9 @@ import { API_URL_1 } from '../supports/api-url/apiurl';
 
 export const onLogin = (user) => {
     return(dispatch) => {
-            axios.get(API_URL_1 +'/users', {
-                params: {
+            axios.post(API_URL_1 +'/login', {
                     email: user.email,
                     password: user.password
-                }
             }).then(user => {
                 console.log(user);
                 dispatch ({
