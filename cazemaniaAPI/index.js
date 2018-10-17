@@ -500,7 +500,7 @@ app.get('/province', function(req,res){
 //LOCAL API
 app.get('/destination', function(req,res){
 
-    sql = `SELECT * FROM destination WHERE city LIKE '%${req.query.destination}%' OR subdistrict LIKE '%${req.query.destination}%'`
+    sql = `SELECT * FROM destination`
     
     conn.query(sql, (err,results)=>{
         if(err) throw err

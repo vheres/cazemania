@@ -33,45 +33,41 @@ class LoginPage extends Component {
         if(this.props.auth.email == "") {
             return(
                 <div>
-                    <Grid fluid>
-                        <Row className="show-grid">
-                            <Col xs={2}>
-                            </Col>
-                            <Col xs={8}>
-                                <PageHeader>
-                                LOGIN
-                                </PageHeader>
-                            </Col>
-                        </Row>
-                        </Grid>
-                        <Grid>
+                    <Grid fluid className="margin-15p margin-bot-15">
                         <Row>
-                            <Col xs={12}>
+                            <img src="https://www.dtn.com.vn/skin/frontend/dtn_website/default/images/banner-package1.jpg" alt="banner" style={{width:"100%"}}/>
+                        </Row>
+                        <Row className="margin-top-15">
+                            <Col mdOffset={2} md={9}>
                             <form id="Login" className="login-form">
                                 <Row>
-                                    <Col xs={2}>
+                                    <Col xs={3} className="text-right register-form-text">
                                     Email: 
                                     </Col>
-                                    <Col xs={10}>
+                                    <Col xs={6}>
                                         <input type="email" ref="email" class="form-control" id="inputEmail" placeholder="Email Address" onKeyPress={this.onKeyPress.bind(this)}/><br/>
                                     </Col>
                                 </Row>
                                 <Row>
-                                    <Col xs={2}>
+                                    <Col xs={3} className="text-right register-form-text">
                                     Password: 
                                     </Col>
-                                    <Col xs={10}>
+                                    <Col xs={6}>
                                         <input type="password" ref="password" class="form-control" id="inputPassword" placeholder="Password" onKeyPress={this.onKeyPress.bind(this)}/><br/>
                                     </Col>
                                 </Row>
                                 <Row>
-                                    <a href="reset.html" className="pull-right login-forgot">Forgot password?</a>
-                                </Row>
-                                <Row>
-                                    <input type="button" class="btn btn-primary login-button" value="Login" onClick={this.onLoginClick}/>
-                                </Row> 
-                                <Row>
-                                    <h2 className="badge badge-danger pull-right login-error">{this.props.auth.error}</h2>
+                                    <Col xs={9}>
+                                        <Row>
+                                            <a href="reset.html" className="pull-right login-forgot">Forgot password?</a>
+                                        </Row>
+                                        <Row>
+                                            <input type="button" class="btn btn-primary login-button" value="Login" onClick={this.onLoginClick}/>
+                                        </Row>
+                                        <Row>
+                                            <h2 className="badge badge-danger pull-right login-error">{this.props.auth.error}</h2>
+                                        </Row>
+                                    </Col>
                                 </Row>                              
                                 </form>
                             </Col>
