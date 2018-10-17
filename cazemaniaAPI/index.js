@@ -366,7 +366,7 @@ app.get('/profile', function(req,res){
     })
 })
 
-app.get('/users', function(req,res){
+app.post('/login', function(req,res){
     const cipher = crypto.createHmac("sha256", secret)
     .update(req.query.password)
     .digest("hex");
@@ -418,7 +418,13 @@ app.post('/users', function(req,res){
         password : cipher,
         firstname: req.body.firstname,
         lastname: req.body.lastname,
-        address: req.body.address
+        gender: req.body.gender,
+        phone : req.body.phone,
+        address: req.body.address,
+        kota: req.body.kota,
+        kodepos: req.body.kotapos,
+        destination_code : req.body.destination_code,
+        category: "customer"
     }
 
     sql = `SELECT * FROM users WHERE email = '${data.email}'`
