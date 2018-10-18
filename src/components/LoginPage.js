@@ -4,6 +4,7 @@ import { onLogin } from '../actions';
 import { Redirect } from 'react-router-dom';
 import { connect } from 'react-redux';
 import Cookies from 'universal-cookie';
+import Select from 'react-select';
 
 const cookies = new Cookies();
 

@@ -64,6 +64,7 @@ class RegisterPage extends Component {
     }
 
     onRegisterClick = () => {
+        // console.log(this.refs.phone.value)
         var gender = '';
         if (document.getElementById('male').checked == true) {
             gender = document.getElementById('male').value

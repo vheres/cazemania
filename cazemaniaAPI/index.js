@@ -373,13 +373,13 @@ app.get('/profile', function(req,res){
 
 app.post('/login', function(req,res){
     const cipher = crypto.createHmac("sha256", secret)
-    .update(req.query.password)
+    .update(req.body.password)
     .digest("hex");
     // console.log(req.query.email)
     // console.log(req.query.password)
     // console.log(cipher)
 
-    sql = `SELECT id, firstname, email FROM users WHERE email = "${req.query.email}" AND password = "${cipher}"`
+    sql = `SELECT id, firstname, email FROM users WHERE email = "${req.body.email}" AND password = "${cipher}"`
     conn.query(sql, (err,results)=>{
         if(err) throw err;
         // console.log(results)
