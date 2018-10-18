@@ -80,7 +80,7 @@ class ProfilePage extends Component {
         if(this.refs.phone.value == '' || this.refs.alamat.value == '' || this.state.selectedOption.label == '' || this.refs.kodepos.value == '') {
             alert('Please fill everything!');
         } else {
-            axios.put(API_URL_1 + '/users/' + this.props.profile.id, {
+            axios.put(API_URL_1 + '/users/' + this.props.auth.id, {
                 gender: gender,
                 phone: this.refs.phone.value,
                 address: this.refs.alamat.value,
@@ -96,7 +96,7 @@ class ProfilePage extends Component {
     }
 
     renderGenderOption() {
-        if (this.state.profile.gender == 'Male') {
+        if (this.state.profile.gender == 'male') {
             return (
                 <Col xs={8}>
                     <input type="radio" id="male" name="gender" value="male" checked></input> Male{' '}
@@ -133,11 +133,8 @@ class ProfilePage extends Component {
                                             <Col xs={2}>
                                             <p className="text-right register-form-text">Nama:</p> 
                                             </Col>
-                                            <Col xs={4}>
-                                                <input type="text" ref="firstName" class="form-control" id="inputFirstName" placeholder="First Name" defaultValue={this.state.profile.firstname} onKeyPress={this.onKeyPress.bind(this)}/><br/>
-                                            </Col>
-                                            <Col xs={4}>
-                                                <input type="text" ref="lastName" class="form-control" id="inputLastName" placeholder="Last Name" defaultValue={this.state.profile.lastname} onKeyPress={this.onKeyPress.bind(this)}/><br/>
+                                            <Col xs={8}>
+                                                <p>{this.state.profile.firstname} {this.state.profile.lastname}</p><br/>
                                             </Col>
                                         </Row>
                                         <Row className="register-form">
@@ -151,7 +148,7 @@ class ProfilePage extends Component {
                                             <p className="text-right register-form-text">Email:</p> 
                                             </Col>
                                             <Col xs={8}>
-                                                <input type="email" ref="email" class="form-control" id="inputEmail" placeholder="Email" defaultValue={this.state.profile.email} onKeyPress={this.onKeyPress.bind(this)}/><br/>
+                                            <p>{this.state.profile.email}</p><br/>
                                             </Col>
                                         </Row>
                                         <Row>

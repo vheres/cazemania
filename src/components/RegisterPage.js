@@ -83,7 +83,6 @@ class RegisterPage extends Component {
                 lastname: this.refs.lastName.value,
                 gender: gender,
                 email: this.refs.email.value,
-                password: this.refs.password1.value,
                 phone: this.refs.phone.value,
                 address: this.refs.alamat.value,
                 destination_code: this.state.selectedOption.value,
