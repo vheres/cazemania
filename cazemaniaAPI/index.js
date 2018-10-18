@@ -319,22 +319,27 @@ app.post('/transaction', function(req,res){
         total_price : req.body.total_price,
         account_holder : req.body.account_holder,
         source_bank : req.body.source_bank,
-        target_bank : req.body.target_bank
+        target_bank : req.body.target_bank,
+        cart : req.body.cart
     }
 
     sql = `INSERT INTO transactions SET ?`
-    sql1 = `SELECT id FROM transactions WHERE user_id = ${data.user_id}`
-    sql2 = `INSERT INTO transaction_details (transaction_id, catalogue_id, case_type, price) VALUES`
+    sql1 = `INSERT INTO transaction_details (transaction_id, catalogue_id, case_brand, case_model, case_type, price, amount) VALUES ?`
     
-
-    conn.query(sql, (err,results)=>{
-        conn.query(sql1, (err,results1)=>{
-
-            for(var index in array){
-                sql1 += `(${results1[0]}, ${array[index].catalogue.id}, )` 
+    conn.beginTransaction(function(err){
+        if(err) {throw err;}
+        conn.query(sql, (err,results)=>{
+            if(err){
+                conn.rollback(function(){
+                    throw err
+                })
+            }
+            var arrDetails = new Array()
+            for(var index in cart){
+                arrDetails.push([results.insertId, cart[index].id, cart[index].brand_id, cart[index].model_id, cart[index].case_type, cart[index].price, cart[index].amount])
             }
 
-            conn.query(sql2, (err,results1)=>{
+            conn.query(sql2, [arrDetails], (err,results1)=>{
                 res.send({results1})
             })
         })
@@ -386,6 +391,7 @@ app.get('/keeplogin', function(req,res){
     sql = `SELECT id, firstname, email FROM users WHERE email = "${req.query.email}"`
     console.log(sql)
     conn.query(sql, (err,results)=>{
+        if(err) throw err;
         console.log('keeplogin')
         console.log(results)
         res.send(results)
@@ -445,6 +451,25 @@ app.post('/users', function(req,res){
         else{
             res.send({error:1})
         }
+    })
+})
+
+app.put('/users/:id', function(req,res){
+    var data = {
+        gender: req.body.gender,
+        phone : req.body.phone,
+        address: req.body.address,
+        kota: req.body.kota,
+        kodepos: req.body.kotapos,
+        destination_code : req.body.destination_code,
+    }
+
+    sql = `UPDATE users SET ? WHERE id = ${req.params.id}`
+    
+    conn.query(sql, data, (err,results)=>{
+        if(err) throw err
+        console.log(results.length)
+        res.send(results)
     })
 })
 
