@@ -428,7 +428,7 @@ app.post('/users', function(req,res){
         phone : req.body.phone,
         address: req.body.address,
         kota: req.body.kota,
-        kodepos: req.body.kotapos,
+        kodepos: req.body.kodepos,
         destination_code : req.body.destination_code,
         category: "customer"
     }
@@ -460,7 +460,7 @@ app.put('/users/:id', function(req,res){
         phone : req.body.phone,
         address: req.body.address,
         kota: req.body.kota,
-        kodepos: req.body.kotapos,
+        kodepos: req.body.kodepos,
         destination_code : req.body.destination_code,
     }
 
