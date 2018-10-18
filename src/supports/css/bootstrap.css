@@ -7108,6 +7108,13 @@ button.close {
 .carousel-text-button {
   line-height: 0px;
 }
+.register-form-text {
+  position: relative;
+  top: 6px;
+}
+.small-font {
+  font-size: 12px;
+}
 
 
 
