@@ -156,11 +156,10 @@ class AdminRenderOrders extends Component {
                                     <strong>TO:</strong>
                                     <h4>{this.props.firstname} {this.props.lastname}</h4>
                                     <p>
-                                    {this.props.address1}<br/>
-                                    {this.props.address2}<br/>
-                                    {this.props.city}, {this.props.province}<br/>
+                                    {this.props.address}<br/>
+                                    {this.props.kota} {this.props.kodepos}<br/>
                                     Phone: {this.props.phone}<br/>
-                                    Email: youemail@gmail.com<br/>
+                                    Email: {this.props.email}<br/>
                                     </p>
                                 </div>
                                 <div class="col-xs-6">

@@ -7,6 +7,7 @@ const crypto = require('crypto')
 var http = require("https");
 var qs = require("querystring")
 var upload = require('express-fileupload')
+var moment = require('moment')
 
 var app = express();
 const port = 1994;
@@ -137,8 +138,8 @@ app.get('/admin/:table', function(req,res){
 })
 
 app.get('/adminorders', function(req,res){
-    sql= `SELECT tr.id as id, LPAD( tr.id, 8, '0') as ordernumber, tr.date as date, tr.time as time, tr.proof as proof, tr.target_bank as target_bank, tr.status as status, tr.total_price as total_price, tr.resi as resi, u.firstname as firstname, 
-    u.lastname as lastname, u.id as user_id, u.address1 as address1, u.address2 as address2, u.email as email, u.phone as phone, u.province as province, u.city as city, u.kabupaten as kabupaten FROM transactions tr JOIN users u ON tr.user_id = u.id ORDER BY date`
+    sql= `SELECT tr.id as id, LPAD( tr.id, 8, '0') as ordernumber, tr.date as date, tr.time as time, tr.proof as proof, tr.target_bank as target_bank, tr.status as status, tr.subtotal as subtotal, tr.shipping as shipping, tr.resi as resi, u.firstname as firstname, 
+    u.lastname as lastname, u.id as user_id, u.address as address, u.email as email, u.phone as phone, u.kota as kota, u.kodepos as kodepos FROM transactions tr JOIN users u ON tr.user_id = u.id ORDER BY date`
     conn.query(sql, (err,results)=>{
         if(err) throw err;
         console.log(results)
@@ -312,15 +313,16 @@ app.delete('/clear_cart/:user_id', function(req,res){
 
 
 app.post('/transaction', function(req,res){
+    dateNow = moment().format("YYYY-MM-DD")
+    timeNow = moment().format("HH:mm")
     data = {
         user_id : req.body.id,
-        date : req.body.date,
-        time : req.body.time,
-        total_price : req.body.total_price,
-        account_holder : req.body.account_holder,
-        source_bank : req.body.source_bank,
+        date : dateNow,
+        time : timeNow,
+        subtotal : req.body.subtotal,
+        shipping : req.body.shipping,
         target_bank : req.body.target_bank,
-        cart : req.body.cart
+        status: "pendingPayment"
     }
 
     sql = `INSERT INTO transactions SET ?`
@@ -328,19 +330,37 @@ app.post('/transaction', function(req,res){
     
     conn.beginTransaction(function(err){
         if(err) {throw err;}
-        conn.query(sql, (err,results)=>{
+        conn.query(sql, data, (err,results)=>{
             if(err){
                 conn.rollback(function(){
+                    console.log("Rollback Succesful1")
                     throw err
                 })
             }
+            console.log(results)
             var arrDetails = new Array()
-            for(var index in cart){
-                arrDetails.push([results.insertId, cart[index].id, cart[index].brand_id, cart[index].model_id, cart[index].case_type, cart[index].price, cart[index].amount])
+            for(var index in req.body.cart){
+                arrDetails.push([results.insertId, req.body.cart[index].id, req.body.cart[index].brand_id, req.body.cart[index].model_id, req.body.cart[index].case_type, req.body.cart[index].price, req.body.cart[index].amount])
             }
 
-            conn.query(sql2, [arrDetails], (err,results1)=>{
-                res.send({results1})
+            conn.query(sql1, [arrDetails], (err,results1)=>{
+                if(err){
+                    conn.rollback(function() {
+                        console.log("Rollback Succesful2")
+                        throw err;
+                    })
+                }
+                conn.commit(function(err){
+                    if (err){
+                        conn.rollback(function(){
+                            console.log("Rollback Succesful3")
+                            throw err;
+                        })
+                    }
+                    res.send({results1})
+                    console.log("Transaction Complete")
+                    conn.end()
+                })
             })
         })
     })
@@ -412,6 +432,18 @@ app.get('/checkout/:id', function(req,res){
     })
 })
 
+app.get('/payment/:transaction_id', function(req,res){
+    sql  = `SELECT * FROM transactions where id = ${req.params.transaction_id}`
+
+    conn.query(sql, (err,results)=>{
+        conn.query(sql1, (err,results1)=>{
+            if(err) throw err;
+            // console.log({cart: results, user:results1})
+            res.send({cart: results, user:results1})
+        })
+    })
+})
+
 app.post('/users', function(req,res){
 
     console.log(req.body)
@@ -469,6 +501,16 @@ app.put('/users/:id', function(req,res){
     conn.query(sql, data, (err,results)=>{
         if(err) throw err
         console.log(results.length)
+        res.send(results)
+    })
+})
+
+
+app.get('/users/transactions/:id', function(req,res){
+    sql= `SELECT * FROM transactions WHERE user_id = ${req.params.id} ORDER BY date`
+    conn.query(sql, (err,results)=>{
+        if(err) throw err;
+        console.log(results)
         res.send(results)
     })
 })
