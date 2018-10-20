@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { Grid, Row, Col, PanelGroup, Panel  } from 'react-bootstrap';
+import { Grid, Row, Col, PanelGroup, Panel, Button, ButtonGroup } from 'react-bootstrap';
 
 class InformationPage extends Component {
     constructor(props, context) {
@@ -38,8 +38,16 @@ class InformationPage extends Component {
                     </Col>
                 </Row>
                 <Row className="margin-top-15">
-                    <Col md={2}></Col>
-                    <Col md={8}>
+                    <Col mdOffset={1} md={2} className="information-quick-link">
+                        <ButtonGroup vertical>
+                            <Button onClick={()=>this.handleSelect(1)}>FAQ</Button>
+                            <Button onClick={()=>this.handleSelect(2)}>Cara Order</Button>
+                            <Button onClick={()=>this.handleSelect(3)}>Pembayaran</Button>
+                            <Button onClick={()=>this.handleSelect(4)}>Informasi Pengiriman</Button>
+                            <Button onClick={()=>this.handleSelect(5)}>Penukaran dan Pengembalian</Button>
+                        </ButtonGroup>
+                    </Col>
+                    <Col md={7}>
                         <PanelGroup accordion id="information"
                         activeKey={this.state.activeKey}
                         onSelect={this.handleSelect}

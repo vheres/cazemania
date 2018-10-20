@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { Grid, Row, Col, Button, Modal } from 'react-bootstrap';
+import { Grid, Row, Col, Button, Modal, Table } from 'react-bootstrap';
 import CartDetail from './CartDetail';
 import {API_URL_1} from '../supports/api-url/apiurl'
 import axios from 'axios'
@@ -9,10 +9,11 @@ import Select from 'react-select';
 
 
 class ProfilePage extends Component {
-    state = {profile: [], edit_modal: false, selectedOption: [], destination: [], filtered_destination: []}
+    state = {profile: [], edit_modal: false, selectedOption: [], destination: [], filtered_destination: [], orders: [], transactions: []}
 
     componentWillMount(){
         this.getUserInfo()
+        this.getTransaction()
     }
 
     getUserInfo = () => {
@@ -23,6 +24,24 @@ class ProfilePage extends Component {
         })
         .then((response) => {
             this.setState({profile: response.data.profile[0]})
+        })
+    }
+
+    getTransaction = () => {
+        axios.get(API_URL_1 + "/users/transactions/" + this.props.auth.id)
+        .then((response) => {
+            var orders= []
+            var transactions= []
+            console.log(response);
+            response.data.map((item, count) => {
+                if (item.status == 'pendingPayment') {
+                    orders.push(item)
+                }
+                else {
+                    transactions.push(item)
+                }
+            })
+            this.setState({orders: orders, transactions: transactions})
         })
     }
 
@@ -113,143 +132,165 @@ class ProfilePage extends Component {
         }
     }
 
+    renderUserInfo() {
+        return (
+            <Col mdOffset={2} md={3}>
+                <Row>
+                    <Col md={12}>
+                        <span style={{"font-size": "28px"}}>My Profile</span><span className="profile-edit-button"><i class="fa fa-edit" title="Edit Profile" onClick={this.handleShow.bind(this)}></i></span>
+                    </Col>
+                </Row>
+                <Row>
+                <div className="my-profile-pointer"></div>
+                </Row>
+                <Row>
+                    <Col md={12}>
+                        <span style={{"font-size": "22px"}}>{this.state.profile.firstname} {this.state.profile.lastname}</span><span class="label bg-info profile-category-label">{this.state.profile.category}</span>
+                    </Col>
+                </Row>
+                <Row>
+                    <Col md={1}  style={{width:"20px"}}>
+                        <i className="fa fa-envelope"></i>
+                    </Col>
+                    <Col md={11}>
+                        {this.state.profile.email}
+                    </Col> 
+                </Row>
+                <Row>
+                    <Col md={1} style={{width:"20px"}}>
+                        <i className="fa fa-phone"></i>
+                    </Col>
+                    <Col md={11}>
+                        {this.state.profile.phone}
+                    </Col>
+                </Row>
+                <Row>
+                    <Col md={1} style={{width:"20px"}}>
+                        <i className="fa fa-user"></i>
+                    </Col>
+                    <Col md={11}>
+                        {this.state.profile.gender}
+                    </Col>
+                </Row>
+                <Row>
+                    <Col md={1} style={{width:"20px"}}>
+                        <i className="fa fa-home"></i>
+                    </Col>
+                    <Col md={11}>
+                        {this.state.profile.address}<br/>
+                        {this.state.profile.kota}<br/>
+                        {this.state.profile.kodepos}
+                    </Col>
+                </Row>
+            </Col>
+        )
+    }
+    
+    renderOrderList() {
+        return (
+            <Col md={5}>
+                <Table fluid>
+                    {this.renderOrderDetail()}
+                </Table>
+            </Col>
+        )
+    }
+
+    renderOrderDetail() {
+        return (
+            this.state.orders.map((item, count) => {
+                
+            })
+        )
+    }
+
     renderProfilePage() {
             return (
                 <Grid fluid>
-                    <Col mdOffset={2} md={8}>
-                        <Row>
-                            <Col md={2}>
-                                <h3>My Profile</h3>
-                            </Col>
-                            <Col md={2}>
-                                <i class="fa fa-edit" onClick={this.handleShow.bind(this)}></i>
-                                <Modal show={this.state.edit_modal} onHide={this.handleClose.bind(this)} bsSize="large">
-                                <Modal.Header closeButton>
-                                    <Modal.Title>Edit Profile</Modal.Title>
-                                </Modal.Header>
-                                <Modal.Body>
-                                    <form id="Register">
-                                        <Row>
-                                            <Col xs={2}>
-                                            <p className="text-right register-form-text">Nama:</p> 
-                                            </Col>
-                                            <Col xs={8}>
-                                                <p>{this.state.profile.firstname} {this.state.profile.lastname}</p><br/>
-                                            </Col>
-                                        </Row>
-                                        <Row className="register-form">
-                                            <Col xs={2}>
-                                            <p className="text-right">Gender:</p>  
-                                            </Col>
-                                            {this.renderGenderOption()}
-                                        </Row>
-                                        <Row>
-                                            <Col xs={2}>
-                                            <p className="text-right register-form-text">Email:</p> 
-                                            </Col>
-                                            <Col xs={8}>
-                                            <p>{this.state.profile.email}</p><br/>
-                                            </Col>
-                                        </Row>
-                                        <Row>
-                                            <Col xs={2}>
-                                            <p className="text-right register-form-text">Phone:</p> 
-                                            </Col>
-                                            <Col xs={8}>
-                                                <input type="text" ref="phone" class="form-control" id="inputPhone" placeholder="Phone" defaultValue={this.state.profile.phone} onKeyPress={this.onKeyPress.bind(this)}/><br/>
-                                            </Col>
-                                        </Row>
-                                        <Row>
-                                            <Col xs={2}>
-                                            <p className="text-right register-form-text">Alamat:</p>  
-                                            </Col>
-                                            <Col xs={8}>
-                                                <textarea type="text" ref="alamat" class="form-control" id="inputAdress" placeholder="Alamat" defaultValue={this.state.profile.address} onKeyPress={this.onKeyPress.bind(this)} style={{resize:"none"}} rows= '4' cols= '80'/><br/>
-                                            </Col>
-                                        </Row>
-                                        <Row>
-                                            <Col xs={2}>
-                                            <p className="text-right register-form-text">Kota atau Kecamatan:</p>  
-                                            </Col>
-                                            <Col xs={3}>
-                                        <Row>
-                                            <Col xs={12}>
-                                                <Select
-                                                    value={this.state.selectedOption}
-                                                    onChange={this.handleChange}
-                                                    options={this.state.filtered_destination}
-                                                    onInputChange={this.handleInputChange.bind(this)}
-                                                    placeholder={`Pilih Kota/Kecamatan`}
-                                                    defaultValue={{value: this.state.profile.destination_code, label: this.state.profile.kota}}
-                                                    defaultInputValue={this.state.profile.kota}
-                                                />
-                                            </Col>
-                                        </Row>
-                                        <Row>
-                                            <Col xs={12}>
-                                                <p className="small-font">*please input 3 or more characters</p>
-                                            </Col>
-                                        </Row> 
-                                        </Col>
-                                        <Col xs={2}>
-                                        <p className="text-right register-form-text">Kode Pos:</p>
-                                        </Col>
-                                        <Col xs={3}>
-                                        <input ref="kodepos" type="text" className="form-control" placeholder="Kode Pos" defaultValue={this.state.profile.kodepos}></input>
-                                        </Col>        
-                                        </Row>                     
-                                    </form>
-                                </Modal.Body>
-                                <Modal.Footer>
-                                    <input type="button" className="btn btn-danger" onClick={this.handleClose.bind(this)} value="Cancel"/>
-                                    <input type="button" className="btn btn-success" onClick={()=>this.onEditSave()} value="Save"/>
-                                </Modal.Footer>
-                                </Modal>
-                            </Col>
-                        </Row>
-                        <Row>
-                            <Col md={3}>
-                                <h3>{this.state.profile.firstname} {this.state.profile.lastname}</h3>
-                            </Col>
-                            <Col md={1}>
-                                <span class="label bg-info">{this.state.profile.category}</span>
-                            </Col>   
-                        </Row>
-                        <Row>
-                            <Col md={1}  style={{width:"20px"}}>
-                                <i className="fa fa-envelope"></i>
-                            </Col>
-                            <Col md={2}>
-                                {this.state.profile.email}
-                            </Col> 
-                        </Row>
-                        <Row>
-                            <Col md={1} style={{width:"20px"}}>
-                                <i className="fa fa-phone"></i>
-                            </Col>
-                            <Col md={2}>
-                                {this.state.profile.phone}
-                            </Col>
-                        </Row>
-                        <Row>
-                            <Col md={1} style={{width:"20px"}}>
-                                <i className="fa fa-user"></i>
-                            </Col>
-                            <Col md={2}>
-                                {this.state.profile.gender}
-                            </Col>
-                        </Row>
-                        <Row>
-                            <Col md={1} style={{width:"20px"}}>
-                                <i className="fa fa-home"></i>
-                            </Col>
-                            <Col md={8}>
-                                {this.state.profile.address}<br/>
-                                {this.state.profile.kota}<br/>
-                                {this.state.profile.kodepos}
-                            </Col>
-                        </Row>
-                    </Col>
+                {this.renderUserInfo()}
+                {this.renderOrderList()}
+                    <Modal show={this.state.edit_modal} onHide={this.handleClose.bind(this)} bsSize="large">
+                        <Modal.Header closeButton>
+                            <Modal.Title>Edit Profile</Modal.Title>
+                        </Modal.Header>
+                        <Modal.Body>
+                            <form id="Register">
+                                <Row>
+                                    <Col xs={2}>
+                                    <p className="text-right register-form-text">Nama:</p> 
+                                    </Col>
+                                    <Col xs={8}>
+                                        <p>{this.state.profile.firstname} {this.state.profile.lastname}</p><br/>
+                                    </Col>
+                                </Row>
+                                <Row className="register-form">
+                                    <Col xs={2}>
+                                    <p className="text-right">Gender:</p>  
+                                    </Col>
+                                    {this.renderGenderOption()}
+                                </Row>
+                                <Row>
+                                    <Col xs={2}>
+                                    <p className="text-right register-form-text">Email:</p> 
+                                    </Col>
+                                    <Col xs={8}>
+                                    <p>{this.state.profile.email}</p><br/>
+                                    </Col>
+                                </Row>
+                                <Row>
+                                    <Col xs={2}>
+                                    <p className="text-right register-form-text">Phone:</p> 
+                                    </Col>
+                                    <Col xs={8}>
+                                        <input type="text" ref="phone" class="form-control" id="inputPhone" placeholder="Phone" defaultValue={this.state.profile.phone} onKeyPress={this.onKeyPress.bind(this)}/><br/>
+                                    </Col>
+                                </Row>
+                                <Row>
+                                    <Col xs={2}>
+                                    <p className="text-right register-form-text">Alamat:</p>  
+                                    </Col>
+                                    <Col xs={8}>
+                                        <textarea type="text" ref="alamat" class="form-control" id="inputAdress" placeholder="Alamat" defaultValue={this.state.profile.address} onKeyPress={this.onKeyPress.bind(this)} style={{resize:"none"}} rows= '4' cols= '80'/><br/>
+                                    </Col>
+                                </Row>
+                                <Row>
+                                    <Col xs={2}>
+                                    <p className="text-right register-form-text">Kota atau Kecamatan:</p>  
+                                    </Col>
+                                    <Col xs={3}>
+                                <Row>
+                                    <Col xs={12}>
+                                        <Select
+                                            value={this.state.selectedOption}
+                                            onChange={this.handleChange}
+                                            options={this.state.filtered_destination}
+                                            onInputChange={this.handleInputChange.bind(this)}
+                                            placeholder={`Pilih Kota/Kecamatan`}
+                                            defaultValue={{value: this.state.profile.destination_code, label: this.state.profile.kota}}
+                                            defaultInputValue={this.state.profile.kota}
+                                        />
+                                    </Col>
+                                </Row>
+                                <Row>
+                                    <Col xs={12}>
+                                        <p className="small-font">*please input 3 or more characters</p>
+                                    </Col>
+                                </Row> 
+                                </Col>
+                                <Col xs={2}>
+                                <p className="text-right register-form-text">Kode Pos:</p>
+                                </Col>
+                                <Col xs={3}>
+                                <input ref="kodepos" type="text" className="form-control" placeholder="Kode Pos" defaultValue={this.state.profile.kodepos}></input>
+                                </Col>        
+                                </Row>                     
+                            </form>
+                        </Modal.Body>
+                        <Modal.Footer>
+                            <input type="button" className="btn btn-danger" onClick={this.handleClose.bind(this)} value="Cancel"/>
+                            <input type="button" className="btn btn-success" onClick={()=>this.onEditSave()} value="Save"/>
+                        </Modal.Footer>
+                    </Modal>
                 </Grid>
             )
     }

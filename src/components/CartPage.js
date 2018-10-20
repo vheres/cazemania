@@ -10,22 +10,6 @@ class CartPage extends Component {
     state = ({cart: []})
 
     componentWillMount(){
-        let data = { origin: 'GKR',
-        destination: 'TGR',
-        weight: 1.7 }
-
-        let axiosConfig = {
-            headers: {
-                "key": "54d16bfab958effecbfc849133dc706e",
-                "content-type": "application/x-www-form-urlencoded",
-                "Access-Control-Allow-Origin": "*"
-            }
-          }
-
-        axios.post("http://api.sicepat.com/customer/tariff", data, axiosConfig)
-        .then((res)=>{
-            console.log(res.data)
-        })
         this.getCartList();
     }
 
@@ -132,7 +116,6 @@ class CartPage extends Component {
         }
 
     render() {
-        console.log(this.props.auth.email)
         if(this.props.auth.email != "") {
             return (
             this.renderCartPage()
