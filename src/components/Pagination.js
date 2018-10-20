@@ -24,12 +24,12 @@ class PaginationClass extends Component {
             }
         }
         if(this.props.active > 0) {
-            arrJSX.unshift(<Pagination.Prev onClick={() => this.props.PageClick(arrLim[this.props.active-1], this.props.active-1)}></Pagination.Prev>)
-            arrJSX.unshift(<Pagination.First onClick={() => this.props.PageClick(arrLim[0], 0)}></Pagination.First>)
+            arrJSX.unshift(<Pagination.Prev title="previous page" onClick={() => this.props.PageClick(arrLim[this.props.active-1], this.props.active-1)}></Pagination.Prev>)
+            arrJSX.unshift(<Pagination.First title="first page" onClick={() => this.props.PageClick(arrLim[0], 0)}></Pagination.First>)
         }
         if (this.props.active < this.props.count-1) {
-            arrJSX.push(<Pagination.Next onClick={() => this.props.PageClick(arrLim[this.props.active+1], this.props.active+1)}></Pagination.Next>)
-            arrJSX.push(<Pagination.Last onClick={() => this.props.PageClick(arrLim[arrLim.length-1], arrLim.length-1)}></Pagination.Last>)
+            arrJSX.push(<Pagination.Next title="next page" onClick={() => this.props.PageClick(arrLim[this.props.active+1], this.props.active+1)}></Pagination.Next>)
+            arrJSX.push(<Pagination.Last title="last page" onClick={() => this.props.PageClick(arrLim[arrLim.length-1], arrLim.length-1)}></Pagination.Last>)
         }
         
         return arrJSX;

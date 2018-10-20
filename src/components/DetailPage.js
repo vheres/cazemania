@@ -186,7 +186,7 @@ class DetailPage extends Component {
                 return (
                     <section>
                         <Row>
-                            <Col xsOffset={1} mdOffset={0} md={12}><h3>{this.state.item.name} | {this.state.item.code}</h3></Col>
+                            <Col xsOffset={1} mdOffset={0} md={12}><h3 className="detail-title-text">{this.state.item.name} | {this.state.item.code}</h3></Col>
                         </Row>
                         <Row>
                             <Col xsOffset={1} mdOffset={0} md={12}><h2 className="price-text">Rp 50000 - Rp 75000</h2></Col> 
@@ -198,7 +198,7 @@ class DetailPage extends Component {
                 return (
                     <section>
                         <Row>
-                            <Col xsOffset={1} mdOffset={0} md={12}><h3>{this.state.item.name} | {this.state.item.code}</h3></Col>
+                            <Col xsOffset={1} mdOffset={0} md={12}><h3 className="detail-title-text">{this.state.item.name} | {this.state.item.code}</h3></Col>
                         </Row>
                         <Row>
                             <Col xsOffset={1} mdOffset={0} md={12}><h2 className="price-text">Rp {this.state.selected_price}</h2></Col> 
@@ -212,11 +212,11 @@ class DetailPage extends Component {
     renderAddToCartButton() {
         console.log(this.state.selected_case)
         if(this.state.selected_case === undefined || this.state.selected_case === 0) {
-            return <input type="button" className="btn btn-success" value="Add to Cart" onClick={()=>this.onAddToCart()} style={{width:"100%"}} disabled></input>
+            return <input type="button" className="btn btn-orange" title="Please select Brand, Model and Type First" value="Add to Cart" onClick={()=>this.onAddToCart()} style={{width:"100%"}} disabled></input>
         }
         else {
             return (
-                <input type="button" className="btn btn-success" value="Add to Cart" onClick={()=>this.onAddToCart()} style={{width:"100%"}}></input>
+                <input type="button" className="btn btn-orange" value="Add to Cart" onClick={()=>this.onAddToCart()} style={{width:"100%"}}></input>
             )
             
         }
@@ -235,7 +235,7 @@ class DetailPage extends Component {
                             <Row>
                                 <Col xsOffset={1} mdOffset={0} md={4}>
                                     <Row>
-                                        <h4><strong>Brand</strong></h4>
+                                        <h4 className="detail-option-text">Brand</h4>
                                     </Row>
                                     <Row>
                                         {this.brandSelectOptions()}
@@ -243,7 +243,7 @@ class DetailPage extends Component {
                                 </Col>
                                 <Col xsOffset={1} mdOffset={0} md={4}>
                                     <Row>
-                                        <h4><strong>Model</strong></h4>
+                                        <h4 className="detail-option-text">Model</h4>
                                     </Row>
                                     <Row>
                                         {this.modelSelectOptions()}
@@ -251,7 +251,7 @@ class DetailPage extends Component {
                                 </Col>
                                 <Col xsOffset={1} mdOffset={0} md={4}>
                                     <Row>
-                                        <h4><strong>Type</strong></h4>
+                                        <h4 className="detail-option-text">Type</h4>
                                     </Row>
                                     <Row>
                                         {this.caseSelectOptions()[this.state.caseselect.hard][this.state.caseselect.soft]}
@@ -262,7 +262,7 @@ class DetailPage extends Component {
                                 <Row>
                                     <Col xsOffset={1} mdOffset={0} md={1}>
                                         <br/>
-                                        <h4><strong>Quantity</strong></h4>
+                                        <h4 className="detail-option-text">Quantity</h4>
                                     </Col>
                                 </Row>
                                 <Row>
@@ -270,11 +270,11 @@ class DetailPage extends Component {
                                         <FormGroup>
                                             <InputGroup>
                                             <InputGroup.Button>
-                                                <Button className="btn btn-danger" onClick={()=>this.PlusMinus("minus")}>-</Button>
+                                                <Button className="btn btn-tosca" onClick={()=>this.PlusMinus("minus")}>-</Button>
                                             </InputGroup.Button>
                                             <FormControl type="text" readOnly id="quantity" ref="quantity" className="form-control text-center" defaultValue="1" style={{background:"white"}}/>
                                             <InputGroup.Button>
-                                                <Button className="btn btn-danger" onClick={()=>this.PlusMinus("plus")}>+</Button>
+                                                <Button className="btn btn-tosca" onClick={()=>this.PlusMinus("plus")}>+</Button>
                                             </InputGroup.Button>
                                             </InputGroup>
                                         </FormGroup>

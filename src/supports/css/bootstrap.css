@@ -7008,8 +7008,18 @@ button.close {
 .login-error {
   margin-right: 20px;
 }
+.detail-title-text {
+  /* color: rgb(255, 181, 44); */
+  color: black;
+  font-weight: bold;
+  font-size: 32px;
+}
+.detail-option-text {
+  color: rgb(255, 181, 44);
+  font-weight: bold;
+}
 .price-text {
-  color: rgb(255, 102, 0);
+  color: rgb(30,190,203);
   font-weight: bold;
 }
 .no-margin {
@@ -7078,6 +7088,26 @@ button.close {
   border-bottom: 5px solid rgb(9, 175, 204);
   border-right: 20px solid rgb(9, 175, 204)
 }
+.my-profile-pointer {
+  width: 360px;
+  height: 10px;
+  position: relative;
+  left: 10px;
+  background: rgb(255, 191, 72);
+  margin-bottom: 15px;
+}
+.my-profile-pointer:after {
+  content: "";
+  position: absolute;
+  left: 0;
+  bottom: 0;
+  width: 0;
+  height: 0;
+  border-left: 20px solid rgb(9, 175, 204);
+  border-top: 5px solid rgb(9, 175, 204);
+  border-bottom: 5px solid rgb(9, 175, 204);
+  border-right: 20px solid rgb(9, 175, 204)
+}
 .block-margin-auto {
   display: block;
   margin-left: auto;
@@ -7114,6 +7144,24 @@ button.close {
 }
 .small-font {
   font-size: 12px;
+}
+.profile-edit-button {
+  position: relative;
+  left: 210px;
+  font-size: 20px;
+}
+.profile-edit-button:hover {
+  color: black;
+}
+.profile-category-label {
+  position: relative;
+  top: -4px;
+  left: 20px;
+}
+.information-quick-link {
+  position: -webkit-sticky;
+  position: sticky;
+  top: 15%;
 }
 
 

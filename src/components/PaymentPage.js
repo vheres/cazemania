@@ -6,7 +6,7 @@ import { connect } from 'react-redux';
 import CartDetail from './CartDetail';
 
 class PaymentPage extends Component {
-    state = ({ user_info: [], cart: [] })
+    state = ({ profile: [], cart: [] })
 
     componentWillMount() {
         this.getUserInfo()
@@ -16,14 +16,32 @@ class PaymentPage extends Component {
         axios.get(API_URL_1 + "/checkout/" + this.props.auth.id)
         .then((response) => {
             console.log(response)
-            this.setState({user_info: response.data.user[0], cart: response.data.cart})
+            this.setState({profile: response.data.user[0], cart: response.data.cart})
         })
     }
 
     renderUserInfo() {
         return (
             <Row>
-                <p>{this.state.user_info.firstname} {this.state.user_info.lastname}</p>
+                <Col md={8}>
+                    <Row>
+                        <span>{this.state.profile.firstname} {this.state.profile.lastname}</span>
+                    </Row>
+                    <Row>
+                        <span>{this.state.profile.address}</span>
+                    </Row>
+                    <Row>
+                        <span>{this.state.profile.kota}</span>
+                    </Row>
+                    <Row>
+                        <span>{this.state.profile.kodepos}</span>
+                    </Row>
+                </Col>
+                <Col md={4}>
+                    <Row>
+                        <input type="button" className="btn btn-warning pull-right" value="Ganti Alamat"></input>
+                    </Row>
+                </Col>
             </Row>
         )
     }
@@ -77,10 +95,10 @@ class PaymentPage extends Component {
                 softPrice = item.price;
             }
             subTotal += item.amount * item.price;
-            arrJSX.push(<tr><td style={{width:"5%"}}>{count +1}.</td><td style={{width:"20%"}}>{item.code},</td><td style={{width:"20%"}}>{item.model_name},</td><td style={{width:"10%"}}>{item.case_type}</td><td style={{width:"20%"}} className="text-right">(Qty:{item.amount})</td><td style={{width:"25%"}}>Rp.{item.amount * item.price}</td></tr>)
+            arrJSX.push(<tr><td style={{width:"5%"}}>{count +1}.</td><td><strong>{item.name} | {item.code}</strong>, {item.model_name}, {item.case_type} case</td><td className="text-right">(Qty:{item.amount}) Rp.{item.amount * item.price}</td></tr>)
         })
         arrJSX.push(<br/>)
-        arrJSX.push(<tr><td/><td colSpan="4"><strong>Sub Total</strong></td><td><strong>Rp.{subTotal}</strong></td></tr>)
+        arrJSX.push(<tr><td/><td><strong>Sub Total</strong></td><td className="text-right"><strong>Rp.{subTotal}</strong></td></tr>)
         totalCase = countHardCase + countSoftCase;
         countFree = Math.floor(totalCase/3);
         for(var i=0; i<countFree; i++) {
@@ -93,14 +111,14 @@ class PaymentPage extends Component {
             }
         }
         if(freeSoft>0) {
-            arrJSX.push(<tr><td/><td colSpan="2">Free Soft Case:</td><td className="text-right" colSpan="2">(Qty:{freeSoft}) -</td><td>Rp.{freeSoft*softPrice}</td></tr>)
+            arrJSX.push(<tr><td/><td>Free Soft Case:</td><td className="text-right">(Qty:{freeSoft}) - Rp.{freeSoft*softPrice}</td></tr>)
         }
         if(freeHard>0) {
-            arrJSX.push(<tr><td/><td colSpan="2">Free Hard Case:</td><td className="text-right" colSpan="2">(Qty:{freeHard}) -</td><td>Rp.{freeHard*hardPrice}</td></tr>)
+            arrJSX.push(<tr><td/><td>Free Hard Case:</td><td className="text-right">(Qty:{freeHard}) - Rp.{freeHard*hardPrice}</td></tr>)
         }
         totalPrice = subTotal - (freeSoft*softPrice) - (freeHard*hardPrice)
         arrJSX.push(<br/>)
-        arrJSX.push(<tr><td/><td colSpan="4"><strong>Total Price</strong></td><td><strong>Rp.{totalPrice}</strong></td></tr>)
+        arrJSX.push(<tr><td/><td><strong>Total Price</strong></td><td className="text-right"><strong>Rp.{totalPrice}</strong></td></tr>)
         return arrJSX
     }
 
@@ -144,7 +162,7 @@ class PaymentPage extends Component {
                             </Panel>
                         </Row>
                     </Col>
-                    <Col mdOffset={1} md={2}>
+                    <Col mdOffset={1} md={3}>
                         {this.renderTransactionSummary()}
                     </Col>
                 </Grid>
