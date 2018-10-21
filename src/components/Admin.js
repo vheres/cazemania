@@ -7,7 +7,7 @@ import AdminRenderCatalogue from './AdminRenderCatalogue'
 
 class Admin extends Component {
 
-    state={data: [], brands: [], types: [], typeselect: [""], caseselect: {soft: 0, hard: 0}}
+    state={data: [], brands: [], types: [], typeselect: [""], caseselect: {soft: 0, hard: 0}, addCase: 0}
     componentWillMount(){
         this.refreshData()
     }
@@ -221,14 +221,77 @@ class Admin extends Component {
             }
         )
     }
+
+    renderAddCaseType(){
+        if(this.state.addCase === 0){
+            return(
+                <input type="button" value="Tambah Tipe Case" className="btn btn-info" style={{"margin-left": "10px"}} onClick={()=>this.onAddCaseTypeClick()}/>
+            )
+        }
+        else{
+            return(
+                <div>
+                    <input type="text" className="col-md-4 m-t-sm" ref="addCaseTypeName" placeholder="Nama Tipe HP"/>
+                    <div className="checkbox m-l col-md-4">
+                      <label className="i-checks" style={{"padding-right":"10px"}} >
+                        <input type="checkbox" name="caseType" ref="addSoft" /><i></i> Soft
+                      </label>
+                      <label className="i-checks">
+                        <input type="checkbox" name="caseType" ref="addHard" /><i></i> Hard
+                      </label>
+                    </div>
+                    <input type="button" value="Submit" className="btn btn-success col-md-1" onClick={()=>this.onSubmitCaseTypeClick()}/>
+                    <input type="button" value="Cancel" className="btn btn-warning col-md-1" onClick={()=>this.onCancelCaseTypeClick()}/>
+                </div>
+            )
+        }
+    }
+
+    onAddCaseTypeClick(){
+        this.setState({addCase: 1})
+    }
+
+    onSubmitCaseTypeClick(){
+        // axios.post(API_URL_1 + "/admin/" + this.props.match.params.table,{
+        //     name: this.refs.addCaseTypeName,
+        //     brand_id: this.refs.brand_select.value,
+        //     soft: this.refs.addSoft,
+        //     hard: this.refs.addHard
+        // })
+        // .then((res) =>{
+        //     this.setState({addCase: 0})
+        //     this.refreshData()
+        // })
+        var softValue = 0
+        var hardValue = 0
+        if(this.refs.addSoft.checked){
+            softValue = 1
+        }
+        if(this.refs.addHard.checked){
+            hardValue = 1
+        }
+        console.log({ name: this.refs.addCaseTypeName.value,
+            brand_id: this.refs.brand_select.value,
+            soft: softValue,
+            hard: hardValue})
+        
+    }
+
+    onCancelCaseTypeClick(){
+        this.setState({addCase: 0})
+    }
+
     render(){
         return(
             <div>
+            <div style={{"padding-top":"15px"}} className="col-md-push-2 col-md-8">
                 {this.tableSelectOptions()}
                 {this.brandSelectOptions()}
-                {this.typeSelectOptions()}
-                {this.caseSelectOptions()[this.state.caseselect.hard][this.state.caseselect.soft]}
+                {this.renderAddCaseType()}
+                {/* {this.typeSelectOptions()}
+                {this.caseSelectOptions()[this.state.caseselect.hard][this.state.caseselect.soft]} */}
                 {this.renderFullTableData()[this.props.match.params.table]()}
+            </div>
             </div>
         )
     }

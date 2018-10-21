@@ -220,7 +220,7 @@ class Header extends Component {
                                     <NavItem eventKey={2} className="header-button" onClick={()=>this.onLinkClick("/reseller-dropshipper")}>
                                         <span className="orange-text">Reseller/Dropshipper</span>
                                     </NavItem>
-                                    <NavItem eventKey={4} className="header-button" onClick={()=>this.onLinkClick("/Admin?table=cases")}>
+                                    <NavItem eventKey={4} className="header-button" onClick={()=>this.onLinkClick("/admin/cases")}>
                                         <span className="orange-text">Admin</span>
                                     </NavItem>
                                 </Nav>
@@ -268,7 +268,7 @@ class Header extends Component {
                                     <NavItem eventKey={2} className="header-button" onClick={()=>this.onLinkClick("/reseller-dropshipper")}>
                                         <span className="orange-text">Reseller/Dropshipper</span>
                                     </NavItem>
-                                    <NavItem eventKey={4} className="header-button" onClick={()=>this.onLinkClick("/Admin?table=cases")}>
+                                    <NavItem eventKey={4} className="header-button" onClick={()=>this.onLinkClick("/admin/cases")}>
                                         <span className="orange-text">Admin</span>
                                     </NavItem>
                                 </Nav>

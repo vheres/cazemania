@@ -38,7 +38,7 @@ class AdminOrders extends Component {
 
     render(){
         return(
-            <div>
+            <div className="col-md-push-2 col-md-8">
                 {this.renderTabs()}
             </div>
         )

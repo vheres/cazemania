@@ -233,6 +233,29 @@ app.put('/admin/:table/:id', function(req,res){
     })
 })
 
+app.post('/admin/:table', function(req,res){
+    function tableselect2(){
+        return(
+            {
+            catalogue: () => {
+                return(
+                    sql = `INSERT INTO catalogue SET ?` )
+                },
+            cases: () => {
+                return(
+                    sql = `INSERT INTO type SET ?` )
+                }
+            }
+        )
+    }
+
+    conn.query(tableselect2()[req.params.table](), req.body, (err,results)=>{
+        if(err) throw err;
+        console.log(results)
+        res.send(results)
+    })
+})
+
 app.get('/item/:id', function(req,res){
     sql  = `SELECT * FROM catalogue WHERE id=${req.params.id}`
     sql1 = `SELECT * FROM brands ORDER BY name`

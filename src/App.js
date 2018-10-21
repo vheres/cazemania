@@ -17,7 +17,7 @@ import RegisterPage from './components/RegisterPage';
 import { Grid, Row, Col } from 'react-bootstrap';
 import { connect } from 'react-redux';
 import { keepLogin, onLogout, cookieChecked } from './actions';
-import { Route, withRouter } from 'react-router-dom';
+import { Route, withRouter, Switch } from 'react-router-dom';
 import Cookies from 'universal-cookie';
 import './supports/css/bootstrap.css';
 import './App.css';
@@ -62,8 +62,10 @@ class App extends Component {
               <Route path="/information" component={InformationPage}/>
               <Route path="/payment" component={PaymentPage}/>
               <Route path="/reseller-dropshipper" component={ResellerPage}/>
-              <Route path="/Admin/:table" component={Admin}/>
-              <Route path="/Admin2/orders" component={AdminOrders}/>
+              <Switch>
+                <Route path="/admin/:table" component={Admin}/>
+                <Route path="/admin" component={AdminOrders}/>
+              </Switch>
               <Route path="/profile" component={ProfilePage}/>
               <Route path="/login" component={LoginPage}/>
               <Route path="/register" component={RegisterPage}/>
