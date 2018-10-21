@@ -82,6 +82,7 @@ class Header extends Component {
 
     renderCartList() {
         var arrJSX = [];
+        console.log(this.state.cart)
         arrJSX = this.state.cart.map((item,count) => {
             return <CartDetail key={item.id} id={item.id} count={count} name={item.code} image={item.image} brand={item.brand_name} model={item.model_name} type={item.case_type} quantity={item.amount} price={item.price} DeleteClick={(temp)=>this.onDeleteClick(temp)}></CartDetail>
         })

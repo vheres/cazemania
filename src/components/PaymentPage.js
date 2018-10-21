@@ -6,7 +6,7 @@ import { connect } from 'react-redux';
 import CartDetail from './CartDetail';
 
 class PaymentPage extends Component {
-    state = ({ profile: [], cart: [] })
+    state = ({ profile: [], cart: [], totalPrice: 0 })
 
     componentWillMount() {
         this.getUserInfo()
@@ -17,6 +17,21 @@ class PaymentPage extends Component {
         .then((response) => {
             console.log(response)
             this.setState({profile: response.data.user[0], cart: response.data.cart})
+            this.calculateTransactionSummary()
+        })
+    }
+
+    onCheckOutClick() {
+        axios.post(API_URL_1 + "/transaction", {
+            id: this.props.auth.id,
+            subtotal: this.state.totalPrice,
+            shipping: '10000',
+            target_bank: 'BCA',
+            cart: this.state.cart
+        })
+        .then(response => {
+            alert('transaction success')
+            this.props.history.push('/profile')
         })
     }
 
@@ -67,10 +82,48 @@ class PaymentPage extends Component {
                     </Table>
                 </Row>
                 <Row>
-                    <input type="button" className="btn btn-primary" style={{width:"100%"}} value="Checkout"/>
+                    <input type="button" className="btn btn-primary" onClick={()=>this.onCheckOutClick()} style={{width:"100%"}} value="Checkout"/>
                 </Row>
             </Row>
         )     
+    }
+
+    calculateTransactionSummary() {
+        console.log(this.state.cart)
+        var subTotal = 0;
+        var totalPrice = 0;
+        var countHardCase = 0;
+        var countSoftCase = 0;
+        var totalCase = 0;
+        var countFree = 0;
+        var freeSoft = 0;
+        var freeHard = 0;
+        var hardPrice = 0;
+        var softPrice = 0;
+        this.state.cart.map((item,count) => {
+            if (item.case_type == "hard") {
+                countHardCase += parseInt(item.amount);
+                hardPrice = item.price;
+            }
+            else {
+                countSoftCase += parseInt(item.amount)
+                softPrice = item.price;
+            }
+            subTotal += item.amount * item.price;
+        })
+        totalCase = countHardCase + countSoftCase;
+        countFree = Math.floor(totalCase/3);
+        for(var i=0; i<countFree; i++) {
+            if(countSoftCase > 0) {
+                countSoftCase--;
+                freeSoft++;
+            }
+            else {
+                freeHard++;
+            }
+        }
+        totalPrice = subTotal - (freeSoft*softPrice) - (freeHard*hardPrice)
+        this.setState({totalPrice: totalPrice})
     }
 
     renderTransactionDetail() {
