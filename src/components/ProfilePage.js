@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import { Grid, Row, Col, Button, Modal, Table } from 'react-bootstrap';
 import CartDetail from './CartDetail';
+import ProfileOrder from './ProfileOrder';
 import {API_URL_1} from '../supports/api-url/apiurl'
 import axios from 'axios'
 import { connect } from 'react-redux';
@@ -9,11 +10,10 @@ import Select from 'react-select';
 
 
 class ProfilePage extends Component {
-    state = {profile: [], edit_modal: false, selectedOption: [], destination: [], filtered_destination: [], orders: [], transactions: []}
+    state = {profile: [], edit_modal: false, selectedOption: [], destination: [], filtered_destination: []}
 
     componentWillMount(){
         this.getUserInfo()
-        this.getTransaction()
     }
 
     getUserInfo = () => {
@@ -24,24 +24,6 @@ class ProfilePage extends Component {
         })
         .then((response) => {
             this.setState({profile: response.data.profile[0]})
-        })
-    }
-
-    getTransaction = () => {
-        axios.get(API_URL_1 + "/users/transactions/" + this.props.auth.id)
-        .then((response) => {
-            var orders= []
-            var transactions= []
-            console.log(response);
-            response.data.map((item, count) => {
-                if (item.status == 'pendingPayment') {
-                    orders.push(item)
-                }
-                else {
-                    transactions.push(item)
-                }
-            })
-            this.setState({orders: orders, transactions: transactions})
         })
     }
 
@@ -185,30 +167,18 @@ class ProfilePage extends Component {
             </Col>
         )
     }
-    
-    renderOrderList() {
-        return (
-            <Col md={5}>
-                <Table fluid>
-                    {this.renderOrderDetail()}
-                </Table>
-            </Col>
-        )
-    }
-
-    renderOrderDetail() {
-        return (
-            this.state.orders.map((item, count) => {
-                
-            })
-        )
-    }
 
     renderProfilePage() {
             return (
                 <Grid fluid>
-                {this.renderUserInfo()}
-                {this.renderOrderList()}
+                <Row>
+                    {this.renderUserInfo()}
+                </Row>
+                <Row>
+                    <Col mdOffset={2} md={8}>
+                        <ProfileOrder/>
+                    </Col>
+                </Row>
                     <Modal show={this.state.edit_modal} onHide={this.handleClose.bind(this)} bsSize="large">
                         <Modal.Header closeButton>
                             <Modal.Title>Edit Profile</Modal.Title>

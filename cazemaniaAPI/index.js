@@ -313,6 +313,7 @@ app.delete('/clear_cart/:user_id', function(req,res){
 
 
 app.post('/transaction', function(req,res){
+    console.log(req.body)
     dateNow = moment().format("YYYY-MM-DD")
     timeNow = moment().format("HH:mm")
     data = {
@@ -340,7 +341,7 @@ app.post('/transaction', function(req,res){
             console.log(results)
             var arrDetails = new Array()
             for(var index in req.body.cart){
-                arrDetails.push([results.insertId, req.body.cart[index].id, req.body.cart[index].brand_id, req.body.cart[index].model_id, req.body.cart[index].case_type, req.body.cart[index].price, req.body.cart[index].amount])
+                arrDetails.push([results.insertId, req.body.cart[index].catalogue_id, req.body.cart[index].brand_id, req.body.cart[index].model_id, req.body.cart[index].case_type, req.body.cart[index].price, req.body.cart[index].amount])
             }
 
             conn.query(sql1, [arrDetails], (err,results1)=>{
@@ -419,7 +420,7 @@ app.get('/keeplogin', function(req,res){
 })
 
 app.get('/checkout/:id', function(req,res){
-    sql  = `SELECT car.id, cat.code, cat.name, cat.image,  car.brand_id, car.model_id, car.case_type, car.amount, br.name as brand_name, ty.name as model_name, pr.price as price FROM catalogue cat JOIN cart car ON cat.id=car.catalogue_id JOIN brands br ON br.id = car.brand_id 
+    sql  = `SELECT car.id, car.catalogue_id, cat.code, cat.name, cat.image,  car.brand_id, car.model_id, car.case_type, car.amount, br.name as brand_name, ty.name as model_name, pr.price as price FROM catalogue cat JOIN cart car ON cat.id=car.catalogue_id JOIN brands br ON br.id = car.brand_id 
     JOIN type ty ON ty.id = car.model_id JOIN price pr ON pr.case_type = car.case_type WHERE car.user_id=${req.params.id}`
 
     sql1 = `SELECT firstname, lastname, address, kota, kodepos FROM users WHERE id = ${req.params.id}`
@@ -504,16 +505,34 @@ app.put('/users/:id', function(req,res){
         res.send(results)
     })
 })
-
-
 app.get('/users/transactions/:id', function(req,res){
-    sql= `SELECT * FROM transactions WHERE user_id = ${req.params.id} ORDER BY date`
+    sql= `SELECT tr.id as id, LPAD( tr.id, 8, '0') as ordernumber, tr.date as date, tr.time as time, tr.proof as proof, tr.target_bank as target_bank, tr.status as status, tr.subtotal as subtotal, tr.shipping as shipping, tr.resi as resi, u.firstname as firstname, 
+    u.lastname as lastname, u.id as user_id, u.address as address, u.email as email, u.phone as phone, u.kota as kota, u.kodepos as kodepos FROM transactions tr JOIN users u ON tr.user_id = u.id WHERE user_id = ${req.params.id} ORDER BY date`
     conn.query(sql, (err,results)=>{
         if(err) throw err;
         console.log(results)
         res.send(results)
     })
 })
+
+app.get('/users/transactions/details/:id', function(req,res){
+    sql= `SELECT trd.id as id, trd.transaction_id as transaction_id, trd.case_type as case_type, trd.price as price, trd.amount as amount, br.name as brand_name, ty.name as type_name, cat.code, cat.name, cat.image
+    FROM transaction_details trd JOIN brands br ON trd.case_brand = br.id JOIN type ty ON trd.case_model=ty.id JOIN catalogue cat ON trd.catalogue_id = cat.id WHERE trd.transaction_id = ${req.params.id}`
+    conn.query(sql, (err,results)=>{
+        if(err) throw err;
+        console.log(results)
+        res.send(results)
+    })
+})
+
+// app.get('/users/transactions/:id', function(req,res){
+//     sql= `SELECT * FROM transactions WHERE user_id = ${req.params.id} ORDER BY date`
+//     conn.query(sql, (err,results)=>{
+//         if(err) throw err;
+//         console.log(results)
+//         res.send(results)
+//     })
+// })
 
 app.get('/province', function(req,res){
     var options = {
