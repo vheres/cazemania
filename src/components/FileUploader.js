@@ -23,19 +23,17 @@ class FileUploader extends Component {
       render() {
         return (
           <div>
-            <br/>
-            <center>
+
               <form encType="multipart/form-data">
                 <input type="file" name="filename"
                 onChange={ e => this.unggahFile(e.target.files[0])} 
                 accept="image/*"/>
                 {/* image/*  , image/png , application/pdf */}
               </form>
-              <br/>
+
               {/* image from backend */}
               {/* <img src="http://localhost:5000/filestorage/fotoid.png" alt="" */}
               {/* style={{width:'50%', height:'50%'}}/> */}
-            </center>
           </div>
         );
       }

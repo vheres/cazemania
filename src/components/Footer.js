@@ -13,8 +13,7 @@ class Footer extends Component { //kalo gak pake destructuring, tulisnya React.C
         return(
             <Grid fluid className="no-margin Footer-css text-left">
                 <Row>
-                    <Col xs={1}></Col>
-                    <Col xs={3}>
+                    <Col xsOffset={2} mdOffset={1} md={3}>
                         <Row>
                             <h2 className="text-white">Support</h2>
                         </Row>
@@ -37,8 +36,7 @@ class Footer extends Component { //kalo gak pake destructuring, tulisnya React.C
                             <Link to="/information?active=5"><h5 className="text-white">Penukaran dan Pengembalian</h5></Link>
                         </Row>
                     </Col>
-                    <Col xs={1}></Col>
-                    <Col xs={3}>
+                    <Col xsOffset={2} mdOffset={1} md={3}>
                         <Row>
                             <h2 className="text-white">Follow Us</h2>
                         </Row>
@@ -52,8 +50,7 @@ class Footer extends Component { //kalo gak pake destructuring, tulisnya React.C
                             <a href="https://www.facebook.com/Cazemania-145129639470441/" target="_blank"><img src="http://www.dfmalherbe.co.za/wp-content/uploads/2016/01/facebook-logo-png-transparent-background.png" alt="facebook" style={{width:"45px"}}></img></a><span className="text-white facebook-text">Cazemania</span>
                         </Row>
                     </Col>
-                    <Col xs={1}></Col>
-                    <Col xs={3}>
+                    <Col xsOffset={2} mdOffset={1} md={3}>
                         <Row>
                             <h2 className="text-white">Contact Us</h2>        
                         </Row>

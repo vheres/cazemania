@@ -10,7 +10,7 @@ import AdminOrdersTabs from './AdminOrdersTabs'
 
 class ProfileOrder extends Component {
 
-    state={orders: [], activeKey: 1}
+    state={orders: [], activeKey: 0}
     componentWillMount(){
         this.refreshData()
     }
@@ -19,7 +19,9 @@ class ProfileOrder extends Component {
         axios.get(API_URL_1 + "/users/transactions/" + this.props.auth.id)
         .then((res)=>{
             this.setState({orders: res.data})
-            this.setState({activeKey:this.state.orders[0].id})
+            if (this.state.orders[0].status == 'pendingPayment') {
+                this.setState({activeKey:this.state.orders[0].id})
+            }
         })
     }
 
