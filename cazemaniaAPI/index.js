@@ -256,6 +256,31 @@ app.post('/admin/:table', function(req,res){
     })
 })
 
+
+app.delete('/admin/:table/:id', function(req,res){
+    function tableselect(){
+        return(
+            {
+            catalogue: () => {
+                return(
+                    sql = `DELETE FROM catalogue WHERE id=${req.params.id}` )
+                },
+            cases: () => {
+                return(
+                    sql = `DELETE FROM type WHERE id=${req.params.id} ` )
+                }
+            }
+        )
+    }
+
+    conn.query(tableselect()[req.params.table](), (err,results)=>{
+        if(err) throw err;
+        console.log(results)
+        res.send(results)
+    })
+})
+
+
 app.get('/item/:id', function(req,res){
     sql  = `SELECT * FROM catalogue WHERE id=${req.params.id}`
     sql1 = `SELECT * FROM brands ORDER BY name`

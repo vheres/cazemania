@@ -7,7 +7,7 @@ import AdminRenderCatalogue from './AdminRenderCatalogue'
 
 class Admin extends Component {
 
-    state={data: [], brands: [], types: [], typeselect: [""], caseselect: {soft: 0, hard: 0}, addCase: 0}
+    state={data: [], brands: [], types: [], typeselect: [""], caseselect: {soft: 0, hard: 0}, addCase: 0, addCatalogue:0}
     componentWillMount(){
         this.refreshData()
     }
@@ -17,7 +17,9 @@ class Admin extends Component {
         .then((res)=>{
             console.log(res.data)
             this.setState({data:res.data.items, brands: res.data.brands, type: res.data.type})
-            this.typeFilter()
+            if(this.props.match.params.table === "cases"){
+                this.typeFilter()
+            }
         })
     }
 
@@ -51,13 +53,29 @@ class Admin extends Component {
     }
 
     brandSelectOptions(){
+        if(this.props.match.params.table === "cases"){
+            console.log(this.state.brands)
+            var arrJSX = this.state.brands.map((item)=>{ 
+                return(
+                    <option value={item.id}>{item.name}</option>)
+            })
+            return(
+                <select ref="brand_select" onChange={()=>this.typeFilter()}>
+                    <option value={0}>--SELECT BRAND--</option>
+                    {arrJSX}
+                </select>
+            )
+        }
+    }
+    
+    brandSelectOptionsAdd(){
         console.log(this.state.brands)
         var arrJSX = this.state.brands.map((item)=>{ 
             return(
                 <option value={item.id}>{item.name}</option>)
         })
         return(
-            <select ref="brand_select" onChange={()=>this.typeFilter()}>
+            <select ref="brand_selectAdd" className="col-md-4 m-t-sm m-r-sm">
                 <option value={0}>--SELECT BRAND--</option>
                 {arrJSX}
             </select>
@@ -87,70 +105,71 @@ class Admin extends Component {
         
         
     }
-    typeSelectOptions(){
-        var arrJSX = this.state.typeselect.map((item)=>{ return(
-            <option value={item.id}>{item.name}</option>)
-        })
-        console.log(this.state.typeselect)
-        //optional if you want to hide empty dropdown
-        // if(this.state.typeselect[0] != ""){
-        //     return(
-        //     <select ref="type_select">
-        //         <option value={0}>--SELECT TYPE--</option>
-        //         {arrJSX}
-        //     </select>
-        //     )
-        // }
-        return(
-        <select ref="type_select" style={{width:250}} onChange={()=>this.onTypeSelect()}>
-            <option value={0}>----------SELECT TYPE----------</option>
-            {arrJSX}
-        </select>
-        )
-    }
+    
+    // typeSelectOptions(){
+    //     var arrJSX = this.state.typeselect.map((item)=>{ return(
+    //         <option value={item.id}>{item.name}</option>)
+    //     })
+    //     console.log(this.state.typeselect)
+    //     //optional if you want to hide empty dropdown
+    //     // if(this.state.typeselect[0] != ""){
+    //     //     return(
+    //     //     <select ref="type_select">
+    //     //         <option value={0}>--SELECT TYPE--</option>
+    //     //         {arrJSX}
+    //     //     </select>
+    //     //     )
+    //     // }
+    //     return(
+    //     <select ref="type_select" style={{width:250}} onChange={()=>this.onTypeSelect()}>
+    //         <option value={0}>----------SELECT TYPE----------</option>
+    //         {arrJSX}
+    //     </select>
+    //     )
+    // }
 
-    onTypeSelect(){
-        var data = this.state.type
-        var tempVar = {soft: 0, hard: 0}
-        for(var num in data){
-            if(data[num].id === parseInt(this.refs.type_select.value)){
-                tempVar = data[num]
-            }
-        }
-        this.setState({caseselect: tempVar})
-    }
+    // onTypeSelect(){
+    //     var data = this.state.type
+    //     var tempVar = {soft: 0, hard: 0}
+    //     for(var num in data){
+    //         if(data[num].id === parseInt(this.refs.type_select.value)){
+    //             tempVar = data[num]
+    //         }
+    //     }
+    //     this.setState({caseselect: tempVar})
+    // }
 
-    caseSelectOptions(){
-        return(
-            [
-                [
-                    <select ref="case_select">
-                        <option value={0}>----------SELECT CASE----------</option>
-                        <option value="hard" disabled>HARD CASE -- unavailable</option>
-                        <option value="soft" disabled>SOFT CASE -- unavailable</option>
-                    </select>,
-                    <select ref="case_select">
-                        <option value={0}>----------SELECT CASE----------</option>
-                        <option value="hard" disabled>HARD CASE -- unavailable</option>
-                        <option value="soft" >SOFT CASE</option>
-                    </select>
-                ],
-                [
-                    <select ref="case_select">
-                        <option value={0}>----------SELECT CASE----------</option>
-                        <option value="hard">HARD CASE</option>
-                        <option value="soft"  disabled>SOFT CASE -- unavailable</option>
-                    </select>,
-                    <select ref="case_select">
-                        <option value={0}>----------SELECT CASE----------</option>
-                        <option value="hard">HARD CASE</option>
-                        <option value="soft">SOFT CASE</option>
-                    </select>
-                ]
-            ]
-        )
+    // caseSelectOptions(){
+    //     return(
+    //         [
+    //             [
+    //                 <select ref="case_select">
+    //                     <option value={0}>----------SELECT CASE----------</option>
+    //                     <option value="hard" disabled>HARD CASE -- unavailable</option>
+    //                     <option value="soft" disabled>SOFT CASE -- unavailable</option>
+    //                 </select>,
+    //                 <select ref="case_select">
+    //                     <option value={0}>----------SELECT CASE----------</option>
+    //                     <option value="hard" disabled>HARD CASE -- unavailable</option>
+    //                     <option value="soft" >SOFT CASE</option>
+    //                 </select>
+    //             ],
+    //             [
+    //                 <select ref="case_select">
+    //                     <option value={0}>----------SELECT CASE----------</option>
+    //                     <option value="hard">HARD CASE</option>
+    //                     <option value="soft"  disabled>SOFT CASE -- unavailable</option>
+    //                 </select>,
+    //                 <select ref="case_select">
+    //                     <option value={0}>----------SELECT CASE----------</option>
+    //                     <option value="hard">HARD CASE</option>
+    //                     <option value="soft">SOFT CASE</option>
+    //                 </select>
+    //             ]
+    //         ]
+    //     )
 
-    }
+    // }
 
     renderCaseHead(){
         return(
@@ -230,18 +249,49 @@ class Admin extends Component {
         }
         else{
             return(
-                <div>
-                    <input type="text" className="col-md-4 m-t-sm" ref="addCaseTypeName" placeholder="Nama Tipe HP"/>
-                    <div className="checkbox m-l col-md-4">
+                <div className=""style={{width: "50%"}}>
+                <section className="vbox panel bg-white padder-v">
+                    {this.brandSelectOptionsAdd()}
+                    <input type="text" className="col-md-4 m-t-sm" ref="addCaseTypeName" placeholder="Input Nama Tipe HP"/>
+                    <div className="checkbox m-l col-md-2">
                       <label className="i-checks" style={{"padding-right":"10px"}} >
-                        <input type="checkbox" name="caseType" ref="addSoft" /><i></i> Soft
+                        <input type="checkbox" name="caseType" ref="addSoft" /><i></i> Soft Case
                       </label>
                       <label className="i-checks">
-                        <input type="checkbox" name="caseType" ref="addHard" /><i></i> Hard
+                        <input type="checkbox" name="caseType" ref="addHard" /><i></i> Hard Case
                       </label>
                     </div>
                     <input type="button" value="Submit" className="btn btn-success col-md-1" onClick={()=>this.onSubmitCaseTypeClick()}/>
                     <input type="button" value="Cancel" className="btn btn-warning col-md-1" onClick={()=>this.onCancelCaseTypeClick()}/>
+                </section>
+                </div>
+            )
+        }
+    }
+
+    renderAddCatalogue(){
+        if(this.state.addCatalogue === 0){
+            return(
+                <input type="button" value="Tambah Catalogue" className="btn btn-info" style={{"margin-left": "10px"}} onClick={()=>this.onAddCatalogueClick()}/>
+            )
+        }
+        else{
+            return(
+                <div className=""style={{width: "50%"}}>
+                <section className="vbox panel bg-white padder-v">
+                    {this.brandSelectOptionsAdd()}
+                    <input type="text" className="col-md-4 m-t-sm" ref="addCaseTypeName" placeholder="Input Nama Tipe HP"/>
+                    <div className="checkbox m-l col-md-2">
+                      <label className="i-checks" style={{"padding-right":"10px"}} >
+                        <input type="checkbox" name="caseType" ref="addSoft" /><i></i> Soft Case
+                      </label>
+                      <label className="i-checks">
+                        <input type="checkbox" name="caseType" ref="addHard" /><i></i> Hard Case
+                      </label>
+                    </div>
+                    <input type="button" value="Submit" className="btn btn-success col-md-1" onClick={()=>this.onSubmitCaseTypeClick()}/>
+                    <input type="button" value="Cancel" className="btn btn-warning col-md-1" onClick={()=>this.onCancelCaseTypeClick()}/>
+                </section>
                 </div>
             )
         }
@@ -251,17 +301,11 @@ class Admin extends Component {
         this.setState({addCase: 1})
     }
 
+    onAddCatalogueClick(){
+        this.setState({addCatalogue: 1})
+    }
+
     onSubmitCaseTypeClick(){
-        // axios.post(API_URL_1 + "/admin/" + this.props.match.params.table,{
-        //     name: this.refs.addCaseTypeName,
-        //     brand_id: this.refs.brand_select.value,
-        //     soft: this.refs.addSoft,
-        //     hard: this.refs.addHard
-        // })
-        // .then((res) =>{
-        //     this.setState({addCase: 0})
-        //     this.refreshData()
-        // })
         var softValue = 0
         var hardValue = 0
         if(this.refs.addSoft.checked){
@@ -270,10 +314,32 @@ class Admin extends Component {
         if(this.refs.addHard.checked){
             hardValue = 1
         }
-        console.log({ name: this.refs.addCaseTypeName.value,
-            brand_id: this.refs.brand_select.value,
-            soft: softValue,
-            hard: hardValue})
+
+        if(this.refs.brand_selectAdd.value === "0"){
+            alert("Pilih Brand Untuk Tambah Tipe Case")
+        }
+        else if(this.refs.addCaseTypeName.value === ""){
+            alert("Isi nama tipe HP")
+        }
+        else if(!this.refs.addSoft.checked && !this.refs.addHard.checked){
+            alert("Pilih Jenis Case (Soft/Hard/Both)")
+        }
+        else{
+            axios.post(API_URL_1 + "/admin/" + this.props.match.params.table,{
+                name: this.refs.addCaseTypeName.value,
+                brand_id: this.refs.brand_selectAdd.value,
+                soft: softValue,
+                hard: hardValue
+            })
+            .then((res) =>{
+                console.log(res)
+                this.setState({addCase: 0})
+                this.refreshData()
+                alert("Tambah Tipe Case Berhasil")
+            })
+        }
+        
+
         
     }
 
@@ -288,8 +354,7 @@ class Admin extends Component {
                 {this.tableSelectOptions()}
                 {this.brandSelectOptions()}
                 {this.renderAddCaseType()}
-                {/* {this.typeSelectOptions()}
-                {this.caseSelectOptions()[this.state.caseselect.hard][this.state.caseselect.soft]} */}
+                {this.renderAddCatalogue()}
                 {this.renderFullTableData()[this.props.match.params.table]()}
             </div>
             </div>
