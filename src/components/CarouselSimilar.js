@@ -13,6 +13,16 @@ class CarouselSimilar extends Component {
     this.getSimilarProduct()
   }
 
+  componentWillReceiveProps(newProps) {
+    axios.get(`${API_URL_1}/similarproducts?name=${newProps.name}&id=${newProps.id}`)
+        .then((response) => {
+          console.log(response)
+            this.setState({similar_product: response.data})
+        }).catch((err) => {
+            console.log(err)
+        })
+  }
+
   getSimilarProduct() {
     axios.get(`${API_URL_1}/similarproducts?name=${this.props.name}&id=${this.props.id}`)
         .then((response) => {
@@ -45,7 +55,7 @@ class CarouselSimilar extends Component {
       if(this.state.similar_product.length > 3) {   
         return (
           <div>
-            <Col md={1} className="carousel-similar-button">
+            <Col xsHidden md={1} className="carousel-similar-button">
               <button onClick={() => this.Carousel._slidePrev()} className="btn btn-tosca"><i className="fa fa-chevron-left"></i></button>
             </Col>
             <Col md={10}>
@@ -63,7 +73,7 @@ class CarouselSimilar extends Component {
               ref={ el => this.Carousel = el }
               />
             </Col>
-            <Col md={1} className="carousel-similar-button">
+            <Col xsHidden md={1} className="carousel-similar-button">
               <button onClick={() => this.Carousel._slideNext()} className="btn btn-tosca"><i className="fa fa-chevron-right"></i></button>
             </Col>
         </div>

@@ -257,12 +257,14 @@ a.list-group-item:focus {
   border-bottom-color: #fff !important;
 }
 .pagination > li > a {
+  color: rgb(30,190,203);
   border-color: #eaeef1;
 }
 .pagination > li > a:hover,
 .pagination > li > a:focus {
   border-color: #eaeef1;
-  background-color: #e8eff0;
+  color: white;
+  background-color: rgb(30,190,203);
 }
 .panel {
   border-radius: 2px;

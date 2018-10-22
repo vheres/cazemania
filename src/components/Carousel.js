@@ -41,7 +41,7 @@ class CarouselClass extends Component {
         const items = this.galleryItems();
         return (
           <div>
-            <Col md={1} className="carousel-best-button text-right">
+            <Col xsHidden md={1} className="carousel-best-button text-right">
               <button onClick={() => this.Carousel._slidePrev()} className="btn btn-tosca"><i className="fa fa-chevron-left"></i></button>
             </Col>
             <Col md={10}>
@@ -59,7 +59,7 @@ class CarouselClass extends Component {
               ref={ el => this.Carousel = el }
               />
             </Col>
-            <Col md={1} className="carousel-best-button text-left">
+            <Col xsHidden md={1} className="carousel-best-button text-left">
               <button onClick={() => this.Carousel._slideNext()} className="btn btn-tosca"><i className="fa fa-chevron-right"></i></button>
             </Col>
         </div>

@@ -36,7 +36,7 @@ class PaginationClass extends Component {
     }
     render() {
         return(
-            <Pagination>
+            <Pagination bsSize="large">
                 {this.renderPagination()}
             </Pagination> 
         );

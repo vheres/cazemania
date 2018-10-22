@@ -77,8 +77,12 @@ class ProfileRenderOrder extends Component {
         if(this.props.status === "pendingPayment"){
             return (
                 <header class="wrapper-md bg-light lter">
-                <div>
-                    <input type="button" value="Bukti Pembayaran" onClick={()=>this.handleShow()} className="btn btn-sm btn-info pull-right"/>
+                <div className="row">
+                    <span className="col-md-2">Bukti pembayaran: </span><span className="col-md-5"><FileUploader/></span>
+                    <span className="col-md-5">
+                        <input type="button" value="Bukti Pembayaran" onClick={()=>this.handleShow()} className="btn btn-sm btn-info pull-right"/>
+                    </span>
+                    
                 </div>
                 </header>
             )
@@ -86,8 +90,11 @@ class ProfileRenderOrder extends Component {
         else if(this.props.status === "pendingDelivery"){
             return (
                 <header class="wrapper-md bg-light lter">
-                <div>
-                    <input type="button" value="Bukti Pembayaran" onClick={()=>this.handleShow()} className="btn btn-sm btn-info pull-right"/>
+                <div className="row">
+                    <span className="col-md-6">Order sedang di proses</span>
+                    <span className="col-md-6">
+                        <input type="button" value="Bukti Pembayaran" onClick={()=>this.handleShow()} className="btn btn-sm btn-info pull-right"/>
+                    </span>
                 </div>
                 </header>
             )
@@ -121,7 +128,7 @@ class ProfileRenderOrder extends Component {
         return(
             <Panel eventKey={this.props.transaction_id} bsStyle={this.selectStyle()}>
               <Panel.Heading>
-                <Panel.Title toggle>Order ID: <strong>CMW#{this.props.ordernumber}</strong> </Panel.Title>
+                <Panel.Title toggle>Order ID: <strong>CMW#{this.props.ordernumber}</strong>{this.renderOrderStatus()[this.props.status]()} </Panel.Title>
               </Panel.Heading>
               <Panel.Body collapsible>
                 <section id="content" style={{"font-size":"16px"}}> 
@@ -132,11 +139,11 @@ class ProfileRenderOrder extends Component {
                             <p class="m-t m-b col-md-3" style={{"line-height":"20px"}}>
                                 Order date: <strong>{this.props.date}</strong><br/>
                                 Order status: {this.renderOrderStatus()[this.props.status]()}<br/>
-                                Order ID: <strong>CMW#{this.props.ordernumber} <FileUploader/></strong>
+                                Order ID: <strong>CMW#{this.props.ordernumber}</strong>
                             </p>
                             <div class="well bg-light b m-t col-md-6">
                                 <div class="row">
-                                <div class="col-xs-6">
+                                <div class="col-xs-12">
                                     <strong>SHIP TO:</strong>
                                     <h4>{this.props.firstname} {this.props.lastname}</h4>
                                     <p>

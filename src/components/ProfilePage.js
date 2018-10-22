@@ -116,7 +116,7 @@ class ProfilePage extends Component {
 
     renderUserInfo() {
         return (
-            <Col mdOffset={2} md={3}>
+            <Col mdOffset={1} md={3}>
                 <Row>
                     <Col md={12}>
                         <span style={{"font-size": "28px"}}>My Profile</span><span className="profile-edit-button"><i class="fa fa-edit" title="Edit Profile" onClick={this.handleShow.bind(this)}></i></span>
@@ -173,10 +173,18 @@ class ProfilePage extends Component {
                 <Grid fluid>
                 <Row>
                     {this.renderUserInfo()}
-                </Row>
-                <Row>
-                    <Col mdOffset={2} md={8}>
-                        <ProfileOrder/>
+                    <Col md={7}>
+                        <Row>
+                            <Col md={12}>
+                                <span style={{"font-size": "28px"}}>My Transactions</span>
+                            </Col>
+                        </Row>
+                        <Row>
+                            <div className="my-profile-pointer"></div>
+                        </Row>
+                        <Row>
+                            <ProfileOrder/>
+                        </Row>
                     </Col>
                 </Row>
                     <Modal show={this.state.edit_modal} onHide={this.handleClose.bind(this)} bsSize="large">
