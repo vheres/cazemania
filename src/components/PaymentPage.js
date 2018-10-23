@@ -1,12 +1,13 @@
 import React, { Component } from 'react';
-import { Grid, Row, Col, Panel, Table } from 'react-bootstrap';
+import { Grid, Row, Col, Panel, Table, Button, Modal } from 'react-bootstrap';
 import axios from 'axios';
 import {API_URL_1} from '../supports/api-url/apiurl'
 import { connect } from 'react-redux';
 import CartDetail from './CartDetail';
+import Select from 'react-select';
 
 class PaymentPage extends Component {
-    state = ({ profile: [], cart: [], totalPrice: 0 })
+    state = ({ profile: [], cart: [], totalPrice: 0, edit_modal: false, selectedOption: [], destination: [], filtered_destination: [] })
 
     componentWillMount() {
         this.getUserInfo()
@@ -35,12 +36,73 @@ class PaymentPage extends Component {
         })
     }
 
+    getDestinationList() {
+        axios.get(API_URL_1 + '/destination')
+        .then(response => {
+            var arrJSX = [];
+            response.data.map((item, count) => {
+                arrJSX.push({value:item.destination_code, label:`${item.province}, ${item.city}, ${item.subdistrict}`})
+            })
+            this.setState({destination: arrJSX})
+        })
+    }
+
+    handleChange = (selectedOption) => {
+        this.setState({ selectedOption });
+        console.log(`Option selected:`, selectedOption);
+      }
+
+    handleInputChange(selectedOption) {
+        if (selectedOption.length >= 3) {
+            var filterArr = [];
+            var regex = new RegExp(selectedOption, "i")
+            for (var num in this.state.destination) {
+                if ( regex.test(this.state.destination[num].label)) {
+                    filterArr.push(this.state.destination[num])
+                }
+            }
+            this.setState({filtered_destination: filterArr})
+        } else if (selectedOption.length < 3) {
+            this.setState({filtered_destination: []})
+        }
+    } 
+
+    handleClose() {
+        this.setState({ edit_modal: false });
+    }
+    
+    handleShow() {
+        this.getDestinationList();
+        this.setState({ selectedOption:{value:this.state.profile.destination_code, label:this.state.profile.kota} ,edit_modal: true });
+    }
+
+    onKeyPress(enter) {
+        console.log(enter.which)
+    }
+
+    onEditSave() {
+        if(this.refs.alamat.value == '' || this.state.selectedOption.label == '' || this.refs.kodepos.value == '') {
+            alert('Please fill everything!');
+        } else {
+            axios.put(API_URL_1 + '/users/' + this.props.auth.id, {
+                address: this.refs.alamat.value,
+                destination_code: this.state.selectedOption.value,
+                kota: this.state.selectedOption.label,
+                kodepos: this.refs.kodepos.value
+            }).then((response) => {
+                alert('Edit Success')
+                this.getUserInfo()
+                this.setState({ edit_modal: false });
+            })
+        }
+    }
+
     renderUserInfo() {
         return (
             <Row>
-                <Col md={8}>
+                <Col md={8} className="alamat-pengiriman">
                     <Row>
-                        <span>{this.state.profile.firstname} {this.state.profile.lastname}</span>
+                        <span><strong>{this.state.profile.firstname} {this.state.profile.lastname}</strong></span>
                     </Row>
                     <Row>
                         <span>{this.state.profile.address}</span>
@@ -54,7 +116,7 @@ class PaymentPage extends Component {
                 </Col>
                 <Col md={4}>
                     <Row>
-                        <input type="button" className="btn btn-warning pull-right" value="Ganti Alamat"></input>
+                        <Button type="submit" onClick={this.handleShow.bind(this)} className="btn btn-default pull-right ganti-alamat-pengiriman"><span><i style={{'font-size': '20px'}} className="fa fa-edit"></i> Ganti Alamat</span></Button> 
                     </Row>
                 </Col>
             </Row>
@@ -218,6 +280,58 @@ class PaymentPage extends Component {
                     <Col mdOffset={1} md={3}>
                         {this.renderTransactionSummary()}
                     </Col>
+                    <Modal show={this.state.edit_modal} onHide={this.handleClose.bind(this)} bsSize="large">
+                        <Modal.Header closeButton>
+                            <Modal.Title>Ganti Alamat</Modal.Title>
+                        </Modal.Header>
+                        <Modal.Body>
+                            <form id="Alamat">
+                                <Row>
+                                    <Col xs={2}>
+                                    <p className="text-right register-form-text">Alamat:</p>  
+                                    </Col>
+                                    <Col xs={8}>
+                                        <textarea type="text" ref="alamat" class="form-control" id="inputAdress" placeholder="Alamat" defaultValue={this.state.profile.address} onKeyPress={this.onKeyPress.bind(this)} style={{resize:"none"}} rows= '4' cols= '80'/><br/>
+                                    </Col>
+                                </Row>
+                                <Row>
+                                    <Col xs={2}>
+                                    <p className="text-right register-form-text">Kota atau Kecamatan:</p>  
+                                    </Col>
+                                    <Col xs={3}>
+                                <Row>
+                                    <Col xs={12}>
+                                        <Select
+                                            value={this.state.selectedOption}
+                                            onChange={this.handleChange}
+                                            options={this.state.filtered_destination}
+                                            onInputChange={this.handleInputChange.bind(this)}
+                                            placeholder={`Pilih Kota/Kecamatan`}
+                                            defaultValue={{value: this.state.profile.destination_code, label: this.state.profile.kota}}
+                                            defaultInputValue={this.state.profile.kota}
+                                        />
+                                    </Col>
+                                </Row>
+                                <Row>
+                                    <Col xs={12}>
+                                        <p className="small-font">*please input 3 or more characters</p>
+                                    </Col>
+                                </Row> 
+                                </Col>
+                                <Col xs={2}>
+                                <p className="text-right register-form-text">Kode Pos:</p>
+                                </Col>
+                                <Col xs={3}>
+                                <input ref="kodepos" type="text" className="form-control" placeholder="Kode Pos" defaultValue={this.state.profile.kodepos}></input>
+                                </Col>        
+                                </Row>                     
+                            </form>
+                        </Modal.Body>
+                        <Modal.Footer>
+                            <input type="button" className="btn btn-danger" onClick={this.handleClose.bind(this)} value="Cancel"/>
+                            <input type="button" className="btn btn-success" onClick={()=>this.onEditSave()} value="Save"/>
+                        </Modal.Footer>
+                    </Modal>
                 </Grid>
         )
     }

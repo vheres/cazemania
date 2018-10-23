@@ -305,7 +305,7 @@ class Header extends Component {
                 </Grid>              
                 <Modal show={this.state.edit_modal} onHide={this.handleClose.bind(this)} bsSize="large">
                 <Modal.Header closeButton>
-                    <Modal.Title><span>Keranjang Anda</span><span><input type="button" className="btn btn-warning pull-right" value="Clear Cart" onClick={()=>this.onClearCartClick()}/></span></Modal.Title>
+                    <Modal.Title><span>Keranjang Anda</span><span><input type="button" style={{'margin-right':'30px'}} className="btn btn-warning pull-right" value="Clear Cart" onClick={()=>this.onClearCartClick()}/></span></Modal.Title>
                 </Modal.Header>
                 <Modal.Body>
                 {this.renderCartPage()}

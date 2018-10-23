@@ -7162,6 +7162,14 @@ button.close {
   position: sticky;
   top: 15%;
 }
+.alamat-pengiriman {
+  position: relative;
+  left: 15px;
+}
+.ganti-alamat-pengiriman {
+  position: relative;
+  right: 15px;
+}
 
 
 

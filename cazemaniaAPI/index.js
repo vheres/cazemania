@@ -376,6 +376,7 @@ app.post('/transaction', function(req,res){
 
     sql = `INSERT INTO transactions SET ?`
     sql1 = `INSERT INTO transaction_details (transaction_id, catalogue_id, case_brand, case_model, case_type, price, amount) VALUES ?`
+    sql2 = `DELETE FROM cart where user_id = ${req.body.id}`
     
     conn.beginTransaction(function(err){
         if(err) {throw err;}
@@ -399,16 +400,24 @@ app.post('/transaction', function(req,res){
                         throw err;
                     })
                 }
-                conn.commit(function(err){
-                    if (err){
+                conn.query(sql2, (err,results2) => {
+                    if(err){
                         conn.rollback(function(){
                             console.log("Rollback Succesful3")
-                            throw err;
+                            throw err
                         })
                     }
-                    res.send({results1})
-                    console.log("Transaction Complete")
-                    conn.end()
+                    conn.commit(function(err){
+                        if (err){
+                            conn.rollback(function(){
+                                console.log("Rollback Succesful4")
+                                throw err;
+                            })
+                        }
+                        res.send({results1})
+                        console.log("Transaction Complete")
+                        conn.end()
+                    })
                 })
             })
         })
@@ -536,18 +545,18 @@ app.post('/users', function(req,res){
 })
 
 app.put('/users/:id', function(req,res){
-    var data = {
-        gender: req.body.gender,
-        phone : req.body.phone,
-        address: req.body.address,
-        kota: req.body.kota,
-        kodepos: req.body.kodepos,
-        destination_code : req.body.destination_code,
-    }
+    // var data = {
+    //     gender: req.body.gender,
+    //     phone : req.body.phone,
+    //     address: req.body.address,
+    //     kota: req.body.kota,
+    //     kodepos: req.body.kodepos,
+    //     destination_code : req.body.destination_code,
+    // }
 
     sql = `UPDATE users SET ? WHERE id = ${req.params.id}`
     
-    conn.query(sql, data, (err,results)=>{
+    conn.query(sql, req.body, (err,results)=>{
         if(err) throw err
         console.log(results.length)
         res.send(results)
@@ -555,7 +564,7 @@ app.put('/users/:id', function(req,res){
 })
 app.get('/users/transactions/:id', function(req,res){
     sql= `SELECT tr.id as id, LPAD( tr.id, 8, '0') as ordernumber, tr.date as date, tr.time as time, tr.proof as proof, tr.target_bank as target_bank, tr.status as status, tr.subtotal as subtotal, tr.shipping as shipping, tr.resi as resi, u.firstname as firstname, 
-    u.lastname as lastname, u.id as user_id, u.address as address, u.email as email, u.phone as phone, u.kota as kota, u.kodepos as kodepos FROM transactions tr JOIN users u ON tr.user_id = u.id WHERE user_id = ${req.params.id} ORDER BY date`
+    u.lastname as lastname, u.id as user_id, u.address as address, u.email as email, u.phone as phone, u.kota as kota, u.kodepos as kodepos FROM transactions tr JOIN users u ON tr.user_id = u.id WHERE user_id = ${req.params.id} ORDER BY date desc`
     conn.query(sql, (err,results)=>{
         if(err) throw err;
         console.log(results)
