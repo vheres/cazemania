@@ -5,6 +5,7 @@ import Header from './components/Header';
 import Footer from './components/Footer';
 import HomePage from './components/Homepage';
 import ShopPage from './components/ShopPage';
+import CustomPage from './components/CustomPage';
 import PremiumPage from './components/PremiumPage';
 import DetailPage from './components/DetailPage';
 import InformationPage from './components/InformationPage';
@@ -55,6 +56,7 @@ class App extends Component {
             <Col xs={12} >
               <Route exact path="/" component={HomePage}/>
               <Route path="/shop" component={ShopPage}/>
+              <Route path="/custom" component={CustomPage}/>
               <Route path="/premium_cases" component={PremiumPage}/>
               <Route path="/product" component={DetailPage}/>
               <Route path="/information" component={InformationPage}/>

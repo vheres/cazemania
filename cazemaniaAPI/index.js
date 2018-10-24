@@ -298,6 +298,20 @@ app.get('/item/:id', function(req,res){
     })
 })
 
+app.get('/custom', function(req,res){
+    sql = `SELECT * FROM brands ORDER BY name`
+    sql1 = `SELECT * FROM type ORDER BY name`
+    sql2 = `SELECT * FROM price`
+    conn.query(sql, (err,results)=>{
+        if(err) throw err;
+        conn.query(sql1, (err,results1)=>{
+            conn.query(sql2, (err,results2)=>{
+                res.send({brands: results, type: results1, price: results2})
+            })
+        })
+    })
+})
+
 app.get('/cart/:id', function(req,res){
     sql  = `SELECT car.id, cat.code, cat.name, cat.image,  car.brand_id, car.model_id, car.case_type, car.amount, br.name as brand_name, ty.name as model_name, pr.price as price FROM catalogue cat JOIN cart car ON cat.id=car.catalogue_id JOIN brands br ON br.id = car.brand_id 
     JOIN type ty ON ty.id = car.model_id JOIN price pr ON pr.case_type = car.case_type WHERE car.user_id=${req.params.id}`

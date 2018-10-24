@@ -216,7 +216,7 @@ class Header extends Component {
                                     <NavDropdown eventKey={3} title={<span className="orange-text">Shop</span>} id="basic-nav-dropdown" className="header-button">
                                         <MenuItem eventKey={3.1} onClick={()=>this.onLinkClick("/shop")}>Collections</MenuItem>
                                         <MenuItem eventKey={3.2} onClick={()=>this.onLinkClick("/premium_cases")}>Premium Cases</MenuItem>
-                                        <MenuItem eventKey={3.3}>Custom Cases</MenuItem>
+                                        <MenuItem eventKey={3.3} onClick={()=>this.onLinkClick("/custom")}>Custom Cases</MenuItem>
                                     </NavDropdown>
                                     <NavItem eventKey={2} className="header-button" onClick={()=>this.onLinkClick("/reseller-dropshipper")}>
                                         <span className="orange-text">Reseller/Dropshipper</span>
@@ -264,7 +264,7 @@ class Header extends Component {
                                     <NavDropdown eventKey={3} title={<span className="orange-text">Shop</span>} id="basic-nav-dropdown" className="header-button">
                                         <MenuItem eventKey={3.1} onClick={()=>this.onLinkClick("/shop")}>Collections</MenuItem>
                                         <MenuItem eventKey={3.2} onClick={()=>this.onLinkClick("/premium_cases")}>Premium Cases</MenuItem>
-                                        <MenuItem eventKey={3.3}>Custom Cases</MenuItem>
+                                        <MenuItem eventKey={3.3} onClick={()=>this.onLinkClick("/custom")}>Custom Cases</MenuItem>
                                     </NavDropdown>
                                     <NavItem eventKey={2} className="header-button" onClick={()=>this.onLinkClick("/reseller-dropshipper")}>
                                         <span className="orange-text">Reseller/Dropshipper</span>
@@ -281,7 +281,7 @@ class Header extends Component {
                                         </FormGroup>
                                     </Navbar.Form>
                                     <NavItem eventKey={5} className="margin-cart" >
-                                        <Button type="submit" className="btn btn-tosca" onClick={()=>this.onLinkClick("/cart")}><i class="fa fa-shopping-cart" ></i></Button>
+                                        <Button type="submit" className="btn btn-tosca" onClick={()=>this.onLinkClick("/login")}><i class="fa fa-shopping-cart" ></i></Button>
                                     </NavItem>
                                     <NavDropdown eventKey={6} title={<i class="fa fa-user"></i>} id="basic-nav-dropdown" className="margin-user account-css">
                                         <MenuItem eventKey={6.1} onClick={()=>this.onLinkClick("/login")}>
