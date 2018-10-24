@@ -350,6 +350,48 @@ app.post('/cart', function(req,res){
     })
 })
 
+app.post('/custom/cart', function(req,res){
+    data = req.body
+    sql  = `INSERT INTO cart SET ?`
+    conn.beginTransaction(function(err){
+        if(err) {throw err;}
+        conn.query(sql, data, (err, results)=>{
+            console.log(results)
+            if(err){
+                conn.rollback(function(){
+                    console.log("Rollback Succesful1")
+                    throw err
+                })
+            }
+            data1 = {
+                image : req.body.image,
+                cart_id: results.insertId
+            }
+            sql1 = `INSERT INTO custom_cases SET ?`
+            conn.query(sql1, data1, (err1, results1) => {
+                if(err1){
+                    conn.rollback(function(){
+                        console.log("Rollback Succesful2")
+                        throw err1
+                    })
+                }
+                conn.commit(function(err){
+                    if (err){
+                        conn.rollback(function(){
+                            console.log("Rollback Succesful3")
+                            throw err;
+                        })
+                    }
+                    res.send({results1})
+                    console.log("Custom add to cart Complete")
+                    conn.end()
+                })
+            })
+        })
+    })
+    
+})
+
 app.delete('/cart/:user_id/:id', function(req,res){
     sql  = `DELETE FROM cart where id = ${req.params.id}`
     sql1 = `SELECT car.id, cat.code, cat.name, cat.image,  car.brand_id, car.model_id, car.case_type, car.amount, br.name as brand_name, ty.name as model_name, pr.price as price FROM catalogue cat JOIN cart car ON cat.id=car.catalogue_id JOIN brands br ON br.id = car.brand_id 
