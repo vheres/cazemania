@@ -123,15 +123,23 @@ class CustomPage extends Component {
     }
 
     onAddToCart() {
-        axios.post(API_URL_1 + `/custom_cart`, {
+        var formData = new FormData()
+        var data =  {
             user_id: this.props.auth.id,
-            picture: this.state.picture,
             catalogue_id: '99',
             brand_id: this.refs.brand_select.value,
             model_id: this.refs.type_select.value,
             case_type: this.refs.case_select.value,
             amount: document.getElementById("quantity").value
-        }).then((res) => {
+        }
+        console.log(document.getElementById("custom_picture").files[0])
+        formData.append('file', document.getElementById("custom_picture").files[0])
+        formData.append('data', JSON.stringify(data))
+        var config = {
+            headers: 
+              {'Content-Type': 'multipart/form-data'}
+          }
+        axios.post(API_URL_1 + `/custom_cart`, formData, config).then((res) => {
             alert('add to cart successful!')
         }).catch((err) => {
             alert(err);
@@ -161,11 +169,29 @@ class CustomPage extends Component {
         }
     }
 
+    uploadCustom = (file) => {
+        var url = `${API_URL_1}/upload`
+        var formData = new FormData()
+        formData.append('file', file)
+        var config = {
+          headers: 
+            {'Content-Type': 'multipart/form-data'}
+        }
+        return axios.post(url, formData, config)
+        .then((res)=>{console.log(res)})
+      }
+
+    
     renderImageMagnifier() {
+        
         if(this.state.picture === "") {
             return (
                 <Col xs={12} className="upload_custom">
-                    <FileUploader />
+                    <div>
+                        <form encType="multipart/form-data">
+                        <input type="file" name="filename" id="custom_picture" accept="image/*"/>
+                        </form>
+                    </div>
                 </Col>
                 
             )

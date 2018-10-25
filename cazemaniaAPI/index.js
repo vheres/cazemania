@@ -350,8 +350,10 @@ app.post('/cart', function(req,res){
     })
 })
 
-app.post('/custom/cart', function(req,res){
-    data = req.body
+app.post('/custom_cart', function(req,res){
+    console.log(req.body)
+    console.log(JSON.parse(req.body.data))
+    var data = JSON.parse(req.body.data)
     sql  = `INSERT INTO cart SET ?`
     conn.beginTransaction(function(err){
         if(err) {throw err;}
@@ -363,30 +365,42 @@ app.post('/custom/cart', function(req,res){
                     throw err
                 })
             }
-            data1 = {
-                image : req.body.image,
-                cart_id: results.insertId
-            }
-            sql1 = `INSERT INTO custom_cases SET ?`
-            conn.query(sql1, data1, (err1, results1) => {
-                if(err1){
+            var unggahFile = req.filess.file
+            var fileName = "custom"+ data.user_id + results.insertId
+            unggahFile.mv('./public/custom/'+ fileName +'.jpg', (err)=>{
+                if(err){
                     conn.rollback(function(){
-                        console.log("Rollback Succesful2")
-                        throw err1
+                        console.log("Rollback Succesful Upload")
+                        throw err
                     })
                 }
-                conn.commit(function(err){
-                    if (err){
+                console.log('Custom case upload success!')
+                data1 = {
+                    image : fileName,
+                    cart_id: results.insertId
+                }
+                sql1 = `INSERT INTO custom_cases SET ?`
+                conn.query(sql1, data1, (err1, results1) => {
+                    if(err1){
                         conn.rollback(function(){
-                            console.log("Rollback Succesful3")
-                            throw err;
+                            console.log("Rollback Succesful2")
+                            throw err1
                         })
                     }
-                    res.send({results1})
-                    console.log("Custom add to cart Complete")
-                    conn.end()
+                    conn.commit(function(err){
+                        if (err){
+                            conn.rollback(function(){
+                                console.log("Rollback Succesful3")
+                                throw err;
+                            })
+                        }
+                        res.send({results1})
+                        console.log("Custom add to cart Complete")
+                        conn.end()
+                    })
                 })
             })
+            
         })
     })
     
@@ -741,6 +755,7 @@ app.get('/shipping', function(req,res){
 })
 
 app.post('/upload', function(req,res){
+    console.log(req)
     if(req.files){
         console.log(req.files)
         var unggahFile = req.files.file
@@ -756,6 +771,32 @@ app.post('/upload', function(req,res){
             }
         })
     }
+})
+
+app.post('/customupload', function(req,res){
+    if(req.files){
+
+        sql = `INSERT INTO cart SET ?`
+
+        conn.query(sql, (err, results) =>{
+
+        })
+
+        console.log(req.files)
+        var unggahFile = req.files.file
+        var file = unggahFile.name
+        unggahFile.mv('./public/custom/'+ file, (err)=>{
+            if(err){
+                console.log(err)
+                res.send(err)
+            } else {
+                console.log('Custom case upload success!')
+                res.send('Custom case upload success!')
+                // res.send(file)
+            }
+        })
+    }
+
 })
 
 app.listen(port, () => console.log(`Example app listening on port ${port}!`));
