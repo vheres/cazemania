@@ -12,8 +12,8 @@ class HomePage extends Component {
 
     renderHomePage() {
         return(
-                <Grid fluid className="HomePage-css margin-15">
-                    <Row>
+                <Grid fluid className="HomePage-css">
+                    <Row className="no-margin">
                         <img src={`${API_URL_1}/others/banner.jpg`} alt="banner" className="homepage-banner"></img>
                     </Row>
                         <Row>
@@ -58,8 +58,8 @@ class HomePage extends Component {
                                 </Row>
                             </Col>   
                         </Row>
-                        <Row className="bestseller-css">
-                            <Row style={{"background-color": 'rgb(30,190,203)'}}>
+                        <Row className="bestseller-css no-margin">
+                            <Row className="no-margin" style={{"background-color": 'rgb(30,190,203)'}}>
                                 <h2 className="text-center text-white">Best Seller</h2>
                                 <div className="block-margin-auto best-seller-pointer"></div>
                             </Row>
@@ -78,8 +78,8 @@ class HomePage extends Component {
                             </Row>
                         </Row>
                         {/*  Row className="instagram-css" */}
-                        <Row className="instagram-css"> 
-                            <Row className="text-center" style={{"background-color": 'rgb(30,190,203)', "padding-top": 15, "padding-bottom": 15}}>
+                        <Row className="instagram-css no-margin"> 
+                            <Row className="text-center no-margin" style={{"background-color": 'rgb(30,190,203)', "padding-top": 15, "padding-bottom": 15}}>
                             <img src="https://diylogodesigns.com/wp-content/uploads/2016/05/instagram-Logo-PNG-Transparent-Background-download-768x768.png" alt="instagram" style={{width:"50px"}}></img><span className="instagram-title text-white">@Cazemania</span>
                             </Row>
                             <Row className="padding-15p">

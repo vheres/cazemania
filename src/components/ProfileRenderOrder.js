@@ -128,7 +128,7 @@ class ProfileRenderOrder extends Component {
         return(
             <Panel eventKey={this.props.transaction_id} bsStyle={this.selectStyle()}>
               <Panel.Heading>
-                <Panel.Title toggle>Order ID: <strong>CMW#{this.props.ordernumber}</strong>{this.renderOrderStatus()[this.props.status]()} </Panel.Title>
+                <Panel.Title toggle>Order ID: <strong>CMW#{this.props.ordernumber}</strong><span style={{float: 'right'}}>{this.renderOrderStatus()[this.props.status]()}</span></Panel.Title>
               </Panel.Heading>
               <Panel.Body collapsible>
                 <section id="content" style={{"font-size":"16px"}}> 
@@ -137,9 +137,9 @@ class ProfileRenderOrder extends Component {
                         <section class="scrollable wrapper" style={{"line-height":"20px"}}> 
                         <div class="row">
                             <p class="m-t m-b col-md-3" style={{"line-height":"20px"}}>
-                                Order date: <strong>{this.props.date}</strong><br/>
-                                Order status: {this.renderOrderStatus()[this.props.status]()}<br/>
-                                Order ID: <strong>CMW#{this.props.ordernumber}</strong>
+                                <div style={{'margin-bottom': '5px'}}>Order date: <strong>{this.props.date}</strong></div>
+                                <div style={{'margin-bottom': '5px'}}>Order status: {this.renderOrderStatus()[this.props.status]()}</div>
+                                <div style={{'margin-bottom': '5px'}}>Order ID: <strong>CMW#{this.props.ordernumber}</strong></div>  
                             </p>
                             <div class="well bg-light b m-t col-md-6">
                                 <div class="row">

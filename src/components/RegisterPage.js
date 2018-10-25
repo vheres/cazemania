@@ -97,7 +97,7 @@ class RegisterPage extends Component {
         const { selectedOption } = this.state;
         if(this.props.auth.email === "") {
             return(
-                <Grid fluid className="margin-15p margin-bot-15">
+                <Grid fluid className="margin-bot-15">
                     <Row>
                         <img src="https://www.dtn.com.vn/skin/frontend/dtn_website/default/images/banner-package1.jpg" alt="banner" style={{width:"100%"}}/>
                     </Row>        

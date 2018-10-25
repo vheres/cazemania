@@ -252,7 +252,7 @@ class CustomPage extends Component {
 
     renderCustomPage() {
         return(
-                <Grid fluid className="HomePage-css margin-15 padding-15p">
+                <Grid fluid className="HomePage-css padding-15p">
                     <Row>
                         <Col md={2}></Col>
                         <Col md={3}>

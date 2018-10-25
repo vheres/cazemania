@@ -110,7 +110,7 @@ class PremiumPage extends Component {
 
     renderShopPage() {
         return(
-                <Grid fluid className="HomePage-css margin-15 padding-15p">
+                <Grid fluid className="HomePage-css padding-15p">
                     <Col md={1}></Col>
                     <Col md={2}>
                         {this.renderFilterMenu()}
