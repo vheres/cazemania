@@ -170,7 +170,7 @@ class ProfilePage extends Component {
 
     renderProfilePage() {
             return (
-                <Grid fluid>
+                <Grid fluid className="">
                 <Row>
                     {this.renderUserInfo()}
                     <Col md={7}>

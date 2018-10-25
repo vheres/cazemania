@@ -6947,7 +6947,6 @@ button.close {
 }
 .Footer-css {
   background-color: rgb(30,190,203);
-  margin-left: 15px;
 }
 .facebook-text {
   margin-left: 10px;
@@ -6976,14 +6975,6 @@ button.close {
 }
 .margin-bot-15 {
   margin-bottom: 15px;
-}
-.margin-15 {
-  margin-left: -15px;
-  margin-right: -15px;
-}
-.margin-15p {
-  margin-left: 15px;
-  margin-right: 15px;
 }
 .padding-text {
   padding-top: 7px;
@@ -7023,6 +7014,9 @@ button.close {
 }
 .no-margin {
   margin: 0;
+}
+.no-padding {
+  padding: 0;
 }
 .square {
   height: 8px;

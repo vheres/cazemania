@@ -48,12 +48,12 @@ class App extends Component {
   render() {
     if (this.props.auth.cookieCheck === true) {
       return (
-        <Grid fluid>
+        <Grid fluid className="no-padding">
           <Row>
             <Header />
           </Row>
           <Row>
-            <Col xs={12} >
+            <Col xs={12} className="no-margin no-padding">
               <Route exact path="/" component={HomePage}/>
               <Route path="/shop" component={ShopPage}/>
               <Route path="/custom" component={CustomPage}/>
@@ -71,11 +71,10 @@ class App extends Component {
               <Route path="/register" component={RegisterPage}/>
             </Col>
           </Row>
-          <Row>
+          <Row className="no-margin no-padding">
             <Footer />
           </Row>
-          <Row>
-              
+          <Row>   
           </Row>
         </Grid>
       );

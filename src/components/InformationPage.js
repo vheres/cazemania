@@ -31,7 +31,7 @@ class InformationPage extends Component {
 
     renderInformationPage() {
         return(
-            <Grid fluid className="HomePage-css margin-15">
+            <Grid fluid className="HomePage-css">
                 <Row>
                     <Col md={12}>
                         <img src="https://www.dtn.com.vn/skin/frontend/dtn_website/default/images/banner-package1.jpg" alt="banner" style={{width:"100%"}}></img>
