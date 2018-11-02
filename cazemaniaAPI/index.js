@@ -433,7 +433,6 @@ app.post('/custom_cart', function(req,res){
                         }
                         res.send({results1})
                         console.log("Custom add to cart Complete")
-                        conn.end()
                     })
                 })
             })
