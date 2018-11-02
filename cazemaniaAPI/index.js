@@ -350,6 +350,43 @@ app.post('/cart', function(req,res){
     })
 })
 
+app.post('/bukti_pembayaran', function(req,res){
+    var data = JSON.parse(req.body.data)
+    var unggahFile = req.files.file
+    var fileName = "bukti_"+ data.transaction_id
+    var sql = `UPDATE transactions SET proof = '${fileName}' WHERE id = ${data.transaction_id}`
+    conn.beginTransaction(function(err){
+        if (err) {throw err;}
+        conn.query(sql, (err, results) => {
+            if (err){
+                conn.rollback(function(){
+                    console.log("Rollback Successful1")
+                    throw err
+                })
+            }
+            unggahFile.mv('./public/bukti/' + fileName + '.jpg', (err)=> {
+                if(err) {
+                    conn.rollback(function() {
+                        console.log("Rollback Successful Upload")
+                        throw err
+                    })
+                }
+                conn.commit(function(err){
+                    if (err){
+                        conn.rollback(function(){
+                            console.log("Rollback Succesful2")
+                            throw err;
+                        })
+                    }
+                    res.send({results})
+                    console.log("Upload procedure completed")
+                    conn.end()
+                })
+            })
+        })
+    })
+})
+
 app.post('/custom_cart', function(req,res){
     console.log(req.body)
     console.log(JSON.parse(req.body.data))
@@ -365,7 +402,7 @@ app.post('/custom_cart', function(req,res){
                     throw err
                 })
             }
-            var unggahFile = req.filess.file
+            var unggahFile = req.files.file
             var fileName = "custom"+ data.user_id + results.insertId
             unggahFile.mv('./public/custom/'+ fileName +'.jpg', (err)=>{
                 if(err){

@@ -37,22 +37,25 @@ class ProfileRenderOrder extends Component {
         }
     }
 
-    onCompleteOrderClick(){
-        axios.put(API_URL_1 + "/adminorders/addresi/" + this.props.transaction_id,{
-            resi: this.refs.addNomorResi.value,
-            email: this.props.email 
-        })
-        .then((res)=>{
-            console.log(res)
-            this.props.refresh()
-            alert("Order Complete")
-        })
-        .catch((err)=>{
-            console.log(err)
-            alert("ERROR")
+    onUpLoadClick() {
+        console.log(document.getElementById('bukti_pembayaran').files[0])
+        var data = {
+            transaction_id: this.props.transaction_id
+        }
+        var formData = new FormData()
+        formData.append('file', document.getElementById('bukti_pembayaran').files[0])
+        formData.append('data', JSON.stringify(data))
+        console.log(formData)
+        var config = {
+            headers: 
+              {'Content-Type': 'multipart/form-data'}
+        }
+          axios.post(API_URL_1 + `/bukti_pembayaran`, formData, config).then((res) => {
+            alert('upload success!')
+        }).catch((err) => {
+            alert(err);
         })
     }
-
 
     renderOrderStatus(){
         return(
@@ -78,8 +81,11 @@ class ProfileRenderOrder extends Component {
             return (
                 <header class="wrapper-md bg-light lter">
                 <div className="row">
-                    <span className="col-md-2">Bukti pembayaran: </span><span className="col-md-5"><FileUploader/></span>
-                    <span className="col-md-5">
+                    <span className="col-md-2">Bukti pembayaran: </span><span className="col-md-5"><input type="file" name="filename" id="bukti_pembayaran" accept="image/*"/></span>
+                    <span className="col-md-3">
+                        <input type="button" value="upload" onClick={()=>this.onUpLoadClick()}></input>
+                    </span>
+                    <span className="col-md-2">
                         <input type="button" value="Bukti Pembayaran" onClick={()=>this.handleShow()} className="btn btn-sm btn-info pull-right"/>
                     </span>
                     
