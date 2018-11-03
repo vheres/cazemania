@@ -9,7 +9,7 @@ import { withRouter } from 'react-router-dom';
 import FileUploader from './FileUploader';
 
 class CustomPage extends Component {
-    state={picture: "", brands: [], types: [], typeselect: [""], caseselect: {soft: 0, hard: 0}, price: [], selected_price: ""}
+    state={picture: "", brands: [], types: [], typeselect: [""], caseselect: {soft: 0, hard: 0}, price: [], selected_price: "", namafile: ''}
 
     componentWillMount(){
         const params = new URLSearchParams(this.props.location.search);
@@ -183,18 +183,31 @@ class CustomPage extends Component {
 
     
     renderImageMagnifier() {
-        
         if(this.state.picture === "") {
-            return (
-                <Col xs={12} className="upload_custom">
-                    <div>
-                        <form encType="multipart/form-data">
-                        <input type="file" name="filename" id="custom_picture" accept="image/*"/>
-                        </form>
-                    </div>
-                </Col>
-                
-            )
+            if (this.state.namafile == '') {
+                return (
+                    <Col xs={12} className="upload_custom">
+                    <label for="custom_picture" className='inputlabel inputlabel_icon'><i className="fa fa-picture-o"/><p style={{'font-size': '30px'}}>Upload Picture</p></label>
+                        <div>
+                            <form encType="multipart/form-data">
+                            <input type="file" name="filename" id="custom_picture" accept="image/*" className="inputfile" onChange={()=>this.setState({namafile: document.getElementById('custom_picture').files[0].name})}/>
+                            </form>
+                        </div>
+                    </Col> 
+                )
+            } else {
+                return (
+                    <Col xs={12} className="upload_custom">
+                    <label for="custom_picture" className='inputlabel inputlabel_icon'><i className="fa fa-picture-o"/><p style={{'font-size': '30px'}}>{document.getElementById("custom_picture").files[0].name}</p></label>
+                        <div>
+                            <form encType="multipart/form-data">
+                            <input type="file" name="filename" id="custom_picture" accept="image/*" className="inputfile" onChange={()=>this.setState({namafile: document.getElementById('custom_picture').files[0].name})}/>
+                            </form>
+                        </div>
+                    </Col> 
+                )
+            }
+            
         }
         else {
             return <Magnifier src={this.state.picture+'.jpg'} width={"100%"} />

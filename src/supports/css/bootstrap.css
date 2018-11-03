@@ -7166,7 +7166,30 @@ button.close {
 }
 .upload_custom {
   position: relative;
-  
+}
+.inputfile {
+	width: 0.1px;
+	height: 0.1px;
+	opacity: 0;
+	overflow: hidden;
+	position: absolute;
+	z-index: -1;
+}
+.inputlabel {
+  cursor: pointer;
+  width: 100%;
+  height: 400px;
+  border: 2px solid rgb(9, 175, 204);
+  border-radius: 5px;
+  font-size: 100px;
+  color: rgb(9, 175, 204);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: background-color 0.3s;
+}
+.inputlabel:hover {
+  background-color: rgb(255, 181, 44);
 }
 
 
