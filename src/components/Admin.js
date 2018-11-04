@@ -242,58 +242,55 @@ class Admin extends Component {
     }
 
     renderAddCaseType(){
-        if(this.state.addCase === 0){
-            return(
-                <input type="button" value="Tambah Tipe Case" className="btn btn-info" style={{"margin-left": "10px"}} onClick={()=>this.onAddCaseTypeClick()}/>
-            )
-        }
-        else{
-            return(
-                <div className=""style={{width: "50%"}}>
-                <section className="vbox panel bg-white padder-v">
-                    {this.brandSelectOptionsAdd()}
-                    <input type="text" className="col-md-4 m-t-sm" ref="addCaseTypeName" placeholder="Input Nama Tipe HP"/>
-                    <div className="checkbox m-l col-md-2">
-                      <label className="i-checks" style={{"padding-right":"10px"}} >
-                        <input type="checkbox" name="caseType" ref="addSoft" /><i></i> Soft Case
-                      </label>
-                      <label className="i-checks">
-                        <input type="checkbox" name="caseType" ref="addHard" /><i></i> Hard Case
-                      </label>
+        if(this.props.match.params.table === "cases"){
+            if(this.state.addCase === 0){
+                return(
+                    <input type="button" value="Tambah Tipe Case" className="btn btn-info" style={{"margin-left": "10px"}} onClick={()=>this.onAddCaseTypeClick()}/>
+                )
+            }
+            else{
+                return(
+                    <div className=""style={{width: "50%"}}>
+                    <section className="vbox panel bg-white padder-v">
+                        {this.brandSelectOptionsAdd()}
+                        <input type="text" className="col-md-4 m-t-sm" ref="addCaseTypeName" placeholder="Input Nama Tipe HP"/>
+                        <div className="checkbox m-l col-md-2">
+                          <label className="i-checks" style={{"padding-right":"10px"}} >
+                            <input type="checkbox" name="caseType" ref="addSoft" /><i></i> Soft Case
+                          </label>
+                          <label className="i-checks">
+                            <input type="checkbox" name="caseType" ref="addHard" /><i></i> Hard Case
+                          </label>
+                        </div>
+                        <input type="button" value="Submit" className="btn btn-success col-md-1" onClick={()=>this.onSubmitCaseTypeClick()}/>
+                        <input type="button" value="Cancel" className="btn btn-warning col-md-1" onClick={()=>this.onCancelCaseTypeClick()}/>
+                    </section>
                     </div>
-                    <input type="button" value="Submit" className="btn btn-success col-md-1" onClick={()=>this.onSubmitCaseTypeClick()}/>
-                    <input type="button" value="Cancel" className="btn btn-warning col-md-1" onClick={()=>this.onCancelCaseTypeClick()}/>
-                </section>
-                </div>
-            )
+                )
+            }
         }
     }
 
     renderAddCatalogue(){
-        if(this.state.addCatalogue === 0){
-            return(
-                <input type="button" value="Tambah Catalogue" className="btn btn-info" style={{"margin-left": "10px"}} onClick={()=>this.onAddCatalogueClick()}/>
-            )
-        }
-        else{
-            return(
-                <div className=""style={{width: "50%"}}>
-                <section className="vbox panel bg-white padder-v">
-                    {this.brandSelectOptionsAdd()}
-                    <input type="text" className="col-md-4 m-t-sm" ref="addCaseTypeName" placeholder="Input Nama Tipe HP"/>
-                    <div className="checkbox m-l col-md-2">
-                      <label className="i-checks" style={{"padding-right":"10px"}} >
-                        <input type="checkbox" name="caseType" ref="addSoft" /><i></i> Soft Case
-                      </label>
-                      <label className="i-checks">
-                        <input type="checkbox" name="caseType" ref="addHard" /><i></i> Hard Case
-                      </label>
+        if(this.props.match.params.table === "catalogue"){
+            if(this.state.addCatalogue === 0){
+                return(
+                    <input type="button" value="Tambah Catalogue" className="btn btn-info" style={{"margin-left": "10px"}} onClick={()=>this.onAddCatalogueClick()}/>
+                )
+            }
+            else{
+                return(
+                    <div className=""style={{width: "50%"}}>
+                    <section className="vbox panel bg-white padder-v">
+                        <input type="text" className="col-md-3 m-t-sm" ref="addCatalogueCode" placeholder="Input Kode Produk"/>
+                        <input type="text" className="col-md-3 m-t-sm" ref="addCatalogueName" placeholder="Input Nama Produk"/>
+                        <input type="file" className="col-md-4 m-t-sm" ref="addCatalogueImage" id="addCatalogueImage"/>
+                        <input type="button" value="Submit" className="btn btn-success col-md-1" onClick={()=>this.onSubmitCatalogueClick()}/>
+                        <input type="button" value="Cancel" className="btn btn-warning col-md-1" onClick={()=>this.onCancelCatalogueClick()}/>
+                    </section>
                     </div>
-                    <input type="button" value="Submit" className="btn btn-success col-md-1" onClick={()=>this.onSubmitCaseTypeClick()}/>
-                    <input type="button" value="Cancel" className="btn btn-warning col-md-1" onClick={()=>this.onCancelCaseTypeClick()}/>
-                </section>
-                </div>
-            )
+                )
+            }
         }
     }
 
@@ -325,7 +322,7 @@ class Admin extends Component {
             alert("Pilih Jenis Case (Soft/Hard/Both)")
         }
         else{
-            axios.post(API_URL_1 + "/admin/" + this.props.match.params.table,{
+            axios.post(API_URL_1 + "/admin/addcases",{
                 name: this.refs.addCaseTypeName.value,
                 brand_id: this.refs.brand_selectAdd.value,
                 soft: softValue,
@@ -337,14 +334,52 @@ class Admin extends Component {
                 this.refreshData()
                 alert("Tambah Tipe Case Berhasil")
             })
-        }
-        
+        } 
+    }
 
+    onSubmitCatalogueClick(){
+        console.log(document.getElementById('addCatalogueImage').files.length)
         
+        if(this.refs.addCatalogueCode.value === ""){
+            alert("Input Kode Produk")
+        }
+        else if(this.refs.addCatalogueName.value === ""){
+            alert("Input Nama Produk")
+        }
+        else if(document.getElementById('addCatalogueImage').files.length === 0){
+            alert("Input Gambar Produk")
+        }
+        else{
+            var data = {
+                code: this.refs.addCatalogueCode.value,
+                name: this.refs.addCatalogueName.value,
+                image: this.refs.addCatalogueCode.value
+            }
+            var formData = new FormData()
+            formData.append('file', document.getElementById('addCatalogueImage').files[0])
+            formData.append('data', JSON.stringify(data))
+            console.log(formData)
+            var config = {
+                headers: 
+                  {'Content-Type': 'multipart/form-data'}
+            }
+
+            axios.post(API_URL_1 + `/admin/addcatalogue`, formData, config)
+            .then((res) => {
+                alert('Tambah Catalogue Success!')
+                this.refreshData()
+            }).catch((err) => {
+                alert(err);
+            })
+        }
     }
 
     onCancelCaseTypeClick(){
         this.setState({addCase: 0})
+    }
+
+    onCancelCatalogueClick(){
+        this.setState({addCatalogue: 0})
     }
 
     render(){

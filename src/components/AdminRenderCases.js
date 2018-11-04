@@ -34,7 +34,7 @@ class AdminRenderCases extends Component {
 
     onDeleteClick(){
         if(window.confirm("Are you sure you want to delete entry? This action cannot be reversed")){
-            axios.delete("http://localhost:1994" + "/admin/" + this.props.table + "/" + this.props.id)
+            axios.delete("http://localhost:1994" + "/admin/deletecases/" + this.props.id)
             .then((res)=>{
                 console.log(res)
                 alert("DELETE SUCCESS")
