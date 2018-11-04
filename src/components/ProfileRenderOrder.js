@@ -5,10 +5,12 @@ import {Panel, PanelGroup, Modal, Button} from 'react-bootstrap'
 import FileUploader from './FileUploader'
 
 class ProfileRenderOrder extends Component {
-    state = {show: false, items: []}
+    constructor(props) {
+        super(props);
+        this.state = {show: false, items: [], namafile: ''}
+    }
 
     componentWillMount(){
-        console.log(this.props.transaction_id)
         axios.get(API_URL_1 + "/users/transactions/details/" + this.props.transaction_id)
         .then((res)=>{
             console.log(res.data)
@@ -78,20 +80,39 @@ class ProfileRenderOrder extends Component {
 
     renderHeader(){
         if(this.props.status === "pendingPayment"){
-            return (
-                <header class="wrapper-md bg-light lter">
-                <div className="row">
-                    <span className="col-md-2">Bukti pembayaran: </span><span className="col-md-5"><input type="file" name="filename" id="bukti_pembayaran" accept="image/*"/></span>
-                    <span className="col-md-3">
-                        <input type="button" value="upload" onClick={()=>this.onUpLoadClick()}></input>
-                    </span>
-                    <span className="col-md-2">
-                        <input type="button" value="Bukti Pembayaran" onClick={()=>this.handleShow()} className="btn btn-sm btn-info pull-right"/>
-                    </span>
-                    
-                </div>
-                </header>
-            )
+            if (this.state.namafile === "") {
+                return (
+                    <header class="wrapper-md bg-light lter">
+                    <div className="row">
+                        <span className="col-md-2">Bukti pembayaran: </span>
+                        <span className="col-md-8"><label for="bukti_pembayaran" className="btn btn-primary" style={{'width': '120px'}}>select image</label>{' '}
+                        <input type="button" value="upload" className="btn btn-success" onClick={()=>this.onUpLoadClick()}></input></span>
+                        <input type="file" className="inputfile" name="filename" id="bukti_pembayaran" accept="image/*" onChange={()=>this.setState({namafile: document.getElementById('bukti_pembayaran').files[0].name})}/>
+                        <span className="col-md-2">
+                            <input type="button" value="Bukti Pembayaran" onClick={()=>this.handleShow()} className="btn btn-sm btn-info pull-right"/>
+                        </span>
+                        
+                    </div>
+                    </header>
+                )
+            } else {
+                console.log(this.state.namafile)
+                return (
+                    <header class="wrapper-md bg-light lter">
+                    <div className="row">
+                        <span className="col-md-2">Bukti pembayaran: </span>
+                        <span className="col-md-8"><label for="bukti_pembayaran" className="btn btn-primary"  style={{'width': '120px'}}><span className="text-ellipsis">{this.state.namafile}</span></label>{' '}
+                        <input type="button" value="upload" className="btn btn-success" onClick={()=>this.onUpLoadClick()}></input></span>
+                        <input type="file" className="inputfile" name="filename" id="bukti_pembayaran" accept="image/*" onChange={()=>this.setState({namafile: document.getElementById('bukti_pembayaran').files[0].name})}/>
+                        <span className="col-md-2">
+                            <input type="button" value="Bukti Pembayaran" onClick={()=>this.handleShow()} className="btn btn-sm btn-info pull-right"/>
+                        </span>
+                        
+                    </div>
+                    </header>
+                )
+            }
+            
         }
         else if(this.props.status === "pendingDelivery"){
             return (

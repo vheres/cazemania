@@ -4,7 +4,7 @@ import axios from 'axios'
 import {API_URL_1} from '../supports/api-url/apiurl'
 import ProfileRenderOrder from './ProfileRenderOrder'
 import { connect } from 'react-redux';
-import {Panel, PanelGroup} from 'react-bootstrap'
+import {Panel, PanelGroup, Col} from 'react-bootstrap'
 import AdminOrdersTabs from './AdminOrdersTabs'
  
 
@@ -19,8 +19,10 @@ class ProfileOrder extends Component {
         axios.get(API_URL_1 + "/users/transactions/" + this.props.auth.id)
         .then((res)=>{
             this.setState({orders: res.data})
-            if (this.state.orders[0].status == 'pendingPayment') {
-                this.setState({activeKey:this.state.orders[0].id})
+            if (this.state.orders.length > 0) {
+                if (this.state.orders[0].status == 'pendingPayment') {
+                    this.setState({activeKey:this.state.orders[0].id})
+                }
             }
         })
     }
@@ -38,19 +40,28 @@ class ProfileOrder extends Component {
         return arrJSX
     }
 
+    renderProfileOrder() {
+        if (this.state.orders.length > 0) {
+            return(
+                <Col xs={12}>
+                    <PanelGroup
+                    accordion
+                    id="accordion-controlled-example"
+                    activeKey={this.state.activeKey}
+                    onSelect={this.handleSelect.bind(this)}
+                    >
+                    {this.renderDataTableOrders()}
+                    </PanelGroup>
+                </Col>
+            )
+        } else {
+            return <Col xs={12}>No Transaction History</Col>
+        }
+       
+    }
+
     render(){
-        return(
-            <div>
-                <PanelGroup
-                accordion
-                id="accordion-controlled-example"
-                activeKey={this.state.activeKey}
-                onSelect={this.handleSelect.bind(this)}
-                >
-                {this.renderDataTableOrders()}
-                </PanelGroup>
-            </div>
-        )
+        return this.renderProfileOrder();
     }
 }
 

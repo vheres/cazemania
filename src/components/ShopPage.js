@@ -6,7 +6,7 @@ import ItemDetail from './ItemDetail';
 import PaginationClass from './Pagination';
 
 class ShopPage extends Component {
-    state = { catalogue: [], pagination: [], pagecount: 0, search_status: [0], active: [0] }
+    state = { catalogue: [], pagination: [], item_count: 0, pagecount: 0, search_status: [0], active: [0] }
 
     componentWillMount() {
         if (this.state.pagination.length === 0) {
@@ -35,7 +35,7 @@ class ShopPage extends Component {
             }
         })
         .then((response)=>{
-            this.setState({ catalogue: response.data.catalogue, pagecount: Math.ceil((response.data.pagecount[0].count/20)) })
+            this.setState({ catalogue: response.data.catalogue, item_count: response.data.pagecount[0].count, pagecount: Math.ceil((response.data.pagecount[0].count/20)) })
         })
     }
 
@@ -55,7 +55,7 @@ class ShopPage extends Component {
             }
         })
         .then((response)=>{
-            this.setState({ catalogue: response.data.catalogue, pagecount: Math.ceil((response.data.pagecount[0].count/20)) })
+            this.setState({ catalogue: response.data.catalogue, item_count: response.data.pagecount[0].count, pagecount: Math.ceil((response.data.pagecount[0].count/20)) })
         })
     }
 
@@ -138,7 +138,7 @@ class ShopPage extends Component {
                     <Col mdOffset={2} md={8}>
                             <Row>
                                 <Col xsHidden md={12}>
-                                    <p className="padding-text">Menampilkan ### produk</p>
+                                    <p className="padding-text">{`Menampilan ${this.state.catalogue.length} produk dari ${this.state.item_count}`}</p>
                                 </Col>
                             </Row>
                             <hr/>

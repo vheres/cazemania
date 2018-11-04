@@ -4060,3 +4060,9 @@ fieldset[disabled] .btn-orange.active {
   background-color: rgb(255, 181, 44);
   border-color: rgb(255, 181, 44);
 }
+.empty_input {
+  border: 2px solid red;
+}
+.password_diff {
+  border: 2px solid orange;
+}

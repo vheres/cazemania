@@ -7191,6 +7191,14 @@ button.close {
 .inputlabel:hover {
   background-color: rgb(255, 181, 44);
 }
+input[type="number"]::-webkit-outer-spin-button, input[type="number"]::-webkit-inner-spin-button {
+    -webkit-appearance: none;
+    margin: 0;
+}
+ 
+input[type="number"] {
+    -moz-appearance: textfield;
+}
 
 
 

@@ -26,7 +26,7 @@ class InformationPage extends Component {
 
     async handleSelect(activeKey) {
         await this.setState({ activeKey });
-        this.props.history.push(`/information?active=${this.state.activeKey}`)
+        this.props.history.push(`/information?active=${this.state.activeKey}`) 
     }
 
     renderInformationPage() {
@@ -54,7 +54,7 @@ class InformationPage extends Component {
                         >
                             <Panel eventKey="1">
                                 <Panel.Heading>
-                                <Panel.Title toggle>FAQ</Panel.Title>
+                                <Panel.Title toggle id='faq'>FAQ</Panel.Title>
                                 </Panel.Heading>
                                 <Panel.Body collapsible>
                                     <Grid fluid>
@@ -131,7 +131,7 @@ class InformationPage extends Component {
                             </Panel>
                             <Panel eventKey="2">
                                 <Panel.Heading>
-                                <Panel.Title toggle>Cara Order</Panel.Title>
+                                <Panel.Title toggle id='caraorder'>Cara Order</Panel.Title>
                                 </Panel.Heading>
                                 <Panel.Body collapsible>
                                 Anim pariatur cliche reprehenderit, enim eiusmod high life accusamus terry
@@ -147,7 +147,7 @@ class InformationPage extends Component {
                             </Panel>
                             <Panel eventKey="3">
                                 <Panel.Heading>
-                                <Panel.Title toggle>Pembayaran</Panel.Title>
+                                <Panel.Title toggle id='pembayaran'>Pembayaran</Panel.Title>
                                 </Panel.Heading>
                                 <Panel.Body collapsible>
                                 Anim pariatur cliche reprehenderit, enim eiusmod high life accusamus terry
@@ -163,7 +163,7 @@ class InformationPage extends Component {
                             </Panel>
                             <Panel eventKey="4">
                                 <Panel.Heading>
-                                <Panel.Title toggle>Informasi Pengiriman</Panel.Title>
+                                <Panel.Title toggle id='informasipengiriman'>Informasi Pengiriman</Panel.Title>
                                 </Panel.Heading>
                                 <Panel.Body collapsible>
                                 <ul>
@@ -176,7 +176,7 @@ class InformationPage extends Component {
                             </Panel>
                             <Panel eventKey="5">
                                 <Panel.Heading>
-                                <Panel.Title toggle>Penukaran dan Pengembalian</Panel.Title>
+                                <Panel.Title toggle id='penukarandanpengembalian'>Penukaran dan Pengembalian</Panel.Title>
                                 </Panel.Heading>
                                 <Panel.Body collapsible>
                                     <Grid fluid>

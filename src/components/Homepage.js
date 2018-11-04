@@ -61,7 +61,7 @@ class HomePage extends Component {
                         <Row className="bestseller-css no-margin">
                             <Row className="no-margin" style={{"background-color": 'rgb(30,190,203)'}}>
                                 <h2 className="text-center text-white">Best Seller</h2>
-                                <div className="block-margin-auto best-seller-pointer"></div>
+                                {/* <div className="block-margin-auto best-seller-pointer"></div> */}
                             </Row>
                             <Row>
                                 <Col md={2}></Col>
