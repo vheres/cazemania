@@ -34,7 +34,8 @@ class AdminRenderCatalogue extends Component {
 
     onDeleteClick(){
         if(window.confirm("Are you sure you want to delete entry? This action cannot be reversed")){
-            axios.delete(API_URL_1 + "/admin/" + this.props.table + "/" + this.props.album_id)
+            var data = {image: this.props.image}
+            axios.post(API_URL_1 + "/admin/deletecatalogue/" + this.props.id, data)
             .then((res)=>{
                 console.log(res)
                 alert("DELETE SUCCESS")

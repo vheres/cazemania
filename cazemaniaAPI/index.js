@@ -8,6 +8,7 @@ var http = require("https");
 var qs = require("querystring")
 var upload = require('express-fileupload')
 var moment = require('moment')
+const fs = require('fs');
 
 var app = express();
 const port = 1994;
@@ -114,7 +115,7 @@ app.get('/admin/:table', function(req,res){
             {
             catalogue: () => {
                 return(
-                    sql = `SELECT * FROM catalogue ORDER BY id DESC` )
+                    sql = `SELECT * FROM catalogue WHERE id != 99 ORDER BY id DESC` )
                 },
             cases: () => {
                 return(
@@ -233,50 +234,132 @@ app.put('/admin/:table/:id', function(req,res){
     })
 })
 
-app.post('/admin/:table', function(req,res){
-    function tableselect2(){
-        return(
-            {
-            catalogue: () => {
-                return(
-                    sql = `INSERT INTO catalogue SET ?` )
-                },
-            cases: () => {
-                return(
-                    sql = `INSERT INTO type SET ?` )
-                }
-            }
-        )
-    }
+// app.post('/admin/:table', function(req,res){
+//     function tableselect2(){
+//         return(
+//             {
+//             catalogue: () => {
+//                 return(
+//                     sql = `INSERT INTO catalogue SET ?` )
+//                 },
+//             cases: () => {
+//                 return(
+//                     sql = `INSERT INTO type SET ?` )
+//                 }
+//             }
+//         )
+//     }
 
-    conn.query(tableselect2()[req.params.table](), req.body, (err,results)=>{
+//     conn.query(tableselect2()[req.params.table](), req.body, (err,results)=>{
+//         if(err) throw err;
+//         console.log(results)
+//         res.send(results)
+//     })
+// })
+
+app.post('/admin/addcases', function(req,res){
+    sql = `INSERT INTO type SET ?`
+
+    conn.query(sql, req.body, (err,results)=>{
         if(err) throw err;
         console.log(results)
         res.send(results)
     })
 })
 
-
-app.delete('/admin/:table/:id', function(req,res){
-    function tableselect(){
-        return(
-            {
-            catalogue: () => {
-                return(
-                    sql = `DELETE FROM catalogue WHERE id=${req.params.id}` )
-                },
-            cases: () => {
-                return(
-                    sql = `DELETE FROM type WHERE id=${req.params.id} ` )
-                }
+app.post('/admin/addcatalogue', function(req,res){
+    var data = JSON.parse(req.body.data)
+    sql = `INSERT INTO catalogue SET ?`
+    
+    conn.query(sql, data, (err,results)=>{
+        if(err) throw err;
+        var unggahFile = req.files.file
+        unggahFile.mv('./public/normal/'+ data.code + ".jpg", (err)=>{
+            if(err){
+                console.log(err)
+                res.send(err)
+            } else {
+                console.log('Add catalogue upload success!')
+                res.send('Add catalogue upload success!')
+                // res.send(file)
             }
-        )
-    }
+        })
+    })
+})
 
-    conn.query(tableselect()[req.params.table](), (err,results)=>{
+
+// app.delete('/admin/:table/:id', function(req,res){
+//     function tableselect(){
+//         return(
+//             {
+//             catalogue: () => {
+//                 return(
+//                     sql = `DELETE FROM catalogue WHERE id=${req.params.id}` )
+//                 },
+//             cases: () => {
+//                 return(
+//                     sql = `DELETE FROM type WHERE id=${req.params.id} ` )
+//                 }
+//             }
+//         )
+//     }
+
+//     conn.query(tableselect()[req.params.table](), (err,results)=>{
+//         if(err) throw err;
+//         if(req.params.table === "catalogue"){
+//             console.log(req.body)
+//             fs.unlink(`./public/normal/${req.body.data.image}.jpg`, (err) => {
+//                 if (err) throw err;
+//                 console.log('Image deleted');
+//               });
+//         }
+//         console.log(results)
+//         res.send(results)
+//     })
+// })
+
+app.post('/admin/deletecases/:id', function(req,res){
+
+    sql = `DELETE FROM type WHERE id=${req.params.id}`
+    conn.query(sql, (err,results)=>{
         if(err) throw err;
         console.log(results)
         res.send(results)
+    })
+})
+
+app.post('/admin/deletecatalogue/:id', function(req,res){
+
+    sql = `DELETE FROM catalogue WHERE id=${req.params.id}`
+    
+    conn.beginTransaction(function(err){
+        if(err) throw err;
+        conn.query(sql, (err,results)=>{
+            if (err){
+                conn.rollback(function(){
+                    console.log("Rollback Successful Query")
+                    throw err
+                })
+            }
+            fs.unlink(`./public/normal/${req.body.image}.jpg`, (err) => {
+                if (err){
+                    conn.rollback(function(){
+                        console.log("Rollback Successful Delete Image")
+                        throw err
+                    })
+                }
+                conn.commit(function(err){
+                    if (err){
+                        conn.rollback(function(){
+                            console.log("Rollback Succesful2")
+                            throw err;
+                        })
+                    }
+                    res.send("catalogue deleted")
+                    console.log('Image deleted');
+                })
+            });
+        })
     })
 })
 
@@ -380,7 +463,6 @@ app.post('/bukti_pembayaran', function(req,res){
                     }
                     res.send({results})
                     console.log("Upload procedure completed")
-                    conn.end()
                 })
             })
         })
@@ -522,7 +604,6 @@ app.post('/transaction', function(req,res){
                         }
                         res.send({results1})
                         console.log("Transaction Complete")
-                        conn.end()
                     })
                 })
             })
