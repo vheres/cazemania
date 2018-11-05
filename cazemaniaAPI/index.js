@@ -668,11 +668,14 @@ app.get('/checkout/:id', function(req,res){
     JOIN type ty ON ty.id = car.model_id JOIN price pr ON pr.case_type = car.case_type WHERE car.user_id=${req.params.id}`
 
     sql1 = `SELECT firstname, lastname, address, kota, kodepos FROM users WHERE id = ${req.params.id}`
+    sql2 = `SELECT * FROM rekening`
     conn.query(sql, (err,results)=>{
         conn.query(sql1, (err,results1)=>{
-            if(err) throw err;
-            // console.log({cart: results, user:results1})
-            res.send({cart: results, user:results1})
+            conn.query(sql2, (err,results2)=>{
+                if(err) throw err;
+                // console.log({cart: results, user:results1})
+                res.send({cart: results, user:results1, rekening: results2})
+            })
         })
     })
 })

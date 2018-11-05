@@ -14,6 +14,7 @@ import PaymentPage from './components/PaymentPage';
 import ProfilePage from './components/ProfilePage';
 import LoginPage from './components/LoginPage';
 import RegisterPage from './components/RegisterPage';
+import RegisterRD from './components/RegisterRD';
 import { Grid, Row, Col } from 'react-bootstrap';
 import { connect } from 'react-redux';
 import { keepLogin, onLogout, cookieChecked } from './actions';
@@ -69,6 +70,7 @@ class App extends Component {
               <Route path="/profile" component={ProfilePage}/>
               <Route path="/login" component={LoginPage}/>
               <Route path="/register" component={RegisterPage}/>
+              <Route path="/register_reseller_dropshipper" component={RegisterRD}/>
             </Col>
           </Row>
           <Row className="no-margin no-padding">

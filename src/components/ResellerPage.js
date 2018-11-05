@@ -5,7 +5,7 @@ class InformationPage extends Component {
 
     renderInformationPage() {
         return(
-            <Grid fluid>
+            <Grid fluid className="m-b-sm">
                 <Row>
                     <Col md={12}>
                         <img src="https://www.dtn.com.vn/skin/frontend/dtn_website/default/images/banner-package1.jpg" alt="banner" style={{width:"100%"}}></img>
@@ -66,6 +66,9 @@ class InformationPage extends Component {
                         </Row>
                         <Row>
                             <h3 style={{color:"#38AFFE"}}><strong>KUOTA TERBATAS! Yuk buruan daftar jadi reseller / dropshipper @cazemania sekarang juga.</strong></h3>
+                        </Row>
+                        <Row>
+                            <input type="button" className="btn btn-primary btn-lg block-margin-auto" value="Daftar Reseller/Dropshipper" onClick={()=>this.props.history.push('/register_reseller_dropshipper')}></input>
                         </Row>
                     </Col>
                 </Row>

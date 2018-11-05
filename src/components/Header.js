@@ -91,7 +91,6 @@ class Header extends Component {
     }
 
     renderCartPage() {
-        console.log(this.state.cart)
         if (this.state.cart.length == 0) {
             return(
                 <Grid fluid>
@@ -281,14 +280,14 @@ class Header extends Component {
                                         </FormGroup>
                                     </Navbar.Form>
                                     <NavItem eventKey={5} className="margin-cart" >
-                                        <Button type="submit" className="btn btn-tosca" onClick={()=>this.onLinkClick("/login")}><i class="fa fa-shopping-cart" ></i></Button>
+                                        <Button type="submit" className="btn btn-tosca" onClick={()=>{alert('Please Login First');this.onLinkClick("/login")}}><i class="fa fa-shopping-cart" ></i></Button>
                                     </NavItem>
                                     <NavDropdown eventKey={6} title={<i class="fa fa-user"></i>} id="basic-nav-dropdown" className="margin-user account-css">
                                         <MenuItem eventKey={6.1} onClick={()=>this.onLinkClick("/login")}>
-                                            <span>Login</span>
+                                            <span><i className="fa fa-sign-in"></i> Login</span>
                                         </MenuItem>
                                         <MenuItem eventKey={6.2} onClick={()=>this.onLinkClick("/register")}>
-                                            <span>Register</span>
+                                            <span><i className="fa fa-user-plus"></i> Register</span>
                                         </MenuItem>
                                     </NavDropdown>
                                 </Nav>

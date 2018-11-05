@@ -138,7 +138,7 @@ class ShopPage extends Component {
                     <Col mdOffset={2} md={8}>
                             <Row>
                                 <Col xsHidden md={12}>
-                                    <p className="padding-text">{`Menampilan ${this.state.catalogue.length} produk dari ${this.state.item_count}`}</p>
+                                    <p className="padding-text">{`Menampilan ${this.state.catalogue.length} dari ${this.state.item_count} produk`}</p>
                                 </Col>
                             </Row>
                             <hr/>

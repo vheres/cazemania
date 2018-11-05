@@ -39,37 +39,59 @@ class LoginPage extends Component {
                             <img src="https://www.dtn.com.vn/skin/frontend/dtn_website/default/images/banner-package1.jpg" alt="banner" style={{width:"100%"}}/>
                         </Row>
                         <Row className="margin-top-15">
-                            <Col mdOffset={2} md={9}>
-                            <form id="Login" className="login-form">
+                            <Col mdOffset={2} md={3}>
                                 <Row>
-                                    <Col xs={3} className="text-right register-form-text">
-                                    Email: 
+                                    <Col xs={12} className="m-b-sm">
+                                        <span className="login-register-title">Belum Punya Akun?</span><br/>
                                     </Col>
-                                    <Col xs={6}>
-                                        <input type="email" ref="email" class="form-control" id="inputEmail" placeholder="Email Address" onKeyPress={this.onKeyPress.bind(this)}/><br/>
+                                </Row>
+                                <Row className="m-b-sm">
+                                    <Col xs={12}>
+                                    Yuk bergabung dengan Cazemania. Dengan membuat akun, kamu akan dimudahkan dalam berbelanja dan melacak pesanan kamu.
                                     </Col>
                                 </Row>
                                 <Row>
-                                    <Col xs={3} className="text-right register-form-text">
-                                    Password: 
-                                    </Col>
-                                    <Col xs={6}>
-                                        <input type="password" ref="password" class="form-control" id="inputPassword" placeholder="Password" onKeyPress={this.onKeyPress.bind(this)}/><br/>
+                                    <Col xs={12}>
+                                        <input type="button" className="btn btn-primary" value="Register" onClick={()=>this.props.history.push('/register')}></input>
                                     </Col>
                                 </Row>
-                                <Row>
-                                    <Col xs={9}>
-                                        <Row>
-                                            <a href="reset.html" className="pull-right login-forgot">Forgot password?</a>
-                                        </Row>
-                                        <Row>
-                                            <input type="button" class="btn btn-primary login-button" value="Login" onClick={this.onLoginClick}/>
-                                        </Row>
-                                        <Row>
-                                            <h2 className="badge badge-danger pull-right login-error">{this.props.auth.error}</h2>
-                                        </Row>
+                            </Col>
+                            <Col md={7}>
+                                <Row className="m-b-md">
+                                    <Col xsOffset={1} xs={11}>
+                                        <span className="login-register-title">Login Member</span>
                                     </Col>
-                                </Row>                              
+                                </Row>
+                                <form id="Login" className="login-form">
+                                    <Row>
+                                        <Col xs={2} className="text-right register-form-text">
+                                        Email: 
+                                        </Col>
+                                        <Col xs={7}>
+                                            <input type="email" ref="email" class="form-control" id="inputEmail" placeholder="Email Address" onKeyPress={this.onKeyPress.bind(this)}/><br/>
+                                        </Col>
+                                    </Row>
+                                    <Row>
+                                        <Col xs={2} className="text-right register-form-text">
+                                        Password: 
+                                        </Col>
+                                        <Col xs={7}>
+                                            <input type="password" ref="password" class="form-control" id="inputPassword" placeholder="Password" onKeyPress={this.onKeyPress.bind(this)}/><br/>
+                                        </Col>
+                                    </Row>
+                                    <Row>
+                                        <Col xs={9}>
+                                            <Row>
+                                                <a href="reset.html" className="pull-right login-forgot">Forgot password?</a>
+                                            </Row>
+                                            <Row>
+                                                <input type="button" class="btn btn-primary login-button" value="Login" onClick={this.onLoginClick}/>
+                                            </Row>
+                                            <Row>
+                                                <h2 className="badge badge-danger pull-right login-error">{this.props.auth.error}</h2>
+                                            </Row>
+                                        </Col>
+                                    </Row>                              
                                 </form>
                             </Col>
                         </Row>

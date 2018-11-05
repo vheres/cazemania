@@ -122,18 +122,24 @@ class DetailPage extends Component {
     }
 
     onAddToCart() {
-        axios.post(API_URL_1 + `/cart`, {
-            user_id: this.props.auth.id,
-            catalogue_id: this.state.item.id,
-            brand_id: this.refs.brand_select.value,
-            model_id: this.refs.type_select.value,
-            case_type: this.refs.case_select.value,
-            amount: document.getElementById("quantity").value
-        }).then((res) => {
-            alert('add to cart successful!')
-        }).catch((err) => {
-            alert(err);
-        })
+        if (this.props.auth.email !== "") {
+            axios.post(API_URL_1 + `/cart`, {
+                user_id: this.props.auth.id,
+                catalogue_id: this.state.item.id,
+                brand_id: this.refs.brand_select.value,
+                model_id: this.refs.type_select.value,
+                case_type: this.refs.case_select.value,
+                amount: document.getElementById("quantity").value
+            }).then((res) => {
+                alert('add to cart successful!')
+            }).catch((err) => {
+                alert(err);
+            })
+        } else {
+            alert('Please Login First')
+            this.props.history.push('/login')
+        }
+        
     }
 
     async onSimilarClick(target) {

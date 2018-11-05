@@ -7,7 +7,7 @@ import CartDetail from './CartDetail';
 import Select from 'react-select';
 
 class PaymentPage extends Component {
-    state = ({ profile: [], cart: [], totalPrice: 0, edit_modal: false, selectedOption: [], destination: [], filtered_destination: [] })
+    state = ({ profile: [], cart: [], rekening: [], totalPrice: 0, edit_modal: false, selectedOption: [], destination: [], filtered_destination: [] })
 
     componentWillMount() {
         this.getUserInfo()
@@ -17,7 +17,7 @@ class PaymentPage extends Component {
         axios.get(API_URL_1 + "/checkout/" + this.props.auth.id)
         .then((response) => {
             console.log(response)
-            this.setState({profile: response.data.user[0], cart: response.data.cart})
+            this.setState({profile: response.data.user[0], cart: response.data.cart, rekening: response.data.rekening})
             this.calculateTransactionSummary()
         })
     }
@@ -237,6 +237,14 @@ class PaymentPage extends Component {
         return arrJSX
     }
 
+    renderRekeningList() {
+        var arrJSX = [];
+        this.state.rekening.map((item,index) => {
+            arrJSX.push(<option value={item.nama}>{item.nama} {item.nomor_rekening}</option>)
+        })
+        return arrJSX;
+    }
+
     renderPaymentPage() {
         return(
             <Grid fluid className="HomePage-css padding-15p">
@@ -273,6 +281,25 @@ class PaymentPage extends Component {
                             <Panel>
                                 <Panel.Body>
                                     
+                                </Panel.Body>
+                            </Panel>
+                        </Row>
+                        <Row>
+                            <h4>Metode Pembayaran</h4>
+                        </Row>
+                        <Row>
+                            <Panel>
+                                <Panel.Body>
+                                    <Row>
+                                        <Col xs={4} className="m-t-sm">
+                                            Pilih Rekening Tujuan:
+                                        </Col>
+                                        <Col xs={4}>
+                                            <select ref="rekening" className="form-control">
+                                                {this.renderRekeningList()}
+                                            </select>
+                                        </Col>
+                                    </Row>
                                 </Panel.Body>
                             </Panel>
                         </Row>

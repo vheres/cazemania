@@ -11,7 +11,7 @@ import {API_URL_1} from '../supports/api-url/apiurl'
 
 const cookies = new Cookies();
 
-class RegisterPage extends Component {
+class RegisterRD extends Component {
     state = { selectedOption: [], destination: [], filtered_destination: [], empty_input: [], input_style: [] }
 
     componentWillMount() {
@@ -185,7 +185,7 @@ class RegisterPage extends Component {
                         <Col mdOffset={2} md={6}>
                             <Row className="m-b-md">
                                 <Col xsOffset={1} xs={11}>
-                                    <span className="login-register-title">Register</span>
+                                    <span className="login-register-title">Register Reseller/Dropshipper</span>
                                 </Col>
                             </Row>
                             <form id="Register">
@@ -295,4 +295,4 @@ const mapStateToProps = (state) => {
     return { auth };
 }
 
-export default connect(mapStateToProps, { onRegister })(RegisterPage);
+export default connect(mapStateToProps, { onRegister })(RegisterRD);
