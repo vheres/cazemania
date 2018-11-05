@@ -66,8 +66,8 @@ app.get('/catalogue', function(req,res){
     //     var sql1 = `SELECT count(*) as count FROM catalogue WHERE name LIKE "%${req.query.name}%"`
     // }
 
-        var sql = `SELECT * FROM catalogue WHERE (code LIKE "%${req.query.search}%" OR name LIKE "%${req.query.search}%") and id != '99' ORDER BY id DESC  limit ${req.query.pagination[0]}, ${req.query.pagination[1]}`
-        var sql1 = `SELECT count(*) as count FROM catalogue WHERE code LIKE "%${req.query.search}%" OR name LIKE "%${req.query.search}%"`
+        var sql = `SELECT * FROM catalogue WHERE (code LIKE "%${req.query.search}%" OR name LIKE "%${req.query.search}%") and category = "normal" ORDER BY id DESC  limit ${req.query.pagination[0]}, ${req.query.pagination[1]}`
+        var sql1 = `SELECT count(*) as count FROM catalogue WHERE code LIKE "%${req.query.search}%" OR name LIKE "%${req.query.search}%" and category = "normal" `
     
     conn.query(sql, (err,results)=>{
         if(err) throw err;
@@ -473,10 +473,17 @@ app.post('/custom_cart', function(req,res){
     console.log(req.body)
     console.log(JSON.parse(req.body.data))
     var data = JSON.parse(req.body.data)
-    sql  = `INSERT INTO cart SET ?`
+    var customdata = {
+        code : `CSTM${data.user_id}`,
+        name: "CUSTOM CASE",
+        image: `CSTM${data.user_id}`,
+        category: "custom"
+    }
+    
+    sql = `INSERT INTO catalogue SET ?`
     conn.beginTransaction(function(err){
         if(err) {throw err;}
-        conn.query(sql, data, (err, results)=>{
+        conn.query(sql, customdata, (err, results)=>{
             console.log(results)
             if(err){
                 conn.rollback(function(){
@@ -484,44 +491,54 @@ app.post('/custom_cart', function(req,res){
                     throw err
                 })
             }
-            var unggahFile = req.files.file
-            var fileName = "custom"+ data.user_id + results.insertId
-            unggahFile.mv('./public/custom/'+ fileName +'.jpg', (err)=>{
-                if(err){
+            sql  = `INSERT INTO cart SET ?`
+            cartdata = {
+                user_id : data.user_id,
+                catalogue_id : results.insertId,
+                brand_id : data.brand_id,
+                model_id : data.model_id,
+                case_type : data.case_type,
+                amount : data.amount
+            }
+            conn.query(sql, cartdata, (err1, results1) => {
+                if(err1){
                     conn.rollback(function(){
-                        console.log("Rollback Succesful Upload")
-                        throw err
+                        console.log("Rollback Succesful2")
+                        throw err1
                     })
                 }
-                console.log('Custom case upload success!')
-                data1 = {
-                    image : fileName,
-                    cart_id: results.insertId
-                }
-                sql1 = `INSERT INTO custom_cases SET ?`
-                conn.query(sql1, data1, (err1, results1) => {
-                    if(err1){
+                sql  = `UPDATE catalogue SET code = 'CSTM${data.user_id}${results.insertId}', image = 'CSTM${data.user_id}${results.insertId}' WHERE id = ${results.insertId}`
+                conn.query(sql, (err2, results2) => {
+                    if(err2){
                         conn.rollback(function(){
                             console.log("Rollback Succesful2")
-                            throw err1
+                            throw err2
                         })
                     }
-                    conn.commit(function(err){
-                        if (err){
+                    var unggahFile = req.files.file
+                    var fileName = `CSTM${data.user_id}${results.insertId}`
+                    unggahFile.mv('./public/custom/'+ fileName +'.jpg', (err)=>{
+                        if(err){
                             conn.rollback(function(){
-                                console.log("Rollback Succesful3")
-                                throw err;
+                                console.log("Rollback Succesful Upload")
+                                throw err
                             })
                         }
-                        res.send({results1})
-                        console.log("Custom add to cart Complete")
+                        conn.commit(function(err){
+                            if (err){
+                                conn.rollback(function(){
+                                    console.log("Rollback Succesful3")
+                                    throw err;
+                                })
+                            }
+                            res.send({results1})
+                            console.log("Custom add to cart Complete")
+                        })
                     })
                 })
             })
-            
         })
-    })
-    
+    }) 
 })
 
 app.delete('/cart/:user_id/:id', function(req,res){

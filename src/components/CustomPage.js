@@ -126,7 +126,6 @@ class CustomPage extends Component {
         var formData = new FormData()
         var data =  {
             user_id: this.props.auth.id,
-            catalogue_id: '99',
             brand_id: this.refs.brand_select.value,
             model_id: this.refs.type_select.value,
             case_type: this.refs.case_select.value,
