@@ -583,49 +583,49 @@ app.post('/transaction', function(req,res){
     sql1 = `INSERT INTO transaction_details (transaction_id, catalogue_id, case_brand, case_model, case_type, price, amount) VALUES ?`
     sql2 = `DELETE FROM cart where user_id = ${req.body.id}`
     
-    conn.beginTransaction(function(err){
-        if(err) {throw err;}
-        conn.query(sql, data, (err,results)=>{
-            if(err){
-                conn.rollback(function(){
-                    console.log("Rollback Succesful1")
-                    throw err
-                })
-            }
-            console.log(results)
-            var arrDetails = new Array()
-            for(var index in req.body.cart){
-                arrDetails.push([results.insertId, req.body.cart[index].catalogue_id, req.body.cart[index].brand_id, req.body.cart[index].model_id, req.body.cart[index].case_type, req.body.cart[index].price, req.body.cart[index].amount])
-            }
+    // conn.beginTransaction(function(err){
+    //     if(err) {throw err;}
+    //     conn.query(sql, data, (err,results)=>{
+    //         if(err){
+    //             conn.rollback(function(){
+    //                 console.log("Rollback Succesful1")
+    //                 throw err
+    //             })
+    //         }
+    //         console.log(results)
+    //         var arrDetails = new Array()
+    //         for(var index in req.body.cart){
+    //             arrDetails.push([results.insertId, req.body.cart[index].catalogue_id, req.body.cart[index].brand_id, req.body.cart[index].model_id, req.body.cart[index].case_type, req.body.cart[index].price, req.body.cart[index].amount])
+    //         }
 
-            conn.query(sql1, [arrDetails], (err,results1)=>{
-                if(err){
-                    conn.rollback(function() {
-                        console.log("Rollback Succesful2")
-                        throw err;
-                    })
-                }
-                conn.query(sql2, (err,results2) => {
-                    if(err){
-                        conn.rollback(function(){
-                            console.log("Rollback Succesful3")
-                            throw err
-                        })
-                    }
-                    conn.commit(function(err){
-                        if (err){
-                            conn.rollback(function(){
-                                console.log("Rollback Succesful4")
-                                throw err;
-                            })
-                        }
-                        res.send({results1})
-                        console.log("Transaction Complete")
-                    })
-                })
-            })
-        })
-    })
+    //         conn.query(sql1, [arrDetails], (err,results1)=>{
+    //             if(err){
+    //                 conn.rollback(function() {
+    //                     console.log("Rollback Succesful2")
+    //                     throw err;
+    //                 })
+    //             }
+    //             conn.query(sql2, (err,results2) => {
+    //                 if(err){
+    //                     conn.rollback(function(){
+    //                         console.log("Rollback Succesful3")
+    //                         throw err
+    //                     })
+    //                 }
+    //                 conn.commit(function(err){
+    //                     if (err){
+    //                         conn.rollback(function(){
+    //                             console.log("Rollback Succesful4")
+    //                             throw err;
+    //                         })
+    //                     }
+    //                     res.send({results1})
+    //                     console.log("Transaction Complete")
+    //                 })
+    //             })
+    //         })
+    //     })
+    // })
 })
 
 app.post('/spam' , function(req,res){
@@ -684,7 +684,7 @@ app.get('/checkout/:id', function(req,res){
     sql  = `SELECT car.id, car.catalogue_id, cat.code, cat.name, cat.image,  car.brand_id, car.model_id, car.case_type, car.amount, br.name as brand_name, ty.name as model_name, pr.price as price FROM catalogue cat JOIN cart car ON cat.id=car.catalogue_id JOIN brands br ON br.id = car.brand_id 
     JOIN type ty ON ty.id = car.model_id JOIN price pr ON pr.case_type = car.case_type WHERE car.user_id=${req.params.id}`
 
-    sql1 = `SELECT firstname, lastname, address, kota, kodepos FROM users WHERE id = ${req.params.id}`
+    sql1 = `SELECT firstname, lastname, address, kota, destination_code, kodepos FROM users WHERE id = ${req.params.id}`
     sql2 = `SELECT * FROM rekening`
     conn.query(sql, (err,results)=>{
         conn.query(sql1, (err,results1)=>{
