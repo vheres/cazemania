@@ -15,6 +15,18 @@ class CartDetail extends Component {
         return
     }
 
+    renderImage(){
+        if(this.props.category === "normal"){
+            return <Thumbnail src={API_URL_1+'/normal/'+this.props.image+'.jpg '}></Thumbnail>
+        }
+        else if(this.props.category === "custom"){
+            return <Thumbnail src={API_URL_1+'/custom/'+this.props.image+'.jpg '}></Thumbnail>
+        }
+        else if(this.props.category === "premium"){
+            return <Thumbnail src={API_URL_1+'/premium/'+this.props.image+'.jpg '}></Thumbnail>
+        }
+    }
+
     render() {
         return (
             <Row>
@@ -23,7 +35,7 @@ class CartDetail extends Component {
                         <h4>{this.props.count+1}</h4>
                     </Col>
                     <Col xs={10} md={3}>
-                        <Thumbnail src={API_URL_1+'/normal/'+this.props.image+'.jpg '}></Thumbnail>
+                        {this.renderImage()}
                     </Col>
                     <Col xs={6} md={4}>
                         <Row>
