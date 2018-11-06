@@ -12,8 +12,7 @@ class InformationPage extends Component {
                     </Col>
                 </Row>
                 <Row className="margin-top-15">
-                    <Col md={2}></Col>
-                    <Col md={8}>
+                    <Col xsOffset={1} xs={10} mdOffset={2} md={8}>
                         <Row>
                             <h1 className="text-center" style={{color:"orange"}}><strong>Yuk dapatkan penghasilan jutaan rupiah dari bisnis online.</strong></h1>
                         </Row>

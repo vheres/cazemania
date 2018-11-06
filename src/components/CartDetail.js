@@ -7,7 +7,7 @@ class CartDetail extends Component {
     renderDeleteButton() {
         if (this.props.DeleteClick != undefined) {
             return (
-                <Col md={2}>
+                <Col xs={2} md={1}>
                         <input type="button" className="btn btn-danger" value="delete" onClick={()=>this.props.DeleteClick(this.props.id)}/>
                 </Col>   
             )
@@ -18,14 +18,14 @@ class CartDetail extends Component {
     render() {
         return (
             <Row>
-                <Col md={10}>
-                    <Col md={1}>
+                <Col xs={12}>
+                    <Col xs={1}>
                         <h4>{this.props.count+1}</h4>
                     </Col>
-                    <Col md={3}>
+                    <Col xs={10} md={3}>
                         <Thumbnail src={API_URL_1+'/normal/'+this.props.image+'.jpg '}></Thumbnail>
                     </Col>
-                    <Col md={5}>
+                    <Col xs={6} md={4}>
                         <Row>
                             <h4>{this.props.name} | {this.props.code}</h4>
                         </Row>
@@ -36,11 +36,11 @@ class CartDetail extends Component {
                             <p>Quantity: {this.props.quantity}</p>
                         </Row>
                     </Col>
-                    <Col md={3}>
+                    <Col xs={6} md={3}>
                         <h3>Rp. {this.props.price}</h3>
                     </Col>
-                </Col>
-                {this.renderDeleteButton()}         
+                    {this.renderDeleteButton()} 
+                </Col>         
             </Row>  
         );   
     }

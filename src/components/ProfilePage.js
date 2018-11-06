@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { Grid, Row, Col, Button, Modal, Table } from 'react-bootstrap';
+import { Grid, Row, Col, Button, Modal, Table, Clearfix } from 'react-bootstrap';
 import CartDetail from './CartDetail';
 import ProfileOrder from './ProfileOrder';
 import {API_URL_1} from '../supports/api-url/apiurl'
@@ -116,7 +116,7 @@ class ProfilePage extends Component {
 
     renderUserInfo() {
         return (
-            <Col mdOffset={1} md={3}>
+            <Col smOffset={1} sm={3}>
                 <Row>
                     <Col md={12}>
                         <span style={{"font-size": "28px"}}>My Profile</span><span className="profile-edit-button"><i class="fa fa-edit" title="Edit Profile" onClick={this.handleShow.bind(this)}></i></span>
@@ -173,7 +173,7 @@ class ProfilePage extends Component {
                 <Grid fluid className="">
                 <Row>
                     {this.renderUserInfo()}
-                    <Col md={7}>
+                    <Col sm={7}>
                         <Row>
                             <Col md={12}>
                                 <span style={{"font-size": "28px"}}>My Transactions</span>
@@ -233,34 +233,35 @@ class ProfilePage extends Component {
                                 </Row>
                                 <Row>
                                     <Col xs={2}>
-                                    <p className="text-right register-form-text">Kota atau Kecamatan:</p>  
+                                        <p className="text-right register-form-text">Kota atau Kecamatan:</p>  
                                     </Col>
-                                    <Col xs={3}>
-                                <Row>
-                                    <Col xs={12}>
-                                        <Select
-                                            value={this.state.selectedOption}
-                                            onChange={this.handleChange}
-                                            options={this.state.filtered_destination}
-                                            onInputChange={this.handleInputChange.bind(this)}
-                                            placeholder={`Pilih Kota/Kecamatan`}
-                                            defaultValue={{value: this.state.profile.destination_code, label: this.state.profile.kota}}
-                                            defaultInputValue={this.state.profile.kota}
-                                        />
+                                    <Col xs={8} md={3}>
+                                        <Row>
+                                            <Col xs={12}>
+                                                <Select
+                                                    value={this.state.selectedOption}
+                                                    onChange={this.handleChange}
+                                                    options={this.state.filtered_destination}
+                                                    onInputChange={this.handleInputChange.bind(this)}
+                                                    placeholder={`Pilih Kota/Kecamatan`}
+                                                    defaultValue={{value: this.state.profile.destination_code, label: this.state.profile.kota}}
+                                                    defaultInputValue={this.state.profile.kota}
+                                                />
+                                            </Col>
+                                        </Row>
+                                        <Row>
+                                            <Col xs={12}>
+                                                <p className="small-font">*please input 3 or more characters</p>
+                                            </Col>
+                                        </Row> 
                                     </Col>
-                                </Row>
-                                <Row>
-                                    <Col xs={12}>
-                                        <p className="small-font">*please input 3 or more characters</p>
+                                    <Clearfix visibleXsBlock visibleSmBlock></Clearfix>
+                                    <Col xs={2} md={2}>
+                                        <p className="text-right register-form-text">Kode Pos:</p>
                                     </Col>
-                                </Row> 
-                                </Col>
-                                <Col xs={2}>
-                                <p className="text-right register-form-text">Kode Pos:</p>
-                                </Col>
-                                <Col xs={3}>
-                                <input ref="kodepos" type="text" className="form-control" placeholder="Kode Pos" defaultValue={this.state.profile.kodepos}></input>
-                                </Col>        
+                                    <Col xs={8} md={3}>
+                                        <input ref="kodepos" type="text" className="form-control" placeholder="Kode Pos" defaultValue={this.state.profile.kodepos}></input>
+                                    </Col>        
                                 </Row>                     
                             </form>
                         </Modal.Body>
