@@ -7,7 +7,7 @@ import CartDetail from './CartDetail';
 import Select from 'react-select';
 
 class PaymentPage extends Component {
-    state = ({ profile: [], cart: [], rekening: [], totalPrice: 0, edit_modal: false, selectedOption: [], destination: [], filtered_destination: [] })
+    state = ({ profile: [], recipient: {}, cart: [], rekening: [], totalPrice: 0, edit_modal: false, selectedOption: [], destination: [], filtered_destination: [] })
 
     componentWillMount() {
         this.getUserInfo()
@@ -17,7 +17,14 @@ class PaymentPage extends Component {
         axios.get(API_URL_1 + "/checkout/" + this.props.auth.id)
         .then((response) => {
             console.log(response)
-            this.setState({profile: response.data.user[0], cart: response.data.cart, rekening: response.data.rekening})
+            this.setState({profile: response.data.user[0], cart: response.data.cart, rekening: response.data.rekening, recipient: {
+                firstname: response.data.user[0].firstname,
+                lastname: response.data.user[0].lastname,
+                address: response.data.user[0].address,
+                destination_code: response.data.user[0].destination_code,
+                kota: response.data.user[0].kota,
+                kodepos: response.data.user[0].kodepos
+            }})
             this.calculateTransactionSummary()
         })
     }
@@ -27,8 +34,9 @@ class PaymentPage extends Component {
             id: this.props.auth.id,
             subtotal: this.state.totalPrice,
             shipping: '10000',
-            target_bank: 'BCA',
-            cart: this.state.cart
+            target_bank: this.refs.rekening.value,
+            cart: this.state.cart,
+            recipient: this.state.recipient
         })
         .then(response => {
             alert('transaction success')
@@ -81,20 +89,32 @@ class PaymentPage extends Component {
     }
 
     onEditSave() {
-        if(this.refs.alamat.value == '' || this.state.selectedOption.label == '' || this.refs.kodepos.value == '') {
+        if(this.refs.firstname.value == '' || this.refs.lastname.value == '' || this.refs.alamat.value == '' || this.state.selectedOption.label == '' || this.refs.kodepos.value == '') {
             alert('Please fill everything!');
         } else {
-            axios.put(API_URL_1 + '/users/' + this.props.auth.id, {
+            this.setState({ recipient: {
+                firstname: this.refs.firstname.value,
+                lastname: this.refs.lastname.value,
                 address: this.refs.alamat.value,
                 destination_code: this.state.selectedOption.value,
                 kota: this.state.selectedOption.label,
                 kodepos: this.refs.kodepos.value
-            }).then((response) => {
-                alert('Edit Success')
-                this.getUserInfo()
-                this.setState({ edit_modal: false });
-            })
+            } })
         }
+        alert('Edit Success');
+        this.setState({ edit_modal: false });
+        // } else {
+        //     axios.put(API_URL_1 + '/users/' + this.props.auth.id, {
+        //         address: this.refs.alamat.value,
+        //         destination_code: this.state.selectedOption.value,
+        //         kota: this.state.selectedOption.label,
+        //         kodepos: this.refs.kodepos.value
+        //     }).then((response) => {
+        //         alert('Edit Success')
+        //         this.getUserInfo()
+        //         this.setState({ edit_modal: false });
+        //     })
+        // }
     }
 
     renderUserInfo() {
@@ -102,16 +122,16 @@ class PaymentPage extends Component {
             <Row>
                 <Col md={8} className="alamat-pengiriman">
                     <Row>
-                        <span><strong>{this.state.profile.firstname} {this.state.profile.lastname}</strong></span>
+                        <span><strong>{this.state.recipient.firstname} {this.state.recipient.lastname}</strong></span>
                     </Row>
                     <Row>
-                        <span>{this.state.profile.address}</span>
+                        <span>{this.state.recipient.address}</span>
                     </Row>
                     <Row>
-                        <span>{this.state.profile.kota}</span>
+                        <span>{this.state.recipient.kota}</span>
                     </Row>
                     <Row>
-                        <span>{this.state.profile.kodepos}</span>
+                        <span>{this.state.recipient.kodepos}</span>
                     </Row>
                 </Col>
                 <Col md={4}>
@@ -291,10 +311,10 @@ class PaymentPage extends Component {
                             <Panel>
                                 <Panel.Body>
                                     <Row>
-                                        <Col xs={4} className="m-t-sm">
+                                        <Col xs={3} className="m-t-sm">
                                             Pilih Rekening Tujuan:
                                         </Col>
-                                        <Col xs={4}>
+                                        <Col xs={8} md={4}>
                                             <select ref="rekening" className="form-control">
                                                 {this.renderRekeningList()}
                                             </select>
@@ -315,10 +335,21 @@ class PaymentPage extends Component {
                             <form id="Alamat">
                                 <Row>
                                     <Col xs={2}>
+                                    <p className="text-right register-form-text">Nama Penerima:</p>  
+                                    </Col>
+                                    <Col xs={4}>
+                                        <input type="text" ref="firstname" class="form-control" id="inputFirstName" placeholder="First name" defaultValue={`${this.state.recipient.firstname}`} onKeyPress={this.onKeyPress.bind(this)}/>
+                                    </Col>
+                                    <Col xs={4}>
+                                        <input type="text" ref="lastname" class="form-control" id="inputLastName" placeholder="Last name" defaultValue={`${this.state.recipient.lastname}`} onKeyPress={this.onKeyPress.bind(this)}/><br/>
+                                    </Col>
+                                </Row>
+                                <Row>
+                                    <Col xs={2}>
                                     <p className="text-right register-form-text">Alamat:</p>  
                                     </Col>
                                     <Col xs={8}>
-                                        <textarea type="text" ref="alamat" class="form-control" id="inputAdress" placeholder="Alamat" defaultValue={this.state.profile.address} onKeyPress={this.onKeyPress.bind(this)} style={{resize:"none"}} rows= '4' cols= '80'/><br/>
+                                        <textarea type="text" ref="alamat" class="form-control" id="inputAdress" placeholder="Alamat" defaultValue={this.state.recipient.address} onKeyPress={this.onKeyPress.bind(this)} style={{resize:"none"}} rows= '4' cols= '80'/><br/>
                                     </Col>
                                 </Row>
                                 <Row>
@@ -331,11 +362,11 @@ class PaymentPage extends Component {
                                         <Select
                                             value={this.state.selectedOption}
                                             onChange={this.handleChange}
-                                            options={this.state.filtered_destination}
+                                            options={this.state.filtered_destination} 
                                             onInputChange={this.handleInputChange.bind(this)}
                                             placeholder={`Pilih Kota/Kecamatan`}
-                                            defaultValue={{value: this.state.profile.destination_code, label: this.state.profile.kota}}
-                                            defaultInputValue={this.state.profile.kota}
+                                            defaultValue={{value: this.state.recipient.destination_code, label: this.state.recipient.kota}}
+                                            defaultInputValue={this.state.recipient.kota}
                                         />
                                     </Col>
                                 </Row>
@@ -349,7 +380,7 @@ class PaymentPage extends Component {
                                 <p className="text-right register-form-text">Kode Pos:</p>
                                 </Col>
                                 <Col xs={3}>
-                                <input ref="kodepos" type="text" className="form-control" placeholder="Kode Pos" defaultValue={this.state.profile.kodepos}></input>
+                                <input ref="kodepos" type="text" className="form-control" placeholder="Kode Pos" defaultValue={this.state.recipient.kodepos}></input>
                                 </Col>        
                                 </Row>                     
                             </form>
