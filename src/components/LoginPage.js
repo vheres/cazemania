@@ -5,6 +5,7 @@ import { Redirect } from 'react-router-dom';
 import { connect } from 'react-redux';
 import Cookies from 'universal-cookie';
 import Select from 'react-select';
+import {API_URL_1} from '../supports/api-url/apiurl'
 
 const cookies = new Cookies();
 
@@ -35,8 +36,8 @@ class LoginPage extends Component {
             return(
                 <div>
                     <Grid fluid className="margin-bot-15">
-                        <Row>
-                            <img src="https://www.dtn.com.vn/skin/frontend/dtn_website/default/images/banner-package1.jpg" alt="banner" style={{width:"100%"}}/>
+                        <Row className="no-margin">
+                            <img src={`${API_URL_1}/others/banner.jpg`} alt="banner" className="homepage-banner"></img>
                         </Row>
                         <Row className="margin-top-15">
                             <Col mdOffset={2} md={3}>

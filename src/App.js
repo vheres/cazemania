@@ -49,7 +49,7 @@ class App extends Component {
   render() {
     if (this.props.auth.cookieCheck === true) {
       return (
-        <Grid fluid className="no-padding">
+        <Grid fluid className="no-margin no-padding">
           <Row>
             <Header />
           </Row>

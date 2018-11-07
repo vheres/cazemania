@@ -1,5 +1,5 @@
 
-import React, { Component } from 'react';  // React, { Component } -> destructuring
+import React, { Component } from 'react';
 import { Nav, Navbar, NavItem, NavDropdown, MenuItem, Grid, Row, Col, FormGroup, FormControl, Button, Modal, Table } from 'react-bootstrap';
 import { Link } from 'react-router-dom';
 import { connect } from 'react-redux';
@@ -35,6 +35,7 @@ class Header extends Component {
 
     onLogoutClick = () => {
         this.props.onLogout();
+        this.props.history.push('/')
     }
 
     onLinkClick = (target) => {
@@ -206,7 +207,7 @@ class Header extends Component {
                     <Navbar fixedTop={true} collapseOnSelect fluid>
                         <Navbar.Header>
                             <Navbar.Brand>
-                                <Link to="/"><img src={`${API_URL_1}/others/logo.png`} alt="Caze Mania" style={{height:"400%"}}></img></Link>
+                                <Link to="/"><img src={`${API_URL_1}/others/logo.png`} alt="Caze Mania" className="img.responsive"></img></Link>
                             </Navbar.Brand>
                             <Navbar.Toggle />
                         </Navbar.Header>

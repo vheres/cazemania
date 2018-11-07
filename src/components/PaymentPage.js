@@ -260,7 +260,7 @@ class PaymentPage extends Component {
     renderRekeningList() {
         var arrJSX = [];
         this.state.rekening.map((item,index) => {
-            arrJSX.push(<option value={item.nama}>{item.nama} {item.nomor_rekening}</option>)
+            arrJSX.push(<option value={item.id}>{item.nama} {item.nomor_rekening}</option>)
         })
         return arrJSX;
     }

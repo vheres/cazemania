@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
-import { Grid, Row, Col, PanelGroup, Panel  } from 'react-bootstrap';
+import { Grid, Row, Col, Panel  } from 'react-bootstrap';
+import {API_URL_1} from '../supports/api-url/apiurl'
 
 class InformationPage extends Component {
 
@@ -8,7 +9,7 @@ class InformationPage extends Component {
             <Grid fluid className="m-b-sm">
                 <Row>
                     <Col md={12}>
-                        <img src="https://www.dtn.com.vn/skin/frontend/dtn_website/default/images/banner-package1.jpg" alt="banner" style={{width:"100%"}}></img>
+                        <img src={`${API_URL_1}/others/banner.jpg`} alt="banner" className="homepage-banner"></img>
                     </Col>
                 </Row>
                 <Row className="margin-top-15">

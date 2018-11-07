@@ -20,19 +20,19 @@ class Footer extends Component { //kalo gak pake destructuring, tulisnya React.C
                                 <div className="pointer"></div>
                             </Row>
                             <Row>
-                                <Link to="/information?active=1"><h5 className="text-white">FAQ</h5></Link>
+                                <Link to="/information?info=faq"><h5 className="text-white">FAQ</h5></Link>
                             </Row>
                             <Row>
-                                <Link to="/information?active=2"><h5 className="text-white">Cara Order</h5></Link>
+                                <Link to="/information?info=caraorder"><h5 className="text-white">Cara Order</h5></Link>
                             </Row>
                             <Row>
-                                <Link to="/information?active=3"><h5 className="text-white"Konfirmasi>Pembayaran</h5></Link>
+                                <Link to="/information?info=pembayaran"><h5 className="text-white"Konfirmasi>Pembayaran</h5></Link>
                             </Row>
                             <Row>
-                                <Link to="/information?active=4"><h5 className="text-white">Informasi Pengiriman</h5></Link>
+                                <Link to="/information?info=informasipengiriman"><h5 className="text-white">Informasi Pengiriman</h5></Link>
                             </Row>
                             <Row>
-                                <Link to="/information?active=5"><h5 className="text-white">Penukaran dan Pengembalian</h5></Link>
+                                <Link to="/information?info=penukarandanpengembalian"><h5 className="text-white">Penukaran dan Pengembalian</h5></Link>
                             </Row>
                         </Col>
                         <Col xsOffset={2} xs={10} mdOffset={0} md={3}>
