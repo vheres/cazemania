@@ -936,4 +936,26 @@ app.post('/customupload', function(req,res){
 
 })
 
+
+app.get('/premiumcatalogue', function(req,res){
+    sql = `SELECT * FROM premium`
+    conn.query(sql, (err,results)=>{
+        if(err) throw err
+        res.send(results)
+    })
+})
+
+app.get(`/premium/:id`, function(req,res){
+    sql = `SELECT * FROM catalogue WHERE category = "premium" AND premium_id = ${req.params.id}`
+    sql1 = `SELECT * FROM premium_images WHERE premium_id = ${req.params.id}`
+    conn.query(sql, (err,results)=>{
+        if(err) throw err
+        conn.query(sql1, (err1,results1)=>{
+            if(err) throw err
+            res.send({item:results, images:results1})
+        })
+    })
+})
+
+
 app.listen(port, () => console.log(`Example app listening on port ${port}!`));
