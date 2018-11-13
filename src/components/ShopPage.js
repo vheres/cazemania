@@ -122,7 +122,7 @@ class ShopPage extends Component {
         console.log(this.state.catalogue)
         var arrJSX = this.state.catalogue.map(item => {
             return (
-                <ItemDetail id={item.id} name={item.name} image={item.image} sales={item.sales}/>
+                <ItemDetail id={item.id} name={item.name} image={item.image} sales={item.sales} category={'normal'} link={'product'}/>
             );
         })
         return arrJSX

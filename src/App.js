@@ -8,6 +8,7 @@ import ShopPage from './components/ShopPage';
 import CustomPage from './components/CustomPage';
 import PremiumPage from './components/PremiumPage';
 import DetailPage from './components/DetailPage';
+import DetailPagePremium from './components/DetailPagePremium';
 import InformationPage from './components/InformationPage';
 import ResellerPage from './components/ResellerPage';
 import PaymentPage from './components/PaymentPage';
@@ -60,6 +61,7 @@ class App extends Component {
               <Route path="/custom" component={CustomPage}/>
               <Route path="/premium_cases" component={PremiumPage}/>
               <Route path="/product" component={DetailPage}/>
+              <Route path="/premium" component={DetailPagePremium}/>
               <Route path="/information" component={InformationPage}/>
               <Route path="/payment" component={PaymentPage}/>
               <Route path="/reseller-dropshipper" component={ResellerPage}/>
