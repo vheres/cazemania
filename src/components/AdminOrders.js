@@ -22,15 +22,6 @@ class AdminOrders extends Component {
         })
     }
 
-    renderDataTableOrders(){
-        var arrJSX = this.state.orders.map((item)=>{
-            return(
-            <AdminRenderOrders key={item.id} transaction_id={item.id} user_id={item.user_id} proof={item.proof} name={item.name} date={item.date} time={item.time} total_price={item.total_price} target_bank={item.target_bank}
-            status={item.status} firstname={item.firstname} lastname={item.lastname} address={item.address} email={item.email}/>
-        )})
-        return arrJSX
-    }
-
     renderTabs(){
         return <AdminOrdersTabs/>
     }

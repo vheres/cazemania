@@ -7,7 +7,7 @@ import CartDetail from './CartDetail';
 import Select from 'react-select';
 
 class PaymentPage extends Component {
-    state = ({ profile: [], recipient: {}, cart: [], rekening: [], totalPrice: 0, edit_modal: false, selectedOption: [], destination: [], filtered_destination: [] })
+    state = ({ profile: [], recipient: {}, cart: [], rekening: [], totalPrice: 0, edit_modal: false, selectedOption: [], destination: [], filtered_destination: [], shipping: 0, totalitems: 0 })
 
     componentWillMount() {
         this.getUserInfo()
@@ -17,15 +17,27 @@ class PaymentPage extends Component {
         axios.get(API_URL_1 + "/checkout/" + this.props.auth.id)
         .then((response) => {
             console.log(response)
-            this.setState({profile: response.data.user[0], cart: response.data.cart, rekening: response.data.rekening, recipient: {
-                firstname: response.data.user[0].firstname,
-                lastname: response.data.user[0].lastname,
-                address: response.data.user[0].address,
-                destination_code: response.data.user[0].destination_code,
-                kota: response.data.user[0].kota,
-                kodepos: response.data.user[0].kodepos
-            }})
-            this.calculateTransactionSummary()
+            var totalitems = 0
+            response.data.cart.map(item => totalitems += parseInt(item.amount))
+            axios.get(API_URL_1 + "/shipping", {
+                params: {
+                    destination: response.data.user[0].destination_code,
+                    weight: totalitems*0.085
+                }
+            })
+            .then((response1) => {
+                this.setState({profile: response.data.user[0], cart: response.data.cart, rekening: response.data.rekening, shipping: response1.data.sicepat.results[0].tariff,
+                    totalitems : totalitems,
+                    recipient: {
+                    firstname: response.data.user[0].firstname,
+                    lastname: response.data.user[0].lastname,
+                    address: response.data.user[0].address,
+                    destination_code: response.data.user[0].destination_code,
+                    kota: response.data.user[0].kota,
+                    kodepos: response.data.user[0].kodepos,
+                }})
+                this.calculateTransactionSummary()
+            })
         })
     }
 
@@ -33,7 +45,7 @@ class PaymentPage extends Component {
         axios.post(API_URL_1 + "/transaction", {
             id: this.props.auth.id,
             subtotal: this.state.totalPrice,
-            shipping: '10000',
+            shipping: this.state.shipping,
             target_bank: this.refs.rekening.value,
             cart: this.state.cart,
             recipient: this.state.recipient
@@ -204,13 +216,15 @@ class PaymentPage extends Component {
                 freeHard++;
             }
         }
-        totalPrice = subTotal - (freeSoft*softPrice) - (freeHard*hardPrice)
+        totalPrice = subTotal - (freeSoft*softPrice) - (freeHard*hardPrice) + parseInt(this.state.shipping)
         this.setState({totalPrice: totalPrice})
     }
 
     renderTransactionDetail() {
+        console.log(this.state.shipping)
         var arrJSX = [];
         var subTotal = 0;
+        var shipping = this.state.shipping
         var totalPrice = 0;
         var countHardCase = 0;
         var countSoftCase = 0;
@@ -251,7 +265,8 @@ class PaymentPage extends Component {
         if(freeHard>0) {
             arrJSX.push(<tr><td/><td>Free Hard Case:</td><td className="text-right">(Qty:{freeHard}) - Rp.{freeHard*hardPrice}</td></tr>)
         }
-        totalPrice = subTotal - (freeSoft*softPrice) - (freeHard*hardPrice)
+        totalPrice = subTotal - (freeSoft*softPrice) - (freeHard*hardPrice) + parseInt(shipping)
+        arrJSX.push(<tr><td/><td><strong>Shipping</strong></td><td className="text-right"><strong>Rp.{this.state.shipping}</strong></td></tr>)
         arrJSX.push(<br/>)
         arrJSX.push(<tr><td/><td><strong>Total Price</strong></td><td className="text-right"><strong>Rp.{totalPrice}</strong></td></tr>)
         return arrJSX
