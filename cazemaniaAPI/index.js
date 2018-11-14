@@ -576,7 +576,10 @@ app.post('/transaction', function(req,res){
         subtotal : req.body.subtotal,
         shipping : req.body.shipping,
         target_bank : req.body.target_bank,
-        status: "pendingPayment"
+        status: "pendingPayment",
+        address: req.body.reqciepient.address,
+        kota: req.body.recipient.kota,
+        kodepos: req.body.recipient.kodepos
     }
 
     sql = `INSERT INTO transactions SET ?`
@@ -869,7 +872,7 @@ app.get('/shipping', function(req,res){
         "method": "GET",
         "hostname": "api.sicepat.com",
         "port": null,
-        "path": `/customer/tariff/?origin=${req.query.origin}&destination=${req.query.destination}&weight=${req.query.weight}`,
+        "path": `/customer/tariff/?origin=TGR&destination=${req.query.destination}&weight=${req.query.weight}`,
         "headers": {
           "api-key": "54d16bfab958effecbfc849133dc706e"
         }
