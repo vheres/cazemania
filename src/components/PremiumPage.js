@@ -6,7 +6,7 @@ import ItemDetail from './ItemDetail';
 import PaginationClass from './Pagination';
 
 class PremiumPage extends Component {
-    state = { catalogue: [], pagination: [], pagecount: 0, search_status: [0], active: [0] }
+    state = { premiumcatalogue: [], pagination: [], pagecount: 0, search_status: [0], active: [0] }
 
     componentWillMount() {
         if (this.state.pagination.length === 0) {
@@ -17,25 +17,13 @@ class PremiumPage extends Component {
     }
 
     getCatalogueList() {
-        const search = this.props.location.search;
-        const params = new URLSearchParams(search);
-        if(search.length == 0) {
-            var code = '';
-            var name = '';
-        }
-        else {
-            var code = params.get('code');
-            var name = params.get('name');
-        }
-        axios.get(API_URL_1 + "/catalogue", {
+        axios.get(API_URL_1 + "/premiumcatalogue", {
             params: {
-                code: code,
-                name: name,
                 pagination: this.state.pagination
             }
         })
         .then((response)=>{
-            this.setState({ catalogue: response.data.catalogue, pagecount: Math.ceil((response.data.pagecount[0].count/20)) })
+            this.setState({ premiumcatalogue: response.data,  pagecount: Math.ceil((response.data.length/20)) })
         })
     }
 
@@ -100,9 +88,9 @@ class PremiumPage extends Component {
 
     renderCatalogue() {
         console.log(this.state.catalogue)
-        var arrJSX = this.state.catalogue.map(item => {
+        var arrJSX = this.state.premiumcatalogue.map(item => {
             return (
-                <ItemDetail id={item.id} name={item.name} image={item.image} sales={item.sales}/>
+                <ItemDetail id={item.id} name={item.name} image={item.image} category={'premium'} link={'premium'}/>
             );
         })
         return arrJSX
@@ -111,9 +99,9 @@ class PremiumPage extends Component {
     renderShopPage() {
         return(
                 <Grid fluid className="HomePage-css padding-15p">
-                    <Col md={1}></Col>
+                    {/* <Col md={1}></Col> */}
                     <Col md={2}>
-                        {this.renderFilterMenu()}
+                        {/* {this.renderFilterMenu()} */}
                     </Col>
                     <Col md={8}>
                             <Row>
