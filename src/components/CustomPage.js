@@ -84,25 +84,25 @@ class CustomPage extends Component {
                 [
                     <select id="case_select" ref="case_select" className="form-control" onChange={()=>this.onTypeSelect()} style={{width:"80%"}}>
                         <option value={0} selected>SELECT CASE</option>
-                        <option value="hard" disabled>HARD CASE -- unavailable</option>
-                        <option value="soft" disabled>SOFT CASE -- unavailable</option>
+                        <option value="customhard" disabled>HARD CASE -- unavailable</option>
+                        <option value="customsoft" disabled>SOFT CASE -- unavailable</option>
                     </select>,
                     <select id="case_select" ref="case_select" className="form-control" onChange={()=>this.onTypeSelect()} style={{width:"80%"}}>
                         <option value={0}>SELECT CASE</option>
-                        <option value="hard" disabled>HARD CASE -- unavailable</option>
-                        <option value="soft" >SOFT CASE</option>
+                        <option value="customhard" disabled>HARD CASE -- unavailable</option>
+                        <option value="customsoft" >SOFT CASE</option>
                     </select>
                 ],
                 [
                     <select id="case_select" ref="case_select" className="form-control" onChange={()=>this.onTypeSelect()} style={{width:"80%"}}>
                         <option value={0}>SELECT CASE</option>
-                        <option value="hard">HARD CASE</option>
-                        <option value="soft"  disabled>SOFT CASE -- unavailable</option>
+                        <option value="customhard">HARD CASE</option>
+                        <option value="customsoft"  disabled>SOFT CASE -- unavailable</option>
                     </select>,
                     <select id="case_select" ref="case_select" className="form-control" onChange={()=>this.onTypeSelect()} style={{width:"80%"}}>
                         <option value={0}>SELECT CASE</option>
-                        <option value="hard">HARD CASE</option>
-                        <option value="soft">SOFT CASE</option>
+                        <option value="customhard">HARD CASE</option>
+                        <option value="customsoft">SOFT CASE</option>
                     </select>
                 ]
             ]
@@ -251,7 +251,7 @@ class CustomPage extends Component {
 
     renderAddToCartButton() {
         console.log(this.state.selected_case)
-        if(this.state.selected_case === undefined || this.state.selected_case === 0 || this.state.picutre === "") {
+        if(this.state.selected_case === undefined || this.state.selected_case === 0 || this.state.picture === "") {
             return <input type="button" className="btn btn-orange" title="Please select Brand, Model and Type First" value="Add to Cart" onClick={()=>this.onAddToCart()} style={{width:"100%"}} disabled></input>
         }
         else {

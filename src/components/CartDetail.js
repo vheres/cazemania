@@ -27,6 +27,18 @@ class CartDetail extends Component {
         }
     }
 
+    renderPrice() {
+        var price: 0;
+        if (this.props.category === "premium") {
+            price = 100000;
+        } else if (this.props.category === "custom") {
+            price = this.props.price + 10000;
+        } else {
+            price = this.props.price;
+        }
+        return price;
+    }
+
     render() {
         return (
             <Row>
@@ -49,7 +61,7 @@ class CartDetail extends Component {
                         </Row>
                     </Col>
                     <Col xs={6} md={3}>
-                        <h3>Rp. {this.props.price}</h3>
+                        <h3>Rp. {this.renderPrice()}</h3>
                     </Col>
                     {this.renderDeleteButton()} 
                 </Col>         

@@ -7033,6 +7033,7 @@ button.close {
   position: relative;
   background: rgb(255, 255, 255);
   margin-bottom: 15px;
+  border-radius: 15pt;
 }
 .pointer:after {
   content: "";
@@ -7044,7 +7045,9 @@ button.close {
   border-left: 20px solid rgb(255, 181, 44);
   border-top: 5px solid rgb(255, 181, 44);
   border-bottom: 5px solid rgb(255, 181, 44);
-  border-right: 20px solid rgb(255, 181, 44)
+  border-right: 20px solid rgb(255, 181, 44);
+  border-top-right-radius: 15pt;
+  border-bottom-right-radius: 15pt;
 }
 .best-seller-pointer {
   width: 180px;
@@ -7071,6 +7074,7 @@ button.close {
   position: relative;
   background: rgb(255, 191, 72);
   margin-bottom: 15px;
+  border-radius: 15pt;
 }
 .similar-product-pointer:after {
   content: "";
@@ -7082,7 +7086,9 @@ button.close {
   border-left: 20px solid rgb(9, 175, 204);
   border-top: 5px solid rgb(9, 175, 204);
   border-bottom: 5px solid rgb(9, 175, 204);
-  border-right: 20px solid rgb(9, 175, 204)
+  border-right: 20px solid rgb(9, 175, 204);
+  border-top-right-radius: 15pt;
+  border-bottom-right-radius: 15pt;
 }
 .my-profile-pointer {
   width: 360px;
@@ -7091,6 +7097,7 @@ button.close {
   left: 10px;
   background: rgb(255, 191, 72);
   margin-bottom: 15px;
+  border-radius: 15pt;
 }
 .my-profile-pointer:after {
   content: "";
@@ -7102,7 +7109,9 @@ button.close {
   border-left: 20px solid rgb(9, 175, 204);
   border-top: 5px solid rgb(9, 175, 204);
   border-bottom: 5px solid rgb(9, 175, 204);
-  border-right: 20px solid rgb(9, 175, 204)
+  border-right: 20px solid rgb(9, 175, 204);
+  border-top-right-radius: 15pt;
+  border-bottom-right-radius: 15pt;
 }
 .block-margin-auto {
   display: block;

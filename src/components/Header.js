@@ -144,16 +144,14 @@ class Header extends Component {
             var countFree = 0;
             var freeSoft = 0;
             var freeHard = 0;
-            var hardPrice = 0;
-            var softPrice = 0;
+            var hardPrice = 75000;
+            var softPrice = 50000;
             this.state.cart.map((item,count) => {
-                if (item.case_type == "hard") {
+                if (item.case_type == "hard" || item.case_type =="customhard" || item.case_type =="premium") {
                     countHardCase += parseInt(item.amount);
-                    hardPrice = item.price;
                 }
                 else {
                     countSoftCase += parseInt(item.amount)
-                    softPrice = item.price;
                 }
                 subTotal += item.amount * item.price;
                 arrJSX.push(<tr><td style={{width:"5%"}}>{count +1}.</td><td style={{width:"50%"}}><strong>{item.name} | {item.code}</strong>, {item.model_name}, {item.case_type}</td><td style={{width:"45%"}} className="text-right">(Qty:{item.amount}) Rp.{item.amount * item.price}</td></tr>)

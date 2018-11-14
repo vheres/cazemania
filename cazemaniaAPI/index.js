@@ -67,7 +67,7 @@ app.get('/catalogue', function(req,res){
     // }
 
         var sql = `SELECT * FROM catalogue WHERE (code LIKE "%${req.query.search}%" OR name LIKE "%${req.query.search}%") and category = "normal" ORDER BY id DESC  limit ${req.query.pagination[0]}, ${req.query.pagination[1]}`
-        var sql1 = `SELECT count(*) as count FROM catalogue WHERE code LIKE "%${req.query.search}%" OR name LIKE "%${req.query.search}%" and category = "normal" `
+        var sql1 = `SELECT count(*) as count FROM catalogue WHERE category = "normal" AND (code LIKE "%${req.query.search}%" OR name LIKE "%${req.query.search}%")`
     
     conn.query(sql, (err,results)=>{
         if(err) throw err;
@@ -948,11 +948,14 @@ app.get('/premiumcatalogue', function(req,res){
 app.get(`/premium/:id`, function(req,res){
     sql = `SELECT * FROM catalogue WHERE category = "premium" AND premium_id = ${req.params.id}`
     sql1 = `SELECT * FROM premium_images WHERE premium_id = ${req.params.id}`
+    sql2 = `select * from type where brand_id = 1 and name in ('Iphone 6', 'Iphone 6+', 'Iphone 7', 'Iphone 7+', 'Iphone 8', 'Iphone 8+') order by name`
     conn.query(sql, (err,results)=>{
         if(err) throw err
         conn.query(sql1, (err1,results1)=>{
             if(err) throw err
-            res.send({item:results, images:results1})
+            conn.query(sql2, (err2,results2)=>{
+                res.send({item:results, images:results1, types:results2})
+            })
         })
     })
 })
