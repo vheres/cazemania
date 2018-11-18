@@ -105,7 +105,7 @@ class DetailPagePremium extends Component {
 
     renderAddToCartButton() {
         if(this.state.premiumselect == 0 || this.state.modelselect == 0) {
-            return <input type="button" className="btn btn-orange" title="Please select Premium Code and Model first" value="Add to Cart" onClick={()=>this.onAddToCart()} style={{width:"100%"}} disabled></input>
+            return <input type="button" className="btn btn-orange disabled" title="Please select Premium Code and Model first" value="Add to Cart" onClick={()=>this.onAddToCart()} style={{width:"100%"}} disabled></input>
         }
         else {
             return (
@@ -157,7 +157,7 @@ class DetailPagePremium extends Component {
                                             <InputGroup.Button>
                                                 <Button className="btn btn-tosca" onClick={()=>this.PlusMinus("minus")}>-</Button>
                                             </InputGroup.Button>
-                                            <FormControl type="text" readOnly id="quantity" ref="quantity" className="form-control text-center" defaultValue="1" style={{background:"white"}}/>
+                                            <FormControl type="text" readOnly id="quantity" ref="quantity" className="form-control text-center" defaultValue="1" style={{background:"white", height:'52px'}}/>
                                             <InputGroup.Button>
                                                 <Button className="btn btn-tosca" onClick={()=>this.PlusMinus("plus")}>+</Button>
                                             </InputGroup.Button>

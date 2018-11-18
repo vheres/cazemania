@@ -273,9 +273,9 @@ class RegisterPage extends Component {
                                 </Row>
                                 <Row>
                                     <Row>
-                                        <input type="button" class="btn btn-primary login-button" value="Register" onClick={()=>this.onRegisterClick()}/>
+                                        <input type="button" class="btn btn-orange pull-right m-r-lg" value="Register" onClick={()=>this.onRegisterClick()}/>
                                     </Row>
-                                    <Row className="pull-right m-r-sm m-t-sm">
+                                    <Row className="pull-right m-r-md m-t-sm">
                                         Sudah punya Akun? <Link to="/login">Login disini</Link>    
                                     </Row> 
                                 </Row>                       

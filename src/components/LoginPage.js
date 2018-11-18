@@ -53,7 +53,7 @@ class LoginPage extends Component {
                                 </Row>
                                 <Row>
                                     <Col xs={12}>
-                                        <input type="button" className="btn btn-primary" value="Register" onClick={()=>this.props.history.push('/register')}></input>
+                                        <input type="button" className="btn btn-orange" value="Register" onClick={()=>this.props.history.push('/register')}></input>
                                     </Col>
                                 </Row>
                             </Col>
@@ -83,13 +83,13 @@ class LoginPage extends Component {
                                     <Row>
                                         <Col xs={9}>
                                             <Row>
-                                                <a href="reset.html" className="pull-right login-forgot">Forgot password?</a>
+                                                <a href="reset.html" className="pull-right m-r">Forgot password?</a>
                                             </Row>
                                             <Row>
-                                                <input type="button" class="btn btn-primary login-button" value="Login" onClick={this.onLoginClick}/>
+                                                <input type="button" class="btn btn-orange m-r m-t" style={{'float': 'right'}} value="Login" onClick={this.onLoginClick}/>
                                             </Row>
                                             <Row>
-                                                <h2 className="badge badge-danger pull-right login-error">{this.props.auth.error}</h2>
+                                                <h2 className="badge badge-danger pull-right m-r">{this.props.auth.error}</h2>
                                             </Row>
                                         </Col>
                                     </Row>                              

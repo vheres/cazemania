@@ -6764,11 +6764,6 @@ button.close {
 .header-button:focus {
   background-color: rgb(4,161,183);
 }
-.header-search-container {
-  margin-top: 15px;
-  margin-bottom: 10px;
-  line-height: 4.4;
-}
 .header-search-button {
   background-color: rgb(30,190,203);
   color: rgb(30,190,203);
@@ -6923,12 +6918,11 @@ button.close {
      transition: background-color ease-in-out .3s;
 }
 .orange-text {
-  margin-top: 10px;
-  margin-bottom: 10px;
-  font-weight: 500;
-  line-height: 4.4;
+  line-height: 4;
+  vertical-align: middle;
   color: rgb(225,112,38);
-  font-size: 18px;
+  font-size: 20px;
+  font-weight: bold;
 }
 @media (max-width: 768px) {
   .orange-text {
@@ -6951,10 +6945,7 @@ button.close {
 .facebook-text {
   margin-left: 10px;
 }
-.bestseller-css {
-  background-color: rgb(253, 203, 151);
-}
-.instagram-css {
+.bg-orange-light {
   background-color: rgb(253, 203, 151);
 }
 .padding-15p {
@@ -6964,39 +6955,17 @@ button.close {
 .margin-top-15 {
   margin-top: 15px;
 }
-.account-css { 
-  font-size: 25px;
-}
-.margin-cart {
-  margin-top: 22px;
-}
-.margin-user {
-  margin-top: 26px;
-}
 .margin-bot-15 {
   margin-bottom: 15px;
 }
 .padding-text {
   padding-top: 7px;
 }
-.instagram-title {
-  font-size: 24px;
-}
 .NavItemMargin {
   margin-left: 20px;
 }
 .badge-danger {
   background-color: rgb(187, 59, 59);
-}
-.login-button {
-  float: right;
-  margin-right: 20px;
-}
-.login-forgot {
-  margin-right: 20px;
-}
-.login-error {
-  margin-right: 20px;
 }
 .login-register-title {
   font-size: 36px;
@@ -7212,6 +7181,13 @@ button.close {
 .inputlabel:hover {
   background-color: rgb(255, 181, 44);
 }
+.reseller-panel {
+  border-radius:10px;
+  color:gray;
+  width:70%;
+  line-height:2;
+  font-size:12pt;
+}
 input[type="number"]::-webkit-outer-spin-button, input[type="number"]::-webkit-inner-spin-button {
     -webkit-appearance: none;
     margin: 0;
@@ -7220,6 +7196,7 @@ input[type="number"]::-webkit-outer-spin-button, input[type="number"]::-webkit-i
 input[type="number"] {
     -moz-appearance: textfield;
 }
+
 
 
 
