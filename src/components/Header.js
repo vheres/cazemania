@@ -147,6 +147,7 @@ class Header extends Component {
             var hardPrice = 75000;
             var softPrice = 50000;
             this.state.cart.map((item,count) => {
+                console.log(item)
                 if (item.case_type == "hard" || item.case_type =="customhard" || item.case_type =="premium") {
                     countHardCase += parseInt(item.amount);
                 }
@@ -196,6 +197,18 @@ class Header extends Component {
     onSearchClick() {
         var search = document.getElementById("search").value;
         this.props.history.push(`/shop?search=${search}`)
+    }
+
+    renderPaymentButton() {
+        if (this.state.cart.length === 0) {
+            return (
+                <input type="button" className="btn btn-success" onClick={()=>this.onPaymentClick()} value="Proceed to Payment" title="Your cart is empty!" disabled/>
+            )
+        } else {
+            return (
+                <input type="button" className="btn btn-success" onClick={()=>this.onPaymentClick()} value="Proceed to Payment"/>
+            )
+        }
     }
 
     renderNavbar = () => {   
@@ -249,7 +262,6 @@ class Header extends Component {
                 </Row>
             );
         }
-
         return(
                 <Row>
                     <Navbar fixedTop={true} collapseOnSelect fluid>
@@ -314,7 +326,7 @@ class Header extends Component {
                 </Modal.Body>
                 <Modal.Footer>
                     <input type="button" className="btn btn-danger" onClick={this.handleClose.bind(this)} value="Back"/>
-                    <input type="button" className="btn btn-success" onClick={()=>this.onPaymentClick()} value="Proceed to Payment"/>
+                    {this.renderPaymentButton()}
                 </Modal.Footer>
                 </Modal>
             </div>

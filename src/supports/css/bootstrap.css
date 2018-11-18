@@ -7120,6 +7120,7 @@ button.close {
   font-size: 12px;
 }
 .profile-edit-button {
+  cursor: pointer;
   position: relative;
   left: 210px;
   font-size: 20px;

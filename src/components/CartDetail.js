@@ -17,26 +17,14 @@ class CartDetail extends Component {
 
     renderImage(){
         if(this.props.category === "normal"){
-            return <Thumbnail src={API_URL_1+'/normal/'+this.props.image+'.jpg '}></Thumbnail>
+            return <Thumbnail src={API_URL_1+'/normal/'+this.props.image+'.jpg'}></Thumbnail>
         }
         else if(this.props.category === "custom"){
-            return <Thumbnail src={API_URL_1+'/custom/'+this.props.image+'.jpg '}></Thumbnail>
+            return <Thumbnail src={API_URL_1+'/custom/'+this.props.image+'.jpg'}></Thumbnail>
         }
         else if(this.props.category === "premium"){
-            return <Thumbnail src={API_URL_1+'/premium/'+this.props.image+'.jpg '}></Thumbnail>
+            return <Thumbnail src={API_URL_1+'/premium/'+this.props.image+'.jpg'}></Thumbnail>
         }
-    }
-
-    renderPrice() {
-        var price: 0;
-        if (this.props.category === "premium") {
-            price = 100000;
-        } else if (this.props.category === "custom") {
-            price = this.props.price + 10000;
-        } else {
-            price = this.props.price;
-        }
-        return price;
     }
 
     render() {
@@ -61,7 +49,7 @@ class CartDetail extends Component {
                         </Row>
                     </Col>
                     <Col xs={6} md={3}>
-                        <h3>Rp. {this.renderPrice()}</h3>
+                        <h3>Rp. {this.props.price}</h3>
                     </Col>
                     {this.renderDeleteButton()} 
                 </Col>         

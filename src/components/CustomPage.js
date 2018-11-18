@@ -9,7 +9,7 @@ import { withRouter } from 'react-router-dom';
 import FileUploader from './FileUploader';
 
 class CustomPage extends Component {
-    state={picture: "", brands: [], types: [], typeselect: [""], caseselect: {soft: 0, hard: 0}, price: [], selected_price: "", namafile: ''}
+    state={picture: '', brands: [], types: [], typeselect: [""], caseselect: {soft: 0, hard: 0}, price: [], selected_price: "", namafile: ''}
 
     componentWillMount(){
         const params = new URLSearchParams(this.props.location.search);
@@ -110,16 +110,15 @@ class CustomPage extends Component {
     }
 
     onTypeSelect() {
-        if (this.refs.case_select.value === 'hard') {
+        if (this.refs.case_select.value === 'customhard') {
             this.setState({selected_price: this.state.price[1].price, selected_case: this.refs.case_select.value})
         }
-        else if (this.refs.case_select.value === 'soft') {
+        else if (this.refs.case_select.value === 'customsoft') {
             this.setState({selected_price: this.state.price[0].price , selected_case: this.refs.case_select.value})
         }
         else if (this.refs.case_select.value == 0) {
             this.setState({selected_price: "", selected_case: 0})
         }
-        console.log(this.state.selected_price)
     }
 
     onAddToCart() {
@@ -250,8 +249,7 @@ class CustomPage extends Component {
         }
 
     renderAddToCartButton() {
-        console.log(this.state.selected_case)
-        if(this.state.selected_case === undefined || this.state.selected_case === 0 || this.state.picture === "") {
+        if(this.state.selected_case === undefined || this.state.selected_case === 0 || this.state.namafile === "") {
             return <input type="button" className="btn btn-orange disabled" title="Please select Brand, Model and Type First" value="Add to Cart" onClick={()=>this.onAddToCart()} style={{width:"100%"}} disabled></input>
         }
         else {

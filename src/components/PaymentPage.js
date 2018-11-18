@@ -7,7 +7,7 @@ import CartDetail from './CartDetail';
 import Select from 'react-select';
 
 class PaymentPage extends Component {
-    state = ({ profile: [], recipient: {}, cart: [], rekening: [], totalPrice: 0, edit_modal: false, selectedOption: [], destination: [], filtered_destination: [], shipping: 0, totalitems: 0 })
+    state = ({ profile: [], recipient: {}, cart: [], rekening: [], subTotal: 0, discount: 0, edit_modal: false, selectedOption: [], destination: [], filtered_destination: [], shipping: 0, totalitems: 0 })
 
     componentWillMount() {
         this.getUserInfo()
@@ -44,7 +44,8 @@ class PaymentPage extends Component {
     onCheckOutClick() {
         axios.post(API_URL_1 + "/transaction", {
             id: this.props.auth.id,
-            subtotal: this.state.totalPrice,
+            subtotal: this.state.subTotal,
+            discount: this.state.discount,
             shipping: this.state.shipping,
             target_bank: this.refs.rekening.value,
             cart: this.state.cart,
@@ -158,7 +159,7 @@ class PaymentPage extends Component {
     renderCartList() {
         var arrJSX = [];
         arrJSX = this.state.cart.map((item,count) => {
-            return <CartDetail key={item.id} id={item.id} count={count} name={item.name} code={item.code} image={item.image} brand={item.brand_name} model={item.model_name} type={item.case_type} quantity={item.amount} price={item.price}></CartDetail>
+            return <CartDetail key={item.id} id={item.id} count={count} name={item.name} code={item.code} category={item.category} image={item.image} brand={item.brand_name} model={item.model_name} type={item.case_type} quantity={item.amount} price={item.price}></CartDetail>
         })
         console.log(arrJSX)
         return arrJSX
@@ -183,7 +184,7 @@ class PaymentPage extends Component {
     }
 
     calculateTransactionSummary() {
-        console.log(this.state.cart)
+        var discount = 0;
         var subTotal = 0;
         var totalPrice = 0;
         var countHardCase = 0;
@@ -192,16 +193,14 @@ class PaymentPage extends Component {
         var countFree = 0;
         var freeSoft = 0;
         var freeHard = 0;
-        var hardPrice = 0;
-        var softPrice = 0;
+        var hardPrice = 75000;
+        var softPrice = 50000;
         this.state.cart.map((item,count) => {
-            if (item.case_type == "hard") {
+            if (item.case_type == "hard" || item.case_type =="customhard" || item.case_type =="premium") {
                 countHardCase += parseInt(item.amount);
-                hardPrice = item.price;
             }
             else {
                 countSoftCase += parseInt(item.amount)
-                softPrice = item.price;
             }
             subTotal += item.amount * item.price;
         })
@@ -216,12 +215,11 @@ class PaymentPage extends Component {
                 freeHard++;
             }
         }
-        totalPrice = subTotal - (freeSoft*softPrice) - (freeHard*hardPrice) + parseInt(this.state.shipping)
-        this.setState({totalPrice: totalPrice})
+        discount = (freeSoft*softPrice) + (freeHard*hardPrice);
+        this.setState({subTotal: subTotal, discount: discount})
     }
 
     renderTransactionDetail() {
-        console.log(this.state.shipping)
         var arrJSX = [];
         var subTotal = 0;
         var shipping = this.state.shipping
@@ -232,16 +230,14 @@ class PaymentPage extends Component {
         var countFree = 0;
         var freeSoft = 0;
         var freeHard = 0;
-        var hardPrice = 0;
-        var softPrice = 0;
+        var hardPrice = 75000;
+        var softPrice = 50000;
         this.state.cart.map((item,count) => {
-            if (item.case_type == "hard") {
+            if (item.case_type == "hard" || item.case_type =="customhard" || item.case_type =="premium") {
                 countHardCase += parseInt(item.amount);
-                hardPrice = item.price;
             }
             else {
                 countSoftCase += parseInt(item.amount)
-                softPrice = item.price;
             }
             subTotal += item.amount * item.price;
             arrJSX.push(<tr><td style={{width:"5%"}}>{count +1}.</td><td><strong>{item.name} | {item.code}</strong>, {item.model_name}, {item.case_type} case</td><td className="text-right">(Qty:{item.amount}) Rp.{item.amount * item.price}</td></tr>)
@@ -306,16 +302,6 @@ class PaymentPage extends Component {
                             <Panel>
                                 <Panel.Body>
                                     {this.renderCartList()}
-                                </Panel.Body>
-                            </Panel>
-                        </Row>
-                        <Row>
-                            <h4>Biaya Pengiriman</h4>
-                        </Row>
-                        <Row>
-                            <Panel>
-                                <Panel.Body>
-                                    
                                 </Panel.Body>
                             </Panel>
                         </Row>
