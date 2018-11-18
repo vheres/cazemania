@@ -139,7 +139,7 @@ app.get('/admin/:table', function(req,res){
 })
 
 app.get('/adminorders', function(req,res){
-    sql= `SELECT tr.id as id, LPAD( tr.id, 8, '0') as ordernumber, tr.date as date, tr.time as time, tr.proof as proof, tr.target_bank as target_bank, tr.status as status, tr.subtotal as subtotal, tr.shipping as shipping, tr.resi as resi, u.firstname as firstname, 
+    sql= `SELECT tr.id as id, LPAD( tr.id, 8, '0') as ordernumber, tr.date as date, tr.time as time, tr.proof as proof, tr.target_bank as target_bank, tr.status as status, tr.subtotal as subtotal, tr.discount as discount, tr.shipping as shipping, tr.resi as resi, u.firstname as firstname, 
     u.lastname as lastname, u.id as user_id, u.address as address, u.email as email, u.phone as phone, u.kota as kota, u.kodepos as kodepos FROM transactions tr JOIN users u ON tr.user_id = u.id ORDER BY date`
     conn.query(sql, (err,results)=>{
         if(err) throw err;
@@ -574,6 +574,7 @@ app.post('/transaction', function(req,res){
         date : dateNow,
         time : timeNow,
         subtotal : req.body.subtotal,
+        discount: req.body.discount,
         shipping : req.body.shipping,
         target_bank : req.body.target_bank,
         status: "pendingPayment",
@@ -774,7 +775,7 @@ app.put('/users/:id', function(req,res){
 })
 
 app.get('/users/transactions/:id', function(req,res){
-    sql= `SELECT tr.id as id, LPAD( tr.id, 8, '0') as ordernumber, tr.date as date, tr.time as time, tr.proof as proof, tr.target_bank as target_bank, tr.status as status, tr.subtotal as subtotal, tr.shipping as shipping, tr.resi as resi, u.firstname as firstname, 
+    sql= `SELECT tr.id as id, LPAD( tr.id, 8, '0') as ordernumber, tr.date as date, tr.time as time, tr.proof as proof, tr.target_bank as target_bank, tr.status as status, tr.subtotal as subtotal, tr.discount as discount, tr.shipping as shipping, tr.resi as resi, u.firstname as firstname, 
     u.lastname as lastname, u.id as user_id, u.address as address, u.email as email, u.phone as phone, u.kota as kota, u.kodepos as kodepos FROM transactions tr JOIN users u ON tr.user_id = u.id WHERE user_id = ${req.params.id} ORDER BY date desc`
     conn.query(sql, (err,results)=>{
         if(err) throw err;
