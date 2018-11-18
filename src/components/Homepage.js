@@ -13,7 +13,7 @@ class HomePage extends Component {
     renderHomePage() {
         return(
                 <Grid fluid className="HomePage-css">
-                    <Row className="no-margin">
+                    <Row className="m-n">
                         <img src={`${API_URL_1}/others/banner.jpg`} alt="banner" className="homepage-banner"></img>
                     </Row>
                     <Row>
@@ -58,17 +58,17 @@ class HomePage extends Component {
                             </Row>
                         </Col>   
                     </Row>
-                    <Row className="bestseller-css no-margin">
-                        <Row className="no-margin" style={{"background-color": 'rgb(30,190,203)'}}>
-                            <h2 className="text-center text-white">Best Seller</h2>
+                    <Row className="bg-orange-light m-n">
+                        <Row className="m-n" style={{"background-color": 'rgb(30,190,203)', "padding-top": 15, "padding-bottom": 15}}>
+                            <div className="text-center text-white" style={{'font-size':'24px'}}>Best Seller</div>
                             {/* <div className="block-margin-auto best-seller-pointer"></div> */}
                         </Row>
                         <Row>
                             <Col mdOffset={1} md={10}><CarouselClass/></Col>
                         </Row>
                     </Row>
-                    <Row className="margin-bot-15">
-                        <Row className="margin-top-15">
+                    <Row className="m-b-lg">
+                        <Row className="m-t-lg">
                             <Col xs={12}><h2 className="text-center">Happy Customer</h2></Col>
                             
                         </Row>
@@ -76,10 +76,10 @@ class HomePage extends Component {
                             <Col xsOffset={0} xs={12} mdOffset={4} md={4}><CarouselText/></Col>
                         </Row>
                     </Row>
-                    {/*  Row className="instagram-css" */}
-                    <Row className="instagram-css no-margin"> 
-                        <Row className="text-center no-margin" style={{"background-color": 'rgb(30,190,203)', "padding-top": 15, "padding-bottom": 15}}>
-                        <img src="https://diylogodesigns.com/wp-content/uploads/2016/05/instagram-Logo-PNG-Transparent-Background-download-768x768.png" alt="instagram" style={{width:"50px"}}></img><span className="instagram-title text-white">@Cazemania</span>
+                    {/*  Row className="bg-orange-light" */}
+                    <Row className="bg-orange-light m-n"> 
+                        <Row className="text-center m-n" style={{"background-color": 'rgb(30,190,203)', "padding-top": 15, "padding-bottom": 15}}>
+                        <img src="https://diylogodesigns.com/wp-content/uploads/2016/05/instagram-Logo-PNG-Transparent-Background-download-768x768.png" alt="instagram" style={{width:"45px"}}></img><span className="text-white" style={{'font-size':'24px'}}>@Cazemania</span>
                         </Row>
                         <Row className="padding-15p">
                         <Col md={12}><CarouselInsta/></Col>

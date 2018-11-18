@@ -3989,7 +3989,8 @@ textarea.form-control {
   color: #fff !important;
   background-color: rgb(30,190,203);
   border-color: rgb(30,190,203);
-  border-radius: 50%;
+  border-radius: 100%;
+  padding: 15px 20px;
 }
 .btn-tosca:hover,
 .btn-tosca:focus,
@@ -3997,13 +3998,15 @@ textarea.form-control {
 .btn-tosca.active,
 .open .dropdown-toggle.btn-tosca {
   color: #fff !important;
-  background-color: rgb(27, 163, 175);
+  background-color: rgb(27, 163, 175) !important;
   border-color: rgb(27, 163, 175);
+  outline: none !important;
 }
 .btn-tosca:active,
 .btn-tosca.active,
 .open .dropdown-toggle.btn-tosca {
   background-image: none;
+  outline: none;
 }
 .btn-tosca.disabled,
 .btn-tosca.disabled:hover,
@@ -4026,16 +4029,24 @@ fieldset[disabled] .btn-tosca.active {
 .btn-orange {
   color: #fff !important;
   background-color: rgb(255, 181, 44);
-  border-color: rgb(255, 181, 44);
+  border: 2px solid rgb(255, 181, 44);
+  font-size: 14pt;
+  width: 200px;
+  height: 40px;
+  border-radius: 15pt;
+  transition: background-color 0.3s;
 }
 .btn-orange:hover,
 .btn-orange:focus,
 .btn-orange:active,
 .btn-orange.active,
 .open .dropdown-toggle.btn-orange {
-  color: #fff !important;
-  background-color: rgb(235, 169, 48);
-  border-color: rgb(182, 125, 19);
+  color: rgb(255, 181, 44) !important;
+  background-color: transparent;
+  outline: none !important;
+}
+.btn-orange.disabled:hover {
+  color: white !important;
 }
 .btn-orange:active,
 .btn-orange.active,

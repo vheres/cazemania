@@ -218,7 +218,7 @@ class DetailPage extends Component {
     renderAddToCartButton() {
         console.log(this.state.selected_case)
         if(this.state.selected_case === undefined || this.state.selected_case === 0) {
-            return <input type="button" className="btn btn-orange" title="Please select Brand, Model and Type First" value="Add to Cart" onClick={()=>this.onAddToCart()} style={{width:"100%"}} disabled></input>
+            return <input type="button" className="btn btn-orange disabled" title="Please select Brand, Model and Type First" value="Add to Cart" onClick={()=>this.onAddToCart()} style={{width:"100%"}} disabled></input>
         }
         else {
             return (
@@ -278,7 +278,7 @@ class DetailPage extends Component {
                                             <InputGroup.Button>
                                                 <Button className="btn btn-tosca" onClick={()=>this.PlusMinus("minus")}>-</Button>
                                             </InputGroup.Button>
-                                            <FormControl type="text" readOnly id="quantity" ref="quantity" className="form-control text-center" defaultValue="1" style={{background:"white"}}/>
+                                            <FormControl type="text" readOnly id="quantity" ref="quantity" className="form-control text-center" defaultValue="1" style={{background:"white", height:'52px'}}/>
                                             <InputGroup.Button>
                                                 <Button className="btn btn-tosca" onClick={()=>this.PlusMinus("plus")}>+</Button>
                                             </InputGroup.Button>

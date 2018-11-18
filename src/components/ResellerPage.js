@@ -15,26 +15,26 @@ class InformationPage extends Component {
                 <Row className="margin-top-15">
                     <Col xsOffset={1} xs={10} mdOffset={2} md={8}>
                         <Row>
-                            <h1 className="text-center" style={{color:"orange"}}><strong>Yuk dapatkan penghasilan jutaan rupiah dari bisnis online.</strong></h1>
+                            <h1 className="" style={{color:"orange"}}><strong>Yuk dapatkan penghasilan jutaan rupiah dari bisnis online.</strong></h1>
                         </Row>
                         <Row>
-                            <h2 className="text-center" style={{color:"#38AFFE"}}><strong>Program Reseller & Dropshipper @Cazemania</strong></h2>
+                            <h2 className="" style={{color:"rgb(30,190,203)"}}><strong>Program Reseller & Dropshipper @Cazemania</strong></h2>
                         </Row>
                         <Row>
-                            <h3 style={{color:"#38AFFE"}}>Kenapa harus jual case hp?</h3>
+                            <h3 style={{color:"rgb(30,190,203)"}}>Kenapa harus jual case hp?</h3>
                         </Row>
                         <Row>
-                        <Panel style={{background:"#FEC664"}}>
+                        <Panel className="reseller-panel">
                             <Panel.Body>
                                 <p>Jaman sekarang ini case hp sudah menjadi kebutuhan banyak orang loh. Coba lihat orang2 di sekitar kk, pasti punya hp. Nah tingginya penggunaan hp / smartphone sekarang ini, menyebabkan tingginya kebutuhan case sebagai pelindung hp :D Selain itu, orang2 suka gonta ganti case loh! Jadi bisa kebayang kan kak berapa besar permintaan akan case hp?</p>
                             </Panel.Body>
                         </Panel>
                         </Row>
                         <Row>
-                            <h3 style={{color:"#38AFFE"}}>Kenapa harus join dan apa keuntungan menjadi reseller / dropsipper di @cazemania?</h3>
+                            <h3 style={{color:"rgb(30,190,203)"}}>Kenapa harus join dan apa keuntungan menjadi reseller / dropsipper di @cazemania?</h3>
                         </Row>
                         <Row>
-                            <Panel style={{background:"#FEC664"}}>
+                            <Panel  className="reseller-panel">
                                 <Panel.Body>
                                     <ul>
                                         <li>Tanpa modal, karena tidak perlu stock. Hanya perlu pesan sesuai orderan yang diterima.</li>
@@ -53,10 +53,10 @@ class InformationPage extends Component {
                             </Panel>
                         </Row>
                         <Row>
-                            <h3 style={{color:"#38AFFE"}}>Syarat menjadi reseller / dropsipper di Cazemania?</h3>
+                            <h3 style={{color:"rgb(30,190,203)"}}>Syarat menjadi reseller / dropsipper di Cazemania?</h3>
                         </Row>
                         <Row>
-                            <Panel style={{background:"#FEC664"}}>
+                            <Panel className="reseller-panel">
                                 <Panel.Body>
                                     <ul>
                                         <li>Biaya pendaftaran hanya 99rb cukup bayar sekali dan berlaku seumur hidup, setelah itu berhak menikmati fasilitas2 diatas. </li>
@@ -65,10 +65,10 @@ class InformationPage extends Component {
                             </Panel>
                         </Row>
                         <Row>
-                            <h3 style={{color:"#38AFFE"}}><strong>KUOTA TERBATAS! Yuk buruan daftar jadi reseller / dropshipper @cazemania sekarang juga.</strong></h3>
+                            <h3 style={{color:"orange"}}><strong>KUOTA TERBATAS! Yuk buruan daftar jadi reseller / dropshipper @cazemania sekarang juga.</strong></h3>
                         </Row>
                         <Row>
-                            <input type="button" className="btn btn-primary btn-lg block-margin-auto" value="Daftar Reseller/Dropshipper" onClick={()=>this.props.history.push('/register_reseller_dropshipper')}></input>
+                            <input type="button" className="btn btn-info btn-lg block-margin-auto" value="Daftar Reseller/Dropshipper" onClick={()=>this.props.history.push('/register_reseller_dropshipper')}></input>
                         </Row>
                     </Col>
                 </Row>

@@ -225,15 +225,17 @@ class Header extends Component {
                                 </Nav>
                                 <Nav pullRight>
                                     <Navbar.Form pullLeft>
-                                        <FormGroup className="header-search-container">
-                                        <FormControl type="text" id="search" placeholder="Search Code / Name" class="form-control" style={{width:"450px"}} onKeyPress={this.onKeyPress.bind(this)}/>{' '}
-                                        <Button type="submit" className="btn btn-tosca" onClick={()=>this.onSearchClick()}><i class="icon-magnifier"></i></Button>
+                                        <FormGroup className="m-t-md">
+                                        <FormControl type="text" id="search"placeholder="Search Code / Name" class="form-control" style={{width:"450px", height:"45px"}} onKeyPress={this.onKeyPress.bind(this)}/>{' '}
                                         </FormGroup>
                                     </Navbar.Form>
-                                    <NavItem eventKey={5} className="margin-cart">
-                                        <Button type="submit" className="btn btn-tosca" onClick={this.handleShow.bind(this)}><i class="fa fa-shopping-cart"></i></Button>
+                                    <NavItem eventKey={4} className="m-t-sm">
+                                        <Button type="submit" className="btn btn-tosca" onClick={()=>this.onSearchClick()}><i class="icon-magnifier"></i></Button>
                                     </NavItem>
-                                    <NavDropdown eventKey={6} title={<i class="fa fa-user"></i>} id="basic-nav-dropdown" className="margin-user account-css">
+                                    <NavItem eventKey={5} className="m-t-sm" >
+                                        <Button type="submit" className="btn btn-tosca" onClick={()=>this.handleShow()}><i class="fa fa-shopping-cart" ></i></Button>
+                                    </NavItem>
+                                    <NavDropdown eventKey={6} title={<i class="fa fa-user"></i>} id="basic-nav-dropdown" className="m-t-md m-r" style={{'font-size': '32px'}}>
                                         <MenuItem eventKey={6.1} onClick={()=>this.onLinkClick(`/profile`)}>
                                             <span>Profile</span>
                                         </MenuItem>
@@ -273,15 +275,17 @@ class Header extends Component {
                                 </Nav>
                                 <Nav pullRight>
                                     <Navbar.Form pullLeft>
-                                        <FormGroup className="header-search-container">
-                                        <FormControl type="text" id="search"placeholder="Search Code / Name" class="form-control" style={{width:"450px"}} onKeyPress={this.onKeyPress.bind(this)}/>{' '}
-                                        <Button type="submit" className="btn btn-tosca" onClick={()=>this.onSearchClick()}><i class="icon-magnifier"></i></Button>
+                                        <FormGroup className="m-t-md">
+                                        <FormControl type="text" id="search"placeholder="Search Code / Name" class="form-control" style={{width:"450px", height:"45px"}} onKeyPress={this.onKeyPress.bind(this)}/>{' '}
                                         </FormGroup>
                                     </Navbar.Form>
-                                    <NavItem eventKey={5} className="margin-cart" >
+                                    <NavItem eventKey={4} className="m-t-sm">
+                                        <Button type="submit" className="btn btn-tosca" onClick={()=>this.onSearchClick()}><i class="icon-magnifier"></i></Button>
+                                    </NavItem>
+                                    <NavItem eventKey={5} className="m-t-sm" >
                                         <Button type="submit" className="btn btn-tosca" onClick={()=>{alert('Please Login First');this.onLinkClick("/login")}}><i class="fa fa-shopping-cart" ></i></Button>
                                     </NavItem>
-                                    <NavDropdown eventKey={6} title={<i class="fa fa-user"></i>} id="basic-nav-dropdown" className="margin-user account-css">
+                                    <NavDropdown eventKey={6} title={<i class="fa fa-user"></i>} id="basic-nav-dropdown" className="m-t-md m-r" style={{'font-size': '32px'}}>
                                         <MenuItem eventKey={6.1} onClick={()=>this.onLinkClick("/login")}>
                                             <span><i className="fa fa-sign-in"></i> Login</span>
                                         </MenuItem>
