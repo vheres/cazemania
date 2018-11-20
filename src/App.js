@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
-import Admin from './components/Admin'
+import Admin from './components/Admin';
+import AdminDashboard from './components/AdminDashboard'
 import AdminOrders from './components/AdminOrders'
 import Header from './components/Header';
 import Footer from './components/Footer';
@@ -66,8 +67,7 @@ class App extends Component {
               <Route path="/payment" component={PaymentPage}/>
               <Route path="/reseller-dropshipper" component={ResellerPage}/>
               <Switch>
-                <Route path="/admin/:table" component={Admin}/>
-                <Route path="/admin" component={AdminOrders}/>
+                <Route path="/admin/dashboard" component={AdminDashboard}/>
               </Switch>
               <Route path="/profile" component={ProfilePage}/>
               <Route path="/login" component={LoginPage}/>

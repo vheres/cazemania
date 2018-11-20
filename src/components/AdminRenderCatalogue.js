@@ -13,7 +13,7 @@ class AdminRenderCatalogue extends Component {
     }
 
     onSaveClick(){
-        axios.put(API_URL_1 + "/admin/" + this.props.table + "/" + this.props.id,
+        axios.put(API_URL_1 + "/admin/catalogue/" + this.props.id,
             {
                 code: this.refs.editCode.value,
                 name: this.refs.editName.value,
@@ -56,7 +56,7 @@ class AdminRenderCatalogue extends Component {
                 <td>{this.props.id}</td>
                 <td>{this.props.code}</td>
                 <td>{this.props.name}</td>
-                <td><img src={API_URL_1 + "/normal/" + this.props.image + '.jpg'} alt={this.props.image} style={{width:"100%"}}/></td>
+                <td><img src={API_URL_1 + "/normal/" + this.props.image + '.jpg'} alt={this.props.image} style={{width:"70%"}}/></td>
                 <td>{this.props.sales}</td>
                 <td>
                     <input type="button" className="btn btn-success" style={{width: 70}} onClick={()=>this.onEditClick()} value="Edit"/>
