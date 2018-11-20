@@ -43,7 +43,7 @@ const conn = mysql.createConnection({
 
 //Get list of bestsellers from catalogue, sorted by sales, limit TO 10
 app.get('/bestsellers', function(req,res){
-    var sql = 'SELECT * FROM catalogue ORDER BY sales ASC LIMIT 10'
+    var sql = 'SELECT * FROM catalogue WHERE category != "custom" ORDER BY sales ASC LIMIT 10'
     conn.query(sql, (err,results)=>{
         if(err) throw err;
         console.log(results)

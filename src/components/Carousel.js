@@ -26,15 +26,14 @@ class CarouselClass extends Component {
       };
       
       galleryItems() {
-          var images = [];
-          this.state.best_seller.map((item, count) => {
-            images.push([item.id, item.image, item.name])
-          })
         return (
-          images.map((item, count) => (
-                // <Link to={"/product?id="+item[0]}><Thumbnail src = {API_URL_1+'/'+item[1]+'.jpg'}></Thumbnail></Link>
-                <Link to={"/product?id="+item[0]} className="best-holder"><img src={API_URL_1+'/normal/'+item[1]+'.jpg'} style={{width:"100%"}}/><div className="best-overlay">{item[2]}</div></Link>
-          ))
+          this.state.best_seller.map((item, index) => {
+            if (item.premium_id !== null) {
+              return <Link to={"/premium?id="+item.premium_id} className="best-holder"><img src={API_URL_1+'/premium/'+item.image+'.jpg'} style={{width:"100%"}}/><div className="best-overlay">{item.name}</div></Link>
+            } else {
+              return <Link to={"/product?id="+item.id} className="best-holder"><img src={API_URL_1+'/normal/'+item.image+'.jpg'} style={{width:"100%"}}/><div className="best-overlay">{item.name}</div></Link>
+            }
+          })
         )
       };
     render() {

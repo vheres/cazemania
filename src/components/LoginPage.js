@@ -40,56 +40,70 @@ class LoginPage extends Component {
                             <img src={`${API_URL_1}/others/banner.jpg`} alt="banner" className="homepage-banner"></img>
                         </Row>
                         <Row className="margin-top-15">
-                            <Col mdOffset={2} md={3}>
+                            <Col mdOffset={2} md={4}>
                                 <Row>
                                     <Col xs={12} className="m-b-sm">
-                                        <span className="login-register-title">Belum Punya Akun?</span><br/>
+                                        <span className="general-title-blue">Belum Punya Akun?</span><br/>
                                     </Col>
                                 </Row>
                                 <Row className="m-b-sm">
-                                    <Col xs={12}>
+                                    <Col xs={12} className="general-text">
                                     Yuk bergabung dengan Cazemania. Dengan membuat akun, kamu akan dimudahkan dalam berbelanja dan melacak pesanan kamu.
                                     </Col>
                                 </Row>
                                 <Row>
                                     <Col xs={12}>
-                                        <input type="button" className="btn btn-orange" value="Register" onClick={()=>this.props.history.push('/register')}></input>
+                                        <input type="button" className="btn-blue-orange" value="Register" onClick={()=>this.props.history.push('/register')}></input>
                                     </Col>
                                 </Row>
                             </Col>
-                            <Col md={7}>
+                            <Col md={6}>
                                 <Row className="m-b-md">
-                                    <Col xsOffset={1} xs={11}>
-                                        <span className="login-register-title">Login Member</span>
+                                    <Col xs={12}>
+                                        <span className="general-title-blue">Login Member</span>
                                     </Col>
                                 </Row>
                                 <form id="Login" className="login-form">
                                     <Row>
-                                        <Col xs={2} className="text-right register-form-text">
+                                        {/* <Col xs={2} className="text-right register-form-text">
                                         Email: 
-                                        </Col>
-                                        <Col xs={7}>
-                                            <input type="email" ref="email" class="form-control" id="inputEmail" placeholder="Email Address" onKeyPress={this.onKeyPress.bind(this)}/><br/>
+                                        </Col> */}
+                                        <Col xs={8}>
+                                            {/* <input type="email" ref="email" class="form-control" id="inputEmail" placeholder="Email Address" onKeyPress={this.onKeyPress.bind(this)}/><br/> */}
+                                            <label className="general-input-container">
+                                                <div className="general-input-label">Email</div>
+                                                <input type="email" ref="email" id="inputEmail" className="general-input" placeholder="Your email" onKeyPress={this.onKeyPress.bind(this)}/>
+                                            </label> 
                                         </Col>
                                     </Row>
-                                    <Row>
-                                        <Col xs={2} className="text-right register-form-text">
+                                    <Row className="m-t">
+                                        {/* <Col xs={2} className="text-right register-form-text">
                                         Password: 
-                                        </Col>
-                                        <Col xs={7}>
-                                            <input type="password" ref="password" class="form-control" id="inputPassword" placeholder="Password" onKeyPress={this.onKeyPress.bind(this)}/><br/>
+                                        </Col> */}
+                                        <Col xs={8}>
+                                            <label className="general-input-container">
+                                                <div className="general-input-label">Password</div>
+                                                <input type="password" ref="password" id="inputPassword" className="general-input" placeholder="Your password" onKeyPress={this.onKeyPress.bind(this)}/>
+                                            </label> 
+                                            {/* <input type="password" ref="password" class="form-control" id="inputPassword" placeholder="Password" onKeyPress={this.onKeyPress.bind(this)}/><br/> */}
                                         </Col>
                                     </Row>
                                     <Row>
-                                        <Col xs={9}>
-                                            <Row>
-                                                <a href="reset.html" className="pull-right m-r">Forgot password?</a>
+                                        <Col xs={8}>
+                                            <Row className="m-t">
+                                                <Col xs={12}>
+                                                    <a href="reset.html" className="pull-right general-link">Forgot password?</a>
+                                                </Col>
                                             </Row>
-                                            <Row>
-                                                <input type="button" class="btn btn-orange m-r m-t" style={{'float': 'right'}} value="Login" onClick={this.onLoginClick}/>
+                                            <Row className="m-t">
+                                                <Col xs={12}>
+                                                    <input type="button" class="btn-orange-blue" style={{'float': 'right', 'width':'100%'}} value="Login" onClick={this.onLoginClick}/>
+                                                </Col>
                                             </Row>
-                                            <Row>
-                                                <h2 className="badge badge-danger pull-right m-r">{this.props.auth.error}</h2>
+                                            <Row className="m-t">
+                                                <Col xs={12}>
+                                                    <h2 className="badge badge-danger pull-right">{this.props.auth.error}</h2>
+                                                </Col>
                                             </Row>
                                         </Col>
                                     </Row>                              

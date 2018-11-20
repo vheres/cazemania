@@ -188,6 +188,10 @@ class ProfileRenderOrder extends Component {
                                 <td>Rp. {this.props.subtotal}</td>
                             </tr>
                             <tr>
+                                <td colspan="3" class="text-right"><strong>Discount</strong></td>
+                                <td>Rp. {this.props.discount}</td>
+                            </tr>
+                            <tr>
                                 <td colspan="3" class="text-right no-border"><strong>Shipping</strong></td>
                                 <td>Rp. {this.props.shipping}</td>
                             </tr>

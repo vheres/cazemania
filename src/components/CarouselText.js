@@ -21,7 +21,7 @@ class CarouselText extends Component {
         const items = this.galleryItems();
         return (
           <div>
-              <Col xsHidden md={1} className="carousel-text-button">
+              <Col xsHidden md={1} className="carousel-text-button" style={{'position':'relative','right':'50px', 'margin-top':'10px'}}>
                 <button onClick={() => this.Carousel._slidePrev()} className="btn btn-tosca"><i className="fa fa-chevron-left"></i></button>
               </Col>
               <Col md={10}>
@@ -39,7 +39,7 @@ class CarouselText extends Component {
                 ref={ el => this.Carousel = el }
                 />
               </Col>
-              <Col xsHidden md={1} className="carousel-text-button text-left">
+              <Col xsHidden md={1} className="carousel-text-button" style={{'position':'relative','left':'25px', 'margin-top':'10px'}}>
                 <button onClick={() => this.Carousel._slideNext()} className="btn btn-tosca"><i className="fa fa-chevron-right"></i></button>
               </Col>
           </div>
