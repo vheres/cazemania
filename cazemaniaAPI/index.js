@@ -108,26 +108,19 @@ app.get('/product/:id', function(req,res){
     })
 })
 
-//Get for admin purposes
-app.get('/admin/:table', function(req,res){
-    function tableselect(){
-        return(
-            {
-            catalogue: () => {
-                return(
-                    sql = `SELECT * FROM catalogue WHERE id != 99 ORDER BY id DESC` )
-                },
-            cases: () => {
-                return(
-                    sql = `SELECT b.name as brands, b.id as brand_id, t.id as type_id,
-                    t.name as case_name, soft, hard FROM brands b JOIN type t ON b.id = t.brand_id ` )
-                }
-            }
-        )
-    }
+app.get('/admin/catalogue', function(req,res){
+    sql = `SELECT * FROM catalogue WHERE category="normal" ORDER BY id DESC` 
+    conn.query(sql, (err,results)=>{
+        if(err) throw err;
+        res.send({items: results})
+    })
+})
+
+app.get('/admin/cases', function(req,res){
+    sql = `SELECT b.name as brands, b.id as brand_id, t.id as type_id, t.name as case_name, soft, hard FROM brands b JOIN type t ON b.id = t.brand_id ` 
     sql1 = `SELECT * FROM brands ORDER BY name`
     sql2 = `SELECT * FROM type ORDER BY name`
-    conn.query(tableselect()[req.params.table](), (err,results)=>{
+    conn.query(sql, (err,results)=>{
         if(err) throw err;
         console.log(results)
         conn.query(sql1, (err,results1)=>{
