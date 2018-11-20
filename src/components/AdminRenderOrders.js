@@ -37,13 +37,14 @@ class AdminRenderOrders extends Component {
 
     onCompleteOrderClick(){
         if(this.refs.addNomorResi.value === ""){
-
+            alert("Nomor resi belum diisi")
         }
         else{
             if(window.confirm("Order ini akan diselesaikan. Lanjutkan?")){
                 axios.put(API_URL_1 + "/adminorders/addresi/" + this.props.transaction_id,{
                     resi: this.refs.addNomorResi.value,
-                    email: this.props.email 
+                    email: this.props.email ,
+                    items: this.state.items
                 })
                 .then((res)=>{
                     console.log(res)
@@ -210,6 +211,10 @@ class AdminRenderOrders extends Component {
                             <tr>
                                 <td colspan="3" class="text-right"><strong>Subtotal</strong></td>
                                 <td style={{"width":"160px"}}>Rp. {parseInt(this.props.subtotal).toLocaleString()}</td>
+                            </tr>
+                            <tr>
+                                <td colspan="3" class="text-right"><strong>Discount</strong></td>
+                                <td style={{"width":"160px"}}>-Rp. {parseInt(this.props.discount).toLocaleString()}</td>
                             </tr>
                             <tr>
                                 <td colspan="3" class="text-right no-border"><strong>Shipping</strong></td>

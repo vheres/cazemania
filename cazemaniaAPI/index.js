@@ -149,7 +149,7 @@ app.get('/adminorders', function(req,res){
 })
 
 app.get('/adminordersdetails/:id', function(req,res){
-    sql= `SELECT trd.id as id, trd.transaction_id as transaction_id, trd.case_type as case_type, trd.price as price, trd.amount as amount, br.name as brand_name, ty.name as type_name, cat.code, cat.name, cat.image
+    sql= `SELECT trd.id as id, trd.transaction_id as transaction_id, trd.catalogue_id as catalogue_id, trd.case_type as case_type, trd.price as price, trd.amount as amount, br.name as brand_name, ty.name as type_name, cat.code, cat.name, cat.image
     FROM transaction_details trd JOIN brands br ON trd.case_brand = br.id JOIN type ty ON trd.case_model=ty.id JOIN catalogue cat ON trd.catalogue_id = cat.id WHERE trd.transaction_id = ${req.params.id}`
     conn.query(sql, (err,results)=>{
         if(err) throw err;
@@ -186,6 +186,7 @@ app.put('/adminorders/confirm/:id', function(req,res){
 
 app.put('/adminorders/addresi/:id', function(req,res){
     sql= `UPDATE transactions SET ? WHERE id = ${req.params.id}`
+    sql1=`UPDATE catalogue c JOIN transaction_details trd ON c.id = trd.catalogue_id SET c.sales = c.sales + trd.amount WHERE trd.transaction_id = ${req.params.id}`
 
     const mailOptions = {
         from: 'cazemania.official@gmail.com', // sender address
@@ -198,16 +199,51 @@ app.put('/adminorders/addresi/:id', function(req,res){
         status: "complete",
         resi : req.body.resi
     }
-    conn.query(sql, data, (err,results)=>{
+    
+    var data2 = req.body.items.map((item,index) => {
+        return (item.catalogue_id)
+    })
+
+    conn.beginTransaction(function(err){
         if(err) throw err;
-        console.log(results)
-        transporter.sendMail(mailOptions, function (err, info) {
-            if(err)
-                console.log(err)
-            else
-                console.log(info);
+        conn.query(sql, data, (err,results)=>{
+            if (err){
+                conn.rollback(function(){
+                    console.log("Rollback Successful Query")
+                    throw err
+                })
+            }
+            console.log(results)
+            conn.query(sql1, [data2], (err,results1)=>{
+                if (err){
+                    conn.rollback(function(){
+                        console.log("Rollback Successful Query")
+                        throw err
+                    })
+                }
+                transporter.sendMail(mailOptions, function (err, info) {
+                    if(err){
+                        console.log(err)
+                        conn.rollback(function(){
+                            console.log("Rollback Successful Query")
+                            throw err
+                        })
+                    }
+                    else{
+                        conn.commit(function(err){
+                            if (err){
+                                conn.rollback(function(){
+                                    console.log("Rollback Succesful4")
+                                    throw err;
+                                })
+                            }
+                            res.send({results1})
+                            console.log("Transaction Complete")
+                        })
+                    }
+                })
+            })
         })
-        res.send(results)
     })
 })
 
