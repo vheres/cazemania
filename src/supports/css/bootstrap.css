@@ -6755,13 +6755,20 @@ button.close {
   }
 }
 /*# sourceMappingURL=bootstrap.css.map */
+.nav-style {
+  background-color: white;
+  /* border-bottom: 4px solid rgb(9, 175, 204); */
+}
+.nav-logo {
+  height: 60px;
+}
 .orange-text {
   cursor: pointer;
   margin: 0 10px;
-  line-height: 4;
+  line-height: 2;
   vertical-align: middle;
   color: rgb(255, 181, 44);
-  font-size: 24px;
+  font-size: 14pt;
   font-weight: bold;
   transition: text-shadow 0.3s;
 }
@@ -6950,7 +6957,20 @@ button.close {
   background-color: white;
 }
 .Footer-css {
-  background-color: rgb(30,190,203);
+  /* background-color: rgb(30,190,203); */
+  background-color: rgb(148, 148, 148);
+}
+.footer-title {
+  color: white;
+  font-size: 20pt;
+  letter-spacing: 0.3rem;
+}
+.footer-text {
+  color: white;
+  cursor: pointer;
+}
+.footer-text:hover {
+  color: rgb(255, 181, 44);
 }
 .facebook-text {
   margin-left: 10px;
@@ -7004,8 +7024,8 @@ button.close {
   margin-bottom: 15px;
 }
 .pointer {
-  width: 180px;
-  height: 10px;
+  width: 280px;
+  height: 4px;
   position: relative;
   background: rgb(255, 255, 255);
   margin-bottom: 15px;
@@ -7019,8 +7039,8 @@ button.close {
   width: 0;
   height: 0;
   border-left: 20px solid rgb(255, 181, 44);
-  border-top: 5px solid rgb(255, 181, 44);
-  border-bottom: 5px solid rgb(255, 181, 44);
+  border-top: 2px solid rgb(255, 181, 44);
+  border-bottom: 2px solid rgb(255, 181, 44);
   border-right: 20px solid rgb(255, 181, 44);
   border-top-right-radius: 15pt;
   border-bottom-right-radius: 15pt;
@@ -7108,16 +7128,16 @@ button.close {
   width: 100px;
 }
 .carousel-best-button {
-  line-height: 210px;
+  margin-top: 7%;
 }
 .carousel-insta-button {
-  line-height: 230px;
+  margin-top: 6%;
 }
 .carousel-similar-button {
-  line-height: 300px;
+  margin-top: 10%;
 }
 .carousel-text-button {
-  line-height: 0px;
+  margin-top: 2%;
 }
 .register-form-text {
   position: relative;
@@ -7247,6 +7267,10 @@ input[type="number"] {
 .btn-orange-blue:focus {
   outline: none;
 }
+.btn-orange-blue.disabled {
+  background-color: rgb(255, 216, 144);
+  pointer-events: none;
+}
 
 .btn-blue-orange {
   font-size: 12pt;
@@ -7271,7 +7295,7 @@ input[type="number"] {
 .general-input-container {
   margin-top: 10px;
   margin-bottom: 10px;
-width: 100%;
+  width: 100%;
 }
 .general-input-container .general-input-label {
   position: relative;
@@ -7285,9 +7309,9 @@ width: 100%;
   margin-top: 10px;
   background-color: transparent;
   border: none;
-  border-bottom: 3px solid rgb(150, 150, 150);
+  border-bottom: 2px solid rgb(150, 150, 150);
   font-size: 12pt;
-  font-weight: bold;
+  /* font-weight: bold; */
   color: gray;
   line-height: 2;
   transition: border-color 0.3s;
@@ -7302,19 +7326,144 @@ width: 100%;
 .search-bar {
   border: none;
   font-size: 12pt;
-  font-weight: 550;
-  color: rgb(9, 175, 204);
-  border-radius: 15pt;
-  padding: 20px 30px;
+  color: rgb(92, 92, 92);
+  border-radius: 3pt;
+  padding: 7px 20px;
   background-color: rgb(255, 255, 255);
   border: 2px solid rgb(207, 207, 207);
+  width:100%;
 }
 .search-bar:focus {
   outline: none;
 }
 .search-bar::placeholder {
-  color: rgb(99, 195, 212);
+  color: rgb(201, 201, 201);
+
+}.dropdown-container {
+  margin-top: 20px;
+  width: 100%;
 }
+
+.dropdown-container > .dropdown-select {
+  width: 100%;
+  margin-top: 10px;
+  background-color: transparent;
+  border: none;
+  border-bottom: 2px solid rgb(150, 150, 150);
+  font-size: 12pt;
+  /* font-weight: bold; */
+  color: gray;
+  line-height: 2;
+  transition: border-color 0.3s;
+/* 
+  background: url('../assets/arrow-down.png');
+  background-position: calc(100% - 5px) center;
+  background-repeat: no-repeat;
+  background-size: 38px;
+
+  -webkit-appearance: none;
+  -moz-appearance: none;
+  -ms-appearance: none;
+  -o-appearance: none;
+  appearance: none; */
+}
+
+.dropdown-container > .dropdown-select:focus {
+  outline: none;
+  border-color: rgb(9, 175, 204);
+}
+
+.dropdown-container > .dropdown-select option {
+  color:#666666;
+}
+
+.dropdown-container > .dropdown-select option:hover {
+color:#54b59f;
+}
+
+.dropdown-container > .text {
+  font-size: 14pt;
+  font-weight: bold;
+  position: relative;
+  top: -60px;
+  color: rgb(255, 181, 44);
+}
+
+.dropdown-container select:focus + .text {
+  color: rgb(9, 175, 204);
+}
+
+/* Custom Radio Box */
+
+/* Customize the label (the container) */
+.container {
+  display: block;
+  position: relative;
+  padding-left: 30px;
+  margin-bottom: 0px;
+  margin-top: 10px;
+  cursor: pointer;
+  font-size: 12pt;
+  color: gray;
+  -webkit-user-select: none;
+  -moz-user-select: none;
+  -ms-user-select: none;
+  user-select: none;
+}
+
+/* Hide the browser's default radio button */
+.container input {
+  position: absolute;
+  opacity: 0;
+  cursor: pointer;
+  height: 0;
+  width: 0;
+}
+
+/* Create a custom radio button */
+.checkmark {
+  position: absolute;
+  top: 2px;
+  left: 0;
+  height: 20px;
+  width: 20px;
+  background-color: #eee;
+  border-radius: 50%;
+}
+
+/* On mouse-over, add a grey background color */
+.container:hover input ~ .checkmark {
+  background-color: rgb(231, 231, 231);
+}
+
+/* When the radio button is checked, add a blue background */
+.container input:checked ~ .checkmark {
+  border: 2px solid rgb(9, 175, 204);
+  background-color: white;
+}
+
+/* Create the indicator (the dot/circle - hidden when not checked) */
+.checkmark:after {
+  content: "";
+  position: absolute;
+  display: none;
+}
+
+/* Show the indicator (dot/circle) when checked */
+.container input:checked ~ .checkmark:after {
+  display: block;
+}
+
+/* Style the indicator (dot/circle) */
+.container .checkmark:after {
+  top: 3px;
+  left: 3px;
+  width: 10px;
+  height: 10px;
+  border-radius: 50%;
+  background: rgb(9, 175, 204);
+}
+
 
 
 

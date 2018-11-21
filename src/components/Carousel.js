@@ -41,7 +41,7 @@ class CarouselClass extends Component {
         return (
           <div>
             <Col xsHidden md={1} className="carousel-best-button text-right">
-              <button onClick={() => this.Carousel._slidePrev()} className="btn btn-tosca"><i className="fa fa-chevron-left"></i></button>
+              <button onClick={() => this.Carousel._slidePrev()} className="btn btn-tosca large"><i className="fa fa-chevron-left"></i></button>
             </Col>
             <Col md={10}>
               <AliceCarousel
@@ -59,7 +59,7 @@ class CarouselClass extends Component {
               />
             </Col>
             <Col xsHidden md={1} className="carousel-best-button text-left">
-              <button onClick={() => this.Carousel._slideNext()} className="btn btn-tosca"><i className="fa fa-chevron-right"></i></button>
+              <button onClick={() => this.Carousel._slideNext()} className="btn btn-tosca large"><i className="fa fa-chevron-right"></i></button>
             </Col>
         </div>
 

@@ -3990,6 +3990,11 @@ textarea.form-control {
   color: #fff !important;
   background-color: rgb(30,190,203);
   border-radius: 100%;
+  border: none;
+  padding: 8px 12px;
+  transition: background-color .2s;
+}
+.btn-tosca.large {
   padding: 15px 20px;
 }
 .btn-tosca:hover,

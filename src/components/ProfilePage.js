@@ -99,16 +99,30 @@ class ProfilePage extends Component {
     renderGenderOption() {
         if (this.state.profile.gender == 'male') {
             return (
-                <Col xs={8}>
-                    <input type="radio" id="male" name="gender" value="male" checked></input> Male{' '}
-                    <input type="radio" id="female" name="gender" value="female"></input> Female{' '}
+                <Col xsOffset={2} xs={8}>
+                    <div style={{'font-size':'12pt', 'font-weight':'bold', 'color': 'rgb(100, 100, 100)', 'margin-top':'20px'}}>Gender</div>
+                    <label className="container">Male
+                    <input type="radio" name="gender" id="male" value="male" checked/>
+                    <span className="checkmark"/>
+                    </label>
+                    <label className="container">Female
+                        <input type="radio" name="gender" id="female" value="female"/>
+                        <span className="checkmark"/>
+                    </label>
                 </Col>
             )
         } else {
             return (
-                <Col xs={8}>
-                    <input type="radio" id="male" name="gender" value="male"></input> Male{' '}
-                    <input type="radio" id="female" name="gender" value="female" checked></input> Female{' '}
+                <Col xsOffset={2} xs={8}>
+                    <div style={{'font-size':'12pt', 'font-weight':'bold', 'color': 'rgb(100, 100, 100)', 'margin-top':'20px'}}>Gender</div>
+                    <label className="container">Male
+                    <input type="radio" name="gender" id="male" value="male"/>
+                    <span className="checkmark"/>
+                    </label>
+                    <label className="container">Female
+                        <input type="radio" name="gender" id="female" value="female" checked/>
+                        <span className="checkmark"/>
+                    </label>
                 </Col>
             )
         }
@@ -170,8 +184,8 @@ class ProfilePage extends Component {
 
     renderProfilePage() {
             return (
-                <Grid fluid className="">
-                <Row>
+                <Grid fluid>
+                <Row style={{'margin-top':'30px'}}>
                     {this.renderUserInfo()}
                     <Col sm={7}>
                         <Row>
@@ -194,51 +208,47 @@ class ProfilePage extends Component {
                         <Modal.Body>
                             <form id="Register">
                                 <Row>
-                                    <Col xs={2}>
-                                    <p className="text-right register-form-text">Nama:</p> 
-                                    </Col>
-                                    <Col xs={8}>
-                                        <p>{this.state.profile.firstname} {this.state.profile.lastname}</p><br/>
+                                    <Col xsOffset={2} xs={8}>
+                                        <label className="general-input-container">
+                                            <div className="general-input-label">Nama</div>
+                                            <input type="text" ref="nama" className="general-input" style={{'border':'none'}} placeholder="nama" defaultValue={`${this.state.profile.firstname} ${this.state.profile.lastname}`} disabled/>
+                                        </label>
                                     </Col>
                                 </Row>
                                 <Row className="register-form">
-                                    <Col xs={2}>
-                                    <p className="text-right">Gender:</p>  
-                                    </Col>
                                     {this.renderGenderOption()}
                                 </Row>
                                 <Row>
-                                    <Col xs={2}>
-                                    <p className="text-right register-form-text">Email:</p> 
-                                    </Col>
-                                    <Col xs={8}>
-                                    <p>{this.state.profile.email}</p><br/>
-                                    </Col>
-                                </Row>
-                                <Row>
-                                    <Col xs={2}>
-                                    <p className="text-right register-form-text">Phone:</p> 
-                                    </Col>
-                                    <Col xs={8}>
-                                        <input type="text" ref="phone" class="form-control" id="inputPhone" placeholder="Phone" defaultValue={this.state.profile.phone} onKeyPress={this.onKeyPress.bind(this)}/><br/>
+                                    <Col xsOffset={2} xs={8}>
+                                        <label className="general-input-container">
+                                            <div className="general-input-label">Email</div>
+                                            <input type="text" ref="email" className="general-input" style={{'border':'none'}} placeholder="email" defaultValue={this.state.profile.email} disabled/>
+                                        </label>
                                     </Col>
                                 </Row>
                                 <Row>
-                                    <Col xs={2}>
-                                    <p className="text-right register-form-text">Alamat:</p>  
-                                    </Col>
-                                    <Col xs={8}>
-                                        <textarea type="text" ref="alamat" class="form-control" id="inputAdress" placeholder="Alamat" defaultValue={this.state.profile.address} onKeyPress={this.onKeyPress.bind(this)} style={{resize:"none"}} rows= '4' cols= '80'/><br/>
+                                    <Col xsOffset={2} xs={8}>
+                                        <label className="general-input-container">
+                                            <div className="general-input-label">Phone</div>
+                                            <input type="text" ref="phone" id="inputPhone" className="general-input" placeholder="Phone" defaultValue={this.state.profile.phone} onKeyPress={this.onKeyPress.bind(this)}/>
+                                        </label> 
                                     </Col>
                                 </Row>
                                 <Row>
-                                    <Col xs={2}>
-                                        <p className="text-right register-form-text">Kota atau Kecamatan:</p>  
+                                    <Col xsOffset={2} xs={8}>
+                                        <label className="general-input-container">
+                                            <div className="general-input-label">Address</div>
+                                            <textarea type="text" ref="alamat" id="inputAdress" className="general-input" placeholder="Alamat" defaultValue={this.state.profile.address} onKeyPress={this.onKeyPress.bind(this)} style={{resize:"none"}}/>
+                                        </label>
                                     </Col>
-                                    <Col xs={8} md={3}>
+                                </Row>
+                                <Row>
+                                    <Col xsOffset={2} xs={8} md={4}>
                                         <Row>
                                             <Col xs={12}>
-                                                <Select
+                                                <label className="general-input-container">
+                                                    <div className="general-input-label m-b">Kota atau Kecamatan</div>
+                                                    <Select
                                                     value={this.state.selectedOption}
                                                     onChange={this.handleChange}
                                                     options={this.state.filtered_destination}
@@ -246,7 +256,8 @@ class ProfilePage extends Component {
                                                     placeholder={`Pilih Kota/Kecamatan`}
                                                     defaultValue={{value: this.state.profile.destination_code, label: this.state.profile.kota}}
                                                     defaultInputValue={this.state.profile.kota}
-                                                />
+                                                    />
+                                                </label>
                                             </Col>
                                         </Row>
                                         <Row>
@@ -256,11 +267,11 @@ class ProfilePage extends Component {
                                         </Row> 
                                     </Col>
                                     <Clearfix visibleXsBlock visibleSmBlock></Clearfix>
-                                    <Col xs={2} md={2}>
-                                        <p className="text-right register-form-text">Kode Pos:</p>
-                                    </Col>
-                                    <Col xs={8} md={3}>
-                                        <input ref="kodepos" type="text" className="form-control" placeholder="Kode Pos" defaultValue={this.state.profile.kodepos}></input>
+                                    <Col xs={8} md={4}>
+                                        <label className="general-input-container">
+                                            <div className="general-input-label">Kode Pos</div>
+                                            <input type="text" ref="kodepos" className="general-input" placeholder="Kode Pos" defaultValue={this.state.profile.kodepos}/>
+                                        </label>
                                     </Col>        
                                 </Row>                     
                             </form>
