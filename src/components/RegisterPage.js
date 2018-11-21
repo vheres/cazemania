@@ -178,11 +178,11 @@ class RegisterPage extends Component {
         if(this.props.auth.email === "") {
             return(
                 <Grid fluid className="margin-bot-15">
-                    <Row className="no-margin">
+                    {/* <Row className="no-margin">
                         <img src={`${API_URL_1}/others/banner.jpg`} alt="banner" className="homepage-banner"></img>
-                    </Row>        
+                    </Row>         */}
                     <Row className="margin-top-15">
-                        <Col mdOffset={3} md={4}>
+                        <Col mdOffset={4} md={4}>
                             <Row className="m-b-md">
                                 <Col xs={12}>
                                     <span className="general-title-blue">Register</span>
@@ -203,10 +203,23 @@ class RegisterPage extends Component {
                                         </label> 
                                     </Col>
                                 </Row>
-                                <Row className="register-form">
+                                {/* <Row className="register-form">
                                     <Col xs={12}>
                                         <input type="radio" id="male" name="gender" value="male" checked></input> Male{' '}
                                         <input type="radio" id="female" name="gender" value="female"></input> Female{' '}
+                                    </Col>
+                                </Row> */}
+                                <Row>
+                                    <Col xs={12}>
+                                        <div style={{'font-size':'12pt', 'font-weight':'bold', 'color': 'rgb(100, 100, 100)', 'margin-top':'20px'}}>Gender</div>
+                                        <label className="container">Male
+                                            <input type="radio" name="gender" id="male" value="male"/>
+                                            <span className="checkmark"/>
+                                        </label>
+                                        <label className="container">Female
+                                            <input type="radio" name="gender" id="female" value="female"/>
+                                            <span className="checkmark"/>
+                                        </label>
                                     </Col>
                                 </Row>
                                 <Row>
@@ -265,7 +278,7 @@ class RegisterPage extends Component {
                                     </Row> 
                                     </Col>
                                     <Col xs={6}>
-                                    <label className="general-input-container">
+                                        <label className="general-input-container">
                                             <div className="general-input-label">Kode Pos</div>
                                             <input type="number" ref="kodepos" className="general-input" placeholder="Kode Pos"/>
                                         </label>

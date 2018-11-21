@@ -36,9 +36,9 @@ class LoginPage extends Component {
             return(
                 <div>
                     <Grid fluid className="margin-bot-15">
-                        <Row className="no-margin">
+                        {/* <Row className="no-margin">
                             <img src={`${API_URL_1}/others/banner.jpg`} alt="banner" className="homepage-banner"></img>
-                        </Row>
+                        </Row> */}
                         <Row className="margin-top-15">
                             <Col mdOffset={2} md={4}>
                                 <Row>

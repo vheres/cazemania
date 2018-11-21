@@ -264,29 +264,32 @@ class Header extends Component {
         }
         return(
                 <Row>
-                    <Navbar fixedTop={true} collapseOnSelect fluid>
+                    <Navbar fixedTop={true} collapseOnSelect fluid className="nav-style">
                         <Navbar.Header>
                             <Navbar.Brand>
-                                <Link to="/"><img src={`${API_URL_1}/others/logo.png`} alt="Caze Mania" className="img-responsive"></img></Link>
+                                <Link to="/"><img src={`${API_URL_1}/others/logo.png`} alt="Caze Mania" className="nav-logo"></img></Link>
                             </Navbar.Brand>
                             <Navbar.Toggle />
                         </Navbar.Header>
                         <Navbar.Collapse>
                                 <Col xsHidden smHidden md={3} lg={4} style={{'padding':'0', 'margin':'0'}}>
                                     <Nav>
-                                        {/* <NavDropdown eventKey={3} title={<span className="orange-text">Shop</span>} id="basic-nav-dropdown" className="header-button">
+                                        <NavDropdown eventKey={3} title={<span className="orange-text">Shop</span>}>
                                             <MenuItem eventKey={3.1} onClick={()=>this.onLinkClick("/shop")}>Collections</MenuItem>
                                             <MenuItem eventKey={3.2} onClick={()=>this.onLinkClick("/premium_cases")}>Premium Cases</MenuItem>
                                             <MenuItem eventKey={3.3} onClick={()=>this.onLinkClick("/custom")}>Custom Cases</MenuItem>
-                                        </NavDropdown> */}
-                                        <span className="orange-text">Shop</span>
-                                        <span className="orange-text" onClick={()=>this.onLinkClick("/reseller-dropshipper")}>Reseller</span>
-                                        <span className="orange-text" onClick={()=>this.onLinkClick("/admin/dashboard")}>Admin</span>
+                                        </NavDropdown>
+                                        <NavItem className="cursor-default">
+                                            <span className="orange-text" onClick={()=>this.onLinkClick("/reseller-dropshipper")}>Reseller</span>
+                                        </NavItem>
+                                        <NavItem>
+                                            <span className="orange-text" onClick={()=>this.onLinkClick("/admin/dashboard")}>Admin</span>
+                                        </NavItem>            
                                     </Nav>
                                 </Col>                   
                                 <Col xsHidden smHidden md={6} lg={6} style={{'padding':'0', 'margin':'0'}} className="pull-right">
                                     <Nav style={{'width':'100%'}}>
-                                        <NavDropdown eventKey={6} title={<i class="fa fa-user"></i>} id="basic-nav-dropdown" className="m-t-md m-r pull-right" style={{'font-size': '32px'}}>
+                                        <NavDropdown eventKey={6} title={<i class="fa fa-user"></i>} id="basic-nav-dropdown" className="m-r pull-right" style={{'font-size': '22px', 'margin-top':'6px'}}>
                                             <MenuItem eventKey={6.1} onClick={()=>this.onLinkClick("/login")}>
                                                 <span><i className="fa fa-sign-in"></i> Login</span>
                                             </MenuItem>
@@ -294,14 +297,14 @@ class Header extends Component {
                                                 <span><i className="fa fa-user-plus"></i> Register</span>
                                             </MenuItem>
                                         </NavDropdown>
-                                        <NavItem eventKey={5} className="m-t-sm pull-right" >
+                                        <NavItem eventKey={5} className="pull-right" >
                                             <Button type="submit" className="btn btn-tosca" onClick={()=>{alert('Please Login First');this.onLinkClick("/login")}}><i class="fa fa-shopping-cart" ></i></Button>
                                         </NavItem>
-                                        <NavItem eventKey={4} className="m-t-sm pull-right">
-                                            <Button type="submit" className="btn btn-tosca" onClick={()=>this.onSearchClick()}><i class="icon-magnifier"></i></Button>
+                                        <NavItem eventKey={4} className="pull-right">
+                                            <Button type="submit" className="btn btn-tosca" onClick={()=>this.onSearchClick()}><i class="fa fa-search"></i></Button>
                                         </NavItem>
-                                        <NavItem eventKey={4} className="m-t pull-right" style={{'width':'300px'}}>
-                                            <input type="text" id="search" placeholder="Search Code / Name" class="search-bar" style={{width:'100%', height:"45px"}} onKeyPress={this.onKeyPress.bind(this)}/>{' '}
+                                        <NavItem eventKey={4} className="pull-right">
+                                            <input type="text" id="search" placeholder="Search Code / Name" class="search-bar" onKeyPress={this.onKeyPress.bind(this)}/>{' '}
                                         </NavItem>
                                     </Nav>
                                 </Col>

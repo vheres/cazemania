@@ -27,10 +27,13 @@ class DetailPage extends Component {
                 <option value={item.id}>{item.name}</option>)
         })
         return(
-            <select ref="brand_select" className="form-control" style={{width:"80%"}} onChange={()=>this.typeFilter()}>
+        <label className="dropdown-container">
+            <select className="dropdown-select" ref="brand_select"  onChange={()=>this.typeFilter()}>
                 <option value={0}>SELECT BRAND</option>
                 {arrJSX}
             </select>
+            <div className="text">Brand</div>
+        </label>
         )
     }
 
@@ -56,10 +59,13 @@ class DetailPage extends Component {
         })
         console.log(this.state.typeselect)
         return(
-        <select id="model_select" ref="type_select" className="form-control" style={{width:"80%"}} onChange={()=>this.onModelSelect()}>
-            <option value={0}>SELECT MODEL</option>
-            {arrJSX}
-        </select>
+        <label className="dropdown-container">
+            <select className="dropdown-select" id="model_select" ref="type_select"  onChange={()=>this.onModelSelect()}>
+                <option value={0}>SELECT MODEL</option>
+                {arrJSX}
+            </select>
+            <div className="text">Model</div>
+        </label>
         )
     }
 
@@ -81,28 +87,40 @@ class DetailPage extends Component {
         return(
             [
                 [
-                    <select id="case_select" ref="case_select" className="form-control" onChange={()=>this.onTypeSelect()} style={{width:"80%"}}>
-                        <option value={0} selected>SELECT CASE</option>
-                        <option value="hard" disabled>HARD CASE -- unavailable</option>
-                        <option value="soft" disabled>SOFT CASE -- unavailable</option>
-                    </select>,
-                    <select id="case_select" ref="case_select" className="form-control" onChange={()=>this.onTypeSelect()} style={{width:"80%"}}>
-                        <option value={0}>SELECT CASE</option>
-                        <option value="hard" disabled>HARD CASE -- unavailable</option>
-                        <option value="soft" >SOFT CASE</option>
-                    </select>
+                    <label className="dropdown-container">
+                        <select className="dropdown-select" id="case_select" ref="case_select" onChange={()=>this.onTypeSelect()}>
+                            <option value={0} selected>SELECT CASE</option>
+                            <option value="hard" disabled>HARD CASE -- unavailable</option>
+                            <option value="soft" disabled>SOFT CASE -- unavailable</option>
+                        </select>
+                        <div className="text">Type</div>
+                    </label>,
+                    <label className="dropdown-container">
+                        <select className="dropdown-select" id="case_select" ref="case_select" onChange={()=>this.onTypeSelect()}>
+                            <option value={0}>SELECT CASE</option>
+                            <option value="hard" disabled>HARD CASE -- unavailable</option>
+                            <option value="soft" >SOFT CASE</option>
+                        </select>
+                        <div className="text">Type</div>
+                    </label>
                 ],
                 [
-                    <select id="case_select" ref="case_select" className="form-control" onChange={()=>this.onTypeSelect()} style={{width:"80%"}}>
-                        <option value={0}>SELECT CASE</option>
-                        <option value="hard">HARD CASE</option>
-                        <option value="soft"  disabled>SOFT CASE -- unavailable</option>
-                    </select>,
-                    <select id="case_select" ref="case_select" className="form-control" onChange={()=>this.onTypeSelect()} style={{width:"80%"}}>
-                        <option value={0}>SELECT CASE</option>
-                        <option value="hard">HARD CASE</option>
-                        <option value="soft">SOFT CASE</option>
-                    </select>
+                    <label className="dropdown-container">
+                        <select className="dropdown-select" id="case_select" ref="case_select" onChange={()=>this.onTypeSelect()}>
+                            <option value={0}>SELECT CASE</option>
+                            <option value="hard">HARD CASE</option>
+                            <option value="soft"  disabled>SOFT CASE -- unavailable</option>
+                        </select>
+                        <div className="text">Type</div>
+                    </label>,
+                    <label className="dropdown-container">
+                        <select className="dropdown-select" id="case_select" ref="case_select" onChange={()=>this.onTypeSelect()}>
+                            <option value={0}>SELECT CASE</option>
+                            <option value="hard">HARD CASE</option>
+                            <option value="soft">SOFT CASE</option>
+                        </select>
+                        <div className="text">Type</div>
+                    </label>
                 ]
             ]
         )
@@ -218,11 +236,11 @@ class DetailPage extends Component {
     renderAddToCartButton() {
         console.log(this.state.selected_case)
         if(this.state.selected_case === undefined || this.state.selected_case === 0) {
-            return <input type="button" className="btn btn-orange disabled" title="Please select Brand, Model and Type First" value="Add to Cart" onClick={()=>this.onAddToCart()} style={{width:"100%"}} disabled></input>
+            return <input type="button" className="btn-orange-blue disabled" title="Please select Brand, Model and Type First" value="Add to Cart" onClick={()=>this.onAddToCart()} style={{width:"100%"}} disabled></input>
         }
         else {
             return (
-                <input type="button" className="btn btn-orange" value="Add to Cart" onClick={()=>this.onAddToCart()} style={{width:"100%"}}></input>
+                <input type="button" className="btn-orange-blue" value="Add to Cart" onClick={()=>this.onAddToCart()} style={{width:"100%"}}></input>
             )
             
         }
@@ -238,60 +256,59 @@ class DetailPage extends Component {
                         </Col>
                         <Col md={4}>
                                 {this.renderProductDetail()}
-                            <Row>
+                            <Row className="m-t-lg">
                                 <Col xsOffset={1} mdOffset={0} md={4}>
                                     <Row>
-                                        <h4 className="detail-option-text">Brand</h4>
-                                    </Row>
-                                    <Row>
-                                        {this.brandSelectOptions()}
+                                        <Col xs={12}>
+                                            {this.brandSelectOptions()}
+                                        </Col>
                                     </Row>     
                                 </Col>
                                 <Col xsOffset={1} mdOffset={0} md={4}>
                                     <Row>
-                                        <h4 className="detail-option-text">Model</h4>
-                                    </Row>
-                                    <Row>
-                                        {this.modelSelectOptions()}
+                                        <Col xs={12}>
+                                            {this.modelSelectOptions()}
+                                        </Col>
                                     </Row>   
                                 </Col>
                                 <Col xsOffset={1} mdOffset={0} md={4}>
                                     <Row>
-                                        <h4 className="detail-option-text">Type</h4>
-                                    </Row>
-                                    <Row>
-                                        {this.caseSelectOptions()[this.state.caseselect.hard][this.state.caseselect.soft]}
+                                        <Col xs={12}>
+                                            {this.caseSelectOptions()[this.state.caseselect.hard][this.state.caseselect.soft]}
+                                        </Col>
                                     </Row>
                                 </Col>
                             </Row>
                             <Row>
-                                <Row>
-                                    <Col xsOffset={1} mdOffset={0} md={1}>
-                                        <br/>
-                                        <h4 className="detail-option-text">Quantity</h4>
+                                <Col xs={12}>
+                                    <Row>
+                                        <Col xsOffset={1} mdOffset={0} md={1}>
+                                            <h4 className="detail-option-text">Quantity</h4>
+                                        </Col>
+                                    </Row>
+                                    <Row>
+                                    <Col xsOffset={1} xs={4} mdOffset={0} md={3}>
+                                            <FormGroup>
+                                                <InputGroup>
+                                                <InputGroup.Button>
+                                                    <Button className="btn btn-tosca" onClick={()=>this.PlusMinus("minus")}>-</Button>
+                                                </InputGroup.Button>
+                                                <FormControl type="text" readOnly id="quantity" ref="quantity" className="text-center" defaultValue="1" style={{background:"white", height:'36px'}}/>
+                                                <InputGroup.Button>
+                                                    <Button className="btn btn-tosca" onClick={()=>this.PlusMinus("plus")}>+</Button>
+                                                </InputGroup.Button>
+                                                </InputGroup>
+                                            </FormGroup>
                                     </Col>
-                                </Row>
-                                <Row>
-                                <Col xsOffset={1} xs={4} mdOffset={0} md={3}>
-                                        <FormGroup>
-                                            <InputGroup>
-                                            <InputGroup.Button>
-                                                <Button className="btn btn-tosca" onClick={()=>this.PlusMinus("minus")}>-</Button>
-                                            </InputGroup.Button>
-                                            <FormControl type="text" readOnly id="quantity" ref="quantity" className="form-control text-center" defaultValue="1" style={{background:"white", height:'52px'}}/>
-                                            <InputGroup.Button>
-                                                <Button className="btn btn-tosca" onClick={()=>this.PlusMinus("plus")}>+</Button>
-                                            </InputGroup.Button>
-                                            </InputGroup>
-                                        </FormGroup>
+                                    </Row>
                                 </Col>
-                                </Row>
                             </Row>
                             <Row>
                                 <Col md={3}>
-                                    <Row>
-                                        <br/>
-                                        {this.renderAddToCartButton()}
+                                    <Row className="m-t-md">
+                                        <Col xs={12}>
+                                            {this.renderAddToCartButton()}
+                                        </Col>
                                     </Row>
                                 </Col>
                             </Row>

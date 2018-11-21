@@ -310,7 +310,7 @@ class CustomPage extends Component {
                                             <InputGroup.Button>
                                                 <Button className="btn btn-tosca" onClick={()=>this.PlusMinus("minus")}>-</Button>
                                             </InputGroup.Button>
-                                            <FormControl type="text" readOnly id="quantity" ref="quantity" className="form-control text-center" defaultValue="1" style={{background:"white",height:'52px'}}/>
+                                            <FormControl type="text" readOnly id="quantity" ref="quantity" className="form-control text-center" defaultValue="1" style={{background:"white",height:'36px'}}/>
                                             <InputGroup.Button>
                                                 <Button className="btn btn-tosca" onClick={()=>this.PlusMinus("plus")}>+</Button>
                                             </InputGroup.Button>
