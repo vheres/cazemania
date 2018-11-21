@@ -99,25 +99,27 @@ renderDataTableOrders3(){
     const { value } = this.state;
 
     return (
-      <div className={classes.root}>
-        <AppBar position="static">
-          <Tabs value={value} onChange={this.handleChange} centered>
-            <Tab label="BELUM DIBAYAR" />
-            <Tab label="BELUM DIKIRIM" />
-            <Tab label="SELESAI"/>
-          </Tabs>
-        </AppBar>
-        {value === 0 && <TabContainer><PanelGroup accordion id="accordion-uncontrolled-example">
-                    {this.renderDataTableOrders1()}
-                </PanelGroup></TabContainer>}
-        {value === 1 && <TabContainer>
-                <PanelGroup accordion id="accordion-uncontrolled-example">
-                    {this.renderDataTableOrders2()}
-                </PanelGroup></TabContainer>}
-        {value === 2 && <TabContainer>
-                <PanelGroup accordion id="accordion-uncontrolled-example">
-                    {this.renderDataTableOrders3()}
-                </PanelGroup></TabContainer>}
+      <div className="col-md-12">
+        <div className={classes.root}>
+          <AppBar position="static">
+            <Tabs value={value} onChange={this.handleChange} centered>
+              <Tab label="BELUM DIBAYAR" />
+              <Tab label="BELUM DIKIRIM" />
+              <Tab label="SELESAI"/>
+            </Tabs>
+          </AppBar>
+          {value === 0 && <TabContainer><PanelGroup accordion id="accordion-uncontrolled-example">
+                      {this.renderDataTableOrders1()}
+                  </PanelGroup></TabContainer>}
+          {value === 1 && <TabContainer>
+                  <PanelGroup accordion id="accordion-uncontrolled-example">
+                      {this.renderDataTableOrders2()}
+                  </PanelGroup></TabContainer>}
+          {value === 2 && <TabContainer>
+                  <PanelGroup accordion id="accordion-uncontrolled-example">
+                      {this.renderDataTableOrders3()}
+                  </PanelGroup></TabContainer>}
+        </div>
       </div>
     );
   }

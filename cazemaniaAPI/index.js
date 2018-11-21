@@ -124,9 +124,24 @@ app.get('/admin/cases', function(req,res){
         if(err) throw err;
         console.log(results)
         conn.query(sql1, (err,results1)=>{
+            if(err) throw err
             conn.query(sql2, (err,results2)=>{
+                if(err) throw err
                 res.send({items:results, brands: results1, type: results2})
             })
+        })
+    })
+})
+
+app.get('/admin/settings', function(req,res){
+    sql = `SELECT * FROM price` 
+    sql1 = `SELECT * FROM rekening`
+    conn.query(sql, (err,results)=>{
+        if(err) throw err;
+        console.log(results)
+        conn.query(sql1, (err,results1)=>{
+            if(err) throw err
+            res.send({price:results, rekening: results1})
         })
     })
 })
@@ -240,51 +255,45 @@ app.put('/adminorders/addresi/:id', function(req,res){
     })
 })
 
-app.put('/admin/:table/:id', function(req,res){
-    function tableselect2(){
-        return(
-            {
-            catalogue: () => {
-                return(
-                    sql = `UPDATE catalogue SET ? WHERE id = ${req.params.id}` )
-                },
-            cases: () => {
-                return(
-                    sql = `UPDATE type SET ? WHERE id = ${req.params.id}` )
-                }
-            }
-        )
-    }
+app.put('/admin/catalogue/:id', function(req,res){
+    sql = `UPDATE catalogue SET ? WHERE id = ${req.params.id}`
 
-    conn.query(tableselect2()[req.params.table](), req.body, (err,results)=>{
+    conn.query(sql, req.body, (err,results)=>{
         if(err) throw err;
         console.log(results)
         res.send(results)
     })
 })
 
-// app.post('/admin/:table', function(req,res){
-//     function tableselect2(){
-//         return(
-//             {
-//             catalogue: () => {
-//                 return(
-//                     sql = `INSERT INTO catalogue SET ?` )
-//                 },
-//             cases: () => {
-//                 return(
-//                     sql = `INSERT INTO type SET ?` )
-//                 }
-//             }
-//         )
-//     }
+app.put('/admin/cases/:id', function(req,res){
+    sql = `UPDATE type SET ? WHERE id = ${req.params.id}`
 
-//     conn.query(tableselect2()[req.params.table](), req.body, (err,results)=>{
-//         if(err) throw err;
-//         console.log(results)
-//         res.send(results)
-//     })
-// })
+    conn.query(sql, req.body, (err,results)=>{
+        if(err) throw err;
+        console.log(results)
+        res.send(results)
+    })
+})
+
+app.put('/admin/price/:id', function(req,res){
+    sql = `UPDATE price SET ? WHERE id = ${req.params.id}`
+
+    conn.query(sql, req.body, (err,results)=>{
+        if(err) throw err;
+        console.log(results)
+        res.send(results)
+    })
+})
+
+app.put('/admin/rekening/:id', function(req,res){
+    sql = `UPDATE rekening SET ? WHERE id = ${req.params.id}`
+
+    conn.query(sql, req.body, (err,results)=>{
+        if(err) throw err;
+        console.log(results)
+        res.send(results)
+    })
+})
 
 app.post('/admin/addcases', function(req,res){
     sql = `INSERT INTO type SET ?`
@@ -315,37 +324,6 @@ app.post('/admin/addcatalogue', function(req,res){
         })
     })
 })
-
-
-// app.delete('/admin/:table/:id', function(req,res){
-//     function tableselect(){
-//         return(
-//             {
-//             catalogue: () => {
-//                 return(
-//                     sql = `DELETE FROM catalogue WHERE id=${req.params.id}` )
-//                 },
-//             cases: () => {
-//                 return(
-//                     sql = `DELETE FROM type WHERE id=${req.params.id} ` )
-//                 }
-//             }
-//         )
-//     }
-
-//     conn.query(tableselect()[req.params.table](), (err,results)=>{
-//         if(err) throw err;
-//         if(req.params.table === "catalogue"){
-//             console.log(req.body)
-//             fs.unlink(`./public/normal/${req.body.data.image}.jpg`, (err) => {
-//                 if (err) throw err;
-//                 console.log('Image deleted');
-//               });
-//         }
-//         console.log(results)
-//         res.send(results)
-//     })
-// })
 
 app.post('/admin/deletecases/:id', function(req,res){
 

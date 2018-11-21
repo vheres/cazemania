@@ -13,7 +13,7 @@ class AdminRenderCases extends Component {
     }
 
     onSaveClick(){
-        axios.put(API_URL_1 + "/admin/" + this.props.table + "/" + this.props.id,
+        axios.put(API_URL_1 + "/admin/cases/" + this.props.id,
             {
                 name: this.refs.editName.value,
                 soft: this.refs.editSoft.value,

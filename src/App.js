@@ -1,7 +1,5 @@
 import React, { Component } from 'react';
-import Admin from './components/Admin';
 import AdminDashboard from './components/AdminDashboard'
-import AdminOrders from './components/AdminOrders'
 import Header from './components/Header';
 import Footer from './components/Footer';
 import HomePage from './components/Homepage';
