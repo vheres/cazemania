@@ -20,6 +20,9 @@ class InformationPage extends Component {
                         <Row>
                             <h2 className="" style={{color:"rgb(30,190,203)"}}><strong>Program Reseller & Dropshipper @Cazemania</strong></h2>
                         </Row>
+                        <Row className="m-t-lg m-b-lg">
+                            <input type="button" className="btn-blue-orange" value="Daftar Reseller/Dropshipper" onClick={()=>this.props.history.push('/register_reseller_dropshipper')}></input>
+                        </Row>
                         <Row>
                             <h3 style={{color:"rgb(30,190,203)"}}>Kenapa harus jual case hp?</h3>
                         </Row>
@@ -66,9 +69,6 @@ class InformationPage extends Component {
                         </Row>
                         <Row>
                             <h3 style={{color:"orange"}}><strong>KUOTA TERBATAS! Yuk buruan daftar jadi reseller / dropshipper @cazemania sekarang juga.</strong></h3>
-                        </Row>
-                        <Row>
-                            <input type="button" className="btn btn-info btn-lg block-margin-auto" value="Daftar Reseller/Dropshipper" onClick={()=>this.props.history.push('/register_reseller_dropshipper')}></input>
                         </Row>
                     </Col>
                 </Row>

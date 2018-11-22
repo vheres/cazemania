@@ -19,8 +19,12 @@ class ProfileOrder extends Component {
         axios.get(API_URL_1 + "/users/transactions/" + this.props.auth.id)
         .then((res)=>{
             this.setState({orders: res.data})
-            if (this.state.orders[0].status == 'pendingPayment') {
-                this.setState({activeKey:this.state.orders[0].id})
+            if (res.data.length === 0) {
+                return null;
+            } else {
+                if (this.state.orders[0].status == 'pendingPayment') {
+                    this.setState({activeKey:this.state.orders[0].id})
+                }
             }
         })
     }

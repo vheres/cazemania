@@ -215,50 +215,84 @@ class Header extends Component {
         if(this.props.auth.email !== "") {
             return(
                 <Row>
-                    <Navbar fixedTop={true} collapseOnSelect fluid>
+                    <Navbar fixedTop={true} collapseOnSelect fluid className="nav-style">
                         <Navbar.Header>
                             <Navbar.Brand>
-                                <Link to="/"><img src={`${API_URL_1}/others/logo.png`} alt="Caze Mania" className="img-responsive"></img></Link>
+                                <Link to="/"><img src={`${API_URL_1}/others/logo.png`} alt="Caze Mania" className="nav-logo"></img></Link>
                             </Navbar.Brand>
                             <Navbar.Toggle />
                         </Navbar.Header>
-                        <Navbar.Collapse>                       
-                                <Nav>
-                                    <NavDropdown eventKey={3} title={<span className="orange-text">Shop</span>} id="basic-nav-dropdown" className="header-button">
-                                        <MenuItem eventKey={3.1} onClick={()=>this.onLinkClick("/shop")}>Collections</MenuItem>
-                                        <MenuItem eventKey={3.2} onClick={()=>this.onLinkClick("/premium_cases")}>Premium Cases</MenuItem>
-                                        <MenuItem eventKey={3.3} onClick={()=>this.onLinkClick("/custom")}>Custom Cases</MenuItem>
-                                    </NavDropdown>
-                                    <NavItem eventKey={2} className="header-button" onClick={()=>this.onLinkClick("/reseller-dropshipper")}>
-                                        <span className="orange-text">Reseller/Dropshipper</span>
-                                    </NavItem>
-                                    <NavItem eventKey={4} className="header-button" onClick={()=>this.onLinkClick("/admin/cases")}>
-                                        <span className="orange-text">Admin</span>
-                                    </NavItem>
-                                </Nav>
-                                <Nav pullRight>
-                                    <Navbar.Form pullLeft>
-                                        <FormGroup className="m-t-md">
-                                        <FormControl type="text" id="search"placeholder="Search Code / Name" class="form-control" style={{width:"450px", height:"45px"}} onKeyPress={this.onKeyPress.bind(this)}/>{' '}
-                                        </FormGroup>
-                                    </Navbar.Form>
-                                    <NavItem eventKey={4} className="m-t-sm">
-                                        <Button type="submit" className="btn btn-tosca" onClick={()=>this.onSearchClick()}><i class="icon-magnifier"></i></Button>
-                                    </NavItem>
-                                    <NavItem eventKey={5} className="m-t-sm" >
-                                        <Button type="submit" className="btn btn-tosca" onClick={()=>this.handleShow()}><i class="fa fa-shopping-cart" ></i></Button>
-                                    </NavItem>
-                                    <NavDropdown eventKey={6} title={<i class="fa fa-user"></i>} id="basic-nav-dropdown" className="m-t-md m-r" style={{'font-size': '32px'}}>
-                                        <MenuItem eventKey={6.1} onClick={()=>this.onLinkClick(`/profile`)}>
-                                            <span>Profile</span>
-                                        </MenuItem>
-                                        <MenuItem eventKey={6.1} onClick={()=>this.onLogoutClick()}>
-                                            <span>Logout</span>
-                                        </MenuItem>
-                                    </NavDropdown>
-                                </Nav>
+                        <Navbar.Collapse>
+                                <Col xsHidden smHidden md={3} lg={4} style={{'padding':'0', 'margin':'0'}}>
+                                    <Nav>
+                                        <NavDropdown eventKey={3} title={<span className="orange-text">Shop</span>}>
+                                            <MenuItem eventKey={3.1} onClick={()=>this.onLinkClick("/shop")}>Collections</MenuItem>
+                                            <MenuItem eventKey={3.2} onClick={()=>this.onLinkClick("/premium_cases")}>Premium Cases</MenuItem>
+                                            <MenuItem eventKey={3.3} onClick={()=>this.onLinkClick("/custom")}>Custom Cases</MenuItem>
+                                        </NavDropdown>
+                                        <NavItem className="cursor-default">
+                                            <span className="orange-text" onClick={()=>this.onLinkClick("/reseller-dropshipper")}>Reseller</span>
+                                        </NavItem>
+                                        <NavItem>
+                                            <span className="orange-text" onClick={()=>this.onLinkClick("/admin/cases")}>Admin</span>
+                                        </NavItem>
+                                        
+                                    </Nav>
+                                </Col>                   
+                                <Col xsHidden smHidden md={6} lg={6} style={{'padding':'0', 'margin':'0'}} className="pull-right">
+                                    <Nav style={{'width':'100%'}}>
+                                        <NavDropdown eventKey={6} title={<i class="fa fa-user"></i>} id="basic-nav-dropdown" className="m-r pull-right" style={{'font-size': '22px', 'margin-top':'6px'}}>
+                                            <MenuItem eventKey={6.1} onClick={()=>this.onLinkClick(`/profile`)}>
+                                                <span>Profile</span>
+                                            </MenuItem>
+                                            <MenuItem eventKey={6.1} onClick={()=>this.onLogoutClick()}>
+                                                <span>Logout</span>
+                                            </MenuItem>
+                                        </NavDropdown>
+                                        <NavItem eventKey={5} className="pull-right" >
+                                            <Button type="submit" className="btn btn-tosca" onClick={()=>this.handleShow()}><i class="fa fa-shopping-cart" ></i></Button>
+                                        </NavItem>
+                                        <NavItem eventKey={4} className="pull-right">
+                                            <Button type="submit" className="btn btn-tosca" onClick={()=>this.onSearchClick()}><i class="fa fa-search"></i></Button>
+                                        </NavItem>
+                                        <NavItem eventKey={4} className="pull-right">
+                                            <input type="text" id="search" placeholder="Search Code / Name" class="search-bar" onKeyPress={this.onKeyPress.bind(this)}/>{' '}
+                                        </NavItem>
+                                    </Nav>
+                                </Col>
+                                <Col xs={12} mdHidden lgHidden style={{'padding':'0', 'margin':'0'}} className="pull-right">
+                                    <Nav style={{'width':'100%'}}>
+                                        <NavDropdown eventKey={3} title={<span className="orange-text">Shop</span>} id="basic-nav-dropdown" className="header-button">
+                                            <MenuItem eventKey={3.1} onClick={()=>this.onLinkClick("/shop")}>Collections</MenuItem>
+                                            <MenuItem eventKey={3.2} onClick={()=>this.onLinkClick("/premium_cases")}>Premium Cases</MenuItem>
+                                            <MenuItem eventKey={3.3} onClick={()=>this.onLinkClick("/custom")}>Custom Cases</MenuItem>
+                                        </NavDropdown>
+                                        <NavItem eventKey={2} className="header-button" onClick={()=>this.onLinkClick("/reseller-dropshipper")}>
+                                            <span className="orange-text">Reseller</span>
+                                        </NavItem>
+                                        <NavItem eventKey={4} className="header-button" onClick={()=>this.onLinkClick("/admin/cases")}>
+                                            <span className="orange-text">Admin</span>
+                                        </NavItem>
+                                        <NavItem eventKey={4} className="header-button" onClick={()=>this.onLinkClick(`/profile`)}>
+                                            <span className="orange-text">Profile</span>
+                                        </NavItem>
+                                        <NavItem eventKey={4} className="header-button" onClick={()=>this.onLogoutClick()}>
+                                            <span className="orange-text">Logout</span>
+                                        </NavItem>
+                                        <NavItem eventKey={4} className="header-button" onClick={()=>this.onLinkClick("/admin/cases")}>
+                                            <span className="orange-text">Cart</span>
+                                        </NavItem>
+                                        
+                                        <NavItem eventKey={4} className="pull-tosca">
+                                            <Button type="submit" className="btn btn-info" onClick={()=>this.onSearchClick()}><i class="icon-magnifier"></i></Button>
+                                        </NavItem>
+                                        <NavItem eventKey={4} className="pull-left" style={{'width':'70%'}}>
+                                            <input type="text" id="search" placeholder="Search Code / Name" class="form-control" style={{width:'100%', height:"45px"}} onKeyPress={this.onKeyPress.bind(this)}/>{' '}
+                                        </NavItem>
+                                    </Nav>
+                                </Col>
                         </Navbar.Collapse>       
-                    </Navbar> 
+                    </Navbar>
                 </Row>
             );
         }
@@ -325,10 +359,10 @@ class Header extends Component {
                                         <NavItem eventKey={4} className="header-button" onClick={()=>this.onLinkClick("/admin/cases")}>
                                             <span className="orange-text">Login</span>
                                         </NavItem>
-                                        <NavItem eventKey={4} className="header-button" onClick={()=>this.onLinkClick("/admin/cases")}>
+                                        <NavItem eventKey={4} className="header-button" onClick={()=>this.onLinkClick("/register")}>
                                             <span className="orange-text">Register</span>
                                         </NavItem>
-                                        <NavItem eventKey={4} className="header-button" onClick={()=>this.onLinkClick("/admin/cases")}>
+                                        <NavItem eventKey={4} className="header-button" onClick={()=>this.onLinkClick("/login")}>
                                             <span className="orange-text">Cart</span>
                                         </NavItem>
                                         

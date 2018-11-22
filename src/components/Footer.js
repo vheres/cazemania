@@ -10,7 +10,7 @@ class Footer extends Component { //kalo gak pake destructuring, tulisnya React.C
 
     renderFooter = () => {   
         return(
-            <Grid fluid className="Footer-css text-left">
+            <Grid fluid className="Footer-css text-left" style={{'margin-right':'0', 'padding-right':'0'}}>
                 <Row style={{'margin-bottom':'30px'}}>
                         <Col xsOffset={2} xs={10} mdOffset={2} md={3} className="m-t-lg">
                             <Row>
