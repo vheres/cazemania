@@ -234,7 +234,6 @@ class DetailPage extends Component {
     }
 
     renderAddToCartButton() {
-        console.log(this.state.selected_case)
         if(this.state.selected_case === undefined || this.state.selected_case === 0) {
             return <input type="button" className="btn-orange-blue disabled" title="Please select Brand, Model and Type First" value="Add to Cart" onClick={()=>this.onAddToCart()} style={{width:"100%"}} disabled></input>
         }
@@ -259,21 +258,21 @@ class DetailPage extends Component {
                             <Row className="m-t-lg">
                                 <Col xsOffset={1} mdOffset={0} md={4}>
                                     <Row>
-                                        <Col xs={12}>
+                                        <Col xs={10} md={12}>
                                             {this.brandSelectOptions()}
                                         </Col>
                                     </Row>     
                                 </Col>
                                 <Col xsOffset={1} mdOffset={0} md={4}>
                                     <Row>
-                                        <Col xs={12}>
+                                        <Col xs={10} md={12}>
                                             {this.modelSelectOptions()}
                                         </Col>
                                     </Row>   
                                 </Col>
                                 <Col xsOffset={1} mdOffset={0} md={4}>
                                     <Row>
-                                        <Col xs={12}>
+                                        <Col xs={10} md={12}>
                                             {this.caseSelectOptions()[this.state.caseselect.hard][this.state.caseselect.soft]}
                                         </Col>
                                     </Row>
@@ -320,7 +319,7 @@ class DetailPage extends Component {
                             <div className="block-margin-auto similar-product-pointer"></div>
                         </Row>
                         <Row>
-                            <Col mdOffset={2} md={8}>
+                            <Col xsOffset={2} xs={8} mdOffset={2} md={8}>
                                 {this.renderCarouselSimilar()}
                             </Col>
                         </Row>

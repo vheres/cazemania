@@ -177,108 +177,123 @@ class RegisterRD extends Component {
         const { selectedOption } = this.state;
         return(
             <Grid fluid className="margin-bot-15">
-                <Row>
-                    <img src="https://www.dtn.com.vn/skin/frontend/dtn_website/default/images/banner-package1.jpg" alt="banner" style={{width:"100%"}}/>
-                </Row>        
-                <Row className="margin-top-15">
-                    <Col mdOffset={2} md={6}>
-                        <Row className="m-b-md">
-                            <Col xsOffset={1} xs={11}>
-                                <span className="login-register-title">Register Reseller/Dropshipper</span>
-                            </Col>
-                        </Row>
-                        <form id="Register">
-                            <Row>
-                                <Col xs={3}>
-                                <p className="text-right register-form-text">Nama:</p> 
-                                </Col>
-                                <Col xs={4}>
-                                    <input type="text" ref="firstName" className={`form-control ${this.state.input_style[0]}`} id="inputUsername" placeholder="First Name" onKeyPress={this.onKeyPress.bind(this)}/><br/>
-                                </Col>
-                                <Col xs={4}>
-                                    <input type="text" ref="lastName" className={`form-control ${this.state.input_style[1]}`} id="inputUsername" placeholder="Last Name" onKeyPress={this.onKeyPress.bind(this)}/><br/>
+                    {/* <Row className="no-margin">
+                        <img src={`${API_URL_1}/others/banner.jpg`} alt="banner" className="homepage-banner"></img>
+                    </Row>         */}
+                    <Row className="margin-top-15">
+                        <Col xsOffset={1} xs={10} mdOffset={4} md={4}>
+                            <Row className="m-b-md">
+                                <Col xs={12}>
+                                    <span className="general-title-blue">Register Reseller / Dropshipper</span>
                                 </Col>
                             </Row>
-                            <Row className="register-form">
-                                <Col xs={3}>
-                                <p className="text-right">Gender:</p>  
-                                </Col>
-                                <Col xs={9}>
-                                    <input type="radio" id="male" name="gender" value="male" checked></input> Male{' '}
-                                    <input type="radio" id="female" name="gender" value="female"></input> Female{' '}
-                                </Col>
-                            </Row>
-                            <Row>
-                                <Col xs={3}>
-                                <p className="text-right register-form-text">Email:</p> 
-                                </Col>
-                                <Col xs={9}>
-                                    <input type="email" ref="email" className={`form-control ${this.state.input_style[2]}`} id="inputEmail" placeholder="Email" onKeyPress={this.onKeyPress.bind(this)}/><br/>
-                                </Col>
-                            </Row>
-                            <Row>
-                                <Col xs={3}>
-                                <p className="text-right register-form-text">Password:</p>  
-                                </Col>
-                                <Col xs={9}>
-                                    <input type="password" ref="password1" className={`form-control ${this.state.input_style[3]}`} id="inputPassword1" placeholder="Password" onKeyPress={this.onKeyPress.bind(this)}/><br/>
-                                    <input type="password" ref="password2" className={`form-control ${this.state.input_style[4]}`} id="inputPassword2" placeholder="Confirm Password" onKeyPress={this.onKeyPress.bind(this)}/><br/>
-                                </Col>
-                            </Row>
-                            <Row>
-                                <Col xs={3}>
-                                <p className="text-right register-form-text">Phone:</p> 
-                                </Col>
-                                <Col xs={9}>
-                                    <input type="number" ref="phone" className={`form-control ${this.state.input_style[5]}`} id="inputPhone" placeholder="Phone" onKeyPress={this.onKeyPress.bind(this)}/><br/>
-                                </Col>
-                            </Row>
-                            <Row>
-                                <Col xs={3}>
-                                <p className="text-right register-form-text">Alamat:</p>  
-                                </Col>
-                                <Col xs={9}>
-                                    <textarea type="text" ref="alamat" className={`form-control ${this.state.input_style[6]}`} id="inputAdress" placeholder="Alamat" onKeyPress={this.onKeyPress.bind(this)} style={{resize:"none"}} rows= '4' cols= '80'/><br/>
-                                </Col>
-                            </Row>
-                            <Row>
-                                <Col xs={3}>
-                                <p className="text-right register-form-text">Kota atau Kecamatan:</p>  
-                                </Col>
-                                <Col xs={4}>
+                            <form id="Register">
+                                <Row>
+                                    <Col xs={6}>
+                                        <label className="general-input-container">
+                                            <div className="general-input-label">Nama Depan</div>
+                                            <input type="text" ref="firstName" id="inputUsername" className="general-input" placeholder="First Name" onKeyPress={this.onKeyPress.bind(this)}/>
+                                        </label> 
+                                    </Col>
+                                    <Col xs={6}>
+                                        <label className="general-input-container">
+                                            <div className="general-input-label">Nama Belakang</div>  
+                                            <input type="text" ref="lastName" id="inputUsername" className="general-input" placeholder="Last Name" onKeyPress={this.onKeyPress.bind(this)}/>
+                                        </label> 
+                                    </Col>
+                                </Row>
+                                {/* <Row className="register-form">
+                                    <Col xs={12}>
+                                        <input type="radio" id="male" name="gender" value="male" checked></input> Male{' '}
+                                        <input type="radio" id="female" name="gender" value="female"></input> Female{' '}
+                                    </Col>
+                                </Row> */}
                                 <Row>
                                     <Col xs={12}>
-                                        <Select
-                                            value={selectedOption}
-                                            onChange={this.handleChange}
-                                            options={this.state.filtered_destination}
-                                            onInputChange={this.handleInputChange.bind(this)}
-                                            placeholder={`Pilih Kota/Kecamatan`}
-                                        />
+                                        <div style={{'font-size':'12pt', 'font-weight':'bold', 'color': 'rgb(100, 100, 100)', 'margin-top':'20px'}}>Gender</div>
+                                        <label className="container">Male
+                                            <input type="radio" name="gender" id="male" value="male"/>
+                                            <span className="checkmark"/>
+                                        </label>
+                                        <label className="container">Female
+                                            <input type="radio" name="gender" id="female" value="female"/>
+                                            <span className="checkmark"/>
+                                        </label>
                                     </Col>
                                 </Row>
                                 <Row>
                                     <Col xs={12}>
-                                        <p className="small-font">*please input 3 or more characters</p>
+                                        <label className="general-input-container">
+                                            <div className="general-input-label">Email</div>
+                                            <input type="email" ref="email" id="inputEmail" className="general-input" placeholder="Email" onKeyPress={this.onKeyPress.bind(this)}/>
+                                        </label> 
                                     </Col>
-                                </Row> 
-                                </Col>
-                                <Col xs={2}>
-                                <p className="text-right register-form-text">Kode Pos:</p>
-                                </Col>
-                                <Col xs={3}>
-                                <input ref="kodepos" type="number" className={`form-control ${this.state.input_style[8]}`} placeholder="Kode Pos"></input>
-                                </Col>        
-                            </Row>
-                            <Row>
-                                <Row>
-                                    <input type="button" class="btn btn-primary login-button" value="Register" onClick={()=>this.onRegisterClick()}/>
                                 </Row>
-                            </Row>                       
-                        </form>
-                    </Col>
-                </Row>
-            </Grid>
+                                <Row>
+                                    <Col xs={12}>
+                                        <label className="general-input-container">
+                                            <div className="general-input-label">Password</div>
+                                            <input type="password" ref="password1" id="inputPassword1" className="general-input" placeholder="Password" onKeyPress={this.onKeyPress.bind(this)}/>
+                                            <input type="password" ref="password2" id="inputPassword2" className="general-input" placeholder="Confirm Password" onKeyPress={this.onKeyPress.bind(this)}/>
+                                        </label> 
+                                    </Col>
+                                </Row>
+                                <Row>
+                                    <Col xs={12}>
+                                        <label className="general-input-container">
+                                            <div className="general-input-label">Phone</div>
+                                            <input type="number" ref="phone" id="inputPhone" className="general-input" placeholder="081x-xxxx-xxxx" onKeyPress={this.onKeyPress.bind(this)}/>
+                                        </label>
+                                    </Col>
+                                </Row>
+                                <Row>
+                                    <Col xs={12}>
+                                        <label className="general-input-container">
+                                            <div className="general-input-label">Address</div>
+                                            <textarea type="text" ref="alamat" id="inputAdress" className="general-input" placeholder="Alamat"/>
+                                        </label>
+                                    </Col>
+                                </Row>
+                                <Row>
+                                    <Col xs={12} md={6}>
+                                    <Row>
+                                        <Col xs={12}>
+                                        <label className="general-input-container">
+                                            <div className="general-input-label m-b">Kota dan Kecamatan</div>
+                                            <Select
+                                                value={selectedOption}
+                                                onChange={this.handleChange}
+                                                options={this.state.filtered_destination}
+                                                onInputChange={this.handleInputChange.bind(this)}
+                                                placeholder={`Pilih Kota/Kecamatan`}
+                                            />
+                                        </label>
+                                        </Col>
+                                    </Row>
+                                    <Row>
+                                        <Col xs={12}>
+                                            <p className="small-font">*please input 3 or more characters</p>
+                                        </Col>
+                                    </Row> 
+                                    </Col>
+                                    <Col xs={12} md={6}>
+                                        <label className="general-input-container">
+                                            <div className="general-input-label">Kode Pos</div>
+                                            <input type="number" ref="kodepos" className="general-input" placeholder="Kode Pos"/>
+                                        </label>
+                                    </Col>        
+                                </Row>
+                                <Row>
+                                    <Row>
+                                        <Col xs={12}>
+                                            <input type="button" class="btn-orange-blue pull-right" style={{'width':'100%'}} value="Register" onClick={()=>this.onRegisterClick()}/>
+                                        </Col>
+                                    </Row>
+                                </Row>                       
+                            </form>
+                        </Col>
+                    </Row>
+                </Grid>
         );
     }
 }

@@ -24,7 +24,7 @@ class CarouselPremium extends Component {
     renderThumb() {
         var arrJSX = []
         this.props.images.map((item, index) => {
-            arrJSX.push(<img src={`${API_URL_1}/premium/${item.image}.jpg`} className="m-b" style={{width:"100%", 'cursor':'pointer'}} key={index} onClick={() => this.Carousel._onDotClick(index)}/>)
+            arrJSX.push(<img src={`${API_URL_1}/premium/${item.image}.jpg`} className="m-b carousel-thumbnail" key={index} onClick={() => this.Carousel._onDotClick(index)}/>)
         })
         return arrJSX;
     }

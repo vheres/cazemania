@@ -12,7 +12,7 @@ class HomePage extends Component {
 
     renderHomePage() {
         return(
-                <Grid fluid className="HomePage-css">
+                <Grid fluid style={{'background-color':'white'}}>
                     <Row className="m-n">
                         <img src={`${API_URL_1}/others/banner.jpg`} alt="banner" className="homepage-banner"></img>
                     </Row>
@@ -20,7 +20,7 @@ class HomePage extends Component {
                         <Col xsOffset={0} mdOffset={2} md={8}>
                             <Row>
                                 <Col xs={6}>
-                                    <Link to="/shop" className="image-holder" style={{'background-color':'gray', width:"100%", height:"400px"}}>
+                                    <Link to="/shop" className="image-holder" style={{'background-color':'gray', height:"400px"}}>
                                         {/* <img src="https://cdn.shopify.com/s/files/1/2689/9614/files/3-3_400x400_crop_center.jpg?v=1528277381" style={{width:"100%", height:"400px"}}/> */}
                                     </Link>
                                 </Col>

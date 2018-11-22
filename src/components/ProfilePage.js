@@ -130,7 +130,7 @@ class ProfilePage extends Component {
 
     renderUserInfo() {
         return (
-            <Col smOffset={1} sm={3}>
+            <Col xsOffset={1} xs={10} smOffset={1} sm={3}>
                 <Row>
                     <Col md={12}>
                         <span style={{"font-size": "28px"}}>My Profile</span><span className="profile-edit-button"><i class="fa fa-edit" title="Edit Profile" onClick={this.handleShow.bind(this)}></i></span>
@@ -187,7 +187,7 @@ class ProfilePage extends Component {
                 <Grid fluid>
                 <Row style={{'margin-top':'30px'}}>
                     {this.renderUserInfo()}
-                    <Col sm={7}>
+                    <Col xsOffset={1} xs={10} smOffset={0} sm={7}>
                         <Row>
                             <Col md={12}>
                                 <span style={{"font-size": "28px"}}>My Transactions</span>
@@ -267,7 +267,7 @@ class ProfilePage extends Component {
                                         </Row> 
                                     </Col>
                                     <Clearfix visibleXsBlock visibleSmBlock></Clearfix>
-                                    <Col xs={8} md={4}>
+                                    <Col xsOffset={2} xs={8} mdOffset={0} md={4}>
                                         <label className="general-input-container">
                                             <div className="general-input-label">Kode Pos</div>
                                             <input type="text" ref="kodepos" className="general-input" placeholder="Kode Pos" defaultValue={this.state.profile.kodepos}/>

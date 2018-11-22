@@ -26,10 +26,13 @@ class DetailPagePremium extends Component {
             arrJSX.push(<option value={item.id}>{item.code}</option>)
         })
         return (
-            <select ref="premium_select" className="form-control" style={{width:"80%"}} onChange={()=>this.setState({premiumselect: this.refs.premium_select.value})}>
-            <option value={0}>SELECT</option>
-            {arrJSX}
-            </select>
+            <label className="dropdown-container">
+                <select className="dropdown-select" ref="premium_select" onChange={()=>this.setState({premiumselect: this.refs.premium_select.value})}>
+                    <option value={0}>SELECT</option>
+                    {arrJSX}
+                </select>
+                <div className="text">Premium Code</div>
+            </label>
         )
     }
 
@@ -38,10 +41,13 @@ class DetailPagePremium extends Component {
             <option value={item.id}>{item.name}</option>)
         })
         return(
-        <select ref="model_select" className="form-control" style={{width:"80%"}} onChange={()=>this.setState({modelselect: this.refs.model_select.value})}>
-            <option value={0}>SELECT MODEL</option>
-            {arrJSX}
-        </select>
+            <label className="dropdown-container">
+                <select className="dropdown-select" ref="model_select" onChange={()=>this.setState({modelselect: this.refs.model_select.value})}>
+                    <option value={0}>SELECT MODEL</option>
+                    {arrJSX}
+                </select>
+                <div className="text">Model</div>
+            </label>
         )
     }
 
@@ -105,11 +111,11 @@ class DetailPagePremium extends Component {
 
     renderAddToCartButton() {
         if(this.state.premiumselect == 0 || this.state.modelselect == 0) {
-            return <input type="button" className="btn btn-orange disabled" title="Please select Premium Code and Model first" value="Add to Cart" onClick={()=>this.onAddToCart()} style={{width:"100%"}} disabled></input>
+            return <input type="button" className="btn-orange-blue disabled" title="Please select Premium Code and Model first" value="Add to Cart" onClick={()=>this.onAddToCart()} style={{width:"100%"}} disabled></input>
         }
         else {
             return (
-                <input type="button" className="btn btn-orange" value="Add to Cart" onClick={()=>this.onAddToCart()} style={{width:"100%"}}></input>
+                <input type="button" className="btn-orange-blue" value="Add to Cart" onClick={()=>this.onAddToCart()} style={{width:"100%"}}/>
             )
             
         }
@@ -125,52 +131,53 @@ class DetailPagePremium extends Component {
                         </Col>
                         <Col md={4}>
                                 {this.renderProductDetail()}
-                            <Row>
+                            <Row className="m-t-lg">
                                 <Col xsOffset={1} mdOffset={0} md={4}>
                                     <Row>
-                                        <h4 className="detail-option-text">Premium Code</h4>
-                                    </Row>
-                                    <Row>
-                                        {this.premiumSelectOptions()}
+                                        <Col xs={10} md={12}>
+                                            {this.premiumSelectOptions()}
+                                        </Col>
                                     </Row>     
                                 </Col>
                                 <Col xsOffset={1} mdOffset={0} md={4}>
                                     <Row>
-                                        <h4 className="detail-option-text">Model</h4>
-                                    </Row>
-                                    <Row>
-                                        {this.modelSelectOptions()}
+                                        <Col xs={10} md={12}>
+                                            {this.modelSelectOptions()}
+                                        </Col>
                                     </Row>   
                                 </Col>
                             </Row>
                             <Row>
-                                <Row>
-                                    <Col xsOffset={1} mdOffset={0} md={1}>
-                                        <br/>
-                                        <h4 className="detail-option-text">Quantity</h4>
+                                <Col xs={12}>
+                                    <Row>
+                                        <Col xsOffset={1} mdOffset={0} md={1}>
+                                            <br/>
+                                            <h4 className="detail-option-text">Quantity</h4>
+                                        </Col>
+                                    </Row>
+                                    <Row>
+                                    <Col xsOffset={1} xs={4} mdOffset={0} md={3}>
+                                            <FormGroup>
+                                                <InputGroup>
+                                                <InputGroup.Button>
+                                                    <Button className="btn btn-tosca" onClick={()=>this.PlusMinus("minus")}>-</Button>
+                                                </InputGroup.Button>
+                                                <FormControl type="text" readOnly id="quantity" ref="quantity" className="form-control text-center" defaultValue="1" style={{background:"white", height:'36px'}}/>
+                                                <InputGroup.Button>
+                                                    <Button className="btn btn-tosca" onClick={()=>this.PlusMinus("plus")}>+</Button>
+                                                </InputGroup.Button>
+                                                </InputGroup>
+                                            </FormGroup>
                                     </Col>
-                                </Row>
-                                <Row>
-                                <Col xsOffset={1} xs={4} mdOffset={0} md={3}>
-                                        <FormGroup>
-                                            <InputGroup>
-                                            <InputGroup.Button>
-                                                <Button className="btn btn-tosca" onClick={()=>this.PlusMinus("minus")}>-</Button>
-                                            </InputGroup.Button>
-                                            <FormControl type="text" readOnly id="quantity" ref="quantity" className="form-control text-center" defaultValue="1" style={{background:"white", height:'36px'}}/>
-                                            <InputGroup.Button>
-                                                <Button className="btn btn-tosca" onClick={()=>this.PlusMinus("plus")}>+</Button>
-                                            </InputGroup.Button>
-                                            </InputGroup>
-                                        </FormGroup>
+                                    </Row>
                                 </Col>
-                                </Row>
                             </Row>
                             <Row>
                                 <Col md={3}>
-                                    <Row>
-                                        <br/>
-                                        {this.renderAddToCartButton()}
+                                    <Row className="m-t-md">
+                                        <Col xs={12}>
+                                            {this.renderAddToCartButton()}
+                                        </Col>
                                     </Row>
                                 </Col>
                             </Row>

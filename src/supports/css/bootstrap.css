@@ -6900,18 +6900,20 @@ button.close {
   height: 100%;
   top: 0;
   z-index: 2;
-  color: white;
+  color: transparent;
   display:flex;
-  align-items: center;
+  align-items: flex-end;
+  padding-bottom: 30px;
   justify-content: center;
   font-size: 26px;
-  font-weight: bold;
+  /* font-weight: bold; */
   text-align: center;
-  transition: text-shadow 0.3s;
+  /* transition: text-shadow 0.3s; */
 }
 .best-overlay:hover { 
   color: rgb(255, 181, 44);
-  text-shadow: 2px 2px rgb(9, 175, 204);
+  background-image: linear-gradient(transparent, black);
+  text-shadow: 2px 1px rgb(9, 175, 204);
 }
 /* Similar Product images */
 .similar-product-holder {
@@ -6944,6 +6946,25 @@ button.close {
   -o-transition: background-color ease-in-out .3s;
      transition: background-color ease-in-out .3s;
 }
+.carousel-responsive {
+  width: 100%;
+}
+@media (min-width: 768px) {
+  .carousel-responsive {
+    width: 300px;
+  }  
+}
+.carousel-thumbnail {
+  width: 30%;
+  cursor: pointer;
+  margin-right: 10px;
+}
+@media (min-width: 768px) {
+  .carousel-thumbnail {
+    width: 100%;
+    margin-right: 0px;
+  }  
+}
 .carousel-image {
   padding-left: 5px;
   padding-right: 5px;
@@ -6952,9 +6973,6 @@ button.close {
   font-size: 12pt;
   line-height: 1.5;
   text-align: center;
-}
-.HomePage-css {
-  background-color: white;
 }
 .Footer-css {
   /* background-color: rgb(30,190,203); */
@@ -7087,7 +7105,7 @@ button.close {
   border-bottom-right-radius: 15pt;
 }
 .my-profile-pointer {
-  width: 360px;
+  width: 320px;
   height: 10px;
   position: relative;
   left: 10px;
@@ -7149,7 +7167,7 @@ button.close {
 .profile-edit-button {
   cursor: pointer;
   position: relative;
-  left: 210px;
+  left: 170px;
   font-size: 20px;
 }
 .profile-edit-button:hover {
@@ -7204,17 +7222,24 @@ button.close {
   display: flex;
   align-items: center;
   justify-content: center;
-  transition: background-color 0.3s;
+  transition: background-color 0.3s, color 0.3s;
 }
 .inputlabel:hover {
-  background-color: rgb(255, 181, 44);
+  border-color: rgb(255, 181, 44);
+  background-color: rgb(230, 230, 230);
+  color: rgb(255, 181, 44);
 }
 .reseller-panel {
   border-radius:10px;
   color:gray;
-  width:70%;
+  width:100%;
   line-height:2;
   font-size:12pt;
+}
+@media (min-width: 768px) {
+  .reseller-panel {
+    width:70%;
+  }
 }
 input[type="number"]::-webkit-outer-spin-button, input[type="number"]::-webkit-inner-spin-button {
     -webkit-appearance: none;
@@ -7350,6 +7375,7 @@ input[type="number"] {
   background-color: transparent;
   border: none;
   border-bottom: 2px solid rgb(150, 150, 150);
+  padding-bottom: 5px;
   font-size: 12pt;
   /* font-weight: bold; */
   color: gray;
@@ -7385,7 +7411,7 @@ color:#54b59f;
   font-size: 14pt;
   font-weight: bold;
   position: relative;
-  top: -60px;
+  top: -65px;
   color: rgb(255, 181, 44);
 }
 

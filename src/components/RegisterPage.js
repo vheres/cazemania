@@ -182,7 +182,7 @@ class RegisterPage extends Component {
                         <img src={`${API_URL_1}/others/banner.jpg`} alt="banner" className="homepage-banner"></img>
                     </Row>         */}
                     <Row className="margin-top-15">
-                        <Col mdOffset={4} md={4}>
+                        <Col xsOffset={1} xs={10} mdOffset={4} md={4}>
                             <Row className="m-b-md">
                                 <Col xs={12}>
                                     <span className="general-title-blue">Register</span>
@@ -256,7 +256,7 @@ class RegisterPage extends Component {
                                     </Col>
                                 </Row>
                                 <Row>
-                                    <Col xs={6}>
+                                    <Col xs={12} md={6}>
                                     <Row>
                                         <Col xs={12}>
                                         <label className="general-input-container">
@@ -277,7 +277,7 @@ class RegisterPage extends Component {
                                         </Col>
                                     </Row> 
                                     </Col>
-                                    <Col xs={6}>
+                                    <Col xs={12} md={6}>
                                         <label className="general-input-container">
                                             <div className="general-input-label">Kode Pos</div>
                                             <input type="number" ref="kodepos" className="general-input" placeholder="Kode Pos"/>
