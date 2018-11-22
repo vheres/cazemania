@@ -317,9 +317,8 @@ class Header extends Component {
                                             <span className="orange-text" onClick={()=>this.onLinkClick("/reseller-dropshipper")}>Reseller</span>
                                         </NavItem>
                                         <NavItem>
-                                            <span className="orange-text" onClick={()=>this.onLinkClick("/admin/cases")}>Admin</span>
-                                        </NavItem>
-                                        
+                                            <span className="orange-text" onClick={()=>this.onLinkClick("/admin/dashboard")}>Admin</span>
+                                        </NavItem>            
                                     </Nav>
                                 </Col>                   
                                 <Col xsHidden smHidden md={6} lg={6} style={{'padding':'0', 'margin':'0'}} className="pull-right">
@@ -353,10 +352,10 @@ class Header extends Component {
                                         <NavItem eventKey={2} className="header-button" onClick={()=>this.onLinkClick("/reseller-dropshipper")}>
                                             <span className="orange-text">Reseller</span>
                                         </NavItem>
-                                        <NavItem eventKey={4} className="header-button" onClick={()=>this.onLinkClick("/admin/cases")}>
+                                        <NavItem eventKey={4} className="header-button" onClick={()=>this.onLinkClick("/admin/dashboard")}>
                                             <span className="orange-text">Admin</span>
                                         </NavItem>
-                                        <NavItem eventKey={4} className="header-button" onClick={()=>this.onLinkClick("/admin/cases")}>
+                                        <NavItem eventKey={4} className="header-button" onClick={()=>this.onLinkClick("/admin/dashboard")}>
                                             <span className="orange-text">Login</span>
                                         </NavItem>
                                         <NavItem eventKey={4} className="header-button" onClick={()=>this.onLinkClick("/register")}>
