@@ -157,8 +157,7 @@ app.get('/adminorders', function(req,res){
 })
 
 app.get('/adminordersdetails/:id', function(req,res){
-    sql= `SELECT trd.id as id, trd.transaction_id as transaction_id, trd.catalogue_id as catalogue_id, trd.case_type as case_type, trd.price as price, trd.amount as amount, br.name as brand_name, ty.name as type_name, cat.code, cat.name, cat.image
-    FROM transaction_details trd JOIN brands br ON trd.case_brand = br.id JOIN type ty ON trd.case_model=ty.id JOIN catalogue cat ON trd.catalogue_id = cat.id WHERE trd.transaction_id = ${req.params.id}`
+    sql= `SELECT* FROM transaction_details WHERE transaction_id = ${req.params.id}`
     conn.query(sql, (err,results)=>{
         if(err) throw err;
         console.log(results)
@@ -591,7 +590,7 @@ app.post('/transaction', function(req,res){
     }
 
     sql = `INSERT INTO transactions SET ?`
-    sql1 = `INSERT INTO transaction_details (transaction_id, catalogue_id, case_brand, case_model, case_type, price, amount) VALUES ?`
+    sql1 = `INSERT INTO transaction_details (transaction_id, name, code, category, image, brand_name, model_name, case_type, amount) VALUES ?`
     sql2 = `DELETE FROM cart where user_id = ${req.body.id}`
     
     conn.beginTransaction(function(err){
@@ -603,38 +602,41 @@ app.post('/transaction', function(req,res){
                     throw err
                 })
             }
-            console.log(results)
-            var arrDetails = new Array()
-            for(var index in req.body.cart){
-                arrDetails.push([results.insertId, req.body.cart[index].catalogue_id, req.body.cart[index].brand_id, req.body.cart[index].model_id, req.body.cart[index].case_type, req.body.cart[index].price, req.body.cart[index].amount])
-            }
-
-            conn.query(sql1, [arrDetails], (err,results1)=>{
-                if(err){
-                    conn.rollback(function() {
-                        console.log("Rollback Succesful2")
-                        throw err;
-                    })
-                }
-                conn.query(sql2, (err,results2) => {
+            else{
+                console.log(results)
+                var data2 = []
+                req.body.cart.map((item)=>{
+                    data2.push([results.insertId, item.name, item.code, item.category, item.image, item.brand_name, item.model_name, item.case_type, item.amount])
+                })
+                conn.query(sql1, [data2], (err,results1)=>{
                     if(err){
-                        conn.rollback(function(){
-                            console.log("Rollback Succesful3")
-                            throw err
+                        conn.rollback(function() {
+                            console.log("Rollback Succesful2")
+                            throw err;
                         })
                     }
-                    conn.commit(function(err){
-                        if (err){
-                            conn.rollback(function(){
-                                console.log("Rollback Succesful4")
-                                throw err;
+                    else{
+                        conn.query(sql2, (err,results2) => {
+                            if(err){
+                                conn.rollback(function(){
+                                    console.log("Rollback Succesful3")
+                                    throw err
+                                })
+                            }
+                            conn.commit(function(err){
+                                if (err){
+                                    conn.rollback(function(){
+                                        console.log("Rollback Succesful4")
+                                        throw err;
+                                    })
+                                }
+                                res.send({results1})
+                                console.log("Transaction Complete")
                             })
-                        }
-                        res.send({results1})
-                        console.log("Transaction Complete")
-                    })
+                        })
+                    }
                 })
-            })
+            }
         })
     })
 })

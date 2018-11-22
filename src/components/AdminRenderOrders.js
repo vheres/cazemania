@@ -137,7 +137,7 @@ class AdminRenderOrders extends Component {
             return(
             <tr>
                 <td>{item.amount}</td>
-                <td>{item.code}-{item.name} || {item.brand_name} {item.type_name} - {item.case_type}</td>
+                <td>{item.code}-{item.name} || {item.brand_name} {item.model_name} - {item.case_type}</td>
                 <td>Rp. {parseInt(item.price).toLocaleString()}</td>
                 <td>Rp. {(parseInt(item.price) * parseInt(item.amount)).toLocaleString()}</td>
             </tr>)
