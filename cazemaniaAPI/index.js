@@ -220,36 +220,40 @@ app.put('/adminorders/addresi/:id', function(req,res){
                     throw err
                 })
             }
-            console.log(results)
-            conn.query(sql1, [data2], (err,results1)=>{
-                if (err){
-                    conn.rollback(function(){
-                        console.log("Rollback Successful Query")
-                        throw err
-                    })
-                }
-                transporter.sendMail(mailOptions, function (err, info) {
-                    if(err){
-                        console.log(err)
+            else{
+                console.log(results)
+                conn.query(sql1, [data2], (err,results1)=>{
+                    if (err){
                         conn.rollback(function(){
                             console.log("Rollback Successful Query")
                             throw err
                         })
                     }
                     else{
-                        conn.commit(function(err){
-                            if (err){
+                        transporter.sendMail(mailOptions, function (err, info) {
+                            if(err){
+                                console.log(err)
                                 conn.rollback(function(){
-                                    console.log("Rollback Succesful4")
-                                    throw err;
+                                    console.log("Rollback Successful Query")
+                                    throw err
                                 })
                             }
-                            res.send({results1})
-                            console.log("Transaction Complete")
+                            else{
+                                conn.commit(function(err){
+                                    if (err){
+                                        conn.rollback(function(){
+                                            console.log("Rollback Succesful4")
+                                            throw err;
+                                        })
+                                    }
+                                    res.send({results1})
+                                    console.log("Transaction Complete")
+                                })
+                            }
                         })
                     }
                 })
-            })
+            }
         })
     })
 })
@@ -590,7 +594,7 @@ app.post('/transaction', function(req,res){
     }
 
     sql = `INSERT INTO transactions SET ?`
-    sql1 = `INSERT INTO transaction_details (transaction_id, name, code, category, image, brand_name, model_name, case_type, amount) VALUES ?`
+    sql1 = `INSERT INTO transaction_details (transaction_id, name, code, category, image, brand_name, model_name, case_type, amount, price) VALUES ?`
     sql2 = `DELETE FROM cart where user_id = ${req.body.id}`
     
     conn.beginTransaction(function(err){
@@ -606,7 +610,7 @@ app.post('/transaction', function(req,res){
                 console.log(results)
                 var data2 = []
                 req.body.cart.map((item)=>{
-                    data2.push([results.insertId, item.name, item.code, item.category, item.image, item.brand_name, item.model_name, item.case_type, item.amount])
+                    data2.push([results.insertId, item.name, item.code, item.category, item.image, item.brand_name, item.model_name, item.case_type, item.amount, item.price])
                 })
                 conn.query(sql1, [data2], (err,results1)=>{
                     if(err){
@@ -794,8 +798,7 @@ app.get('/users/transactions/:id', function(req,res){
 })
 
 app.get('/users/transactions/details/:id', function(req,res){
-    sql= `SELECT trd.id as id, trd.transaction_id as transaction_id, trd.case_type as case_type, trd.price as price, trd.amount as amount, br.name as brand_name, ty.name as type_name, cat.code, cat.name, cat.image
-    FROM transaction_details trd JOIN brands br ON trd.case_brand = br.id JOIN type ty ON trd.case_model=ty.id JOIN catalogue cat ON trd.catalogue_id = cat.id WHERE trd.transaction_id = ${req.params.id}`
+    sql= `SELECT * FROM transaction_details WHERE transaction_id = ${req.params.id}`
     conn.query(sql, (err,results)=>{
         if(err) throw err;
         console.log(results)
