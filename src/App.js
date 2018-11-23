@@ -15,6 +15,7 @@ import ProfilePage from './components/ProfilePage';
 import LoginPage from './components/LoginPage';
 import RegisterPage from './components/RegisterPage';
 import RegisterRD from './components/RegisterRD';
+import LinkTree from './components/LinkTree';
 import { Grid, Row, Col } from 'react-bootstrap';
 import { connect } from 'react-redux';
 import { keepLogin, onLogout, cookieChecked } from './actions';
@@ -56,6 +57,7 @@ class App extends Component {
           <Row>
             <Col xs={12} className="no-margin no-padding">
               <Route exact path="/" component={HomePage}/>
+              <Route path="/links" component={LinkTree}/>
               <Route path="/shop" component={ShopPage}/>
               <Route path="/custom" component={CustomPage}/>
               <Route path="/premium_cases" component={PremiumPage}/>

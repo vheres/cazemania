@@ -40,7 +40,7 @@ class LoginPage extends Component {
                             <img src={`${API_URL_1}/others/banner.jpg`} alt="banner" className="homepage-banner"></img>
                         </Row> */}
                         <Row className="margin-top-15">
-                            <Col mdOffset={2} md={4}>
+                            <Col xsOffset={1} xs={10} mdOffset={2} md={4}>
                                 <Row>
                                     <Col xs={12} className="m-b-sm">
                                         <span className="general-title-blue">Belum Punya Akun?</span><br/>
@@ -57,7 +57,7 @@ class LoginPage extends Component {
                                     </Col>
                                 </Row>
                             </Col>
-                            <Col md={6}>
+                            <Col xsOffset={1} xs={10} mdOffset={0} md={6}>
                                 <Row className="m-b-md">
                                     <Col xs={12}>
                                         <span className="general-title-blue">Login Member</span>
@@ -68,7 +68,7 @@ class LoginPage extends Component {
                                         {/* <Col xs={2} className="text-right register-form-text">
                                         Email: 
                                         </Col> */}
-                                        <Col xs={8}>
+                                        <Col xs={12} md={8}>
                                             {/* <input type="email" ref="email" class="form-control" id="inputEmail" placeholder="Email Address" onKeyPress={this.onKeyPress.bind(this)}/><br/> */}
                                             <label className="general-input-container">
                                                 <div className="general-input-label">Email</div>
@@ -80,7 +80,7 @@ class LoginPage extends Component {
                                         {/* <Col xs={2} className="text-right register-form-text">
                                         Password: 
                                         </Col> */}
-                                        <Col xs={8}>
+                                        <Col xs={12} md={8}>
                                             <label className="general-input-container">
                                                 <div className="general-input-label">Password</div>
                                                 <input type="password" ref="password" id="inputPassword" className="general-input" placeholder="Your password" onKeyPress={this.onKeyPress.bind(this)}/>
@@ -89,7 +89,7 @@ class LoginPage extends Component {
                                         </Col>
                                     </Row>
                                     <Row>
-                                        <Col xs={8}>
+                                        <Col xs={12} md={8}>
                                             <Row className="m-t">
                                                 <Col xs={12}>
                                                     <a href="reset.html" className="pull-right general-link">Forgot password?</a>

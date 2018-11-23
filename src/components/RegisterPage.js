@@ -190,13 +190,13 @@ class RegisterPage extends Component {
                             </Row>
                             <form id="Register">
                                 <Row>
-                                    <Col xs={6}>
+                                    <Col xs={12} md={6}>
                                         <label className="general-input-container">
                                             <div className="general-input-label">Nama Depan</div>
                                             <input type="text" ref="firstName" id="inputUsername" className="general-input" placeholder="First Name" onKeyPress={this.onKeyPress.bind(this)}/>
                                         </label> 
                                     </Col>
-                                    <Col xs={6}>
+                                    <Col xs={12} md={6}>
                                         <label className="general-input-container">
                                             <div className="general-input-label">Nama Belakang</div>  
                                             <input type="text" ref="lastName" id="inputUsername" className="general-input" placeholder="Last Name" onKeyPress={this.onKeyPress.bind(this)}/>

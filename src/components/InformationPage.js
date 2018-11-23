@@ -70,7 +70,7 @@ class InformationPage extends Component {
                     </Col>
                 </Row>
                 <Row className="margin-top-15">
-                    <Col mdOffset={1} md={2} className="information-quick-link">
+                    <Col mdOffset={1} md={2} xsHidden smHidden className="information-quick-link">
                         <ButtonGroup vertical>
                             <Button onClick={()=>this.handleSelect('faq')} className={`${this.state.buttonCSS[0]}`}>FAQ</Button>
                             <Button onClick={()=>this.handleSelect('caraorder')} className={`${this.state.buttonCSS[1]}`}>Cara Order</Button>
@@ -79,9 +79,14 @@ class InformationPage extends Component {
                             <Button onClick={()=>this.handleSelect('penukarandanpengembalian')} className={`${this.state.buttonCSS[4]}`}>Penukaran dan Pengembalian</Button>
                         </ButtonGroup>
                     </Col>
-                    <Col md={7}>
+                    <Col xsOffset={1} xs={10} mdOffset={0} md={7} style={{'line-height':'1.8'}}>
                         <Row>
-                            <Col xs={12} id="faq" className="information-list-title">
+                            <Col xs={12} className="general-title-blue" style={{'position':'absolute'}}>
+                                Information Page
+                            </Col>
+                        </Row>
+                        <Row>
+                            <Col xs={12} id="faq" className="information-list-title" style={{'padding-top':'80px'}}>
                                 FAQ
                             </Col>
                         </Row>
@@ -185,7 +190,7 @@ class InformationPage extends Component {
                             </Col>
                         </Row>
                         <Row>
-                            <Col xs={12} id="caraorder" className="information-list-title">
+                            <Col xs={12} id="caraorder" className="information-list-title" style={{'padding-top':'80px'}}>
                             Cara Order
                             </Col>
                         </Row>
@@ -206,7 +211,7 @@ class InformationPage extends Component {
                             </Col>
                         </Row>
                         <Row>
-                            <Col xs={12} id="pembayaran" className="information-list-title">
+                            <Col xs={12} id="pembayaran" className="information-list-title" style={{'padding-top':'80px'}}>
                                 Pembayaran
                             </Col>
                         </Row>
@@ -227,7 +232,7 @@ class InformationPage extends Component {
                             </Col>
                         </Row>
                         <Row>
-                            <Col xs={12} id="informasipengiriman" className="information-list-title">
+                            <Col xs={12} id="informasipengiriman" className="information-list-title" style={{'padding-top':'80px'}}>
                                 Informasi Pengiriman
                             </Col>
                         </Row>
@@ -245,7 +250,7 @@ class InformationPage extends Component {
                             </Col>
                         </Row>
                         <Row>
-                            <Col xs={12} id="penukarandanpengembalian" className="information-list-title">
+                            <Col xs={12} id="penukarandanpengembalian" className="information-list-title" style={{'padding-top':'80px'}}>
                                 Penukaran dan Pengembalian
                             </Col>
                         </Row>

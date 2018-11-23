@@ -7349,7 +7349,6 @@ input[type="number"] {
   color: rgb(199, 199, 199);
 }
 .search-bar {
-  border: none;
   font-size: 12pt;
   color: rgb(92, 92, 92);
   border-radius: 3pt;
@@ -7363,10 +7362,43 @@ input[type="number"] {
 }
 .search-bar::placeholder {
   color: rgb(201, 201, 201);
+}
 
-}.dropdown-container {
+.search-bar-mobile {
+  border: none;
+  font-size: 12pt;
+  color: rgb(92, 92, 92);
+  padding: 7px 20px;
+  background-color: rgb(255, 255, 255);
+  border-bottom: 1px solid rgb(207, 207, 207);
+  width:80%;
+}
+.search-bar-mobile:focus {
+  outline: none;
+}
+.search-bar-mobile::placeholder {
+  color: rgb(201, 201, 201);
+}
+.btn-mobile {
+  border: none !important;
+  border-radius: 0pt !important;
+  border-bottom: 1px solid rgb(207, 207, 207)!important;
+  background-color: rgb(9, 175, 204)!important;
+  width: 20% !important;
+  padding: 8px !important;
+  position: absolute !important;
+  top: 0px !important;
+}
+.btn-mobile:hover {
+  background-color: rgb(255, 181, 44);
+}
+.btn-mobile:focus {
+  outline: none;
+}
+.dropdown-container {
   margin-top: 20px;
   width: 100%;
+  font-size: 12pt;
 }
 
 .dropdown-container > .dropdown-select {
