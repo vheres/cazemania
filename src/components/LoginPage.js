@@ -52,7 +52,7 @@ class LoginPage extends Component {
                                     </Col>
                                 </Row>
                                 <Row>
-                                    <Col xs={12}>
+                                    <Col xsOffset={1} xs={10} mdOffset={0} md={12}>
                                         <input type="button" className="btn-blue-orange" value="Register" onClick={()=>this.props.history.push('/register')}></input>
                                     </Col>
                                 </Row>
@@ -91,17 +91,17 @@ class LoginPage extends Component {
                                     <Row>
                                         <Col xs={12} md={8}>
                                             <Row className="m-t">
-                                                <Col xs={12}>
+                                                <Col xsOffset={1} xs={10} mdOffset={0} md={12}>
                                                     <a href="reset.html" className="pull-right general-link">Forgot password?</a>
                                                 </Col>
                                             </Row>
                                             <Row className="m-t">
-                                                <Col xs={12}>
+                                                <Col xsOffset={1} xs={10} mdOffset={0} md={12}>
                                                     <input type="button" class="btn-orange-blue" style={{'float': 'right', 'width':'100%'}} value="Login" onClick={this.onLoginClick}/>
                                                 </Col>
                                             </Row>
                                             <Row className="m-t">
-                                                <Col xs={12}>
+                                                <Col xsOffset={1} xs={10} mdOffset={0} md={12}>
                                                     <h2 className="badge badge-danger pull-right">{this.props.auth.error}</h2>
                                                 </Col>
                                             </Row>

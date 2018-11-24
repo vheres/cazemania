@@ -14,7 +14,8 @@ class HomePage extends Component {
         return(
                 <Grid fluid style={{'background-color':'white'}}>
                     <Row className="m-n">
-                        <img src={`${API_URL_1}/others/banner.jpg`} alt="banner" className="homepage-banner"></img>
+                        {/* <img src={`${API_URL_1}/others/banner.jpg`} alt="banner" className="homepage-banner"></img> */}
+                        <img src={`https://cdn-stamplib.casetify.com/cms/image/b1693f984b9c00ca202b0cf2da85cf3c.png`} alt="banner" className="homepage-banner"></img>
                     </Row>
                     <Row className="m-t-lg">
                         <Col xsOffset={0} mdOffset={2} md={8}>

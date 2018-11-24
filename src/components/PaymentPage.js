@@ -177,7 +177,7 @@ class PaymentPage extends Component {
                     </Table>
                 </Row>
                 <Row>
-                    <input type="button" className="btn btn-primary" onClick={()=>this.onCheckOutClick()} style={{width:"100%"}} value="Checkout"/>
+                    <input type="button" className="btn-orange-blue" onClick={()=>this.onCheckOutClick()} style={{width:"100%"}} value="Checkout"/>
                 </Row>
             </Row>
         )     
@@ -240,10 +240,10 @@ class PaymentPage extends Component {
                 countSoftCase += parseInt(item.amount)
             }
             subTotal += item.amount * item.price;
-            arrJSX.push(<tr><td style={{width:"5%"}}>{count +1}.</td><td><strong>{item.name} | {item.code}</strong>, {item.model_name}, {item.case_type} case</td><td className="text-right">(Qty:{item.amount}) Rp.{item.amount * item.price}</td></tr>)
+            arrJSX.push(<tr><td style={{width:"5%"}}>{count +1}.</td><td><strong>{item.name} | {item.code}</strong>, {item.model_name}, {item.case_type} case</td><td className="text-right">(Qty:{item.amount}) Rp. {(item.amount * item.price).toLocaleString()}</td></tr>)
         })
         arrJSX.push(<br/>)
-        arrJSX.push(<tr><td/><td><strong>Sub Total</strong></td><td className="text-right"><strong>Rp.{subTotal}</strong></td></tr>)
+        arrJSX.push(<tr><td/><td><strong>Sub Total</strong></td><td className="text-right"><strong>Rp. {subTotal.toLocaleString()}</strong></td></tr>)
         totalCase = countHardCase + countSoftCase;
         countFree = Math.floor(totalCase/3);
         for(var i=0; i<countFree; i++) {
@@ -256,15 +256,15 @@ class PaymentPage extends Component {
             }
         }
         if(freeSoft>0) {
-            arrJSX.push(<tr><td/><td>Free Soft Case:</td><td className="text-right">(Qty:{freeSoft}) - Rp.{freeSoft*softPrice}</td></tr>)
+            arrJSX.push(<tr><td/><td>Free Soft Case:</td><td className="text-right">(Qty:{freeSoft}) - Rp. {(freeSoft*softPrice).toLocaleString()}</td></tr>)
         }
         if(freeHard>0) {
-            arrJSX.push(<tr><td/><td>Free Hard Case:</td><td className="text-right">(Qty:{freeHard}) - Rp.{freeHard*hardPrice}</td></tr>)
+            arrJSX.push(<tr><td/><td>Free Hard Case:</td><td className="text-right">(Qty:{freeHard}) - Rp. {(freeHard*hardPrice).toLocaleString()}</td></tr>)
         }
         totalPrice = subTotal - (freeSoft*softPrice) - (freeHard*hardPrice) + parseInt(shipping)
-        arrJSX.push(<tr><td/><td><strong>Shipping</strong></td><td className="text-right"><strong>Rp.{this.state.shipping}</strong></td></tr>)
+        arrJSX.push(<tr><td/><td><strong>Shipping</strong></td><td className="text-right"><strong>Rp. {this.state.shipping.toLocaleString()}</strong></td></tr>)
         arrJSX.push(<br/>)
-        arrJSX.push(<tr><td/><td><strong>Total Price</strong></td><td className="text-right"><strong>Rp.{totalPrice}</strong></td></tr>)
+        arrJSX.push(<tr><td/><td><strong>Total Price</strong></td><td className="text-right"><strong>Rp. {totalPrice.toLocaleString()}</strong></td></tr>)
         return arrJSX
     }
 
@@ -279,8 +279,7 @@ class PaymentPage extends Component {
     renderPaymentPage() {
         return(
             <Grid fluid className="HomePage-css padding-15p">
-                    <Col md={2}></Col>
-                    <Col md={5}>
+                    <Col xsOffset={1} xs={10} mdOffset={1} md={5}>
                         <Row>
                             <h3>Checkout</h3>
                             <hr/>
@@ -312,55 +311,55 @@ class PaymentPage extends Component {
                             <Panel>
                                 <Panel.Body>
                                     <Row>
-                                        <Col xs={3} className="m-t-sm">
-                                            Pilih Rekening Tujuan:
-                                        </Col>
-                                        <Col xs={8} md={4}>
-                                            <select ref="rekening" className="form-control">
-                                                {this.renderRekeningList()}
-                                            </select>
+                                        <Col xs={12} md={6}>
+                                            <label className="dropdown-container">
+                                                <select className="dropdown-select" ref="rekening" defaultValue={1} id="gender">
+                                                    {this.renderRekeningList()}
+                                                </select>
+                                                <div className="text">Pilih Rekening Tujuan:</div>
+                                            </label>
                                         </Col>
                                     </Row>
                                 </Panel.Body>
                             </Panel>
                         </Row>
                     </Col>
-                    <Col mdOffset={1} md={3}>
+                    <Col xsOffset={1} xs={10} mdOffset={1} md={4}>
                         {this.renderTransactionSummary()}
                     </Col>
                     <Modal show={this.state.edit_modal} onHide={this.handleClose.bind(this)} bsSize="large">
                         <Modal.Header closeButton>
-                            <Modal.Title>Ganti Alamat</Modal.Title>
+                            <Modal.Title>Ganti Tujuan Pengiriman</Modal.Title>
                         </Modal.Header>
                         <Modal.Body>
                             <form id="Alamat">
                                 <Row>
-                                    <Col xs={2}>
-                                    <p className="text-right register-form-text">Nama Penerima:</p>  
+                                    <Col xs={12} mdsOffset={1} md={5}>
+                                        <label className="general-input-container">
+                                            <div className="general-input-label">Nama Depan:</div>
+                                            <input type="text" ref="firstname" id="inputFirstName" className="general-input" placeholder="First Name" defaultValue={`${this.state.recipient.firstname}`} onKeyPress={this.onKeyPress.bind(this)}/>
+                                        </label>
                                     </Col>
-                                    <Col xs={4}>
-                                        <input type="text" ref="firstname" class="form-control" id="inputFirstName" placeholder="First name" defaultValue={`${this.state.recipient.firstname}`} onKeyPress={this.onKeyPress.bind(this)}/>
-                                    </Col>
-                                    <Col xs={4}>
-                                        <input type="text" ref="lastname" class="form-control" id="inputLastName" placeholder="Last name" defaultValue={`${this.state.recipient.lastname}`} onKeyPress={this.onKeyPress.bind(this)}/><br/>
-                                    </Col>
-                                </Row>
-                                <Row>
-                                    <Col xs={2}>
-                                    <p className="text-right register-form-text">Alamat:</p>  
-                                    </Col>
-                                    <Col xs={8}>
-                                        <textarea type="text" ref="alamat" class="form-control" id="inputAdress" placeholder="Alamat" defaultValue={this.state.recipient.address} onKeyPress={this.onKeyPress.bind(this)} style={{resize:"none"}} rows= '4' cols= '80'/><br/>
+                                    <Col xs={12} md={5}>
+                                        <label className="general-input-container">
+                                            <div className="general-input-label">Nama Belakang:</div>
+                                            <input type="text" ref="lastname" id="inputLastName" className="general-input" placeholder="Last Name" defaultValue={`${this.state.recipient.lastname}`} onKeyPress={this.onKeyPress.bind(this)}/>
+                                        </label>
                                     </Col>
                                 </Row>
                                 <Row>
-                                    <Col xs={2}>
-                                    <p className="text-right register-form-text">Kota atau Kecamatan:</p>  
+                                    <Col xs={12} mdOffset={1} md={10}>
+                                        <label className="general-input-container">
+                                            <div className="general-input-label">Address</div>
+                                            <textarea type="text" ref="alamat" id="inputAdress" className="general-input" placeholder="Alamat" defaultValue={this.state.recipient.address} onKeyPress={this.onKeyPress.bind(this)} style={{resize:"none"}}/>
+                                        </label>
                                     </Col>
-                                    <Col xs={3}>
+                                </Row>
                                 <Row>
-                                    <Col xs={12}>
-                                        <Select
+                                    <Col xs={12} mdOffset={1} md={5}>
+                                        <label className="general-input-container">
+                                            <div className="general-input-label m-b">Kota dan Kecamatan</div>
+                                            <Select
                                             value={this.state.selectedOption}
                                             onChange={this.handleChange}
                                             options={this.state.filtered_destination} 
@@ -368,20 +367,19 @@ class PaymentPage extends Component {
                                             placeholder={`Pilih Kota/Kecamatan`}
                                             defaultValue={{value: this.state.recipient.destination_code, label: this.state.recipient.kota}}
                                             defaultInputValue={this.state.recipient.kota}
-                                        />
-                                    </Col>
-                                </Row>
-                                <Row>
-                                    <Col xs={12}>
-                                        <p className="small-font">*please input 3 or more characters</p>
-                                    </Col>
-                                </Row> 
+                                            />
+                                        </label>
+                                    <Row>
+                                        <Col xs={12}>
+                                            <p className="small-font">*please input 3 or more characters</p>
+                                        </Col>
+                                    </Row> 
                                 </Col>
-                                <Col xs={2}>
-                                <p className="text-right register-form-text">Kode Pos:</p>
-                                </Col>
-                                <Col xs={3}>
-                                <input ref="kodepos" type="text" className="form-control" placeholder="Kode Pos" defaultValue={this.state.recipient.kodepos}></input>
+                                <Col xs={12} md={5}>
+                                    <label className="general-input-container">
+                                        <div className="general-input-label">Kode Pos</div>
+                                        <input type="number" ref="kodepos" className="general-input" placeholder="Kode Pos" defaultValue={this.state.recipient.kodepos}/>
+                                    </label>
                                 </Col>        
                                 </Row>                     
                             </form>

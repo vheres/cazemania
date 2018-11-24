@@ -139,7 +139,7 @@ class ProfileRenderOrder extends Component {
         return(
             <Panel eventKey={this.props.transaction_id} bsStyle={this.selectStyle()}>
               <Panel.Heading>
-                <Panel.Title toggle>Order ID: <strong>CMW#{this.props.ordernumber}</strong><span style={{float: 'right'}}>{this.renderOrderStatus()[this.props.status]()}</span></Panel.Title>
+                <Panel.Title toggle style={{'font-size':'10pt'}}>Order ID: <strong>CMW#{this.props.ordernumber}</strong><span style={{float: 'right'}}>{this.renderOrderStatus()[this.props.status]()}</span></Panel.Title>
               </Panel.Heading>
               <Panel.Body collapsible>
                 <section id="content" style={{"font-size":"16px"}}> 
@@ -172,35 +172,37 @@ class ProfileRenderOrder extends Component {
                             </div>
                         </div>          
                         <div class="line"></div>
-                        <table class="table">
-                            <thead>
-                            <tr>
-                                <th style={{"width": "60px"}}>QTY</th>
-                                <th>DESCRIPTION</th>
-                                <th style={{"width": "140px"}}>UNIT PRICE</th>
-                                <th style={{"width": "130px"}}>TOTAL</th>
-                            </tr>
-                            </thead>
-                            <tbody>
-                            {this.renderTransactionDetails()}
-                            <tr>
-                                <td colspan="3" class="text-right"><strong>Subtotal</strong></td>
-                                <td>Rp. {this.props.subtotal}</td>
-                            </tr>
-                            <tr>
-                                <td colspan="3" class="text-right"><strong>Discount</strong></td>
-                                <td>Rp. {this.props.discount}</td>
-                            </tr>
-                            <tr>
-                                <td colspan="3" class="text-right no-border"><strong>Shipping</strong></td>
-                                <td>Rp. {this.props.shipping}</td>
-                            </tr>
-                            <tr>
-                                <td colspan="3" class="text-right no-border"><strong>Total</strong></td>
-                                <td><strong>Rp. {this.props.total_price}</strong></td>
-                            </tr>
-                            </tbody>
-                        </table>              
+                        <div style={{'overflow-x':'auto'}}>
+                            <table class="table">
+                                <thead className="table-head">
+                                <tr>
+                                    <th style={{"width": "10%"}}>QTY</th>
+                                    <th style={{"width": "50%"}}>DESCRIPTION</th>
+                                    <th style={{"width": "20%"}}>UNIT PRICE</th>
+                                    <th style={{"width": "20%"}}>TOTAL</th>
+                                </tr>
+                                </thead>
+                                <tbody className="table-body">
+                                {this.renderTransactionDetails()}
+                                <tr>
+                                    <td colspan="3" class="text-right"><strong>Subtotal</strong></td>
+                                    <td>Rp. {this.props.subtotal}</td>
+                                </tr>
+                                <tr>
+                                    <td colspan="3" class="text-right"><strong>Discount</strong></td>
+                                    <td>Rp. {this.props.discount}</td>
+                                </tr>
+                                <tr>
+                                    <td colspan="3" class="text-right no-border"><strong>Shipping</strong></td>
+                                    <td>Rp. {this.props.shipping}</td>
+                                </tr>
+                                <tr>
+                                    <td colspan="3" class="text-right no-border"><strong>Total</strong></td>
+                                    <td><strong>Rp. {this.props.total_price}</strong></td>
+                                </tr>
+                                </tbody>
+                            </table>  
+                        </div>   
                         </section>
                     </section>
                 </section>

@@ -6773,7 +6773,7 @@ button.close {
   transition: text-shadow 0.3s;
 }
 .orange-text:hover {
-  text-shadow: 2px 2px rgb(9, 175, 204);
+  text-shadow: 2px 1px rgb(9, 175, 204);
 }
 @media (min-width: 768px) {
   .header-button:hover {
@@ -7178,6 +7178,20 @@ button.close {
   top: -4px;
   left: 20px;
 }
+.table-head {
+ font-size: 6pt;
+}
+.table-body {
+  font-size: 6pt;
+}
+@media (min-width: 768px) {
+  .table-head {
+    font-size: 14pt;
+  }
+  .table-body {
+    font-size: 12pt;
+  }
+}
 .information-quick-link {
   position: -webkit-sticky;
   position: sticky;
@@ -7359,6 +7373,7 @@ input[type="number"] {
 }
 .search-bar:focus {
   outline: none;
+  border-color: rgb(9, 175, 204);
 }
 .search-bar::placeholder {
   color: rgb(201, 201, 201);
@@ -7371,7 +7386,7 @@ input[type="number"] {
   padding: 7px 20px;
   background-color: rgb(255, 255, 255);
   border-bottom: 1px solid rgb(207, 207, 207);
-  width:80%;
+  width:60%;
 }
 .search-bar-mobile:focus {
   outline: none;
@@ -7382,12 +7397,14 @@ input[type="number"] {
 .btn-mobile {
   border: none !important;
   border-radius: 0pt !important;
+  border-right: 1px solid rgb(207, 207, 207)!important;
   border-bottom: 1px solid rgb(207, 207, 207)!important;
   background-color: rgb(9, 175, 204)!important;
   width: 20% !important;
   padding: 8px !important;
-  position: absolute !important;
-  top: 0px !important;
+  margin-top: -2px;
+  /* position: absolute !important; */
+  /* top: 0px !important; */
 }
 .btn-mobile:hover {
   background-color: rgb(255, 181, 44);
@@ -7521,7 +7538,6 @@ color:#54b59f;
   border-radius: 50%;
   background: rgb(9, 175, 204);
 }
-
 
 
 

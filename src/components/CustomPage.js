@@ -9,7 +9,7 @@ import { withRouter } from 'react-router-dom';
 import FileUploader from './FileUploader';
 
 class CustomPage extends Component {
-    state={picture: '', brands: [], types: [], typeselect: [""], caseselect: {soft: 0, hard: 0}, price: [], selected_price: "", namafile: ''}
+    state={picture: '', brands: [], types: [], typeselect: [""], caseselect: {soft: 0, hard: 0}, price: [], selected_price: "", inputfile: []}
 
     componentWillMount(){
         const params = new URLSearchParams(this.props.location.search);
@@ -91,16 +91,16 @@ class CustomPage extends Component {
                     <label className="dropdown-container">
                         <select className="dropdown-select" id="case_select" ref="case_select" onChange={()=>this.onTypeSelect()}>
                             <option value={0} selected>SELECT CASE</option>
-                            <option value="hard" disabled>HARD CASE -- unavailable</option>
-                            <option value="soft" disabled>SOFT CASE -- unavailable</option>
+                            <option value="customhard" disabled>HARD CASE -- unavailable</option>
+                            <option value="customsoft" disabled>SOFT CASE -- unavailable</option>
                         </select>
                         <div className="text">Type</div>
                     </label>,
                     <label className="dropdown-container">
                         <select className="dropdown-select" id="case_select" ref="case_select" onChange={()=>this.onTypeSelect()}>
                             <option value={0}>SELECT CASE</option>
-                            <option value="hard" disabled>HARD CASE -- unavailable</option>
-                            <option value="soft" >SOFT CASE</option>
+                            <option value="customhard" disabled>HARD CASE -- unavailable</option>
+                            <option value="customsoft" >SOFT CASE</option>
                         </select>
                         <div className="text">Type</div>
                     </label>
@@ -109,16 +109,16 @@ class CustomPage extends Component {
                     <label className="dropdown-container">
                         <select className="dropdown-select" id="case_select" ref="case_select" onChange={()=>this.onTypeSelect()}>
                             <option value={0}>SELECT CASE</option>
-                            <option value="hard">HARD CASE</option>
-                            <option value="soft"  disabled>SOFT CASE -- unavailable</option>
+                            <option value="customhard">HARD CASE</option>
+                            <option value="customsoft"  disabled>SOFT CASE -- unavailable</option>
                         </select>
                         <div className="text">Type</div>
                     </label>,
                     <label className="dropdown-container">
                         <select className="dropdown-select" id="case_select" ref="case_select" onChange={()=>this.onTypeSelect()}>
                             <option value={0}>SELECT CASE</option>
-                            <option value="hard">HARD CASE</option>
-                            <option value="soft">SOFT CASE</option>
+                            <option value="customhard">HARD CASE</option>
+                            <option value="customsoft">SOFT CASE</option>
                         </select>
                         <div className="text">Type</div>
                     </label>
@@ -128,6 +128,7 @@ class CustomPage extends Component {
     }
 
     onTypeSelect() {
+        console.log(this.state.inputfile);
         if (this.refs.case_select.value === 'customhard') {
             this.setState({selected_price: this.state.price[1].price, selected_case: this.refs.case_select.value})
         }
@@ -148,8 +149,7 @@ class CustomPage extends Component {
             case_type: this.refs.case_select.value,
             amount: document.getElementById("quantity").value
         }
-        console.log(document.getElementById("custom_picture").files[0])
-        formData.append('file', document.getElementById("custom_picture").files[0])
+        formData.append('file', this.state.inputfile)
         formData.append('data', JSON.stringify(data))
         var config = {
             headers: 
@@ -198,15 +198,15 @@ class CustomPage extends Component {
       }
 
     
-    renderImageMagnifier() {
+    renderCustomImage() {
         if(this.state.picture === "") {
-            if (this.state.namafile == '') {
+            if (this.state.inputfile.length == 0) {
                 return (
                     <Col xs={12} className="upload_custom">
                     <label for="custom_picture" className='inputlabel inputlabel_icon'><i className="fa fa-picture-o"/><p style={{'font-size': '30px'}}>Upload Picture</p></label>
                         <div>
                             <form encType="multipart/form-data">
-                            <input type="file" name="filename" id="custom_picture" accept="image/*" className="inputfile" onChange={()=>this.setState({namafile: document.getElementById('custom_picture').files[0].name})}/>
+                            <input type="file" name="filename" id="custom_picture" accept="image/*" className="inputfile" onChange={()=>this.setState({inputfile: document.getElementById('custom_picture').files[0]})}/>
                             </form>
                         </div>
                     </Col> 
@@ -214,10 +214,10 @@ class CustomPage extends Component {
             } else {
                 return (
                     <Col xs={12} className="upload_custom">
-                    <label for="custom_picture" className='inputlabel inputlabel_icon'><i className="fa fa-picture-o"/><p style={{'font-size': '30px'}}>Upload Picture</p></label><p className="text-ellipsis" style={{'font-size': '20px'}}><i className="fa fa-check"></i>{this.state.namafile}</p>
+                    <label for="custom_picture" className='inputlabel inputlabel_icon'><i className="fa fa-picture-o"/><p style={{'font-size': '30px'}}>Upload Picture</p></label><p className="text-ellipsis" style={{'font-size': '20px'}}><i className="fa fa-check"></i>{this.state.inputfile.name}</p>
                         <div>
                             <form encType="multipart/form-data">
-                            <input type="file" name="filename" id="custom_picture" accept="image/*" className="inputfile" onChange={()=>this.setState({namafile: document.getElementById('custom_picture').files[0].name})}/>
+                            <input type="file" name="filename" id="custom_picture" accept="image/*" className="inputfile" onChange={()=>this.setState({inputfile: document.getElementById('custom_picture').files[0]})}/>
                             </form>
                         </div>
                     </Col> 
@@ -247,7 +247,7 @@ class CustomPage extends Component {
                             <Col xsOffset={1} mdOffset={0} md={12}><h3 className="detail-title-text">Custom Case</h3></Col>
                         </Row>
                         <Row>
-                            <Col xsOffset={1} mdOffset={0} md={12}><h2 className="price-text">Rp 60000 - Rp 85000</h2></Col> 
+                            <Col xsOffset={1} mdOffset={0} md={12}><h2 className="price-text">Rp 60,000 - Rp 85,000</h2></Col> 
                         </Row>
                     </section>
                 )
@@ -259,7 +259,7 @@ class CustomPage extends Component {
                             <Col xsOffset={1} mdOffset={0} md={12}><h3 className="detail-title-text">Custom Case</h3></Col>
                         </Row>
                         <Row>
-                            <Col xsOffset={1} mdOffset={0} md={12}><h2 className="price-text">Rp {this.state.selected_price + 10000}</h2></Col> 
+                            <Col xsOffset={1} mdOffset={0} md={12}><h2 className="price-text">Rp {(this.state.selected_price + 10000).toLocaleString()}</h2></Col> 
                         </Row>
                     </section>
                 )
@@ -282,11 +282,10 @@ class CustomPage extends Component {
         return(
                 <Grid fluid className="bg-white padding-15p">
                     <Row>
-                        <Col md={2}></Col>
-                        <Col md={3}>
-                            {this.renderImageMagnifier()}
+                        <Col xsOffset={0} xs={12} mdOffset={2} md={3}>
+                            {this.renderCustomImage()}
                         </Col>
-                        <Col md={4}>
+                        <Col xs={12} md={4}>
                                 {this.renderProductDetail()}
                             <Row className="m-t-lg">
                                 <Col xsOffset={1} mdOffset={0} md={4}>
@@ -336,9 +335,9 @@ class CustomPage extends Component {
                                 </Col>
                             </Row>
                             <Row>
-                                <Col md={3}>
+                                <Col md={12}>
                                     <Row className="m-t-md">
-                                        <Col xs={12}>
+                                        <Col xsOffset={1} xs={10} mdOffset={0} md={12}>
                                             {this.renderAddToCartButton()}
                                         </Col>
                                     </Row>

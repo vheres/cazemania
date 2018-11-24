@@ -99,7 +99,7 @@ class ProfilePage extends Component {
     renderGenderOption() {
         if (this.state.profile.gender == 'male') {
             return (
-                <Col xsOffset={2} xs={8}>
+                <Col xs={12} mdOffset={2} md={8}>
                     <div style={{'font-size':'12pt', 'font-weight':'bold', 'color': 'rgb(100, 100, 100)', 'margin-top':'20px'}}>Gender</div>
                     <label className="container">Male
                     <input type="radio" name="gender" id="male" value="male" checked/>
@@ -113,7 +113,7 @@ class ProfilePage extends Component {
             )
         } else {
             return (
-                <Col xsOffset={2} xs={8}>
+                <Col xs={12} mdOffset={2} md={8}>
                     <div style={{'font-size':'12pt', 'font-weight':'bold', 'color': 'rgb(100, 100, 100)', 'margin-top':'20px'}}>Gender</div>
                     <label className="container">Male
                     <input type="radio" name="gender" id="male" value="male"/>
@@ -197,7 +197,9 @@ class ProfilePage extends Component {
                             <div className="my-profile-pointer"></div>
                         </Row>
                         <Row>
-                            <ProfileOrder/>
+                            <Col xs={12}>
+                                <ProfileOrder/>
+                            </Col>
                         </Row>
                     </Col>
                 </Row>
@@ -208,7 +210,7 @@ class ProfilePage extends Component {
                         <Modal.Body>
                             <form id="Register">
                                 <Row>
-                                    <Col xsOffset={2} xs={8}>
+                                    <Col xs={12} mdOffset={2} md={8}>
                                         <label className="general-input-container">
                                             <div className="general-input-label">Nama</div>
                                             <input type="text" ref="nama" className="general-input" style={{'border':'none'}} placeholder="nama" defaultValue={`${this.state.profile.firstname} ${this.state.profile.lastname}`} disabled/>
@@ -219,7 +221,7 @@ class ProfilePage extends Component {
                                     {this.renderGenderOption()}
                                 </Row>
                                 <Row>
-                                    <Col xsOffset={2} xs={8}>
+                                    <Col xs={12} mdOffset={2} md={8}>
                                         <label className="general-input-container">
                                             <div className="general-input-label">Email</div>
                                             <input type="text" ref="email" className="general-input" style={{'border':'none'}} placeholder="email" defaultValue={this.state.profile.email} disabled/>
@@ -227,7 +229,7 @@ class ProfilePage extends Component {
                                     </Col>
                                 </Row>
                                 <Row>
-                                    <Col xsOffset={2} xs={8}>
+                                    <Col xs={12} mdOffset={2} md={8}>
                                         <label className="general-input-container">
                                             <div className="general-input-label">Phone</div>
                                             <input type="text" ref="phone" id="inputPhone" className="general-input" placeholder="Phone" defaultValue={this.state.profile.phone} onKeyPress={this.onKeyPress.bind(this)}/>
@@ -235,7 +237,7 @@ class ProfilePage extends Component {
                                     </Col>
                                 </Row>
                                 <Row>
-                                    <Col xsOffset={2} xs={8}>
+                                    <Col xs={12} mdOffset={2} md={8}>
                                         <label className="general-input-container">
                                             <div className="general-input-label">Address</div>
                                             <textarea type="text" ref="alamat" id="inputAdress" className="general-input" placeholder="Alamat" defaultValue={this.state.profile.address} onKeyPress={this.onKeyPress.bind(this)} style={{resize:"none"}}/>
@@ -243,7 +245,7 @@ class ProfilePage extends Component {
                                     </Col>
                                 </Row>
                                 <Row>
-                                    <Col xsOffset={2} xs={8} md={4}>
+                                    <Col xs={12} mdOffset={2} md={4}>
                                         <Row>
                                             <Col xs={12}>
                                                 <label className="general-input-container">
@@ -267,7 +269,7 @@ class ProfilePage extends Component {
                                         </Row> 
                                     </Col>
                                     <Clearfix visibleXsBlock visibleSmBlock></Clearfix>
-                                    <Col xsOffset={2} xs={8} mdOffset={0} md={4}>
+                                    <Col xs={12} mdOffset={0} md={4}>
                                         <label className="general-input-container">
                                             <div className="general-input-label">Kode Pos</div>
                                             <input type="text" ref="kodepos" className="general-input" placeholder="Kode Pos" defaultValue={this.state.profile.kodepos}/>
