@@ -85,10 +85,10 @@ class ProfileRenderOrder extends Component {
                     <div className="row">
                         <span className="col-xs-12 col-md-2">Bukti pembayaran: </span>
                         <span className="col-xs-8 col-md-8">
-                            <label for="bukti_pembayaran" className="btn btn-sm btn-primary" style={{'width': '120px'}}>
+                            <label for="bukti_pembayaran" className="btn btn-sm btn-primary" style={{'width': '120px'}} title="pilih file, lalu klik upload">
                                 <span className="text-ellipsis">{this.state.namafile}</span>
                             </label>{' '}
-                            <input type="button" value="Upload" className="btn btn-sm btn-success" onClick={()=>this.onUpLoadClick()}></input>
+                            <input type="button" value="Upload" className="btn btn-sm btn-success" title="pilih file, lalu klik upload" onClick={()=>this.onUpLoadClick()}></input>
                         </span>
                             <input type="file" className="inputfile" name="filename" id="bukti_pembayaran" accept="image/*" onChange={()=>this.setState({namafile: document.getElementById('bukti_pembayaran').files[0].name})}/>
                         <span className="col-xs-4 col-md-2">

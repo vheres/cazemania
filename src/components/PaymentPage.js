@@ -6,11 +6,14 @@ import { connect } from 'react-redux';
 import CartDetail from './CartDetail';
 import Select from 'react-select';
 
+import ReactPixel from 'react-facebook-pixel';
+
 class PaymentPage extends Component {
     state = ({ profile: [], recipient: {}, cart: [], rekening: [], subTotal: 0, discount: 0, edit_modal: false, selectedOption: [], destination: [], filtered_destination: [], shipping: 0, totalitems: 0 })
 
-    componentWillMount() {
+    componentDidMount() {
         this.getUserInfo()
+        ReactPixel.track( 'InitiateCheckout' )
     }
 
     getUserInfo() {

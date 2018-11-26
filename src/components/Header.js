@@ -10,6 +10,7 @@ import { withRouter } from 'react-router-dom';
 import {API_URL_1} from '../supports/api-url/apiurl'
 import axios from 'axios'
 import CartDetail from './CartDetail';
+import ReactPixel from 'react-facebook-pixel';
 
 const cookies = new Cookies();
 
@@ -51,6 +52,7 @@ class Header extends Component {
     getCartList() {
         axios.get(API_URL_1 + `/cart/` + this.props.auth.id)
         .then((response) => {
+            console.log(response.data.results)
             this.setState({cart: response.data.results})
         })
     }
@@ -63,8 +65,8 @@ class Header extends Component {
     onDeleteClick(id) {
         axios.delete(API_URL_1 + `/cart/` + this.props.auth.id + "/" + id, )
         .then((response) => {
-            console.log(response.data)
             this.setState({cart: response.data.results1})
+            console.log(response.data.results1)
             alert(`delete item success!`)
         }).catch((err) => {
             console.log(err);
@@ -83,11 +85,9 @@ class Header extends Component {
 
     renderCartList() {
         var arrJSX = [];
-        console.log(this.state.cart)
         arrJSX = this.state.cart.map((item,count) => {
             return <CartDetail key={item.id} id={item.id} category={item.category} count={count} name={item.name} code={item.code} image={item.image} brand={item.brand_name} model={item.model_name} type={item.case_type} quantity={item.amount} price={item.price} DeleteClick={(temp)=>this.onDeleteClick(temp)}></CartDetail>
         })
-        console.log(arrJSX)
         return arrJSX
     }
 
@@ -147,7 +147,6 @@ class Header extends Component {
             var hardPrice = 75000;
             var softPrice = 50000;
             this.state.cart.map((item,count) => {
-                console.log(item)
                 if (item.case_type == "hard" || item.case_type =="customhard" || item.case_type =="premium") {
                     countHardCase += parseInt(item.amount);
                 }
@@ -198,9 +197,11 @@ class Header extends Component {
         if (window.innerWidth >= 768) {
             var search = document.getElementById("search").value;
             this.props.history.push(`/shop?search=${search}`)
+            ReactPixel.track('Search', search)
         } else {
             var searchMobile = document.getElementById("mobilesearch").value;
             this.props.history.push(`/shop?search=${searchMobile}`)
+            ReactPixel.track('Search', searchMobile)
         }
     }
 
@@ -291,7 +292,7 @@ class Header extends Component {
                     <Col xs={12} mdHidden lgHidden style={{'padding-top':'0px'}}>
                         <input type="text" id="mobilesearch" placeholder="Search Code / Name" class="search-bar-mobile" onKeyPress={this.onKeyPress.bind(this)}/>
                         <Button type="submit" className="btn-mobile" onClick={()=>this.onSearchClick()}><i class="fa fa-search" style={{'color':'white'}}></i></Button>
-                        <Button type="submit" className="btn-mobile" onClick={()=>{alert('Please Login First');this.onLinkClick("/login")}}><i class="fa fa-shopping-cart" style={{'color':'white'}}></i></Button>
+                        <Button type="submit" className="btn-mobile" onClick={()=>this.handleShow()}><i class="fa fa-shopping-cart" style={{'color':'white'}}></i></Button>
                     </Col>
                 </Row>
             );

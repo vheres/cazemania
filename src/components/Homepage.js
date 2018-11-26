@@ -8,7 +8,7 @@ import axios from 'axios';
 import {API_URL_1} from '../supports/api-url/apiurl'
 import { Link } from 'react-router-dom';
 
-class HomePage extends Component {      
+class HomePage extends Component {
 
     renderHomePage() {
         return(
