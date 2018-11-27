@@ -17,9 +17,7 @@ class AdminCases extends Component {
         .then((res)=>{
             console.log(res.data)
             this.setState({data:res.data.items, brands: res.data.brands, type: res.data.type})
-            if(this.props.match.params.table === "cases"){
-                this.typeFilter()
-            }
+            this.typeFilter()
         })
     }
 

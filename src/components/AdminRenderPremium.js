@@ -2,8 +2,20 @@ import React, {Component} from 'react';
 import axios from 'axios'
 import {API_URL_1} from '../supports/api-url/apiurl'
 
-class AdminRenderCatalogue extends Component {
+class AdminRenderPremium extends Component {
     state = {edit: 0}
+
+    componentWillMount(){
+        this.refreshData()
+    }
+
+    refreshData(){
+        axios.get(API_URL_1 + "/admin/premiuminfo/" + this.props.id)
+        .then((res)=>{
+            console.log(res.data)
+            this.setState({data:res.data.items})
+        })
+    }
 
     onEditClick(){
         this.setState({edit:1})
@@ -13,21 +25,13 @@ class AdminRenderCatalogue extends Component {
     }
 
     onSaveClick(){
-        var formData = new FormData()
-        var data = {
-            code: this.refs.editCode.value,
-            name: this.refs.editName.value,
-            image: this.props.image
-        }
-        formData.append('file', document.getElementById('addCatalogueImage').files[0])
-        formData.append('data', JSON.stringify(data))
-        console.log(formData)
-        var config = {
-            headers: 
-              {'Content-Type': 'multipart/form-data'}
-        }
-
-        axios.put(API_URL_1 + "/admin/catalogue/" + this.props.id, formData, config)
+        axios.put(API_URL_1 + "/admin/premiuminfo/" + this.props.id,
+            {
+                code: this.refs.editCode.value,
+                name: this.refs.editName.value,
+                image: this.refs.editImage.value
+            }
+        )
         .then((res)=>{
             console.log(res)
             alert("SUCCESS")
@@ -62,10 +66,8 @@ class AdminRenderCatalogue extends Component {
             [
                 <tr>
                 <td>{this.props.id}</td>
-                <td>{this.props.code}</td>
                 <td>{this.props.name}</td>
-                <td><img src={API_URL_1 + "/normal/" + this.props.image + '.jpg'} alt={this.props.image} style={{width:"70%"}}/></td>
-                <td>{this.props.sales}</td>
+                <td><img src={API_URL_1 + "/premium/" + this.props.image + '.jpg'} alt={this.props.image} style={{width:"70%"}}/></td>
                 <td>
                     <input type="button" className="btn btn-success" style={{width: 70}} onClick={()=>this.onEditClick()} value="Edit"/>
                     <br/>
@@ -74,10 +76,8 @@ class AdminRenderCatalogue extends Component {
                 </tr>,
                 <tr>
                 <td>{this.props.id}</td>
-                <td><input type="text" ref="editCode"  defaultValue={this.props.code}/></td>
                 <td><input type="text" ref="editName"  defaultValue={this.props.name}/></td>
-                <td><input type="file" ref="editImage"/></td>
-                <td>{this.props.sales}</td>
+                <td><input type="text" ref="editImage" defaultValue={this.props.image}/></td>
                 <td>
                     <input type="button" className="btn btn-primary" style={{width: 70}} onClick={()=>this.onSaveClick()} value="Save"/>
                     <br/>
@@ -95,4 +95,4 @@ class AdminRenderCatalogue extends Component {
     }
 }
 
-export default AdminRenderCatalogue
+export default AdminRenderPremium
