@@ -2,9 +2,9 @@
 import React, { Component } from 'react';
 import axios from 'axios'
 import {API_URL_1} from '../supports/api-url/apiurl'
-import AdminRenderCatalogue from './AdminRenderCatalogue'
+import AdminRenderPremium from './AdminRenderPremium'
 
-class AdminCatalogue extends Component {
+class AdminPremium extends Component {
 
     state={ data: [], addCatalogue:0 }
     componentWillMount(){
@@ -12,7 +12,7 @@ class AdminCatalogue extends Component {
     }
 
     refreshData(){
-        axios.get(API_URL_1 + "/admin/catalogue")
+        axios.get(API_URL_1 + "/admin/premium")
         .then((res)=>{
             console.log(res.data)
             this.setState({data:res.data.items})
@@ -71,10 +71,8 @@ class AdminCatalogue extends Component {
             <thead>
                 <tr>
                     <th style={{width: "5%"}}>ID</th>
-                    <th style={{width: "10%"}}>Code</th>
-                    <th style={{width: "15%"}}>Name</th>
-                    <th style={{width: "15%"}}>Image</th>
-                    <th style={{width: "15%"}}>Sales</th>
+                    <th style={{width: "15%"}}>Group</th>
+                    <th style={{width: "15%"}}>Thumbnail</th>
                     <th style={{width: "15%"}}>Actions</th>
                 </tr>
             </thead>
@@ -84,7 +82,7 @@ class AdminCatalogue extends Component {
     renderDataTableCatalogue(){
         var arrJSX = this.state.data.map((item)=>{
             return(
-            <AdminRenderCatalogue key={item.id} id={item.id} code={item.code} name={item.name} image={item.image} sales={item.sales} table={this.props.match.params.table} refresh={()=>this.refreshData()}/>
+            <AdminRenderPremium key={item.id} id={item.id} code={item.code} name={item.name} image={item.image} sales={item.sales} table={this.props.match.params.table} refresh={()=>this.refreshData()}/>
             )
         })
         return arrJSX
@@ -136,4 +134,4 @@ class AdminCatalogue extends Component {
 }
 
 
-export default AdminCatalogue;
+export default AdminPremium;

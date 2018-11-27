@@ -21,7 +21,6 @@ class AdminRenderOrders extends Component {
     handleShow() {
         this.setState({ show: true });
     }
-
         
     selectStyle(){
         if(this.props.status === "pendingPayment"){
@@ -104,10 +103,10 @@ class AdminRenderOrders extends Component {
         if(this.props.status === "pendingPayment"){
             return (
                 <header class="wrapper-md bg-light lter">
-                <div>
-                    <input type="button" value="Konfirmasi Pembayaran" onClick={()=>this.onConfirmOrderClick()} className="btn btn-sm btn-info"/>
-                    <input type="button" value="Bukti Pembayaran" onClick={()=>this.handleShow()} className="btn btn-sm btn-info pull-right"/>
-                </div>
+                    <div>
+                        <input type="button" value="Konfirmasi Pembayaran" onClick={()=>this.onConfirmOrderClick()} className="btn btn-sm btn-info"/>
+                        <input type="button" value="Bukti Pembayaran" onClick={()=>this.handleShow()} className="btn btn-sm btn-info pull-right"/>
+                    </div>
                 </header>
             )
         }
@@ -133,11 +132,11 @@ class AdminRenderOrders extends Component {
     }
 
     renderTransactionDetails(){
-        var arrJSX = this.state.items.map((item) =>{
+        var arrJSX = this.state.items.map((item) => {
             return(
-            <tr>
+            <tr key={item.id}>
                 <td>{item.amount}</td>
-                <td>{item.code}-{item.name} || {item.brand_name} {item.model_name} - {item.case_type}</td>
+                <td>{item.code}-{item.name} || {item.brand_name} {item.model_name} - {item.case_type} <a href={`${API_URL_1}/${item.category}/${item.image}.jpg`} target="_blank"><i class="fa fa-image"/></a></td>
                 <td>Rp. {parseInt(item.price).toLocaleString()}</td>
                 <td>Rp. {(parseInt(item.price) * parseInt(item.amount)).toLocaleString()}</td>
             </tr>)
@@ -158,6 +157,22 @@ class AdminRenderOrders extends Component {
             )
         }
     }
+
+    // renderImageModal(category, image, id){
+    //     return(
+    //         <Modal key={id} show={false} onHide={()=>this.show = false} id="modalcustom">
+    //             <Modal.Header closeButton>
+    //                 <Modal.Title>Image Custom Case || ORDER: CMW#{this.props.ordernumber}</Modal.Title>
+    //             </Modal.Header>
+    //             <Modal.Body>
+    //                 <img src={`${API_URL_1}/${category}/${image}.jpg`} alt="custom" style={{width: "100%"}}/>
+    //             </Modal.Body>
+    //             <Modal.Footer>
+    //                 <Button onClick={()=>this.show = false}>Close</Button>
+    //             </Modal.Footer>
+    //         </Modal>
+    //     )
+    // }
     
     renderPage(){
         console.log(this.props.proof)

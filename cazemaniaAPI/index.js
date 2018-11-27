@@ -146,6 +146,14 @@ app.get('/admin/settings', function(req,res){
     })
 })
 
+app.get('/admin/premium', function(req,res){
+    sql = `SELECT * FROM premium` 
+    conn.query(sql, (err,results)=>{
+        if(err) throw err;
+        res.send({items: results})
+    })
+})
+
 app.get('/adminorders', function(req,res){
     sql= `SELECT tr.id as id, LPAD( tr.id, 8, '0') as ordernumber, tr.date as date, tr.time as time, tr.proof as proof, tr.target_bank as target_bank, tr.status as status, tr.subtotal as subtotal, tr.discount as discount, tr.shipping as shipping, tr.resi as resi, u.firstname as firstname, 
     u.lastname as lastname, u.id as user_id, u.address as address, u.email as email, u.phone as phone, u.kota as kota, u.kodepos as kodepos FROM transactions tr JOIN users u ON tr.user_id = u.id ORDER BY date`
@@ -259,6 +267,21 @@ app.put('/adminorders/addresi/:id', function(req,res){
 })
 
 app.put('/admin/catalogue/:id', function(req,res){
+    var data = JSON.parse(req.body.data)
+    if(req.files){
+        var unggahFile = req.files.file
+        var file = unggahFile.name
+        unggahFile.mv('./public/custom/'+ file, (err)=>{
+            if(err){
+                console.log(err)
+                res.send(err)
+            } else {
+                console.log('Custom case upload success!')
+                res.send('Custom case upload success!')
+                // res.send(file)
+            }
+        })
+    }
     sql = `UPDATE catalogue SET ? WHERE id = ${req.params.id}`
 
     conn.query(sql, req.body, (err,results)=>{
@@ -950,7 +973,6 @@ app.post('/customupload', function(req,res){
             }
         })
     }
-
 })
 
 
