@@ -26,6 +26,7 @@ import './App.css';
 import './supports/css/app.css';
 import './supports/css/font-awesome.css';
 import './supports/css/simple-line-icons.css';
+import ReactPixel from 'react-facebook-pixel';
 
 const cookies = new Cookies();
 
@@ -39,6 +40,8 @@ class App extends Component {
       this.props.cookieChecked();
     }
     console.log(this.props.auth);
+    ReactPixel.init('769774673361971', {}, { debug: true, autoConfig: false });
+    ReactPixel.pageView(); 	
   }
 
   componentWillReceiveProps(newProps) {

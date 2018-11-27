@@ -14,44 +14,44 @@ class LinkTree extends Component {
                         </div>
                     </Col>
                 </Row>
-                <Row style={{'marginTop':'5px', 'marginBottom':'5px'}}>
+                <Row style={{'marginTop':'7px', 'marginBottom':'7px'}}>
                     <Col xsOffset={1} xs={10}>
                         <input type="button" className="btn-orange-blue" style={{'width':'100%'}} value="Link 1"/>
                     </Col>
                 </Row>
-                <Row style={{'marginTop':'5px', 'marginBottom':'5px'}}>
+                <Row style={{'marginTop':'7px', 'marginBottom':'7px'}}>
+                    <Col xsOffset={1} xs={10}>
+                        <input type="button" className="btn-blue-orange" style={{'width':'100%'}} value="Link 1"/>
+                    </Col>
+                </Row>
+                <Row style={{'marginTop':'7px', 'marginBottom':'7px'}}>
                     <Col xsOffset={1} xs={10}>
                         <input type="button" className="btn-orange-blue" style={{'width':'100%'}} value="Link 1"/>
                     </Col>
                 </Row>
-                <Row style={{'marginTop':'5px', 'marginBottom':'5px'}}>
+                <Row style={{'marginTop':'7px', 'marginBottom':'7px'}}>
+                    <Col xsOffset={1} xs={10}>
+                        <input type="button" className="btn-blue-orange" style={{'width':'100%'}} value="Link 1"/>
+                    </Col>
+                </Row>
+                <Row style={{'marginTop':'7px', 'marginBottom':'7px'}}>
                     <Col xsOffset={1} xs={10}>
                         <input type="button" className="btn-orange-blue" style={{'width':'100%'}} value="Link 1"/>
                     </Col>
                 </Row>
-                <Row style={{'marginTop':'5px', 'marginBottom':'5px'}}>
+                <Row style={{'marginTop':'7px', 'marginBottom':'7px'}}>
+                    <Col xsOffset={1} xs={10}>
+                        <input type="button" className="btn-blue-orange" style={{'width':'100%'}} value="Link 1"/>
+                    </Col>
+                </Row>
+                <Row style={{'marginTop':'7px', 'marginBottom':'7px'}}>
                     <Col xsOffset={1} xs={10}>
                         <input type="button" className="btn-orange-blue" style={{'width':'100%'}} value="Link 1"/>
                     </Col>
                 </Row>
-                <Row style={{'marginTop':'5px', 'marginBottom':'5px'}}>
+                <Row style={{'marginTop':'7px', 'marginBottom':'7px'}}>
                     <Col xsOffset={1} xs={10}>
-                        <input type="button" className="btn-orange-blue" style={{'width':'100%'}} value="Link 1"/>
-                    </Col>
-                </Row>
-                <Row style={{'marginTop':'5px', 'marginBottom':'5px'}}>
-                    <Col xsOffset={1} xs={10}>
-                        <input type="button" className="btn-orange-blue" style={{'width':'100%'}} value="Link 1"/>
-                    </Col>
-                </Row>
-                <Row style={{'marginTop':'5px', 'marginBottom':'5px'}}>
-                    <Col xsOffset={1} xs={10}>
-                        <input type="button" className="btn-orange-blue" style={{'width':'100%'}} value="Link 1"/>
-                    </Col>
-                </Row>
-                <Row style={{'marginTop':'5px', 'marginBottom':'5px'}}>
-                    <Col xsOffset={1} xs={10}>
-                        <input type="button" className="btn-orange-blue" style={{'width':'100%'}} value="Link 1"/>
+                        <input type="button" className="btn-blue-orange" style={{'width':'100%'}} value="Link 1"/>
                     </Col>
                 </Row>
             </Grid>

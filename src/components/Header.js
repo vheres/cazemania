@@ -10,6 +10,7 @@ import { withRouter } from 'react-router-dom';
 import {API_URL_1} from '../supports/api-url/apiurl'
 import axios from 'axios'
 import CartDetail from './CartDetail';
+import ReactPixel from 'react-facebook-pixel';
 
 const cookies = new Cookies();
 
@@ -51,6 +52,7 @@ class Header extends Component {
     getCartList() {
         axios.get(API_URL_1 + `/cart/` + this.props.auth.id)
         .then((response) => {
+            console.log(response.data.results)
             this.setState({cart: response.data.results})
         })
     }
@@ -63,8 +65,8 @@ class Header extends Component {
     onDeleteClick(id) {
         axios.delete(API_URL_1 + `/cart/` + this.props.auth.id + "/" + id, )
         .then((response) => {
-            console.log(response.data)
             this.setState({cart: response.data.results1})
+            console.log(response.data.results1)
             alert(`delete item success!`)
         }).catch((err) => {
             console.log(err);
@@ -83,11 +85,9 @@ class Header extends Component {
 
     renderCartList() {
         var arrJSX = [];
-        console.log(this.state.cart)
         arrJSX = this.state.cart.map((item,count) => {
             return <CartDetail key={item.id} id={item.id} category={item.category} count={count} name={item.name} code={item.code} image={item.image} brand={item.brand_name} model={item.model_name} type={item.case_type} quantity={item.amount} price={item.price} DeleteClick={(temp)=>this.onDeleteClick(temp)}></CartDetail>
         })
-        console.log(arrJSX)
         return arrJSX
     }
 
@@ -147,7 +147,6 @@ class Header extends Component {
             var hardPrice = 75000;
             var softPrice = 50000;
             this.state.cart.map((item,count) => {
-                console.log(item)
                 if (item.case_type == "hard" || item.case_type =="customhard" || item.case_type =="premium") {
                     countHardCase += parseInt(item.amount);
                 }
@@ -155,10 +154,10 @@ class Header extends Component {
                     countSoftCase += parseInt(item.amount)
                 }
                 subTotal += item.amount * item.price;
-                arrJSX.push(<tr><td style={{width:"5%"}}>{count +1}.</td><td style={{width:"50%"}}><strong>{item.name} | {item.code}</strong>, {item.model_name}, {item.case_type}</td><td style={{width:"45%"}} className="text-right">(Qty:{item.amount}) Rp.{item.amount * item.price}</td></tr>)
+                arrJSX.push(<tr><td style={{width:"5%"}}>{count +1}.</td><td style={{width:"50%"}}><strong>{item.name} | {item.code}</strong>, {item.model_name}, {item.case_type}</td><td style={{width:"45%"}} className="text-right">(Qty:{item.amount}) Rp. {(item.amount * item.price).toLocaleString()}</td></tr>)
             })
             arrJSX.push(<br/>)
-            arrJSX.push(<tr><td/><td><strong>Sub Total</strong></td><td className="text-right"><strong>Rp.{subTotal}</strong></td></tr>)
+            arrJSX.push(<tr><td/><td><strong>Sub Total</strong></td><td className="text-right"><strong>Rp. {subTotal.toLocaleString()}</strong></td></tr>)
             totalCase = countHardCase + countSoftCase;
             countFree = Math.floor(totalCase/3);
             for(var i=0; i<countFree; i++) {
@@ -171,14 +170,14 @@ class Header extends Component {
                 }
             }
             if(freeSoft>0) {
-                arrJSX.push(<tr><td/><td>Free Soft Case:</td><td className="text-right">(Qty:{freeSoft}) - Rp.{freeSoft*softPrice}</td></tr>)
+                arrJSX.push(<tr><td/><td>Free Soft Case:</td><td className="text-right">(Qty:{freeSoft}) - Rp. {(freeSoft*softPrice).toLocaleString()}</td></tr>)
             }
             if(freeHard>0) {
-                arrJSX.push(<tr><td/><td>Free Hard Case:</td><td className="text-right">(Qty:{freeHard}) - Rp.{freeHard*hardPrice}</td></tr>)
+                arrJSX.push(<tr><td/><td>Free Hard Case:</td><td className="text-right">(Qty:{freeHard}) - Rp. {(freeHard*hardPrice).toLocaleString()}</td></tr>)
             }
             totalPrice = subTotal - (freeSoft*softPrice) - (freeHard*hardPrice)
             arrJSX.push(<br/>)
-            arrJSX.push(<tr><td/><td><strong>Total Price</strong></td><td className="text-right"><strong>Rp.{totalPrice}</strong></td></tr>)
+            arrJSX.push(<tr><td/><td><strong>Total Price</strong></td><td className="text-right"><strong>Rp. {totalPrice.toLocaleString()}</strong></td></tr>)
             return arrJSX
         }
     // END CART SECTION
@@ -195,13 +194,15 @@ class Header extends Component {
     // END MODAL SECTION
 
     onSearchClick() {
-        var search = document.getElementById("search").value;
-        this.props.history.push(`/shop?search=${search}`)
-    }
-
-    mobileSearchClick() {
-        var search = document.getElementById("mobilesearch").value;
-        this.props.history.push(`/shop?search=${search}`)
+        if (window.innerWidth >= 768) {
+            var search = document.getElementById("search").value;
+            this.props.history.push(`/shop?search=${search}`)
+            ReactPixel.track('Search', search)
+        } else {
+            var searchMobile = document.getElementById("mobilesearch").value;
+            this.props.history.push(`/shop?search=${searchMobile}`)
+            ReactPixel.track('Search', searchMobile)
+        }
     }
 
     renderPaymentButton() {
@@ -284,16 +285,14 @@ class Header extends Component {
                                         <NavItem eventKey={4} className="header-button" onClick={()=>this.onLogoutClick()}>
                                             <span className="orange-text">Logout</span>
                                         </NavItem>
-                                        <NavItem eventKey={4} className="header-button" onClick={()=>this.handleShow()}>
-                                            <span className="orange-text">Cart</span>
-                                        </NavItem>
                                     </Nav>
                                 </Col>
                         </Navbar.Collapse>       
                     </Navbar>
                     <Col xs={12} mdHidden lgHidden style={{'padding-top':'0px'}}>
                         <input type="text" id="mobilesearch" placeholder="Search Code / Name" class="search-bar-mobile" onKeyPress={this.onKeyPress.bind(this)}/>
-                        <Button type="submit" className="btn-mobile" onClick={()=>this.mobileSearchClick()}><i class="fa fa-search" style={{'color':'white'}}></i></Button>
+                        <Button type="submit" className="btn-mobile" onClick={()=>this.onSearchClick()}><i class="fa fa-search" style={{'color':'white'}}></i></Button>
+                        <Button type="submit" className="btn-mobile" onClick={()=>this.handleShow()}><i class="fa fa-shopping-cart" style={{'color':'white'}}></i></Button>
                     </Col>
                 </Row>
             );
@@ -363,16 +362,14 @@ class Header extends Component {
                                         <NavItem eventKey={4} className="header-button" onClick={()=>this.onLinkClick("/register")}>
                                             <span className="orange-text">Register</span>
                                         </NavItem>
-                                        <NavItem eventKey={4} className="header-button" onClick={()=>{alert('Please Login First');this.onLinkClick("/login")}}>
-                                            <span className="orange-text">Cart</span>
-                                        </NavItem>
                                     </Nav>
                                 </Col>
                         </Navbar.Collapse>       
                     </Navbar>
                     <Col xs={12} mdHidden lgHidden style={{'padding-top':'0px'}}>
                         <input type="text" id="mobilesearch" placeholder="Search Code / Name" class="search-bar-mobile" onKeyPress={this.onKeyPress.bind(this)}/>
-                        <Button type="submit" className="btn-mobile" onClick={()=>this.mobileSearchClick()}><i class="fa fa-search" style={{'color':'white'}}></i></Button>
+                        <Button type="button" className="btn-mobile" onClick={()=>this.onSearchClick()}><i class="fa fa-search" style={{'color':'white'}}></i></Button>
+                        <Button type="submit" className="btn-mobile" onClick={()=>{alert('Please Login First');this.onLinkClick("/login")}}><i class="fa fa-shopping-cart" style={{'color':'white'}}></i></Button>
                     </Col>
                 </Row>
         );

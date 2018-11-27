@@ -102,7 +102,7 @@ class DetailPagePremium extends Component {
                         <Col xsOffset={1} mdOffset={0} md={12}><h3 className="detail-title-text">{this.state.item[0].name}</h3></Col>
                     </Row>
                     <Row>
-                        <Col xsOffset={1} mdOffset={0} md={12}><h2 className="price-text">Rp 100000</h2></Col> 
+                        <Col xsOffset={1} mdOffset={0} md={12}><h2 className="price-text">Rp 100,000</h2></Col> 
                     </Row>
                 </section>
             )
@@ -173,9 +173,9 @@ class DetailPagePremium extends Component {
                                 </Col>
                             </Row>
                             <Row>
-                                <Col md={3}>
+                                <Col md={12}>
                                     <Row className="m-t-md">
-                                        <Col xs={12}>
+                                        <Col xsOffset={1} xs={10} mdOffset={0} md={12}>
                                             {this.renderAddToCartButton()}
                                         </Col>
                                     </Row>

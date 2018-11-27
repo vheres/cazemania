@@ -49,7 +49,7 @@ class CartDetail extends Component {
                         </Row>
                     </Col>
                     <Col xs={6} md={3}>
-                        <h3>Rp. {this.props.price}</h3>
+                        <h4 style={{'font-weight':'bold'}}>Rp. {this.props.price.toLocaleString()}</h4>
                     </Col>
                     {this.renderDeleteButton()} 
                 </Col>         

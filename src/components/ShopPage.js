@@ -8,7 +8,7 @@ import PaginationClass from './Pagination';
 class ShopPage extends Component {
     state = { catalogue: [], pagination: [], item_count: 0, pagecount: 0, search_status: [0], active: [0] }
 
-    componentWillMount() {
+    componentDidMount() {
         if (this.state.pagination.length === 0) {
             this.state.pagination.push(0, 20)
         }
@@ -119,13 +119,20 @@ class ShopPage extends Component {
     // }
 
     renderCatalogue() {
-        console.log(this.state.catalogue)
-        var arrJSX = this.state.catalogue.map(item => {
-            return (
-                <ItemDetail id={item.id} name={item.name} image={item.image} sales={item.sales} category={'normal'} link={'product'}/>
-            );
-        })
-        return arrJSX
+        if (this.state.catalogue.length === 0) {
+            return(
+                <div className="general-title-blue text-center">
+                    Hasil pencarian kosong
+                </div>
+            )
+        } else {
+            var arrJSX = this.state.catalogue.map(item => {
+                return (
+                    <ItemDetail id={item.id} name={item.name} image={item.image} sales={item.sales} category={'normal'} link={'product'}/>
+                );
+            })
+            return arrJSX
+        }
     }
 
     renderShopPage() {

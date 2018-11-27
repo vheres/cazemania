@@ -6,11 +6,12 @@ import { connect } from 'react-redux';
 import Magnifier from 'react-magnifier';
 import CarouselSimilar from './CarouselSimilar';
 import { withRouter } from 'react-router-dom';
+import ReactPixel from 'react-facebook-pixel';
 
 class DetailPage extends Component {
     state={item: [], brands: [], types: [], typeselect: [""], caseselect: {soft: 0, hard: 0}, price: [], selected_price: ""}
 
-    componentWillMount(){
+    componentDidMount(){
         const params = new URLSearchParams(this.props.location.search);
         const id = params.get('id')
         axios.get(API_URL_1 + "/item/" + id)
@@ -150,6 +151,7 @@ class DetailPage extends Component {
                 amount: document.getElementById("quantity").value
             }).then((res) => {
                 alert('add to cart successful!')
+                ReactPixel.track('AddToCart', {some:'value'})
             }).catch((err) => {
                 alert(err);
             })
@@ -213,7 +215,7 @@ class DetailPage extends Component {
                             <Col xsOffset={1} mdOffset={0} md={12}><h3 className="detail-title-text">{this.state.item.name} | {this.state.item.code}</h3></Col>
                         </Row>
                         <Row>
-                            <Col xsOffset={1} mdOffset={0} md={12}><h2 className="price-text">Rp 50000 - Rp 75000</h2></Col> 
+                            <Col xsOffset={1} mdOffset={0} md={12}><h2 className="price-text">Rp 50,000 - Rp 75,000</h2></Col> 
                         </Row>
                     </section>
                 )
@@ -225,7 +227,7 @@ class DetailPage extends Component {
                             <Col xsOffset={1} mdOffset={0} md={12}><h3 className="detail-title-text">{this.state.item.name} | {this.state.item.code}</h3></Col>
                         </Row>
                         <Row>
-                            <Col xsOffset={1} mdOffset={0} md={12}><h2 className="price-text">Rp {this.state.selected_price}</h2></Col> 
+                            <Col xsOffset={1} mdOffset={0} md={12}><h2 className="price-text">Rp {this.state.selected_price.toLocaleString()}</h2></Col> 
                         </Row>
                     </section>
                 )
@@ -303,9 +305,9 @@ class DetailPage extends Component {
                                 </Col>
                             </Row>
                             <Row>
-                                <Col md={3}>
+                                <Col xs={12}>
                                     <Row className="m-t-md">
-                                        <Col xs={12}>
+                                        <Col xsOffset={1} xs={10} mdOffset={0} md={12}>
                                             {this.renderAddToCartButton()}
                                         </Col>
                                     </Row>
@@ -319,7 +321,7 @@ class DetailPage extends Component {
                             <div className="block-margin-auto similar-product-pointer"></div>
                         </Row>
                         <Row>
-                            <Col xsOffset={2} xs={8} mdOffset={2} md={8}>
+                            <Col xsOffset={0} xs={12} mdOffset={2} md={8}>
                                 {this.renderCarouselSimilar()}
                             </Col>
                         </Row>
