@@ -130,7 +130,7 @@ class ProfilePage extends Component {
 
     renderUserInfo() {
         return (
-            <Col xsOffset={1} xs={10} smOffset={1} sm={3}>
+            <Col xsOffset={1} xs={10} lgOffset={1} lg={3}>
                 <Row>
                     <Col md={12}>
                         <span style={{"font-size": "28px"}}>My Profile</span><span className="profile-edit-button"><i class="fa fa-edit" title="Edit Profile" onClick={this.handleShow.bind(this)}></i></span>
@@ -184,10 +184,10 @@ class ProfilePage extends Component {
 
     renderProfilePage() {
             return (
-                <Grid fluid>
+                <Grid fluid style={{minHeight:'51.6vh'}}>
                 <Row style={{'margin-top':'30px'}}>
                     {this.renderUserInfo()}
-                    <Col xsOffset={1} xs={10} smOffset={0} sm={7}>
+                    <Col xsOffset={1} xs={10} lgOffset={0} lg={7}>
                         <Row>
                             <Col md={12}>
                                 <span style={{"font-size": "28px"}}>My Transactions</span>

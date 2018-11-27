@@ -212,7 +212,7 @@ class DetailPage extends Component {
                 return (
                     <section>
                         <Row>
-                            <Col xsOffset={1} mdOffset={0} md={12}><h3 className="detail-title-text">{this.state.item.name} | {this.state.item.code}</h3></Col>
+                            <Col xsOffset={1} mdOffset={0} md={12}><h3 className="alternate-title">{this.state.item.name} | {this.state.item.code}</h3></Col>
                         </Row>
                         <Row>
                             <Col xsOffset={1} mdOffset={0} md={12}><h2 className="price-text">Rp 50,000 - Rp 75,000</h2></Col> 
@@ -224,7 +224,7 @@ class DetailPage extends Component {
                 return (
                     <section>
                         <Row>
-                            <Col xsOffset={1} mdOffset={0} md={12}><h3 className="detail-title-text">{this.state.item.name} | {this.state.item.code}</h3></Col>
+                            <Col xsOffset={1} mdOffset={0} md={12}><h3 className="alternate-title">{this.state.item.name} | {this.state.item.code}</h3></Col>
                         </Row>
                         <Row>
                             <Col xsOffset={1} mdOffset={0} md={12}><h2 className="price-text">Rp {this.state.selected_price.toLocaleString()}</h2></Col> 

@@ -244,7 +244,7 @@ class CustomPage extends Component {
                 return (
                     <section>
                         <Row>
-                            <Col xsOffset={1} mdOffset={0} md={12}><h3 className="detail-title-text">Custom Case</h3></Col>
+                            <Col xsOffset={1} mdOffset={0} md={12}><h3 className="alternate-title">Custom Case</h3></Col>
                         </Row>
                         <Row>
                             <Col xsOffset={1} mdOffset={0} md={12}><h2 className="price-text">Rp 60,000 - Rp 85,000</h2></Col> 
@@ -256,7 +256,7 @@ class CustomPage extends Component {
                 return (
                     <section>
                         <Row>
-                            <Col xsOffset={1} mdOffset={0} md={12}><h3 className="detail-title-text">Custom Case</h3></Col>
+                            <Col xsOffset={1} mdOffset={0} md={12}><h3 className="alternate-title">Custom Case</h3></Col>
                         </Row>
                         <Row>
                             <Col xsOffset={1} mdOffset={0} md={12}><h2 className="price-text">Rp {(this.state.selected_price + 10000).toLocaleString()}</h2></Col> 
