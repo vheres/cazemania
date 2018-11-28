@@ -51,6 +51,15 @@ app.get('/bestsellers', function(req,res){
     })
 })
 
+app.get('/testimonies', function(req,res){
+    var sql = 'SELECT * FROM testimonies'
+    conn.query(sql, (err,results)=>{
+        if(err) throw err;
+        console.log(results)
+        res.send({testimonies: results})
+    })
+})
+
 //Get list of catalogue, sorted by ID
 app.get('/catalogue', function(req,res){
     // if (req.query.code != null && req.query.name != null) {
@@ -266,6 +275,14 @@ app.put('/adminorders/addresi/:id', function(req,res){
     })
 })
 
+app.put('/admin/testimonies/:id', function(req,res){
+    var sql = `UPDATE testimonies SET ? WHERE id = ${req.params.id}`
+    conn.query(sql, req,body, (err,results)=>{
+        if(err) throw err;
+        res.send(resutls)
+    })
+})
+
 app.put('/admin/catalogue/:id', function(req,res){
     var data = JSON.parse(req.body.data)
     if(req.files){
@@ -321,6 +338,14 @@ app.put('/admin/rekening/:id', function(req,res){
     })
 })
 
+app.post('/admin/testimonies', function(req,res){
+    var sql = `INSERT INTO testimonies SET ?`;
+    conn.query(sql, req.body, (err,results)=>{
+        if(err) throw err;
+        res.send(results)
+    })
+}
+
 app.post('/admin/addcases', function(req,res){
     sql = `INSERT INTO type SET ?`
 
@@ -348,6 +373,14 @@ app.post('/admin/addcatalogue', function(req,res){
                 // res.send(file)
             }
         })
+    })
+})
+
+app.post('/admin/deletetestimonies/:id', function(req,res){
+    var sql = `DELETE FROM testimonies WHERE id=${req.params.id}`
+    conn.query(sql, (err,results)=>{
+        if(err) throw err;
+        res.send(results)
     })
 })
 
