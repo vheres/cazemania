@@ -64,11 +64,6 @@ class InformationPage extends Component {
     renderInformationPage() {
         return(
             <Grid fluid className="HomePage-css">
-                <Row>
-                    <Col md={12}>
-                        <img src={`${API_URL_1}/others/banner.jpg`} alt="banner" className="homepage-banner"></img>
-                    </Col>
-                </Row>
                 <Row className="margin-top-15">
                     <Col mdOffset={1} md={2} xsHidden smHidden className="information-quick-link">
                         <ButtonGroup vertical>
@@ -79,7 +74,7 @@ class InformationPage extends Component {
                             <Button onClick={()=>this.handleSelect('penukarandanpengembalian')} className={`${this.state.buttonCSS[4]}`}>Penukaran dan Pengembalian</Button>
                         </ButtonGroup>
                     </Col>
-                    <Col xsOffset={1} xs={10} mdOffset={0} md={7} style={{'line-height':'1.8'}}>
+                    <Col xsOffset={1} xs={10} mdOffset={0} md={6} style={{'line-height':'1.8'}}>
                         <Row>
                             <Col xs={12} className="general-title-blue" style={{'position':'absolute'}}>
                                 Information Page

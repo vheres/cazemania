@@ -266,7 +266,7 @@ class Header extends Component {
                                         </NavItem>
                                     </Nav>
                                 </Col>
-                                <Col xs={12} mdHidden lgHidden style={{'padding':'0', 'margin':'0'}} className="pull-right">
+                                <Col xs={12} sm={10} mdHidden lgHidden style={{'padding':'0', 'margin':'0'}}>
                                     <Nav style={{'width':'100%'}}>
                                         <NavDropdown eventKey={3} title={<span className="orange-text">Shop</span>} id="basic-nav-dropdown" className="header-button">
                                             <MenuItem eventKey={3.1} onClick={()=>this.onLinkClick("/shop")}>Collections</MenuItem>
@@ -343,7 +343,7 @@ class Header extends Component {
                                         </NavItem>
                                     </Nav>
                                 </Col>
-                                <Col xs={12} mdHidden lgHidden style={{'padding':'0', 'margin':'0'}} className="pull-right">
+                                <Col xs={12} sm={6} mdHidden lgHidden style={{'padding':'0', 'margin':'0'}} className="pull-right">
                                     <Nav style={{'width':'100%'}}>
                                         <NavDropdown eventKey={3} title={<span className="orange-text">Shop</span>} id="basic-nav-dropdown" className="header-button">
                                             <MenuItem eventKey={3.1} onClick={()=>this.onLinkClick("/shop")}>Collections</MenuItem>

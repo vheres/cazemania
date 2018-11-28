@@ -55,7 +55,7 @@ class CarouselSimilar extends Component {
       if(this.state.similar_product.length > 3) {   
         return (
           <div>
-            <Col xsHidden md={1} className="carousel-similar-button">
+            <Col xsHidden smHidden md={1} className="carousel-similar-button">
               <button onClick={() => this.Carousel._slidePrev()} className="btn btn-tosca large"><i className="fa fa-chevron-left"></i></button>
             </Col>
             <Col md={10}>
@@ -73,7 +73,7 @@ class CarouselSimilar extends Component {
               ref={ el => this.Carousel = el }
               />
             </Col>
-            <Col xsHidden md={1} className="carousel-similar-button">
+            <Col xsHidden smHidden md={1} className="carousel-similar-button">
               <button onClick={() => this.Carousel._slideNext()} className="btn btn-tosca large"><i className="fa fa-chevron-right"></i></button>
             </Col>
         </div>
