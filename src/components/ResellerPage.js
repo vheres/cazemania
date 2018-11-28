@@ -1,8 +1,12 @@
 import React, { Component } from 'react';
 import { Grid, Row, Col, Panel  } from 'react-bootstrap';
 import {API_URL_1} from '../supports/api-url/apiurl'
+import ReactPixel from 'react-facebook-pixel';
 
 class InformationPage extends Component {
+    componentDidMount() {
+        ReactPixel.pageView();
+    }
 
     renderInformationPage() {
         return(

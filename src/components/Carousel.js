@@ -5,6 +5,7 @@ import 'react-alice-carousel/lib/alice-carousel.css';
 import axios from 'axios';
 import {API_URL_1} from '../supports/api-url/apiurl'
 import { Link } from 'react-router-dom';
+import ReactPixel from 'react-facebook-pixel';
 
 class CarouselClass extends Component {
   state = {best_seller: []}
@@ -29,9 +30,9 @@ class CarouselClass extends Component {
         return (
           this.state.best_seller.map((item, index) => {
             if (item.premium_id !== null) {
-              return <Link to={"/premium?id="+item.premium_id} className="best-holder"><img src={API_URL_1+'/premium/'+item.image+'.jpg'} style={{width:"100%"}}/><div className="best-overlay">{item.name}</div></Link>
+              return <Link to={"/premium?id="+item.premium_id} onClick={()=>ReactPixel.trackCustom('bestSellerClick')} className="best-holder"><img src={API_URL_1+'/premium/'+item.image+'.jpg'} style={{width:"100%"}}/><div className="best-overlay">{item.name}</div></Link>
             } else {
-              return <Link to={"/product?id="+item.id} className="best-holder"><img src={API_URL_1+'/normal/'+item.image+'.jpg'} style={{width:"100%"}}/><div className="best-overlay">{item.name}</div></Link>
+              return <Link to={"/product?id="+item.id} onClick={()=>ReactPixel.trackCustom('bestSellerClick')} className="best-holder"><img src={API_URL_1+'/normal/'+item.image+'.jpg'} style={{width:"100%"}}/><div className="best-overlay">{item.name}</div></Link>
             }
           })
         )

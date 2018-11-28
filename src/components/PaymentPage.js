@@ -13,6 +13,7 @@ class PaymentPage extends Component {
 
     componentDidMount() {
         this.getUserInfo()
+        ReactPixel.pageView();
         ReactPixel.track( 'InitiateCheckout' )
     }
 
@@ -56,6 +57,7 @@ class PaymentPage extends Component {
         })
         .then(response => {
             alert('transaction success')
+            ReactPixel.track('Purchase')
             this.props.history.push('/profile')
         })
     }

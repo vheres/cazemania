@@ -19,6 +19,8 @@ class DetailPage extends Component {
             console.log(res.data)
             this.setState({item:res.data.item[0], brands: res.data.brands, type: res.data.type, price: res.data.price})
         })
+        ReactPixel.pageView();
+        ReactPixel.track('ViewContent');
     }
 
     brandSelectOptions(){
@@ -151,7 +153,19 @@ class DetailPage extends Component {
                 amount: document.getElementById("quantity").value
             }).then((res) => {
                 alert('add to cart successful!')
-                ReactPixel.track('AddToCart', {some:'value'})
+                ReactPixel.track('AddToCart', {
+                    content_category: 'standard',
+                    content_name: this.state.item.name,
+                    currency: 'IDR',
+                    contents: [
+                        {
+                            id: this.state.item.id,
+                            quantity: document.getElementById("quantity").value,
+                            item_price: this.state.selected_price
+                        }
+                    ],
+                    content_type: 'product'
+                })
             }).catch((err) => {
                 alert(err);
             })

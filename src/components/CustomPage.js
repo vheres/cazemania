@@ -7,11 +7,12 @@ import Magnifier from 'react-magnifier';
 import CarouselSimilar from './CarouselSimilar';
 import { withRouter } from 'react-router-dom';
 import FileUploader from './FileUploader';
+import ReactPixel from 'react-facebook-pixel';
 
 class CustomPage extends Component {
     state={picture: '', brands: [], types: [], typeselect: [""], caseselect: {soft: 0, hard: 0}, price: [], selected_price: "", inputfile: []}
 
-    componentWillMount(){
+    componentDidMount(){
         const params = new URLSearchParams(this.props.location.search);
         const id = params.get('id')
         axios.get(API_URL_1 + "/custom")
@@ -19,6 +20,7 @@ class CustomPage extends Component {
             console.log(res.data)
             this.setState({brands: res.data.brands, type: res.data.type, price: res.data.price})
         })
+        ReactPixel.pageView();
     }
 
     brandSelectOptions(){
@@ -155,8 +157,22 @@ class CustomPage extends Component {
             headers: 
               {'Content-Type': 'multipart/form-data'}
           }
-        axios.post(API_URL_1 + `/custom_cart`, formData, config).then((res) => {
+        axios.post(API_URL_1 + `/custom_cart`, formData, config)
+        .then((res) => {
             alert('add to cart successful!')
+            ReactPixel.track('AddToCart', {
+                content_category: 'custom',
+                content_name: 'custom case',
+                currency: 'IDR',
+                contents: [
+                    {
+                        id: 'custom',
+                        quantity: document.getElementById("quantity").value,
+                        item_price: this.state.selected_price
+                    }
+                ],
+                content_type: 'product'
+            })
         }).catch((err) => {
             alert(err);
         })

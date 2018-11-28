@@ -4,6 +4,7 @@ import axios from 'axios'
 import {API_URL_1} from '../supports/api-url/apiurl'
 import ItemDetail from './ItemDetail';
 import PaginationClass from './Pagination';
+import ReactPixel from 'react-facebook-pixel';
 
 class PremiumPage extends Component {
     state = { premiumcatalogue: [], pagination: [], pagecount: 0, search_status: [0], active: [0] }
@@ -14,6 +15,7 @@ class PremiumPage extends Component {
         }
         this.setState({})
         this.getCatalogueList();
+        ReactPixel.pageView();
     }
 
     getCatalogueList() {

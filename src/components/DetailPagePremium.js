@@ -7,17 +7,20 @@ import Magnifier from 'react-magnifier';
 import CarouselSimilar from './CarouselSimilar';
 import CarouselPremium from './CarouselPremium';
 import { withRouter } from 'react-router-dom';
+import ReactPixel from 'react-facebook-pixel';
 
 class DetailPagePremium extends Component {
     state={item: [], images: [], brands: [], types: [], premiumselect: 0, modelselect: 0}
 
-    componentWillMount(){
+    componentDidMount(){
         const params = new URLSearchParams(this.props.location.search);
         const id = params.get('id')
         axios.get(API_URL_1 + "/premium/" + id)
         .then((res)=>{
             this.setState({item:res.data.item, images: res.data.images, types: res.data.types})
         })
+        ReactPixel.pageView();
+        ReactPixel.track('ViewContent');
     }
 
     premiumSelectOptions() {
@@ -62,6 +65,19 @@ class DetailPagePremium extends Component {
                 amount: document.getElementById("quantity").value
             }).then((res) => {
                 alert('add to cart successful!')
+                ReactPixel.track('AddToCart', {
+                    content_category: 'premium',
+                    content_name: this.state.item[0].name,
+                    currency: 'IDR',
+                    contents: [
+                        {
+                            id: this.state.premiumselect,
+                            quantity: document.getElementById("quantity").value,
+                            item_price: 100000
+                        }
+                    ],
+                    content_type: 'product'
+                })
             }).catch((err) => {
                 alert(err);
             })

@@ -197,11 +197,11 @@ class Header extends Component {
         if (window.innerWidth >= 768) {
             var search = document.getElementById("search").value;
             this.props.history.push(`/shop?search=${search}`)
-            ReactPixel.track('Search', search)
+            ReactPixel.track('Search', {search_string: search})
         } else {
             var searchMobile = document.getElementById("mobilesearch").value;
             this.props.history.push(`/shop?search=${searchMobile}`)
-            ReactPixel.track('Search', searchMobile)
+            ReactPixel.track('Search', {search_string: searchMobile})
         }
     }
 

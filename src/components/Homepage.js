@@ -7,8 +7,12 @@ import InstaSlide from './InstaSlide';
 import axios from 'axios';
 import {API_URL_1} from '../supports/api-url/apiurl'
 import { Link } from 'react-router-dom';
+import ReactPixel from 'react-facebook-pixel';
 
 class HomePage extends Component {
+    componentDidMount() {
+        ReactPixel.pageView();
+    }
 
     renderHomePage() {
         return(

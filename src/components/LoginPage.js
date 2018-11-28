@@ -6,10 +6,15 @@ import { connect } from 'react-redux';
 import Cookies from 'universal-cookie';
 import Select from 'react-select';
 import {API_URL_1} from '../supports/api-url/apiurl'
+import ReactPixel from 'react-facebook-pixel';
 
 const cookies = new Cookies();
 
 class LoginPage extends Component {
+    componentDidMount() {
+        ReactPixel.pageView();
+    }
+
     componentWillReceiveProps(newProps) {
         if(newProps.auth.email !== "") {
             cookies.set('myCookie', newProps.auth.email, { path: '/' });

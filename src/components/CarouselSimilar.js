@@ -5,6 +5,7 @@ import 'react-alice-carousel/lib/alice-carousel.css';
 import axios from 'axios';
 import {API_URL_1} from '../supports/api-url/apiurl'
 import { Link } from 'react-router-dom';
+import ReactPixel from 'react-facebook-pixel';
 
 class CarouselSimilar extends Component {
   state = {similar_product: [], index: 0}
@@ -46,7 +47,7 @@ class CarouselSimilar extends Component {
           })
         return (
           images.map((item, count) => (
-                <Link to={`/product?id=${item[0]}`} onClick={()=>this.props.SimilarClick(`/product?id=${item[0]}`)} className="best-holder"><img src={API_URL_1+'/normal/'+item[1]+'.jpg'} style={{width:"100%"}}/><div className="best-overlay">{item[2]}</div></Link>
+                <Link to={`/product?id=${item[0]}`} onClick={()=>{this.props.SimilarClick(`/product?id=${item[0]}`);ReactPixel.trackCustom('similarClick')}} className="best-holder"><img src={API_URL_1+'/normal/'+item[1]+'.jpg'} style={{width:"100%"}}/><div className="best-overlay">{item[2]}</div></Link>
           ))
         )
       };

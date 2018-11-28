@@ -2,8 +2,13 @@ import React, { Component } from 'react';
 import { Grid, Row, Col } from 'react-bootstrap';
 import { Link } from 'react-router-dom';
 import {API_URL_1} from '../supports/api-url/apiurl'
+import ReactPixel from 'react-facebook-pixel';
 
 class LinkTree extends Component {
+    componentDidMount() {
+        ReactPixel.pageView();
+    }
+
     render() {
         return (
             <Grid fluid>

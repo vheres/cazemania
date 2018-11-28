@@ -7,13 +7,15 @@ import axios from 'axios'
 import { connect } from 'react-redux';
 import { Redirect, Link } from 'react-router-dom';
 import Select from 'react-select';
+import ReactPixel from 'react-facebook-pixel';
 
 
 class ProfilePage extends Component {
     state = {profile: [], edit_modal: false, selectedOption: [], destination: [], filtered_destination: []}
 
-    componentWillMount(){
+    componentDidMount(){
         this.getUserInfo()
+        ReactPixel.pageView();
     }
 
     getUserInfo = () => {

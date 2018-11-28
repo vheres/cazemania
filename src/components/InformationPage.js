@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import { Grid, Row, Col, Button, ButtonGroup } from 'react-bootstrap';
 import {API_URL_1} from '../supports/api-url/apiurl'
+import ReactPixel from 'react-facebook-pixel';
 
 class InformationPage extends Component {
     constructor(props, context) {
@@ -25,6 +26,7 @@ class InformationPage extends Component {
         const params = new URLSearchParams(this.props.location.search);
         const info = params.get('info');
         document.getElementById(info).scrollIntoView({behavior: 'smooth', block: 'start'});
+        ReactPixel.pageView();
     }
     
     componentWillUnmount() {

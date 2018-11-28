@@ -4,6 +4,7 @@ import axios from 'axios'
 import {API_URL_1} from '../supports/api-url/apiurl'
 import ItemDetail from './ItemDetail';
 import PaginationClass from './Pagination';
+import ReactPixel from 'react-facebook-pixel';
 
 class ShopPage extends Component {
     state = { catalogue: [], pagination: [], item_count: 0, pagecount: 0, search_status: [0], active: [0] }
@@ -13,6 +14,7 @@ class ShopPage extends Component {
             this.state.pagination.push(0, 20)
         }
         this.getCatalogueList();
+        ReactPixel.pageView();
     }
 
     componentWillReceiveProps(newProps) {
