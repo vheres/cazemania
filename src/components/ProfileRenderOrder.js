@@ -59,6 +59,14 @@ class ProfileRenderOrder extends Component {
         })
     }
 
+    handleInputFile() {
+        if (document.getElementById('bukti_pembayaran').files[0] === undefined) {
+            this.setState({namafile: 'Pilih Gambar'})
+        } else {
+            this.setState({namafile: document.getElementById('bukti_pembayaran').files[0].name})
+        }
+    }
+
     renderOrderStatus(){
         return(
             {
@@ -90,7 +98,7 @@ class ProfileRenderOrder extends Component {
                             </label>{' '}
                             <input type="button" value="Upload" className="btn btn-sm btn-success" title="pilih file, lalu klik upload" onClick={()=>this.onUpLoadClick()}></input>
                         </span>
-                            <input type="file" className="inputfile" name="filename" id="bukti_pembayaran" accept="image/*" onChange={()=>this.setState({namafile: document.getElementById('bukti_pembayaran').files[0].name})}/>
+                            <input type="file" className="inputfile" name="filename" id="bukti_pembayaran" accept="image/*" onChange={()=>this.handleInputFile()}/>
                         <span className="col-xs-4 col-md-2">
                             <input type="button" value="Bukti Pembayaran" onClick={()=>this.handleShow()} className="btn btn-sm btn-info pull-right"/>
                         </span>   

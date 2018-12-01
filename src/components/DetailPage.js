@@ -157,6 +157,7 @@ class DetailPage extends Component {
                     content_category: 'standard',
                     content_name: this.state.item.name,
                     currency: 'IDR',
+                    value: (this.state.selected_price * document.getElementById("quantity").value),
                     contents: [
                         {
                             id: this.state.item.id,

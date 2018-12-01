@@ -87,7 +87,7 @@ class App extends Component {
       );
     }
     else {
-      return <div>Authentication Checking</div>
+      return <div className="general-title-blue text-center">Authentication Checking</div>
     }
     
   }

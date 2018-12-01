@@ -65,8 +65,8 @@ class Header extends Component {
     onDeleteClick(id) {
         axios.delete(API_URL_1 + `/cart/` + this.props.auth.id + "/" + id, )
         .then((response) => {
-            this.setState({cart: response.data.results1})
-            console.log(response.data.results1)
+            this.getCartList();
+            // this.setState({cart: response.data.results1})
             alert(`delete item success!`)
         }).catch((err) => {
             console.log(err);

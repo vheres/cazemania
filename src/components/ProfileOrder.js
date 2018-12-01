@@ -34,12 +34,16 @@ class ProfileOrder extends Component {
       }
 
     renderDataTableOrders(){
-        var arrJSX = this.state.orders.map((item, count)=>{
-            return(
-                <ProfileRenderOrder key={item.id} transaction_id={item.id} ordernumber={item.ordernumber} user_id={item.user_id} proof={item.proof} name={item.name} date={item.date} time={item.time} subtotal={item.subtotal} discount={item.discount} shipping={item.shipping} total_price={parseInt(item.subtotal) + parseInt(item.shipping)} target_bank={item.target_bank}
-                status={item.status} firstname={item.firstname} lastname={item.lastname} address={item.address} phone={item.phone} kota={item.kota} kodepos={item.kodepos} email={item.email} resi={item.resi} refresh={()=>this.refreshData()}/>
-        )})
-        return arrJSX
+        if (this.state.orders.length === 0) {
+            return <div className="general-title-blue">There are no transactions yet!</div>
+        } else {
+            var arrJSX = this.state.orders.map((item, count)=>{
+                return(
+                    <ProfileRenderOrder key={item.id} transaction_id={item.id} ordernumber={item.ordernumber} user_id={item.user_id} proof={item.proof} name={item.name} date={item.date} time={item.time} subtotal={item.subtotal} discount={item.discount} shipping={item.shipping} total_price={parseInt(item.subtotal) + parseInt(item.shipping)} target_bank={item.target_bank}
+                    status={item.status} firstname={item.firstname} lastname={item.lastname} address={item.address} phone={item.phone} kota={item.kota} kodepos={item.kodepos} email={item.email} resi={item.resi} refresh={()=>this.refreshData()}/>
+            )})
+            return arrJSX
+        } 
     }
 
     render(){

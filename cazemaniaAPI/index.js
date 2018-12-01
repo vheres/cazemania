@@ -163,6 +163,15 @@ app.get('/admin/premium', function(req,res){
     })
 })
 
+app.get('/admin/premiuminfo/:id', function(req,res){
+    sql = `SELECT * FROM catalogue WHERE category='premium' AND premium_id=${req.params.id}`
+    console.log(sql)
+    conn.query(sql, (err,results)=>{
+        if(err) throw err;
+        res.send({items: results})
+    })
+})
+
 app.get('/adminorders', function(req,res){
     sql= `SELECT tr.id as id, LPAD( tr.id, 8, '0') as ordernumber, tr.date as date, tr.time as time, tr.proof as proof, tr.target_bank as target_bank, tr.status as status, tr.subtotal as subtotal, tr.discount as discount, tr.shipping as shipping, tr.resi as resi, u.firstname as firstname, 
     u.lastname as lastname, u.id as user_id, u.address as address, u.email as email, u.phone as phone, u.kota as kota, u.kodepos as kodepos FROM transactions tr JOIN users u ON tr.user_id = u.id ORDER BY date`
@@ -344,7 +353,7 @@ app.post('/admin/testimonies', function(req,res){
         if(err) throw err;
         res.send(results)
     })
-}
+})
 
 app.post('/admin/addcases', function(req,res){
     sql = `INSERT INTO type SET ?`
@@ -373,6 +382,39 @@ app.post('/admin/addcatalogue', function(req,res){
                 // res.send(file)
             }
         })
+    })
+})
+
+app.post('/admin/addpremiumgroup', function(req,res){
+    var data = JSON.parse(req.body.data)
+    sql = `INSERT INTO premium SET ?`
+    conn.query(sql, data, (err,results)=>{
+        if(err) throw err;
+
+        sql2 = `INSERT INTO premium_images (premium_id, image) VALUES ('${results.insertId}', '${data.image}')`
+        conn.query(sql2, (err,results2)=>{
+            if(err) throw err;
+
+            var unggahFile = req.files.file
+            unggahFile.mv('./public/premium/'+ data.name + ".jpg", (err)=>{
+                if(err){
+                    console.log(err)
+                    res.send(err)
+                } else {
+                    console.log('Add premium group success!')
+                    res.send('Add premium group success!')
+                }
+            })
+        })
+    })
+})
+
+app.post('/admin/addpremiumitem', function(req,res){
+    console.log(req.body)
+    sql = `INSERT INTO catalogue SET ?`
+    conn.query(sql, req.body, (err,results)=>{
+        if(err) throw err;
+        res.send(results)
     })
 })
 
@@ -609,14 +651,15 @@ app.post('/custom_cart', function(req,res){
 
 app.delete('/cart/:user_id/:id', function(req,res){
     sql  = `DELETE FROM cart where id = ${req.params.id}`
-    sql1 = `SELECT car.id, cat.code, cat.name, cat.image, car.brand_id, car.model_id, car.case_type, car.amount, br.name as brand_name, ty.name as model_name, pr.price as price FROM catalogue cat JOIN cart car ON cat.id=car.catalogue_id JOIN brands br ON br.id = car.brand_id 
-    JOIN type ty ON ty.id = car.model_id JOIN price pr ON pr.case_type = car.case_type WHERE car.user_id=${req.params.user_id}`
+    // sql1 = `SELECT car.id, cat.code, cat.name, cat.image, car.brand_id, car.model_id, car.case_type, car.amount, br.name as brand_name, ty.name as model_name, pr.price as price FROM catalogue cat JOIN cart car ON cat.id=car.catalogue_id JOIN brands br ON br.id = car.brand_id 
+    // JOIN type ty ON ty.id = car.model_id JOIN price pr ON pr.case_type = car.case_type WHERE car.user_id=${req.params.user_id}`
     conn.query(sql, (err,results)=>{
         if(err) throw err;
-        conn.query(sql1, (err1,results1) => {
-            if(err1) throw err1;
-            res.send({results1})
-        })
+        res.send({results})
+        // conn.query(sql1, (err1,results1) => {
+        //     if(err1) throw err1;
+        //     res.send({results1})
+        // })
     })
 })
 

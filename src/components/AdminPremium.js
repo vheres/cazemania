@@ -28,12 +28,7 @@ class AdminPremium extends Component {
     }
 
     onSubmitCatalogueClick(){
-        console.log(document.getElementById('addCatalogueImage').files.length)
-        
-        if(this.refs.addCatalogueCode.value === ""){
-            alert("Input Kode Produk")
-        }
-        else if(this.refs.addCatalogueName.value === ""){
+        if(this.refs.addCatalogueName.value === ""){
             alert("Input Nama Produk")
         }
         else if(document.getElementById('addCatalogueImage').files.length === 0){
@@ -41,10 +36,8 @@ class AdminPremium extends Component {
         }
         else{
             var data = {
-                code: this.refs.addCatalogueCode.value,
                 name: this.refs.addCatalogueName.value,
-                image: this.refs.addCatalogueCode.value,
-                category: "normal"
+                image: this.refs.addCatalogueName.value,
             }
             var formData = new FormData()
             formData.append('file', document.getElementById('addCatalogueImage').files[0])
@@ -55,7 +48,7 @@ class AdminPremium extends Component {
                   {'Content-Type': 'multipart/form-data'}
             }
 
-            axios.post(API_URL_1 + `/admin/addcatalogue`, formData, config)
+            axios.post(API_URL_1 + `/admin/addpremiumgroup`, formData, config)
             .then((res) => {
                 alert('Tambah Catalogue Success!')
                 this.refreshData()
@@ -68,12 +61,12 @@ class AdminPremium extends Component {
     
     renderCatalogueHead(){
         return(
-            <thead>
-                <tr>
+            <thead style={{color:'white'}}>
+                <tr style={{backgroundColor:'rgb(255, 181, 44)'}}>
                     <th style={{width: "5%"}}>ID</th>
-                    <th style={{width: "15%"}}>Group</th>
-                    <th style={{width: "15%"}}>Thumbnail</th>
-                    <th style={{width: "15%"}}>Actions</th>
+                    <th style={{width: "40%"}}>Group</th>
+                    <th style={{width: "30%"}}>Thumbnail</th>
+                    <th style={{width: "25%"}}>Actions</th>
                 </tr>
             </thead>
         )
@@ -102,14 +95,13 @@ class AdminPremium extends Component {
     renderAddCatalogue(){
         if(this.state.addCatalogue === 0){
             return(
-                <input type="button" value="Tambah Catalogue" className="btn btn-info" style={{"margin-left": "10px"}} onClick={()=>this.onAddCatalogueClick()}/>
+                <input type="button" value="Tambah Premium Group" className="btn btn-info" style={{"margin-left": "10px"}} onClick={()=>this.onAddCatalogueClick()}/>
             )
         }
         else{
             return(
                 <div className=""style={{width: "100%"}}>
                     <section className="vbox panel bg-white padder-v">
-                        <div className="col-md-3 m-t-sm"><input type="text" className="form-control" ref="addCatalogueCode" placeholder="Input Kode Produk"/></div>
                         <div className="col-md-3 m-t-sm"><input type="text" className="form-control" ref="addCatalogueName" placeholder="Input Nama Produk"/></div>
                         <div className="col-md-4 m-t-sm"><input type="file" ref="addCatalogueImage" id="addCatalogueImage"/></div>
                         <div className="col-md-1"><input type="button" value="Submit" className="btn btn-success" onClick={()=>this.onSubmitCatalogueClick()}/></div>

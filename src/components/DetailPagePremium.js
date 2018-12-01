@@ -69,6 +69,7 @@ class DetailPagePremium extends Component {
                     content_category: 'premium',
                     content_name: this.state.item[0].name,
                     currency: 'IDR',
+                    value: (100000 * document.getElementById("quantity").value),
                     contents: [
                         {
                             id: this.state.premiumselect,

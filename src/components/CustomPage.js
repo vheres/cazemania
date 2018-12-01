@@ -164,6 +164,7 @@ class CustomPage extends Component {
                 content_category: 'custom',
                 content_name: 'custom case',
                 currency: 'IDR',
+                value: (this.state.selected_price * document.getElementById("quantity").value),
                 contents: [
                     {
                         id: 'custom',
