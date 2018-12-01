@@ -99,6 +99,8 @@ class AdminRenderOrders extends Component {
         )
     }
 
+    render
+
     renderHeader(){
         if(this.props.status === "pendingPayment"){
             return (

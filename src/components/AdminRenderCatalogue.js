@@ -19,7 +19,9 @@ class AdminRenderCatalogue extends Component {
             name: this.refs.editName.value,
             image: this.props.image
         }
-        formData.append('file', document.getElementById('addCatalogueImage').files[0])
+        if(document.getElementById('addCatalogueImage')){
+            formData.append('file', document.getElementById('addCatalogueImage').files[0])
+        }
         formData.append('data', JSON.stringify(data))
         console.log(formData)
         var config = {

@@ -201,7 +201,7 @@ app.put('/adminorders/confirm/:id', function(req,res){
 
 app.put('/adminorders/addresi/:id', function(req,res){
     sql= `UPDATE transactions SET ? WHERE id = ${req.params.id}`
-    sql1=`UPDATE catalogue c JOIN transaction_details trd ON c.id = trd.catalogue_id SET c.sales = c.sales + trd.amount WHERE trd.transaction_id = ${req.params.id}`
+    sql1=`UPDATE catalogue as cat, (SELECT c.id as id, SUM(amount) as total FROM catalogue c JOIN transaction_details trd ON c.id = trd.catalogue_id WHERE trd.transaction_id = ${req.params.id} GROUP BY c.code) as trans SET cat.sales = cat.sales + trans.total WHERE cat.id = trans.id;`
 
     const mailOptions = {
         from: 'cazemania.official@gmail.com', // sender address
@@ -268,27 +268,53 @@ app.put('/adminorders/addresi/:id', function(req,res){
 
 app.put('/admin/catalogue/:id', function(req,res){
     var data = JSON.parse(req.body.data)
-    if(req.files){
-        var unggahFile = req.files.file
-        var file = unggahFile.name
-        unggahFile.mv('./public/custom/'+ file, (err)=>{
-            if(err){
-                console.log(err)
-                res.send(err)
-            } else {
-                console.log('Custom case upload success!')
-                res.send('Custom case upload success!')
-                // res.send(file)
+    console.log(data)
+    if(data.code !== data.image){
+        fs.rename('./public/normal/'+ data.image + '.jpg', './public/normal/'+data.code + '.jpg', (err) => {
+            if (err){
+                throw err;
             }
+            else if(req.files){
+                console.log('Rename complete!');
+                var unggahFile = req.files.file
+                unggahFile.mv('./public/normal/'+ data.code + '.jpg', (err)=>{
+                    if(err){
+                        console.log(err)
+                        throw err
+                    } else {
+                        console.log('Normal case upload success!')
+                    }
+                })
+
+                var data2 = {code: data.code, name: data.name, image: data.code}
+                sql = `UPDATE catalogue SET ? WHERE id = ${req.params.id}`
+                conn.query(sql, data2, (err,results)=>{
+                    if(err) throw err;
+                    console.log(results)
+                    res.send(results)
+                })
+            }
+            else{
+                console.log('Rename complete!2');
+                var data2 = {code: data.code, name: data.name, image: data.code}
+                sql = `UPDATE catalogue SET ? WHERE id = ${req.params.id}`
+                conn.query(sql, data2, (err,results)=>{
+                    if(err) throw err;
+                    console.log(results)
+                    res.send(results)
+                })
+            }
+        });
+    }
+    else{
+        var data2 = {code: data.code, name: data.name, image: data.code}
+        sql = `UPDATE catalogue SET ? WHERE id = ${req.params.id}`
+        conn.query(sql, data2, (err,results)=>{
+            if(err) throw err;
+            console.log(results)
+            res.send(results)
         })
     }
-    sql = `UPDATE catalogue SET ? WHERE id = ${req.params.id}`
-
-    conn.query(sql, req.body, (err,results)=>{
-        if(err) throw err;
-        console.log(results)
-        res.send(results)
-    })
 })
 
 app.put('/admin/cases/:id', function(req,res){
@@ -576,8 +602,10 @@ app.post('/custom_cart', function(req,res){
 
 app.delete('/cart/:user_id/:id', function(req,res){
     sql  = `DELETE FROM cart where id = ${req.params.id}`
-    sql1 = `SELECT car.id, cat.code, cat.name, cat.image, car.brand_id, car.model_id, car.case_type, car.amount, br.name as brand_name, ty.name as model_name, pr.price as price FROM catalogue cat JOIN cart car ON cat.id=car.catalogue_id JOIN brands br ON br.id = car.brand_id 
+    sql1 = `SELECT car.id, cat.code, cat.name, cat.image,  car.brand_id, car.model_id, car.case_type, car.amount, br.name as brand_name, ty.name as model_name, pr.price as price FROM catalogue cat JOIN cart car ON cat.id=car.catalogue_id JOIN brands br ON br.id = car.brand_id 
     JOIN type ty ON ty.id = car.model_id JOIN price pr ON pr.case_type = car.case_type WHERE car.user_id=${req.params.user_id}`
+    console.log(req.body.user)
+    console.log(typeof req.body.user)
     conn.query(sql, (err,results)=>{
         if(err) throw err;
         conn.query(sql1, (err1,results1) => {
@@ -615,7 +643,7 @@ app.post('/transaction', function(req,res){
     }
 
     sql = `INSERT INTO transactions SET ?`
-    sql1 = `INSERT INTO transaction_details (transaction_id, name, code, category, image, brand_name, model_name, case_type, amount, price) VALUES ?`
+    sql1 = `INSERT INTO transaction_details (transaction_id, catalogue_id, name, code, category, image, brand_name, model_name, case_type, amount, price) VALUES ?`
     sql2 = `DELETE FROM cart where user_id = ${req.body.id}`
     
     conn.beginTransaction(function(err){
@@ -631,7 +659,7 @@ app.post('/transaction', function(req,res){
                 console.log(results)
                 var data2 = []
                 req.body.cart.map((item)=>{
-                    data2.push([results.insertId, item.name, item.code, item.category, item.image, item.brand_name, item.model_name, item.case_type, item.amount, item.price])
+                    data2.push([results.insertId, item.catalogue_id, item.name, item.code, item.category, item.image, item.brand_name, item.model_name, item.case_type, item.amount, item.price])
                 })
                 conn.query(sql1, [data2], (err,results1)=>{
                     if(err){
