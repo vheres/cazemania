@@ -26,17 +26,27 @@ class AdminRenderPremium extends Component {
     }
 
     onSaveClick(){
-        axios.put(API_URL_1 + "/admin/premiuminfo/" + this.props.id,
-            {
-                code: this.refs.editCode.value,
-                name: this.refs.editName.value,
-                image: this.refs.editImage.value
-            }
-        )
+        var formData = new FormData()
+        var data = {
+            name: this.refs.editName.value,
+            image: this.props.image
+        }
+        if(document.getElementById('editImage')){
+            formData.append('file', document.getElementById('editImage').files[0])
+        }
+        formData.append('data', JSON.stringify(data))
+        console.log(formData)
+        var config = {
+            headers: 
+              {'Content-Type': 'multipart/form-data'}
+        }
+
+        axios.put(API_URL_1 + "/admin/editpremiumgroup/" + this.props.id, formData, config)
         .then((res)=>{
             console.log(res)
             alert("SUCCESS")
             this.props.refresh()
+            this.refreshData()
             this.setState({edit:0})
         })
         .catch((err)=>{
@@ -47,8 +57,7 @@ class AdminRenderPremium extends Component {
 
     onDeleteClick(){
         if(window.confirm("Are you sure you want to delete entry? This action cannot be reversed")){
-            var data = {image: this.props.image}
-            axios.post(API_URL_1 + "/admin/deletecatalogue/" + this.props.id, data)
+            axios.delete(API_URL_1 + "/admin/deletepremiumgroup/" + this.props.id)
             .then((res)=>{
                 console.log(res)
                 alert("DELETE SUCCESS")
@@ -100,7 +109,7 @@ class AdminRenderPremium extends Component {
                 <tr style={{backgroundColor:'rgb(255, 209, 124)'}}>
                     <td style={{width: "5%"}}>{this.props.id}</td>
                     <td style={{width: "20%"}}><input type="text" ref="editName"  defaultValue={this.props.name}/></td>
-                    <td colSpan={2} style={{width: "50%"}}><input type="text" ref="editImage" defaultValue={this.props.image}/></td>
+                    <td colSpan={2} style={{width: "50%"}}><input type="file" id="editImage" ref="editImage"/></td>
                     <td colSpan={2} style={{width: "25%"}}>
                         <input type="button" className="btn btn-primary" style={{width: 70}} onClick={()=>this.onSaveClick()} value="Save"/>
                         <br/>
@@ -126,7 +135,9 @@ class AdminRenderPremium extends Component {
     renderAddPremiumCatalogue() {
         return (
             <tr style={{backgroundColor:'rgb(134, 204, 216)'}}>
-                <td colSpan={3}/>
+                <td colSpan={3}>
+                    Tambah produk ke {this.props.name}
+                </td>
                 <td><input type="text" ref="addCode" placeholder="Kode produk" style={{width:'100%'}}/></td>
                 <td>
                 <input type="button" className="btn btn-primary" value="Tambah produk" onClick={()=>this.addPremiumItem()}/>
@@ -155,7 +166,6 @@ class AdminRenderPremium extends Component {
                         {this.renderPremiumCatalogueHead()}
                     </thead>
                     <tbody>
-                        
                         {this.renderPremiumCatalogueBody()}
                         {this.renderAddPremiumCatalogue()}
                     </tbody>

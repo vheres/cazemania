@@ -333,13 +333,36 @@ app.put('/admin/catalogue/:id', function(req,res){
         });
     }
     else{
-        var data2 = {code: data.code, name: data.name, image: data.code}
-        sql = `UPDATE catalogue SET ? WHERE id = ${req.params.id}`
-        conn.query(sql, data2, (err,results)=>{
-            if(err) throw err;
-            console.log(results)
-            res.send(results)
-        })
+        if(req.files){
+            console.log('Rename complete!');
+            var unggahFile = req.files.file
+            unggahFile.mv('./public/normal/'+ data.code + '.jpg', (err)=>{
+                if(err){
+                    console.log(err)
+                    throw err
+                } else {
+                    console.log('Normal case upload success!')
+                }
+            })
+
+            var data2 = {code: data.code, name: data.name, image: data.code}
+            sql = `UPDATE catalogue SET ? WHERE id = ${req.params.id}`
+            conn.query(sql, data2, (err,results)=>{
+                if(err) throw err;
+                console.log(results)
+                res.send(results)
+            })
+        }
+        else{
+            console.log('Rename complete!2');
+            var data2 = {code: data.code, name: data.name, image: data.code}
+            sql = `UPDATE catalogue SET ? WHERE id = ${req.params.id}`
+            conn.query(sql, data2, (err,results)=>{
+                if(err) throw err;
+                console.log(results)
+                res.send(results)
+            })
+        }
     }
 })
 
@@ -369,6 +392,116 @@ app.put('/admin/rekening/:id', function(req,res){
     conn.query(sql, req.body, (err,results)=>{
         if(err) throw err;
         console.log(results)
+        res.send(results)
+    })
+})
+
+app.put('/admin/editpremiumgroup/:id', function(req,res){
+    var data = JSON.parse(req.body.data)
+    console.log(data)
+    if(data.name !== data.image){
+        fs.rename('./public/premium/'+ data.image + '.jpg', './public/premium/'+ data.name + '.jpg', (err) => {
+            if (err){
+                throw err;
+            }
+            else if(req.files){
+                console.log('Rename complete!');
+                var unggahFile = req.files.file
+                unggahFile.mv('./public/premium/'+ data.name + '.jpg', (err)=>{
+                    if(err){
+                        console.log(err)
+                        throw err
+                    } else {
+                        console.log('Premium case upload success!')
+                    }
+                })
+
+                var data2 = {name: data.name, image: data.name}
+                sql = `UPDATE premium SET ? WHERE id = ${req.params.id}`
+                sql2 = `UPDATE catalogue SET ? WHERE premium_id = ${req.params.id}`
+                sql3 = `UPDATE premium_images SET image = '${data.name}' WHERE image = '${data.image}'`
+                conn.query(sql, data2, (err,results)=>{
+                    if(err) throw err;
+                    conn.query(sql2, data2, (err,results2)=>{
+                        if(err) throw err;
+                        conn.query(sql3, (err,results3)=>{
+                            if(err) throw err;
+                            res.send(results3)
+                        })
+                    })
+                })
+            }
+            else{
+                console.log('Rename complete!2');
+                var data2 = {name: data.name, image: data.name}
+                sql = `UPDATE premium SET ? WHERE id = ${req.params.id}`
+                sql2 = `UPDATE catalogue SET ? WHERE premium_id = ${req.params.id}`
+                sql3 = `UPDATE premium_images SET image = '${data.name}' WHERE image = '${data.image}'`
+                conn.query(sql, data2, (err,results)=>{
+                    if(err) throw err;
+                    conn.query(sql2, data2, (err,results2)=>{
+                        if(err) throw err;
+                        conn.query(sql3, (err,results3)=>{
+                            if(err) throw err;
+                            res.send(results3)
+                        })
+                    })
+                })
+            }
+        });
+    }
+    else{
+        if(req.files){
+            console.log('Rename complete!');
+            var unggahFile = req.files.file
+            unggahFile.mv('./public/premium/'+ data.name + '.jpg', (err)=>{
+                if(err){
+                    console.log(err)
+                    throw err
+                } else {
+                    console.log('Premium case upload success!')
+                }
+            })
+
+            var data2 = {name: data.name, image: data.name}
+            sql = `UPDATE premium SET ? WHERE id = ${req.params.id}`
+            sql2 = `UPDATE catalogue SET ? WHERE premium_id = ${req.params.id}`
+            sql3 = `UPDATE premium_images SET image = '${data.name}' WHERE image = '${data.image}'`
+            conn.query(sql, data2, (err,results)=>{
+                if(err) throw err;
+                conn.query(sql2, data2, (err,results2)=>{
+                    if(err) throw err;
+                    conn.query(sql3, (err,results3)=>{
+                        if(err) throw err;
+                        res.send(results3)
+                    })
+                })
+            })
+        }
+        else{
+            console.log('Rename complete!2');
+            var data2 = {name: data.name, image: data.name}
+            sql = `UPDATE premium SET ? WHERE id = ${req.params.id}`
+            sql2 = `UPDATE catalogue SET ? WHERE premium_id = ${req.params.id}`
+            sql3 = `UPDATE premium_images SET image = '${data.name}' WHERE image = '${data.image}'`
+            conn.query(sql, data2, (err,results)=>{
+                if(err) throw err;
+                conn.query(sql2, data2, (err,results2)=>{
+                    if(err) throw err;
+                    conn.query(sql3, (err,results3)=>{
+                        if(err) throw err;
+                        res.send(results3)
+                    })
+                })
+            })
+        }
+    }
+})
+
+app.put('/admin/editpremiumitem/:id', function(req,res){
+    sql = `UPDATE catalogue SET code = '${req.body.code}' WHERE id = ${req.params.id}`
+    conn.query(sql, (err,results)=>{
+        if (err) throw err;
         res.send(results)
     })
 })
@@ -695,6 +828,59 @@ app.delete('/clear_cart/:user_id', function(req,res){
     })
 })
 
+app.delete('/admin/deletepremiumgroup/:id', function(req,res){
+    sql = `DELETE FROM premium where id = ${req.params.id}`
+    sql2 = `DELETE FROM catalogue where premium_id = ${req.params.id}`
+    sql3 = `DELETE FROM premium_images where premium_id = ${req.params.id}`
+    conn.beginTransaction(function(err){
+        if(err) {throw err;}
+        conn.query(sql, (err,results)=>{
+            if(err){
+                conn.rollback(function(){
+                    console.log("Rollback Succesful1")
+                    throw err
+                })
+            } else {
+                conn.query(sql2, (err,results2)=>{
+                    if(err){
+                        conn.rollback(function() {
+                        console.log("Rollback Succesful2")
+                        throw err;
+                        })
+                    } else {
+                        conn.query(sql3, (err,results3)=>{
+                            if(err){
+                                conn.rollback(function() {
+                                console.log("Rollback Succesful3")
+                                throw err;
+                                })
+                            } else {
+                                conn.commit(function(err){
+                                    if (err){
+                                            conn.rollback(function(){
+                                            console.log("Rollback Succesful4")
+                                            throw err;
+                                        })
+                                    } else {
+                                        res.send({results2})
+                                    }
+                                })
+                            }
+                        })
+                    }
+                })
+            }
+        })
+    })
+})        
+
+app.delete('/admin/deletepremiumitem/:id', function(req,res){
+    sql = `DELETE FROM catalogue WHERE id = ${req.params.id}`
+    conn.query(sql, (err,results)=>{
+        if(err) throw err;
+        res.send({results})
+    })
+})
 
 app.post('/transaction', function(req,res){
     console.log(req.body)
