@@ -240,9 +240,8 @@ class Header extends Component {
                                             <span className="orange-text" onClick={()=>this.onLinkClick("/reseller-dropshipper")}>Reseller</span>
                                         </NavItem>
                                         <NavItem>
-                                            <span className="orange-text" onClick={()=>this.onLinkClick("/admin/cases")}>Admin</span>
+                                            <span className="orange-text" onClick={()=>this.onLinkClick("/admin/dashboard")}>Admin</span>
                                         </NavItem>
-                                        
                                     </Nav>
                                 </Col>                   
                                 <Col xsHidden smHidden md={6} lg={6} style={{'padding':'0', 'margin':'0'}} className="pull-right">

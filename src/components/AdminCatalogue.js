@@ -11,6 +11,32 @@ class AdminCatalogue extends Component {
         this.refreshData()
     }
 
+    sorter(fn, array){ 
+        for (let i = 0; i < array.length-1; i ++){
+            for (let j = i+1; j < array.length; j++){
+                if(fn(array[i],array[j])){
+                    var temp = array[i];
+                        array[i] = array[j];
+                        array[j] = temp;
+                }
+            }
+        }
+        return array;
+    }
+
+    sortAsc(param){
+        var sortedArr = this.sorter(function(a,b){
+            return  (a[param] > b[param]) ;
+            },this.state.data);
+        this.setState({data : sortedArr})
+    }
+    sortDesc(param){
+        var sortedArr = this.sorter(function(a,b){
+            return  (a[param] < b[param]) ;
+            },this.state.data);
+        this.setState({data : sortedArr})
+    }
+
     refreshData(){
         axios.get(API_URL_1 + "/admin/catalogue")
         .then((res)=>{
@@ -71,11 +97,11 @@ class AdminCatalogue extends Component {
             <thead>
                 <tr>
                     <th style={{width: "5%"}}>ID</th>
-                    <th style={{width: "10%"}}>Code</th>
-                    <th style={{width: "15%"}}>Name</th>
-                    <th style={{width: "15%"}}>Image</th>
-                    <th style={{width: "15%"}}>Sales</th>
-                    <th style={{width: "15%"}}>Actions</th>
+                    <th style={{width: "10%"}}>Code <i class="fa fa-sort-amount-asc m-r-sm th-sortable" onClick={()=>this.sortAsc("code")}/><i class="fa fa-sort-amount-desc th-sortable" onClick={()=>this.sortDesc("code")}/></th>
+                    <th style={{width: "15%"}}>Name <i class="fa fa-sort-amount-asc m-r-sm th-sortable" onClick={()=>this.sortAsc("name")}/><i class="fa fa-sort-amount-desc th-sortable" onClick={()=>this.sortDesc("name")}/></th>
+                    <th style={{width: "15%"}}>Image </th>
+                    <th style={{width: "15%"}}>Sales <i class="fa fa-sort-amount-asc m-r-sm th-sortable" onClick={()=>this.sortAsc("sales")}/><i class="fa fa-sort-amount-desc th-sortable" onClick={()=>this.sortDesc("sales")}/></th>
+                    <th style={{width: "15%"}}>Actions </th>
                 </tr>
             </thead>
         )
