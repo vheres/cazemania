@@ -19,8 +19,8 @@ class AdminRenderCatalogue extends Component {
             name: this.refs.editName.value,
             image: this.props.image
         }
-        if(document.getElementById('addCatalogueImage')){
-            formData.append('file', document.getElementById('addCatalogueImage').files[0])
+        if(document.getElementById('editImage')){
+            formData.append('file', document.getElementById('editImage').files[0])
         }
         formData.append('data', JSON.stringify(data))
         console.log(formData)
@@ -78,7 +78,7 @@ class AdminRenderCatalogue extends Component {
                 <td>{this.props.id}</td>
                 <td><input type="text" ref="editCode"  defaultValue={this.props.code}/></td>
                 <td><input type="text" ref="editName"  defaultValue={this.props.name}/></td>
-                <td><input type="file" ref="editImage"/></td>
+                <td><input type="file" id="editImage" ref="editImage"/></td>
                 <td>{this.props.sales}</td>
                 <td>
                     <input type="button" className="btn btn-primary" style={{width: 70}} onClick={()=>this.onSaveClick()} value="Save"/>

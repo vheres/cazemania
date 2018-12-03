@@ -14,11 +14,9 @@ class AdminRenderPremiumCatalogue extends Component {
     }
 
     onSaveClick(){
-        axios.put(API_URL_1 + "/admin/premiuminfo/" + this.props.id,
+        axios.put(API_URL_1 + "/admin/editpremiumitem/" + this.props.id,
             {
                 code: this.refs.editCode.value,
-                name: this.refs.editName.value,
-                image: this.refs.editImage.value
             }
         )
         .then((res)=>{
@@ -35,8 +33,7 @@ class AdminRenderPremiumCatalogue extends Component {
 
     onDeleteClick(){
         if(window.confirm("Are you sure you want to delete entry? This action cannot be reversed")){
-            var data = {image: this.props.image}
-            axios.post(API_URL_1 + "/admin/deletecatalogue/" + this.props.id, data)
+            axios.delete(API_URL_1 + "/admin/deletepremiumitem/" + this.props.id)
             .then((res)=>{
                 console.log(res)
                 alert("DELETE SUCCESS")
@@ -67,7 +64,7 @@ class AdminRenderPremiumCatalogue extends Component {
                 <tr style={{backgroundColor:'rgb(134, 204, 216)'}}>
                     <td>{this.props.id}</td>
                     <td><input type="text" ref="editCode" defaultValue={this.props.code}/></td>
-                    <td><input type="text" ref="editName"  defaultValue={this.props.name}/></td>
+                    <td>{this.props.name}</td>
                     <td>{this.props.sales}</td>
                     <td>
                         <input type="button" className="btn btn-primary" style={{width: 70}} onClick={()=>this.onSaveClick()} value="Save"/>
