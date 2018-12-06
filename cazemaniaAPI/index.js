@@ -11,7 +11,7 @@ var moment = require('moment')
 const fs = require('fs');
 
 var app = express();
-const port = 1994;
+const port = process.env.PORt || 1994;
 var url = bodyParser.urlencoded({extended:false})
 
 var transporter = nodemailer.createTransport({
@@ -1284,4 +1284,4 @@ app.get(`/premium/:id`, function(req,res){
 })
 
 
-app.listen(port, () => console.log(`Example app listening on port ${port}!`));
+app.listen(port, () => console.log(`Example app listening on port ${process.env.PORT || port}!`));
