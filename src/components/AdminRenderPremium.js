@@ -3,9 +3,10 @@ import axios from 'axios'
 import {API_URL_1} from '../supports/api-url/apiurl'
 import {Panel, PanelGroup, Modal, Button} from 'react-bootstrap'
 import AdminRenderPremiumCatalogue from './AdminRenderPremiumCatalogue';
+import AdminRenderPremiumThumbnails from './AdminRenderPremiumThumbnails';
 
 class AdminRenderPremium extends Component {
-    state = {data:[], edit: 0}
+    state = {data:[], thumbnails:[], edit: 0}
 
     componentDidMount(){
         this.refreshData()
@@ -14,7 +15,7 @@ class AdminRenderPremium extends Component {
     refreshData(){
         axios.get(API_URL_1 + "/admin/premiuminfo/" + this.props.id)
         .then((res)=>{
-            this.setState({data:res.data.items})
+            this.setState({data:res.data.items,thumbnails:res.data.thumbnails})
         })
     }
 
@@ -29,7 +30,8 @@ class AdminRenderPremium extends Component {
         var formData = new FormData()
         var data = {
             name: this.refs.editName.value,
-            image: this.props.image
+            image: this.props.image,
+            thumbnails:this.state.thumbnails
         }
         if(document.getElementById('editImage')){
             formData.append('file', document.getElementById('editImage').files[0])
@@ -132,6 +134,22 @@ class AdminRenderPremium extends Component {
         )
     }
 
+    renderPremiumAddImageHead() {
+        return (
+            <tr style={{backgroundColor:'rgb(9, 175, 204)', color:'white'}}>
+                <th colSpan={4}>Additional images for display (max 3)</th>
+                <th>Actions</th>
+            </tr>
+        )
+    }
+
+    renderPremiumAddImageBody() {
+        console.log(this.props.id)
+        return (
+            <AdminRenderPremiumThumbnails key={this.props.id} id={this.props.id} name={this.props.name} thumbnails={this.state.thumbnails} refresh={()=>this.refreshData()}/>
+        )
+    }
+
     renderAddPremiumCatalogue() {
         return (
             <tr style={{backgroundColor:'rgb(134, 204, 216)'}}>
@@ -163,6 +181,8 @@ class AdminRenderPremium extends Component {
                 <table className="table table-striped m-b-none" style={{color:'black'}}>
                     <thead>
                         {this.renderPage()[this.state.edit]}
+                        {this.renderPremiumAddImageHead()}
+                        {this.renderPremiumAddImageBody()}
                         {this.renderPremiumCatalogueHead()}
                     </thead>
                     <tbody>

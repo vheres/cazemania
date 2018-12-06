@@ -39,6 +39,11 @@ const conn = mysql.createConnection({
     password : '7d59e0bc',
     database : 'heroku_a67561992c3e45d',
     port: 3306
+    // host : 'cazemania.com',
+    // user : 'u5854250',
+    // password : 'tambunbekasi123',
+    // database : 'u5854250_cazemania',
+    // port: 3306
     });
 
 //Get list of bestsellers from catalogue, sorted by sales, limit TO 10
@@ -156,7 +161,7 @@ app.get('/admin/settings', function(req,res){
 })
 
 app.get('/admin/premium', function(req,res){
-    sql = `SELECT * FROM premium` 
+    sql = `SELECT * FROM premium`;
     conn.query(sql, (err,results)=>{
         if(err) throw err;
         res.send({items: results})
@@ -164,11 +169,14 @@ app.get('/admin/premium', function(req,res){
 })
 
 app.get('/admin/premiuminfo/:id', function(req,res){
-    sql = `SELECT * FROM catalogue WHERE category='premium' AND premium_id=${req.params.id}`
-    console.log(sql)
+    var sql = `SELECT * FROM catalogue WHERE category='premium' AND premium_id=${req.params.id}`;
+    var sql2 = `SELECT * FROM premium_images WHERE premium_id=${req.params.id}`;
     conn.query(sql, (err,results)=>{
         if(err) throw err;
-        res.send({items: results})
+        conn.query(sql2, (err,results2)=>{
+            if(err) throw err;
+            res.send({items:results,thumbnails:results2})
+        })
     })
 })
 
@@ -292,6 +300,56 @@ app.put('/admin/testimonies/:id', function(req,res){
     })
 })
 
+app.put('/admin/editGambarPremium/:id', function(req,res){
+    var data = JSON.parse(req.body.data)
+    if (req.files) {
+        var tempArr=[];
+        if(req.files.file1) {
+            tempArr.push([req.params.id,`${data.name}1`])
+            var unggahFile1 = req.files.file1
+            unggahFile1.mv('./public/premium/'+data.name+'1.jpg', (err)=>{
+                if(err){
+                    console.log(err)
+                    throw err;
+                } else {
+                    console.log('Premium image 1 upload success')
+                }
+            })
+        }
+        if(req.files.file2) {
+            tempArr.push([req.params.id,`${data.name}2`])
+            var unggahFile2 = req.files.file2
+            unggahFile2.mv('./public/premium/'+data.name+'2.jpg', (err)=>{
+                if(err){
+                    console.log(err)
+                    throw err;
+                } else {
+                    console.log('Premium image 2 upload success')
+                }
+            })
+        }
+        if(req.files.file3) {
+            tempArr.push([req.params.id,`${data.name}3`])
+            var unggahFile3 = req.files.file3
+            unggahFile3.mv('./public/premium/'+data.name+'3.jpg', (err)=>{
+                if(err){
+                    console.log(err)
+                    throw err;
+                } else {
+                    console.log('Premium image 3 upload success')
+                }
+            })
+        }
+        console.log(tempArr)
+        var sql = `INSERT INTO premium_images (premium_id, image) VALUES ? ON DUPLICATE KEY UPDATE image=values(image)`
+        conn.query(sql, [tempArr], (err,results)=>{
+            if(err) throw err;
+            res.send(results)
+        })
+    }
+
+})
+
 app.put('/admin/catalogue/:id', function(req,res){
     var data = JSON.parse(req.body.data)
     console.log(data)
@@ -398,8 +456,26 @@ app.put('/admin/rekening/:id', function(req,res){
 
 app.put('/admin/editpremiumgroup/:id', function(req,res){
     var data = JSON.parse(req.body.data)
-    console.log(data)
+    var tempArr=[];
+    data.thumbnails.forEach((item,index)=>{
+        if (index === 0) {
+            tempArr.push([item.id, item.premium_id, `${data.name}`])
+        } else {
+            tempArr.push([item.id, item.premium_id, `${data.name}${index}`])
+        }
+    })
     if(data.name !== data.image){
+        data.thumbnails.forEach((item,index)=>{
+            if (index !== 0) {
+                fs.rename('./public/premium/'+data.image+index+'.jpg', './public/premium/'+data.name+index+'.jpg',(err)=>{
+                    if(err) {
+                        throw err;
+                    } else {
+                        console.log(`rename ${data.image}${index} to ${data.name}${index}`)
+                    }
+                })
+            }
+        })
         fs.rename('./public/premium/'+ data.image + '.jpg', './public/premium/'+ data.name + '.jpg', (err) => {
             if (err){
                 throw err;
@@ -419,12 +495,12 @@ app.put('/admin/editpremiumgroup/:id', function(req,res){
                 var data2 = {name: data.name, image: data.name}
                 sql = `UPDATE premium SET ? WHERE id = ${req.params.id}`
                 sql2 = `UPDATE catalogue SET ? WHERE premium_id = ${req.params.id}`
-                sql3 = `UPDATE premium_images SET image = '${data.name}' WHERE image = '${data.image}'`
+                sql3 = `INSERT INTO premium_images (id, premium_id, image) VALUES ? ON DUPLICATE KEY UPDATE image=values(image)`
                 conn.query(sql, data2, (err,results)=>{
                     if(err) throw err;
                     conn.query(sql2, data2, (err,results2)=>{
                         if(err) throw err;
-                        conn.query(sql3, (err,results3)=>{
+                        conn.query(sql3, [tempArr], (err,results3)=>{
                             if(err) throw err;
                             res.send(results3)
                         })
@@ -436,12 +512,13 @@ app.put('/admin/editpremiumgroup/:id', function(req,res){
                 var data2 = {name: data.name, image: data.name}
                 sql = `UPDATE premium SET ? WHERE id = ${req.params.id}`
                 sql2 = `UPDATE catalogue SET ? WHERE premium_id = ${req.params.id}`
-                sql3 = `UPDATE premium_images SET image = '${data.name}' WHERE image = '${data.image}'`
+                // sql3 = `UPDATE premium_images SET image = '${data.name}' WHERE image = '${data.image}'`
+                sql3 = `INSERT INTO premium_images (id, premium_id, image) VALUES ? ON DUPLICATE KEY UPDATE image=values(image)`
                 conn.query(sql, data2, (err,results)=>{
                     if(err) throw err;
                     conn.query(sql2, data2, (err,results2)=>{
                         if(err) throw err;
-                        conn.query(sql3, (err,results3)=>{
+                        conn.query(sql3, [tempArr], (err,results3)=>{
                             if(err) throw err;
                             res.send(results3)
                         })
@@ -466,12 +543,13 @@ app.put('/admin/editpremiumgroup/:id', function(req,res){
             var data2 = {name: data.name, image: data.name}
             sql = `UPDATE premium SET ? WHERE id = ${req.params.id}`
             sql2 = `UPDATE catalogue SET ? WHERE premium_id = ${req.params.id}`
-            sql3 = `UPDATE premium_images SET image = '${data.name}' WHERE image = '${data.image}'`
+            // sql3 = `UPDATE premium_images SET image = '${data.name}' WHERE image = '${data.image}'`
+            sql3 = `INSERT INTO premium_images (id, premium_id, image) VALUES ? ON DUPLICATE KEY UPDATE image=values(image)`
             conn.query(sql, data2, (err,results)=>{
                 if(err) throw err;
                 conn.query(sql2, data2, (err,results2)=>{
                     if(err) throw err;
-                    conn.query(sql3, (err,results3)=>{
+                    conn.query(sql3, [tempArr], (err,results3)=>{
                         if(err) throw err;
                         res.send(results3)
                     })
@@ -483,12 +561,13 @@ app.put('/admin/editpremiumgroup/:id', function(req,res){
             var data2 = {name: data.name, image: data.name}
             sql = `UPDATE premium SET ? WHERE id = ${req.params.id}`
             sql2 = `UPDATE catalogue SET ? WHERE premium_id = ${req.params.id}`
-            sql3 = `UPDATE premium_images SET image = '${data.name}' WHERE image = '${data.image}'`
+            // sql3 = `UPDATE premium_images SET image = '${data.name}' WHERE image = '${data.image}'`
+            sql3 = `INSERT INTO premium_images (id, premium_id, image) VALUES ? ON DUPLICATE KEY UPDATE image=values(image)`
             conn.query(sql, data2, (err,results)=>{
                 if(err) throw err;
                 conn.query(sql2, data2, (err,results2)=>{
                     if(err) throw err;
-                    conn.query(sql3, (err,results3)=>{
+                    conn.query(sql3, [tempArr], (err,results3)=>{
                         if(err) throw err;
                         res.send(results3)
                     })
