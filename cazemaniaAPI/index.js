@@ -11,7 +11,7 @@ var moment = require('moment')
 const fs = require('fs');
 
 var app = express();
-const port = 1994;
+const port = process.env.PORt || 1994;
 var url = bodyParser.urlencoded({extended:false})
 
 var transporter = nodemailer.createTransport({
@@ -48,7 +48,7 @@ const conn = mysql.createConnection({
 
 //Get list of bestsellers from catalogue, sorted by sales, limit TO 10
 app.get('/bestsellers', function(req,res){
-    var sql = 'SELECT * FROM catalogue WHERE category != "custom" ORDER BY sales ASC LIMIT 10'
+    var sql = 'SELECT * FROM catalogue WHERE category != "custom" AND category != "premium" ORDER BY sales DESC LIMIT 12'
     conn.query(sql, (err,results)=>{
         if(err) throw err;
         console.log(results)
@@ -182,7 +182,7 @@ app.get('/admin/premiuminfo/:id', function(req,res){
 
 app.get('/adminorders', function(req,res){
     sql= `SELECT tr.id as id, LPAD( tr.id, 8, '0') as ordernumber, tr.date as date, tr.time as time, tr.proof as proof, tr.target_bank as target_bank, tr.status as status, tr.subtotal as subtotal, tr.discount as discount, tr.shipping as shipping, tr.resi as resi, u.firstname as firstname, 
-    u.lastname as lastname, u.id as user_id, u.address as address, u.email as email, u.phone as phone, u.kota as kota, u.kodepos as kodepos FROM transactions tr JOIN users u ON tr.user_id = u.id ORDER BY date`
+    u.lastname as lastname, u.id as user_id, u.address as address, u.email as email, u.phone as phone, u.kota as kota, u.kodepos as kodepos FROM transactions tr JOIN users u ON tr.user_id = u.id ORDER BY date, id DESC `
     conn.query(sql, (err,results)=>{
         if(err) throw err;
         console.log(results)
@@ -1363,4 +1363,4 @@ app.get(`/premium/:id`, function(req,res){
 })
 
 
-app.listen(port, () => console.log(`Example app listening on port ${port}!`));
+app.listen(port, () => console.log(`Example app listening on port ${process.env.PORT || port}!`));
