@@ -1,6 +1,5 @@
 import React, { Component } from 'react';
-import { Grid, Row, Col, Button, Modal, Table, Clearfix } from 'react-bootstrap';
-import CartDetail from './CartDetail';
+import { Grid, Row, Col, Modal, Clearfix } from 'react-bootstrap';
 import ProfileOrder from './ProfileOrder';
 import {API_URL_1} from '../supports/api-url/apiurl'
 import axios from 'axios'

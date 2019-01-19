@@ -6821,6 +6821,9 @@ button.close {
 .image-holder:hover {
   box-shadow: 5px 10px rgb(255, 181, 44);
 }
+.image-holder.alt:hover {
+  box-shadow: 5px 10px rgb(9, 175, 204);
+}
 .overlay {
   background-color:rgba(0,0,0,0);
   position: absolute;

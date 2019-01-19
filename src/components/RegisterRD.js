@@ -1,10 +1,8 @@
 import React, { Component } from 'react';
 import { Grid, Row, Col } from 'react-bootstrap';
 import { onRegister } from '../actions';
-import { Redirect } from 'react-router-dom';
 import { connect } from 'react-redux';
 import Cookies from 'universal-cookie';
-import { Link } from 'react-router-dom';
 import Select from 'react-select';
 import axios from 'axios';
 import {API_URL_1} from '../supports/api-url/apiurl'

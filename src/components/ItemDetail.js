@@ -1,6 +1,5 @@
 import React, { Component } from 'react';
-import { Grid, Row, Col, Thumbnail  } from 'react-bootstrap';
-import axios from 'axios'
+import { Row, Col } from 'react-bootstrap';
 import { Link } from 'react-router-dom';
 import {API_URL_1} from '../supports/api-url/apiurl'
 

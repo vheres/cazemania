@@ -1,6 +1,6 @@
 
 import React, { Component } from 'react';
-import { Nav, Navbar, NavItem, NavDropdown, MenuItem, Grid, Row, Col, FormGroup, FormControl, Button, Modal, Table } from 'react-bootstrap';
+import { Nav, Navbar, NavItem, NavDropdown, MenuItem, Grid, Row, Col, Button, Modal, Table } from 'react-bootstrap';
 import { Link } from 'react-router-dom';
 import { connect } from 'react-redux';
 import { onLogout } from '../actions';

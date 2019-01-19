@@ -4,9 +4,7 @@ import axios from 'axios'
 import {API_URL_1} from '../supports/api-url/apiurl'
 import ProfileRenderOrder from './ProfileRenderOrder'
 import { connect } from 'react-redux';
-import {Panel, PanelGroup} from 'react-bootstrap'
-import AdminOrdersTabs from './AdminOrdersTabs'
- 
+import { PanelGroup} from 'react-bootstrap'
 
 class ProfileOrder extends Component {
 

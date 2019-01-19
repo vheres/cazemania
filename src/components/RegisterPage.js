@@ -8,7 +8,6 @@ import { Link } from 'react-router-dom';
 import Select from 'react-select';
 import axios from 'axios';
 import {API_URL_1} from '../supports/api-url/apiurl'
-import ReactPixel from 'react-facebook-pixel';
 
 const cookies = new Cookies();
 

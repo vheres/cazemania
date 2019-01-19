@@ -1,8 +1,7 @@
 import React, {Component} from 'react';
 import axios from 'axios'
 import {API_URL_1} from '../supports/api-url/apiurl'
-import {Panel, PanelGroup, Modal, Button} from 'react-bootstrap'
-import FileUploader from './FileUploader'
+import {Panel, Modal, Button} from 'react-bootstrap'
 
 class ProfileRenderOrder extends Component {
     constructor(props) {

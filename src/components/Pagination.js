@@ -1,7 +1,6 @@
 import React, { Component } from 'react';
 import { Pagination } from 'react-bootstrap';
 
-
 class PaginationClass extends Component {
     renderPagination() {
         var arrLim = [];

@@ -1,6 +1,5 @@
 import React, { Component } from 'react';
-import { Grid, Row, Col, Panel  } from 'react-bootstrap';
-import {API_URL_1} from '../supports/api-url/apiurl'
+import { Grid, Row, Col } from 'react-bootstrap';
 import ReactPixel from 'react-facebook-pixel';
 
 class InformationPage extends Component {

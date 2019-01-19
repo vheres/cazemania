@@ -4,9 +4,7 @@ import axios from 'axios'
 import {API_URL_1} from '../supports/api-url/apiurl'
 import { connect } from 'react-redux';
 import Magnifier from 'react-magnifier';
-import CarouselSimilar from './CarouselSimilar';
 import { withRouter } from 'react-router-dom';
-import FileUploader from './FileUploader';
 import ReactPixel from 'react-facebook-pixel';
 
 class CustomPage extends Component {

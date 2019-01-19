@@ -1,11 +1,9 @@
 import React, { Component } from 'react';
-import { Grid, Row, Col, PageHeader } from 'react-bootstrap';
+import { Grid, Row, Col } from 'react-bootstrap';
 import { onLogin } from '../actions';
 import { Redirect } from 'react-router-dom';
 import { connect } from 'react-redux';
 import Cookies from 'universal-cookie';
-import Select from 'react-select';
-import {API_URL_1} from '../supports/api-url/apiurl'
 import ReactPixel from 'react-facebook-pixel';
 
 const cookies = new Cookies();

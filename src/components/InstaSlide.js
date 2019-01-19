@@ -1,7 +1,6 @@
 import React, { Component } from 'react';
 import Instafeed from 'react-instafeed';
 
-import AliceCarousel from 'react-alice-carousel';
 import 'react-alice-carousel/lib/alice-carousel.css';
 
 const instafeedTarget = 'instafeed';
