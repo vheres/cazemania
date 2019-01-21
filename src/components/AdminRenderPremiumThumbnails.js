@@ -19,9 +19,9 @@ class AdminRenderPremiumThumbnails extends Component {
         var data = {
             name: this.props.name
         }
-        document.getElementById('addImage0')?formData.append('file1',document.getElementById('addImage0').files[0]):null;
-        document.getElementById('addImage1')?formData.append('file2',document.getElementById('addImage1').files[0]):null;
-        document.getElementById('addImage2')?formData.append('file3',document.getElementById('addImage2').files[0]):null;
+        formData.append('file1',document.getElementById('addImage0').files[0])
+        formData.append('file2',document.getElementById('addImage1').files[0])
+        formData.append('file3',document.getElementById('addImage2').files[0])
         formData.append('data', JSON.stringify(data))
         var config = {
             headers: 

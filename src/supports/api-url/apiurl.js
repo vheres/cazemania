@@ -1,1 +1,1 @@
-export const API_URL_1 = "http://localhost:1994"
+export const API_URL_1 = "https://nodeaplikasi.cazemania.id/"
