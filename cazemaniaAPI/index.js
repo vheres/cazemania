@@ -182,7 +182,7 @@ app.get('/admin/premiuminfo/:id', function(req,res){
 
 app.get('/adminorders', function(req,res){
     sql= `SELECT tr.id as id, LPAD( tr.id, 8, '0') as ordernumber, tr.date as date, tr.time as time, tr.proof as proof, tr.target_bank as target_bank, tr.status as status, tr.subtotal as subtotal, tr.discount as discount, tr.shipping as shipping, tr.resi as resi, u.firstname as firstname, 
-    u.lastname as lastname, u.id as user_id, u.address as address, u.email as email, u.phone as phone, u.kota as kota, u.kodepos as kodepos FROM transactions tr JOIN users u ON tr.user_id = u.id ORDER BY date, id DESC `
+    u.lastname as lastname, u.id as user_id, u.address as address, u.email as email, u.phone as phone, u.kota as kota, u.kodepos as kodepos, tr.firstname as r_firstname, tr.lastname as r_lastname, tr.phone as r_phone, tr.address as r_address, tr.kota as r_kota, tr.kodepos as r_kodepos FROM transactions tr JOIN users u ON tr.user_id = u.id ORDER BY date, id DESC `
     conn.query(sql, (err,results)=>{
         if(err) throw err;
         console.log(results)
@@ -976,7 +976,10 @@ app.post('/transaction', function(req,res){
         status: "pendingPayment",
         address: req.body.recipient.address,
         kota: req.body.recipient.kota,
-        kodepos: req.body.recipient.kodepos
+        kodepos: req.body.recipient.kodepos,
+        firstname: req.body.recipient.firstname,
+        lastname: req.body.recipient.lastname,
+        phone: req.body.recipient.phone
     }
 
     sql = `INSERT INTO transactions SET ?`
@@ -1087,7 +1090,7 @@ app.get('/checkout/:id', function(req,res){
     sql  = `SELECT car.id, car.catalogue_id, cat.code, cat.name, cat.image, cat.category,  car.brand_id, car.model_id, car.case_type, car.amount, br.name as brand_name, ty.name as model_name, pr.price as price FROM catalogue cat JOIN cart car ON cat.id=car.catalogue_id JOIN brands br ON br.id = car.brand_id 
     JOIN type ty ON ty.id = car.model_id JOIN price pr ON pr.case_type = car.case_type WHERE car.user_id=${req.params.id}`
 
-    sql1 = `SELECT firstname, lastname, address, kota, destination_code, kodepos FROM users WHERE id = ${req.params.id}`
+    sql1 = `SELECT firstname, lastname, phone, address, kota, destination_code, kodepos FROM users WHERE id = ${req.params.id}`
     sql2 = `SELECT * FROM rekening`
     conn.query(sql, (err,results)=>{
         conn.query(sql1, (err,results1)=>{
@@ -1113,8 +1116,6 @@ app.get('/payment/:transaction_id', function(req,res){
 })
 
 app.post('/users', function(req,res){
-
-    console.log(req.body)
     const cipher = crypto.createHmac("sha256", secret)
     .update(req.body.password)
     .digest("hex");
@@ -1175,7 +1176,7 @@ app.put('/users/:id', function(req,res){
 
 app.get('/users/transactions/:id', function(req,res){
     sql= `SELECT tr.id as id, LPAD( tr.id, 8, '0') as ordernumber, tr.date as date, tr.time as time, tr.proof as proof, tr.target_bank as target_bank, tr.status as status, tr.subtotal as subtotal, tr.discount as discount, tr.shipping as shipping, tr.resi as resi, u.firstname as firstname, 
-    u.lastname as lastname, u.id as user_id, u.address as address, u.email as email, u.phone as phone, u.kota as kota, u.kodepos as kodepos FROM transactions tr JOIN users u ON tr.user_id = u.id WHERE user_id = ${req.params.id} ORDER BY date desc`
+    u.lastname as lastname, u.id as user_id, u.address as address, u.email as email, u.phone as phone, u.kota as kota, u.kodepos as kodepos, tr.firstname as r_firstname, tr.lastname as r_lastname, tr.address as r_address, tr.kota as r_kota, tr.kodepos as r_kodepos, tr.phone as r_phone FROM transactions tr JOIN users u ON tr.user_id = u.id WHERE user_id = ${req.params.id} ORDER BY date desc`
     conn.query(sql, (err,results)=>{
         if(err) throw err;
         console.log(results)
@@ -1340,10 +1341,14 @@ app.post('/customupload', function(req,res){
 
 
 app.get('/premiumcatalogue', function(req,res){
-    sql = `SELECT * FROM premium`
+    sql = `SELECT * FROM premium`;
+    var sql1 = `SELECT count(*) as count FROM premium`;
     conn.query(sql, (err,results)=>{
         if(err) throw err
-        res.send(results)
+        conn.query(sql1, (err1,results1)=>{
+            if(err1) throw err1;
+            res.send({catalogue:results,item_count:results1})
+        })
     })
 })
 

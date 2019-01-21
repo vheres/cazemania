@@ -7,7 +7,7 @@ import PaginationClass from './Pagination';
 import ReactPixel from 'react-facebook-pixel';
 
 class PremiumPage extends Component {
-    state = { premiumcatalogue: [], pagination: [], pagecount: 0, search_status: [0], active: [0] }
+    state = { premiumcatalogue: [], pagination: [], item_count: 0, pagecount: 0, search_status: [0], active: [0] }
 
     componentWillMount() {
         if (this.state.pagination.length === 0) {
@@ -25,7 +25,8 @@ class PremiumPage extends Component {
             }
         })
         .then((response)=>{
-            this.setState({ premiumcatalogue: response.data,  pagecount: Math.ceil((response.data.length/20)) })
+            console.log(response)
+            this.setState({ premiumcatalogue: response.data.catalogue,item_count:response.data.item_count[0].count, pagecount: Math.ceil((response.data.catalogue.length/20)) })
         })
     }
 
@@ -89,7 +90,6 @@ class PremiumPage extends Component {
     }
 
     renderCatalogue() {
-        console.log(this.state.catalogue)
         var arrJSX = this.state.premiumcatalogue.map(item => {
             return (
                 <ItemDetail id={item.id} name={item.name} image={item.image} category={'premium'} link={'premium'}/>
@@ -108,7 +108,7 @@ class PremiumPage extends Component {
                     <Col md={8}>
                             <Row>
                                 <Col xsHidden md={12}>
-                                    <p className="padding-text">Menampilkan ### produk</p>
+                                    <p className="padding-text">{`Menampilan ${this.state.premiumcatalogue.length} dari ${this.state.item_count} produk`}</p>
                                 </Col>
                             </Row>
                             <hr/>

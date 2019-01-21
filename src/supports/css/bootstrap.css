@@ -4,8 +4,12 @@
  * Licensed under MIT (https://github.com/twbs/bootstrap/blob/master/LICENSE)
  */
 /*! normalize.css v3.0.3 | MIT License | github.com/necolas/normalize.css */
+@font-face {
+  font-family: 'modernEraTrial';
+  src: url('../fonts/MODERNERATRIAL-REGULAR.OTF') format('opentype');
+}
 html {
-  font-family: sans-serif;
+  font-family: 'modernEraTrial', sans-serif;
   -webkit-text-size-adjust: 100%;
       -ms-text-size-adjust: 100%;
 }
@@ -6779,7 +6783,7 @@ button.close {
   margin: 0 10px;
   line-height: 2;
   vertical-align: middle;
-  color: rgb(255, 181, 44);
+  color: #F9A044;
   font-size: 14pt;
   font-weight: bold;
   transition: text-shadow 0.3s;
@@ -6801,28 +6805,61 @@ button.close {
 }
 .homepage-banner {
   width: 100%;
-  height: 91vh;
-  object-fit: cover;
+}
+@media (min-width:567px) {
+  .homepage-banner {
+    object-fit: cover;
+    height: 93vh;
+  }
 }
 .homepage-button {
   width: 100%;
   height: 100%;
   object-fit: cover;
 }
+.homepage-button-padding {
+  padding: 2px;
+}
+@media (min-width: 567px) {
+  .homepage-button-padding {
+    padding: 6px;
+  }
+}
+.homepage-section-margin {
+  margin-top: 30px;
+}
+@media (min-width: 567px) {
+  .homepage-section-margin {
+    margin-top: 150px;
+  }
+}
+.homepage-section-title {
+  font-size: 16pt;
+}
+.homepage-section-title > .icon {
+  font-size: 28pt;
+}
+@media (min-width: 567px) {
+  .homepage-section-title {
+    font-size: 28pt;
+  }
+  .homepage-section-title > .icon {
+    font-size: 40pt
+  }
+}
 /* homepage buttons */
 .image-holder {
   width: 100%;
-  margin-top: 10px;
-  margin-bottom: 10px;
+
   position: relative;
   float: left;
   transition: box-shadow 0.3s;
 }
 .image-holder:hover {
-  box-shadow: 5px 10px rgb(255, 181, 44);
+  box-shadow: 5px 10px #F9E7D7;
 }
 .image-holder.alt:hover {
-  box-shadow: 5px 10px rgb(9, 175, 204);
+  box-shadow: 5px 10px #D4F4F2;
 }
 .overlay {
   background-color:rgba(0,0,0,0);
@@ -6885,7 +6922,7 @@ button.close {
 }
 .shop-overlay:hover { 
   color: rgb(255, 255, 255);
-  background-color:rgba(0, 0, 0, 0.4);
+  background-color:rgba(241, 199, 106, 0.192);
   -webkit-transition: background-color ease-in-out .3s;
   -o-transition: background-color ease-in-out .3s;
      transition: background-color ease-in-out .3s;
@@ -7251,6 +7288,7 @@ button.close {
   font-size: 100px;
   color: rgb(9, 175, 204);
   display: flex;
+  flex-direction: column;
   align-items: center;
   justify-content: center;
   transition: background-color 0.3s, color 0.3s;
@@ -7312,9 +7350,11 @@ input[type="number"] {
 .general-link:hover {
   color: rgb(9, 175, 204);
 }
-
+.border {
+  border-bottom: 4px solid black;
+}
 .btn-orange-blue {
-  font-size: 12pt;
+  font-size: 12px;
   font-weight: bold;
   color: white;
   border-radius: 2px;
@@ -7322,6 +7362,11 @@ input[type="number"] {
   border: none;
   padding: 10px 25px;
   transition: box-shadow 0.3s;
+}
+@media (min-width: 1367px) {
+  .btn-orange-blue {
+    font-size: 14px;
+  }
 }
 .btn-orange-blue:hover {
   box-shadow: 3px 5px rgb(9, 175, 204);
@@ -7338,7 +7383,7 @@ input[type="number"] {
 }
 
 .btn-blue-orange {
-  font-size: 12pt;
+  font-size: 12px;
   font-weight: bold;
   color: white;
   border-radius: 2px;
@@ -7346,6 +7391,11 @@ input[type="number"] {
   border: none;
   padding: 10px 25px;
   transition: box-shadow 0.3s;
+}
+@media (min-width: 1367px) {
+  .btn-blue-orange {
+    font-size: 14px;
+  }
 }
 .btn-blue-orange:hover {
   box-shadow: 3px 5px rgb(255, 181, 44);
@@ -7365,9 +7415,14 @@ input[type="number"] {
 .general-input-container .general-input-label {
   position: relative;
   top: 5px;
-  font-size: 12pt;
+  font-size: 12px;
   font-weight: bold;
   color: rgb(100, 100, 100);
+}
+@media (min-width: 1367px) {
+  .general-input-container .general-input-label {
+    font-size: 14px;
+  }
 }
 .general-input-container .general-input {
   width: 100%;
@@ -7375,11 +7430,16 @@ input[type="number"] {
   background-color: transparent;
   border: none;
   border-bottom: 2px solid rgb(150, 150, 150);
-  font-size: 12pt;
+  font-size: 12px;
   /* font-weight: bold; */
   color: gray;
   line-height: 2;
   transition: border-color 0.3s;
+}
+@media (min-width: 1367px) {
+  .general-input-container .general-input {
+    font-size: 14px;
+  }
 }
 .general-input-container .general-input:focus {
   outline: none;
@@ -7452,7 +7512,7 @@ input[type="number"] {
   border: none;
   border-bottom: 2px solid rgb(150, 150, 150);
   padding-bottom: 5px;
-  font-size: 12pt;
+  font-size: 12px;
   /* font-weight: bold; */
   color: gray;
   line-height: 2;
@@ -7469,6 +7529,11 @@ input[type="number"] {
   -o-appearance: none;
   appearance: none; */
 }
+@media (min-width: 1367px) {
+  .dropdown-container > .dropdown-select {
+    font-size: 14px;
+  }
+}
 
 .dropdown-container > .dropdown-select:focus {
   outline: none;
@@ -7484,11 +7549,16 @@ color:#54b59f;
 }
 
 .dropdown-container > .text {
-  font-size: 14pt;
+  font-size: 14px;
   font-weight: bold;
   position: relative;
   top: -65px;
   color: rgb(255, 181, 44);
+}
+@media (min-width: 1367px) {
+  .dropdown-container > .text {
+    font-size: 14pt;
+  }
 }
 
 .dropdown-container select:focus + .text {
@@ -7505,12 +7575,17 @@ color:#54b59f;
   margin-bottom: 0px;
   margin-top: 10px;
   cursor: pointer;
-  font-size: 12pt;
+  font-size: 12px;
   color: gray;
   -webkit-user-select: none;
   -moz-user-select: none;
   -ms-user-select: none;
   user-select: none;
+}
+@media (min-width: 1367px) {
+  .container {
+    font-size: 14px;
+  }
 }
 
 /* Hide the browser's default radio button */
@@ -7525,12 +7600,17 @@ color:#54b59f;
 /* Create a custom radio button */
 .checkmark {
   position: absolute;
-  top: 2px;
+  top: -2px;
   left: 0;
   height: 20px;
   width: 20px;
   background-color: #eee;
   border-radius: 50%;
+}
+@media (min-width: 1367px) {
+  .checkmark {
+    top: 0px;
+  }
 }
 
 /* On mouse-over, add a grey background color */
@@ -7565,6 +7645,7 @@ color:#54b59f;
   border-radius: 50%;
   background: rgb(9, 175, 204);
 }
+
 
 
 

@@ -35,6 +35,7 @@ class PaymentPage extends Component {
                     recipient: {
                     firstname: response.data.user[0].firstname,
                     lastname: response.data.user[0].lastname,
+                    phone: response.data.user[0].phone,
                     address: response.data.user[0].address,
                     destination_code: response.data.user[0].destination_code,
                     kota: response.data.user[0].kota,
@@ -113,6 +114,7 @@ class PaymentPage extends Component {
             this.setState({ recipient: {
                 firstname: this.refs.firstname.value,
                 lastname: this.refs.lastname.value,
+                phone: this.refs.phone.value,
                 address: this.refs.alamat.value,
                 destination_code: this.state.selectedOption.value,
                 kota: this.state.selectedOption.label,
@@ -141,6 +143,9 @@ class PaymentPage extends Component {
                 <Col md={8} className="alamat-pengiriman">
                     <Row>
                         <span><strong>{this.state.recipient.firstname} {this.state.recipient.lastname}</strong></span>
+                    </Row>
+                    <Row>
+                        <span>{this.state.recipient.phone}</span>
                     </Row>
                     <Row>
                         <span>{this.state.recipient.address}</span>
@@ -339,7 +344,7 @@ class PaymentPage extends Component {
                         <Modal.Body>
                             <form id="Alamat">
                                 <Row>
-                                    <Col xs={12} mdsOffset={1} md={5}>
+                                    <Col xs={12} mdOffset={1} md={5}>
                                         <label className="general-input-container">
                                             <div className="general-input-label">Nama Depan:</div>
                                             <input type="text" ref="firstname" id="inputFirstName" className="general-input" placeholder="First Name" defaultValue={`${this.state.recipient.firstname}`} onKeyPress={this.onKeyPress.bind(this)}/>
@@ -349,6 +354,14 @@ class PaymentPage extends Component {
                                         <label className="general-input-container">
                                             <div className="general-input-label">Nama Belakang:</div>
                                             <input type="text" ref="lastname" id="inputLastName" className="general-input" placeholder="Last Name" defaultValue={`${this.state.recipient.lastname}`} onKeyPress={this.onKeyPress.bind(this)}/>
+                                        </label>
+                                    </Col>
+                                </Row>
+                                <Row>
+                                    <Col xs={12} mdOffset={1} md={10}>
+                                        <label className="general-input-container">
+                                            <div className="general-input-label">Phone:</div>
+                                            <input type="text" ref="phone" id="inputPhone" className="general-input" placeholder="081xxxxxxxxx" defaultValue={`${this.state.recipient.phone}`} onKeyPress={this.onKeyPress.bind(this)}/>
                                         </label>
                                     </Col>
                                 </Row>

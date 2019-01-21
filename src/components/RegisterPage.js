@@ -285,7 +285,7 @@ class RegisterPage extends Component {
                                     </Col>        
                                 </Row>
                                 <Row>
-                                    <Row>
+                                    <Row className="m-t">
                                         <Col xs={12}>
                                             <input type="button" class="btn-orange-blue pull-right" style={{'width':'100%'}} value="Register" onClick={()=>this.onRegisterClick()}/>
                                         </Col>

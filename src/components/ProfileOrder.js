@@ -27,6 +27,20 @@ class ProfileOrder extends Component {
         })
     }
 
+    componentWillReceiveProps(newProps) {
+        axios.get(API_URL_1 + "/users/transactions/" + newProps.auth.id)
+        .then((res)=>{
+            this.setState({orders: res.data})
+            if (res.data.length === 0) {
+                return null;
+            } else {
+                if (this.state.orders[0].status == 'pendingPayment') {
+                    this.setState({activeKey:this.state.orders[0].id})
+                }
+            }
+        })
+    }
+
     handleSelect(activeKey) {
         this.setState({ activeKey });
       }
@@ -38,7 +52,7 @@ class ProfileOrder extends Component {
             var arrJSX = this.state.orders.map((item, count)=>{
                 return(
                     <ProfileRenderOrder key={item.id} transaction_id={item.id} ordernumber={item.ordernumber} user_id={item.user_id} proof={item.proof} name={item.name} date={item.date} time={item.time} subtotal={item.subtotal} discount={item.discount} shipping={item.shipping} total_price={parseInt(item.subtotal) + parseInt(item.shipping)} target_bank={item.target_bank}
-                    status={item.status} firstname={item.firstname} lastname={item.lastname} address={item.address} phone={item.phone} kota={item.kota} kodepos={item.kodepos} email={item.email} resi={item.resi} refresh={()=>this.refreshData()}/>
+                    status={item.status} firstname={item.r_firstname} lastname={item.r_lastname} address={item.r_address} phone={item.r_phone} kota={item.r_kota} kodepos={item.r_kodepos} email={item.email} resi={item.resi} refresh={()=>this.refreshData()}/>
             )})
             return arrJSX
         } 

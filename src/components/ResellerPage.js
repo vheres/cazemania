@@ -1,10 +1,23 @@
 import React, { Component } from 'react';
 import { Grid, Row, Col } from 'react-bootstrap';
 import ReactPixel from 'react-facebook-pixel';
+import axios from 'axios'
+import {API_URL_1} from '../supports/api-url/apiurl'
+import { connect } from 'react-redux';
+import { withRouter } from 'react-router-dom';
 
 class InformationPage extends Component {
     componentDidMount() {
         ReactPixel.pageView();
+    }
+
+    onRegisterClick() {
+        if (this.props.auth.email !== "") {
+            window.confirm(`Daftar menjadi Reseller / Dropshipper?`)
+        } else {
+            alert('Please Login First')
+            this.props.history.push('/login')
+        }
     }
 
     renderInformationPage() {
@@ -19,7 +32,7 @@ class InformationPage extends Component {
                             <strong>Program Reseller & Dropshipper @Cazemania</strong>
                         </div>
                         <div className="m-t-lg m-b-lg">
-                            <input type="button" className="btn-blue-orange" value="Daftar Reseller/Dropshipper" onClick={()=>this.props.history.push('/register_reseller_dropshipper')}></input>
+                            <input type="button" className="btn-blue-orange" value="Daftar Reseller/Dropshipper" onClick={()=>this.onRegisterClick()}></input>
                         </div>
                     </Col>
                 </Row>
@@ -93,4 +106,10 @@ class InformationPage extends Component {
     }
 }
 
-export default InformationPage;
+const mapStateToProps = (state) => {
+    const auth = state.auth;
+
+    return { auth };
+}
+
+export default withRouter(connect(mapStateToProps, {})(InformationPage));

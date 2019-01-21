@@ -309,7 +309,7 @@ class DetailPage extends Component {
                                                 <InputGroup.Button>
                                                     <Button className="btn btn-tosca" onClick={()=>this.PlusMinus("minus")}>-</Button>
                                                 </InputGroup.Button>
-                                                <FormControl type="text" readOnly id="quantity" ref="quantity" className="text-center" defaultValue="1" style={{background:"white", height:'36px'}}/>
+                                                <FormControl type="text" readOnly id="quantity" ref="quantity" className="text-center" defaultValue="1" style={{background:"white", height:'36px',minWidth:'50px'}}/>
                                                 <InputGroup.Button>
                                                     <Button className="btn btn-tosca" onClick={()=>this.PlusMinus("plus")}>+</Button>
                                                 </InputGroup.Button>

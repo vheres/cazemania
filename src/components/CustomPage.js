@@ -141,40 +141,45 @@ class CustomPage extends Component {
     }
 
     onAddToCart() {
-        var formData = new FormData()
-        var data =  {
-            user_id: this.props.auth.id,
-            brand_id: this.refs.brand_select.value,
-            model_id: this.refs.type_select.value,
-            case_type: this.refs.case_select.value,
-            amount: document.getElementById("quantity").value
-        }
-        formData.append('file', this.state.inputfile)
-        formData.append('data', JSON.stringify(data))
-        var config = {
-            headers: 
-              {'Content-Type': 'multipart/form-data'}
-          }
-        axios.post(API_URL_1 + `/custom_cart`, formData, config)
-        .then((res) => {
-            alert('add to cart successful!')
-            ReactPixel.track('AddToCart', {
-                content_category: 'custom',
-                content_name: 'custom case',
-                currency: 'IDR',
-                value: (this.state.selected_price * document.getElementById("quantity").value),
-                contents: [
-                    {
-                        id: 'custom',
-                        quantity: document.getElementById("quantity").value,
-                        item_price: this.state.selected_price
-                    }
-                ],
-                content_type: 'product'
+        if (this.props.auth.email !== "") {
+            var formData = new FormData()
+            var data =  {
+                user_id: this.props.auth.id,
+                brand_id: this.refs.brand_select.value,
+                model_id: this.refs.type_select.value,
+                case_type: this.refs.case_select.value,
+                amount: document.getElementById("quantity").value
+            }
+            formData.append('file', this.state.inputfile)
+            formData.append('data', JSON.stringify(data))
+            var config = {
+                headers: 
+                {'Content-Type': 'multipart/form-data'}
+            }
+            axios.post(API_URL_1 + `/custom_cart`, formData, config)
+            .then((res) => {
+                alert('add to cart successful!')
+                ReactPixel.track('AddToCart', {
+                    content_category: 'custom',
+                    content_name: 'custom case',
+                    currency: 'IDR',
+                    value: (this.state.selected_price * document.getElementById("quantity").value),
+                    contents: [
+                        {
+                            id: 'custom',
+                            quantity: document.getElementById("quantity").value,
+                            item_price: this.state.selected_price
+                        }
+                    ],
+                    content_type: 'product'
+                })
+            }).catch((err) => {
+                alert(err);
             })
-        }).catch((err) => {
-            alert(err);
-        })
+        } else {
+            alert('Please Login First')
+            this.props.history.push('/login')
+        }
     }
 
     // async onSimilarClick(target) {
@@ -218,7 +223,7 @@ class CustomPage extends Component {
             if (this.state.inputfile.length == 0) {
                 return (
                     <Col xs={12} className="upload_custom">
-                    <label for="custom_picture" className='inputlabel inputlabel_icon'><i className="fa fa-picture-o"/><p style={{'font-size': '30px'}}>Upload Picture</p></label>
+                    <label for="custom_picture" className='inputlabel'><i className="fa fa-picture-o"/><p style={{'font-size': '30px'}}>Upload Picture</p></label>
                         <div>
                             <form encType="multipart/form-data">
                             <input type="file" name="filename" id="custom_picture" accept="image/*" className="inputfile" onChange={()=>this.setState({inputfile: document.getElementById('custom_picture').files[0]})}/>
@@ -339,7 +344,7 @@ class CustomPage extends Component {
                                                 <InputGroup.Button>
                                                     <Button className="btn btn-tosca" onClick={()=>this.PlusMinus("minus")}>-</Button>
                                                 </InputGroup.Button>
-                                                <FormControl type="text" readOnly id="quantity" ref="quantity" className="form-control text-center" defaultValue="1" style={{background:"white",height:'36px'}}/>
+                                                <FormControl type="text" readOnly id="quantity" ref="quantity" className="form-control text-center" defaultValue="1" style={{background:"white",height:'36px',minWidth:'50px'}}/>
                                                 <InputGroup.Button>
                                                     <Button className="btn btn-tosca" onClick={()=>this.PlusMinus("plus")}>+</Button>
                                                 </InputGroup.Button>

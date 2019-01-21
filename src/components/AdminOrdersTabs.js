@@ -69,7 +69,7 @@ class AdminOrdersTabs extends React.Component {
       var arrJSX = this.state.orders1.map((item)=>{
           return(
           <AdminRenderOrders key={item.user_id} transaction_id={item.id} ordernumber={item.ordernumber} discount={item.discount} user_id={item.user_id} proof={item.proof} name={item.name} date={item.date} shipping={item.shipping} time={item.time} subtotal={item.subtotal} target_bank={item.target_bank}
-          status={item.status} firstname={item.firstname} lastname={item.lastname} address={item.address} phone={item.phone} kota={item.kota} kodepos={item.kodepos} email={item.email} resi={item.resi} refresh={()=>this.refreshData()}/>
+          status={item.status} firstname={item.r_firstname} lastname={item.r_lastname} address={item.r_address} phone={item.r_phone} kota={item.r_kota} kodepos={item.r_kodepos} email={item.email} resi={item.resi} refresh={()=>this.refreshData()}/>
       )})
       return arrJSX
   }
@@ -78,7 +78,7 @@ class AdminOrdersTabs extends React.Component {
     var arrJSX = this.state.orders2.map((item)=>{
         return(
         <AdminRenderOrders key={item.user_id} transaction_id={item.id} ordernumber={item.ordernumber} discount={item.discount} user_id={item.user_id} proof={item.proof} name={item.name} date={item.date} shipping={item.shipping} time={item.time} subtotal={item.subtotal} target_bank={item.target_bank}
-        status={item.status} firstname={item.firstname} lastname={item.lastname} address={item.address} phone={item.phone} kota={item.kota} kodepos={item.kodepos} email={item.email} resi={item.resi} refresh={()=>this.refreshData()}/>
+        status={item.status} firstname={item.r_firstname} lastname={item.r_lastname} address={item.r_address} phone={item.r_phone} kota={item.r_kota} kodepos={item.r_kodepos} email={item.email} resi={item.resi} refresh={()=>this.refreshData()}/>
     )})
     return arrJSX
 }
@@ -87,7 +87,7 @@ renderDataTableOrders3(){
   var arrJSX = this.state.orders3.map((item)=>{
       return(
       <AdminRenderOrders key={item.user_id} transaction_id={item.id} ordernumber={item.ordernumber} discount={item.discount} user_id={item.user_id} proof={item.proof} name={item.name} date={item.date} shipping={item.shipping} time={item.time} subtotal={item.subtotal} target_bank={item.target_bank}
-      status={item.status} firstname={item.firstname} lastname={item.lastname} address={item.address} phone={item.phone} kota={item.kota} kodepos={item.kodepos} email={item.email} resi={item.resi} refresh={()=>this.refreshData()}/>
+      status={item.status} firstname={item.r_firstname} lastname={item.r_lastname} address={item.r_address} phone={item.r_phone} kota={item.r_kota} kodepos={item.r_kodepos} email={item.email} resi={item.resi} refresh={()=>this.refreshData()}/>
   )})
   return arrJSX
 }

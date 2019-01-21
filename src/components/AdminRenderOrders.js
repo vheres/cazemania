@@ -203,7 +203,7 @@ class AdminRenderOrders extends Component {
                                     {this.props.address}<br/>
                                     {this.props.kota} {this.props.kodepos}<br/>
                                     Phone: {this.props.phone}<br/>
-                                    Email: {this.props.email}<br/>
+                                    {/* Email: {this.props.email}<br/> */}
                                     </p>
                                 </div>
                                 </div>

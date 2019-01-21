@@ -52,7 +52,8 @@ class ProfileRenderOrder extends Component {
               {'Content-Type': 'multipart/form-data'}
         }
           axios.post(API_URL_1 + `/bukti_pembayaran`, formData, config).then((res) => {
-            alert('upload success!')
+            alert('upload success!');
+            this.props.refresh();
         }).catch((err) => {
             alert(err);
         })
@@ -141,6 +142,19 @@ class ProfileRenderOrder extends Component {
 
         return arrJSX
     }
+
+    renderBukti(){
+        if(this.props.proof !== null){
+            return(
+                <img src={API_URL_1 + `/bukti/${this.props.proof}.jpg`} alt="buktipembayaran" style={{width: "100%"}}/>
+            )
+        }
+        else{
+            return(
+                <div>Bukti pembayaran belum dikirim</div>
+            )
+        }
+    }
     
     renderPage(){
         return(
@@ -168,7 +182,7 @@ class ProfileRenderOrder extends Component {
                                     {this.props.address}<br/>
                                     {this.props.kota} {this.props.kodepos}<br/>
                                     Phone: {this.props.phone}<br/>
-                                    Email: {this.props.email}<br/>
+                                    {/* Email: {this.props.email}<br/> */}
                                     </p>
                                 </div>
                                 </div>
@@ -219,7 +233,7 @@ class ProfileRenderOrder extends Component {
                     <Modal.Title>Bukti Pembayaran ORDER: CMW#{this.props.ordernumber}</Modal.Title>
                 </Modal.Header>
                 <Modal.Body>
-                    <img src="http://localhost:1994/normal/ADDS1.jpg" alt="buktipembayaran" style={{width: "50%"}}/>
+                    {this.renderBukti()}
                 </Modal.Body>
                 <Modal.Footer>
                     <Button onClick={()=>this.handleClose()}>Close</Button>
