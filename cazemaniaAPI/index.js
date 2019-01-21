@@ -34,10 +34,10 @@ app.use(upload())
 
 //Connect to MySQL database
 const conn = mysql.createConnection({
-    host : 'us-cdbr-iron-east-01.cleardb.net',
-    user : 'bde441d3eff40c',
-    password : '7d59e0bc',
-    database : 'heroku_a67561992c3e45d',
+    host : '103.126.226.66',
+    user : 'cazemani_devs',
+    password : 'tambunbekasi123',
+    database : 'cazemani_cazemania',
     port: 3306
     // host : 'cazemania.com',
     // user : 'u5854250',
@@ -45,6 +45,11 @@ const conn = mysql.createConnection({
     // database : 'u5854250_cazemania',
     // port: 3306
     });
+
+//WELCOME PAGE
+app.get('/', function(req,res){
+    res.send("Welcome to Cazemania API")
+})
 
 //Get list of bestsellers from catalogue, sorted by sales, limit TO 10
 app.get('/bestsellers', function(req,res){
@@ -1084,8 +1089,8 @@ app.get('/keeplogin', function(req,res){
 })
 
 app.get('/checkout/:id', function(req,res){
-    sql  = `SELECT car.id, car.catalogue_id, cat.code, cat.name, cat.image, cat.category,  car.brand_id, car.model_id, car.case_type, car.amount, br.name as brand_name, ty.name as model_name, pr.price as price FROM catalogue cat JOIN cart car ON cat.id=car.catalogue_id JOIN brands br ON br.id = car.brand_id 
-    JOIN type ty ON ty.id = car.model_id JOIN price pr ON pr.case_type = car.case_type WHERE car.user_id=${req.params.id}`
+    sql  = `SELECT car.id, car.catalogue_id, cat.code, cat.name, cat.image, cat.category, car.brand_id, car.model_id, car.case_type, car.amount, br.name as brand_name, ty.name as model_name, pr.price as price FROM catalogue cat JOIN cart car ON cat.id=car.catalogue_id JOIN brands br ON br.id = car.brand_id 
+    JOIN type ty ON ty.id = car.model_id JOIN price pr ON pr.case_type = car.case_type WHERE car.user_id = ${req.params.id}`
 
     sql1 = `SELECT firstname, lastname, address, kota, destination_code, kodepos FROM users WHERE id = ${req.params.id}`
     sql2 = `SELECT * FROM rekening`
