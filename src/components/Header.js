@@ -306,22 +306,22 @@ class Header extends Component {
                             <Navbar.Toggle />
                         </Navbar.Header>
                         <Navbar.Collapse>
-                                <Col xsHidden smHidden md={3} lg={4} style={{'padding':'0', 'margin':'0'}}>
+                                <Col xsHidden smHidden md={3} lg={5} style={{'padding':'0', 'margin':'0'}}>
                                     <Nav>
-                                        <NavDropdown eventKey={3} title={<span className="orange-text">Shop</span>}>
+                                        <NavDropdown eventKey={3} title={<span className="orange-text header-button">Shop</span>}>
                                             <MenuItem eventKey={3.1} onClick={()=>this.onLinkClick("/shop")}>Collections</MenuItem>
                                             <MenuItem eventKey={3.2} onClick={()=>this.onLinkClick("/premium_cases")}>Premium Cases</MenuItem>
                                             <MenuItem eventKey={3.3} onClick={()=>this.onLinkClick("/custom")}>Custom Cases</MenuItem>
                                         </NavDropdown>
-                                        <NavItem className="cursor-default">
-                                            <span className="orange-text" onClick={()=>this.onLinkClick("/reseller-dropshipper")}>Reseller</span>
+                                        <NavItem>
+                                            <span className="orange-text header-button" onClick={()=>this.onLinkClick("/reseller-dropshipper")}>Reseller</span>
                                         </NavItem>
                                         <NavItem>
-                                            <span className="orange-text" onClick={()=>this.onLinkClick("/admin/dashboard")}>Admin</span>
+                                            <span className="orange-text header-button" onClick={()=>this.onLinkClick("/admin/dashboard")}>Admin</span>
                                         </NavItem>            
                                     </Nav>
                                 </Col>                   
-                                <Col xsHidden smHidden md={6} lg={6} style={{'padding':'0', 'margin':'0'}} className="pull-right">
+                                <Col xsHidden smHidden md={6} lg={5} style={{'padding':'0', 'margin':'0'}} className="pull-right">
                                     <Nav style={{'width':'100%'}}>
                                         <NavDropdown eventKey={6} title={<i class="fa fa-user"></i>} id="basic-nav-dropdown" className="m-r pull-right" style={{'font-size': '22px', 'margin-top':'6px'}}>
                                             <MenuItem eventKey={6.1} onClick={()=>this.onLinkClick("/login")}>
@@ -349,17 +349,17 @@ class Header extends Component {
                                             <MenuItem eventKey={3.2} onClick={()=>this.onLinkClick("/premium_cases")}>Premium Cases</MenuItem>
                                             <MenuItem eventKey={3.3} onClick={()=>this.onLinkClick("/custom")}>Custom Cases</MenuItem>
                                         </NavDropdown>
-                                        <NavItem eventKey={2} className="header-button" onClick={()=>this.onLinkClick("/reseller-dropshipper")}>
-                                            <span className="orange-text">Reseller</span>
+                                        <NavItem>
+                                            <span className="orange-text header-button" onClick={()=>this.onLinkClick("/reseller-dropshipper")}>Reseller</span>
                                         </NavItem>
-                                        <NavItem eventKey={4} className="header-button" onClick={()=>this.onLinkClick("/admin/dashboard")}>
-                                            <span className="orange-text">Admin</span>
+                                        <NavItem>
+                                            <span className="orange-text header-button" onClick={()=>this.onLinkClick("/admin/dashboard")}>Admin</span>
                                         </NavItem>
-                                        <NavItem eventKey={4} className="header-button" onClick={()=>this.onLinkClick("/login")}>
-                                            <span className="orange-text">Login</span>
+                                        <NavItem>
+                                            <span className="orange-text header-button" onClick={()=>this.onLinkClick("/login")}>Login</span>
                                         </NavItem>
-                                        <NavItem eventKey={4} className="header-button" onClick={()=>this.onLinkClick("/register")}>
-                                            <span className="orange-text">Register</span>
+                                        <NavItem>
+                                            <span className="orange-text header-button" onClick={()=>this.onLinkClick("/register")}>Register</span>
                                         </NavItem>
                                     </Nav>
                                 </Col>

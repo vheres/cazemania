@@ -100,7 +100,7 @@ class LoginPage extends Component {
                                             </Row>
                                             <Row className="m-t">
                                                 <Col xsOffset={1} xs={10} mdOffset={0} md={12}>
-                                                    <input type="button" class="btn-orange-blue" style={{'float': 'right', 'width':'100%'}} value="Login" onClick={this.onLoginClick}/>
+                                                    <input type="button" class="btn-blue-orange" style={{'float': 'right', 'width':'100%'}} value="Login" onClick={this.onLoginClick}/>
                                                 </Col>
                                             </Row>
                                             <Row className="m-t">
