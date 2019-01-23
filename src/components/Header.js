@@ -261,7 +261,7 @@ class Header extends Component {
                                             <Button type="submit" className="btn btn-tosca" onClick={()=>this.onSearchClick()}><i class="fa fa-search"></i></Button>
                                         </NavItem>
                                         <NavItem eventKey={4} className="pull-right">
-                                            <input type="text" id="search" placeholder="Search Code / Name" class="search-bar" onKeyPress={this.onKeyPress.bind(this)}/>{' '}
+                                            <input type="text" id="search" placeholder="Cari" class="search-bar" onKeyPress={this.onKeyPress.bind(this)}/>{' '}
                                         </NavItem>
                                     </Nav>
                                 </Col>
@@ -289,7 +289,7 @@ class Header extends Component {
                         </Navbar.Collapse>       
                     </Navbar>
                     <Col xs={12} mdHidden lgHidden style={{'padding-top':'0px'}}>
-                        <input type="text" id="mobilesearch" placeholder="Search Code / Name" class="search-bar-mobile" onKeyPress={this.onKeyPress.bind(this)}/>
+                        <input type="text" id="mobilesearch" placeholder="Cari" class="search-bar-mobile" onKeyPress={this.onKeyPress.bind(this)}/>
                         <Button type="submit" className="btn-mobile" onClick={()=>this.onSearchClick()}><i class="fa fa-search" style={{'color':'white'}}></i></Button>
                         <Button type="submit" className="btn-mobile" onClick={()=>this.handleShow()}><i class="fa fa-shopping-cart" style={{'color':'white'}}></i></Button>
                     </Col>
@@ -338,7 +338,7 @@ class Header extends Component {
                                             <Button type="submit" className="btn btn-tosca" onClick={()=>this.onSearchClick()}><i class="fa fa-search"></i></Button>
                                         </NavItem>
                                         <NavItem eventKey={4} className="pull-right">
-                                            <input type="text" id="search" placeholder="Search Code / Name" class="search-bar" onKeyPress={this.onKeyPress.bind(this)}/>{' '}
+                                            <input type="text" id="search" placeholder="Cari" class="search-bar" onKeyPress={this.onKeyPress.bind(this)}/>{' '}
                                         </NavItem>
                                     </Nav>
                                 </Col>
@@ -366,7 +366,7 @@ class Header extends Component {
                         </Navbar.Collapse>       
                     </Navbar>
                     <Col xs={12} mdHidden lgHidden style={{'padding-top':'0px'}}>
-                        <input type="text" id="mobilesearch" placeholder="Search Code / Name" class="search-bar-mobile" onKeyPress={this.onKeyPress.bind(this)}/>
+                        <input type="text" id="mobilesearch" placeholder="Cari" class="search-bar-mobile" onKeyPress={this.onKeyPress.bind(this)}/>
                         <Button type="button" className="btn-mobile" onClick={()=>this.onSearchClick()}><i class="fa fa-search" style={{'color':'white'}}></i></Button>
                         <Button type="submit" className="btn-mobile" onClick={()=>{alert('Please Login First');this.onLinkClick("/login")}}><i class="fa fa-shopping-cart" style={{'color':'white'}}></i></Button>
                     </Col>

@@ -12,7 +12,7 @@ class ItemDetail extends Component {
                 <Row>
                     <Link to={`/${this.props.link}?id=${this.props.id}`} className="shop-holder">
                         <img src={`${API_URL_1}/${this.props.category}/${this.props.image}.jpg`} style={{width:"100%"}}/>
-                        <div className="shop-overlay"></div>
+                        <div className="shop-overlay">{this.props.name}</div>
                     </Link>
                 </Row>
                 <Row>

@@ -57,7 +57,7 @@ class HomePage extends Component {
                     <Row className="homepage-section-margin">
                         <Col xsOffset={1} xs={10}>
                             <div className="text-center font-bold homepage-section-title" style={{color:'#F9A044'}}>BEST SELLER</div>
-                            <div className="border" style={{borderColor:'#D4F4F2',paddingTop:'2rem'}}/>
+                            <div className="border" style={{borderColor:'#D4F4F2',paddingTop:'0.5rem'}}/>
                         </Col>
                     </Row>
                     <Row style={{marginTop:'2rem'}}>
@@ -68,7 +68,7 @@ class HomePage extends Component {
                     <Row className="homepage-section-margin">
                         <Col xsOffset={1} xs={10}>
                             <div className="text-center font-bold homepage-section-title" style={{color:'rgb(9, 175, 204)'}}>HAPPY CUSTOMER</div>
-                            <div className="border" style={{borderColor:'#F9E7D7',paddingTop:'2rem'}}/>
+                            <div className="border" style={{borderColor:'#F9E7D7',paddingTop:'0.5rem'}}/>
                         </Col>
                     </Row>
                     <Row style={{marginTop:'3rem'}}>
@@ -81,7 +81,7 @@ class HomePage extends Component {
                             <div className="text-center font-bold homepage-section-title">
                                 <span className="icon" style={{color:'rgb(9, 175, 204)'}}><i class="fa fa-instagram"></i></span>
                                 <span style={{color:'#F9A044'}}> INSTAGRAM</span>
-                                <div className="border" style={{borderColor:'#D4F4F2',paddingTop:'2rem'}}/>
+                                <div className="border" style={{borderColor:'#D4F4F2',paddingTop:'0.5rem'}}/>
                             </div>
                         </Col>
                     </Row>

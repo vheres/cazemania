@@ -39,7 +39,7 @@ class CarouselClass extends Component {
           var arrJSX = new Array();
         for (var i = 0; i < this.image_url[0].length; i++) {
             // arrJSX.push(<Thumbnail src={this.image_url[0][i]} href={this.image_url[1][i]} target="_blank" ></Thumbnail>);
-            arrJSX.push(<a href={this.image_url[1][i]} onClick={()=>ReactPixel.trackCustom('instagramClick')} className="best-holder" target="_blank"><img src={this.image_url[0][i]} style={{width:"100%"}}/><div className="best-overlay"><i class="fa fa-instagram"></i></div></a>)
+            arrJSX.push(<a href={this.image_url[1][i]} onClick={()=>ReactPixel.trackCustom('instagramClick')} className="best-holder" target="_blank"><img src={this.image_url[0][i]} style={{width:"100%", height:'250px',objectFit:'cover'}}/><div className="best-overlay"><i class="fa fa-instagram"></i></div></a>)
             // arrJSX.push(<div className="instagram-holder"><Thumbnail src={this.image_url[0][i]} href={this.image_url[1][i]} target="_blank" style={{width:"100%", height:"250px"}}></Thumbnail><div className="instagram-overlay"></div></div>) 
         }
         return arrJSX;

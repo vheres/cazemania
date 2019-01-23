@@ -6899,12 +6899,9 @@ button.close {
   margin-bottom: 10px;
   margin-right: 5px;
   margin-left: 5px;
-  border: 3px solid rgb(30,190,203);
+  border: 2px solid white;
   position: relative;
   float: left;
-}
-.shop-holder:hover {
-  border: 3px solid rgb(253, 203, 151);
 }
 .shop-overlay {
   background-color:rgba(0,0,0,0);
@@ -6915,17 +6912,20 @@ button.close {
   z-index: 2;
   color: transparent;
   display:flex;
-  align-items: center;
+  align-items: flex-end;
+  padding-bottom: 30px;
   justify-content: center;
   font-size: 22px;
   text-align: center;
+  transition: .3s;
 }
 .shop-overlay:hover { 
+  background-image: linear-gradient(transparent, rgba(0, 0, 0, 0.8));
   color: rgb(255, 255, 255);
-  background-color:rgba(241, 199, 106, 0.192);
-  -webkit-transition: background-color ease-in-out .3s;
+  /* background-color:rgba(241, 199, 106, 0.192); */
+  /* -webkit-transition: background-color ease-in-out .3s;
   -o-transition: background-color ease-in-out .3s;
-     transition: background-color ease-in-out .3s;
+     transition: background-color ease-in-out .3s; */
 }
 .text-item-detail {
   color: rgb(70, 70, 70);
@@ -6947,7 +6947,7 @@ button.close {
   border: 2px solid white;
   margin-right: 5px;
   margin-left: 5px;
-  transition: box-shadow 0.3s;
+  transition: 0.3s;
 }
 .best-holder:hover {
   box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
@@ -6970,9 +6970,8 @@ button.close {
   /* transition: text-shadow 0.3s; */
 }
 .best-overlay:hover { 
-  color: rgb(255, 181, 44);
-  background-image: linear-gradient(transparent, black);
-  text-shadow: 2px 1px rgb(9, 175, 204);
+  color: white;
+  background-image: linear-gradient(transparent, rgba(0, 0, 0, 0.8));
 }
 /* Similar Product images */
 .similar-product-holder {
@@ -7351,7 +7350,7 @@ input[type="number"] {
   color: rgb(9, 175, 204);
 }
 .border {
-  border-bottom: 4px solid black;
+  border-bottom: 6px solid black;
 }
 .btn-orange-blue {
   font-size: 12px;
