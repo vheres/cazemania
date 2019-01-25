@@ -280,8 +280,8 @@ class ProfilePage extends Component {
                             </form>
                         </Modal.Body>
                         <Modal.Footer>
-                            <input type="button" className="btn btn-danger" onClick={this.handleClose.bind(this)} value="Cancel"/>
-                            <input type="button" className="btn btn-success" onClick={()=>this.onEditSave()} value="Save"/>
+                            <input type="button" className="btn-orange-blue m-r" onClick={this.handleClose.bind(this)} value="Cancel"/>
+                            <input type="button" className="btn-blue-orange" onClick={()=>this.onEditSave()} value="Save"/>
                         </Modal.Footer>
                     </Modal>
                 </Grid>

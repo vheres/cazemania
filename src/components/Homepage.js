@@ -71,7 +71,7 @@ class HomePage extends Component {
                             <div className="border" style={{borderColor:'#F9E7D7',paddingTop:'0.5rem'}}/>
                         </Col>
                     </Row>
-                    <Row style={{marginTop:'3rem'}}>
+                    <Row style={{marginTop:'3rem',paddingTop:'5rem',paddingBottom:'5rem',backgroundColor:'#f2f2f2'}}>
                         <Col xsOffset={0} xs={12} mdOffset={4} md={4}>
                             <CarouselText/>
                         </Col>

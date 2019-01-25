@@ -101,10 +101,14 @@ class Header extends Component {
                         </Col>
                     </Row>
                     <Row>
-                        <h4 className="text-center">Your cart is empty, shop now!</h4>
+                        <Col xs={12}>
+                            <h4 className="text-center">Your cart is empty, shop now!</h4>
+                        </Col>
                     </Row>
                     <Row>
-                        <input type="button" className="btn btn-success gotoshop-button" value="Go to shop!" onClick={()=>{this.setState({edit_modal: false});this.props.history.push('/shop')}}/>
+                        <Col xs={12} style={{display:'flex',flexDirection:'row',justifyContent:'center'}}>
+                            <input type="button" className="btn-blue-orange" value="Go to shop!" onClick={()=>{this.setState({edit_modal: false});this.props.history.push('/shop')}}/>
+                        </Col>
                     </Row>
                 </Grid>
             )
@@ -208,11 +212,11 @@ class Header extends Component {
     renderPaymentButton() {
         if (this.state.cart.length === 0) {
             return (
-                <input type="button" className="btn btn-success" onClick={()=>this.onPaymentClick()} value="Proceed to Payment" title="Your cart is empty!" disabled/>
+                <input type="button" className="btn-blue-orange" onClick={()=>this.onPaymentClick()} value="Proceed to Payment" title="Your cart is empty!" disabled/>
             )
         } else {
             return (
-                <input type="button" className="btn btn-success" onClick={()=>this.onPaymentClick()} value="Proceed to Payment"/>
+                <input type="button" className="btn-blue-orange" onClick={()=>this.onPaymentClick()} value="Proceed to Payment"/>
             )
         }
     }
@@ -231,16 +235,16 @@ class Header extends Component {
                         <Navbar.Collapse>
                                 <Col xsHidden smHidden md={3} lg={4} style={{'padding':'0', 'margin':'0'}}>
                                     <Nav>
-                                        <NavDropdown eventKey={3} title={<span className="orange-text">Shop</span>}>
+                                        <NavDropdown eventKey={3} title={<span className="orange-text header-button">Shop</span>}>
                                             <MenuItem eventKey={3.1} onClick={()=>this.onLinkClick("/shop")}>Collections</MenuItem>
                                             <MenuItem eventKey={3.2} onClick={()=>this.onLinkClick("/premium_cases")}>Premium Cases</MenuItem>
                                             <MenuItem eventKey={3.3} onClick={()=>this.onLinkClick("/custom")}>Custom Cases</MenuItem>
                                         </NavDropdown>
-                                        <NavItem className="cursor-default">
-                                            <span className="orange-text" onClick={()=>this.onLinkClick("/reseller-dropshipper")}>Reseller</span>
+                                        <NavItem>
+                                            <span className="orange-text header-button" onClick={()=>this.onLinkClick("/reseller-dropshipper")}>Reseller</span>
                                         </NavItem>
                                         <NavItem>
-                                            <span className="orange-text" onClick={()=>this.onLinkClick("/admin/dashboard")}>Admin</span>
+                                            <span className="orange-text header-button" onClick={()=>this.onLinkClick("/admin/dashboard")}>Admin</span>
                                         </NavItem>
                                     </Nav>
                                 </Col>                   
@@ -267,22 +271,22 @@ class Header extends Component {
                                 </Col>
                                 <Col xs={12} sm={10} mdHidden lgHidden style={{'padding':'0', 'margin':'0'}}>
                                     <Nav style={{'width':'100%'}}>
-                                        <NavDropdown eventKey={3} title={<span className="orange-text">Shop</span>} id="basic-nav-dropdown" className="header-button">
+                                        <NavDropdown eventKey={3} title={<span className="orange-text header-button">Shop</span>}>
                                             <MenuItem eventKey={3.1} onClick={()=>this.onLinkClick("/shop")}>Collections</MenuItem>
                                             <MenuItem eventKey={3.2} onClick={()=>this.onLinkClick("/premium_cases")}>Premium Cases</MenuItem>
                                             <MenuItem eventKey={3.3} onClick={()=>this.onLinkClick("/custom")}>Custom Cases</MenuItem>
                                         </NavDropdown>
-                                        <NavItem eventKey={2} className="header-button" onClick={()=>this.onLinkClick("/reseller-dropshipper")}>
-                                            <span className="orange-text">Reseller</span>
+                                        <NavItem>
+                                            <span className="orange-text header-button" onClick={()=>this.onLinkClick("/reseller-dropshipper")}>Reseller</span>
                                         </NavItem>
-                                        <NavItem eventKey={4} className="header-button" onClick={()=>this.onLinkClick("/admin/cases")}>
-                                            <span className="orange-text">Admin</span>
+                                        <NavItem>
+                                            <span className="orange-text header-button" onClick={()=>this.onLinkClick("/admin/cases")}>Admin</span>
                                         </NavItem>
-                                        <NavItem eventKey={4} className="header-button" onClick={()=>this.onLinkClick(`/profile`)}>
-                                            <span className="orange-text">Profile</span>
+                                        <NavItem>
+                                            <span className="orange-text header-button" onClick={()=>this.onLinkClick(`/profile`)}>Profile</span>
                                         </NavItem>
-                                        <NavItem eventKey={4} className="header-button" onClick={()=>this.onLogoutClick()}>
-                                            <span className="orange-text">Logout</span>
+                                        <NavItem>
+                                            <span className="orange-text header-button" onClick={()=>this.onLogoutClick()}>Logout</span>
                                         </NavItem>
                                     </Nav>
                                 </Col>
@@ -381,13 +385,13 @@ class Header extends Component {
                 </Grid>              
                 <Modal show={this.state.edit_modal} onHide={this.handleClose.bind(this)} bsSize="large">
                 <Modal.Header closeButton>
-                    <Modal.Title><span>Keranjang Anda</span><span><input type="button" style={{'margin-right':'30px'}} className="btn btn-warning pull-right" value="Clear Cart" onClick={()=>this.onClearCartClick()}/></span></Modal.Title>
+                    <Modal.Title><span>Keranjang Anda</span><span><input type="button" style={{'margin-right':'30px'}} className="btn-blue-orange pull-right" value="Clear Cart" onClick={()=>this.onClearCartClick()}/></span></Modal.Title>
                 </Modal.Header>
                 <Modal.Body>
                 {this.renderCartPage()}
                 </Modal.Body>
                 <Modal.Footer>
-                    <input type="button" className="btn btn-danger" onClick={this.handleClose.bind(this)} value="Back"/>
+                    <input type="button" className="btn-orange-blue m-r" onClick={this.handleClose.bind(this)} value="Back"/>
                     {this.renderPaymentButton()}
                 </Modal.Footer>
                 </Modal>

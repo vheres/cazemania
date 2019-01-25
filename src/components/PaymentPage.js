@@ -30,6 +30,7 @@ class PaymentPage extends Component {
                 }
             })
             .then((response1) => {
+                console.log(response1)
                 this.setState({profile: response.data.user[0], cart: response.data.cart, rekening: response.data.rekening, shipping: response1.data.sicepat.results[0].tariff,
                     totalitems : totalitems,
                     recipient: {
@@ -43,6 +44,25 @@ class PaymentPage extends Component {
                 }})
                 this.calculateTransactionSummary()
             })
+            .catch(err => {
+                console.log(err)
+            })
+        })
+    }
+
+    getShippingCost() {
+        axios.get(API_URL_1 + "/shipping", {
+            params: {
+                destination: this.state.recipient.destination_code,
+                weight: this.state.totalitems
+            }
+        })
+        .then(async res => {
+            console.log(res)
+            await this.setState({shipping: res.data.sicepat.results[0].tariff})
+        })
+        .catch(err => {
+            console.log(err)
         })
     }
 
@@ -107,11 +127,11 @@ class PaymentPage extends Component {
         console.log(enter.which)
     }
 
-    onEditSave() {
+    async onEditSave() {
         if(this.refs.firstname.value == '' || this.refs.lastname.value == '' || this.refs.alamat.value == '' || this.state.selectedOption.label == '' || this.refs.kodepos.value == '') {
             alert('Please fill everything!');
         } else {
-            this.setState({ recipient: {
+            await this.setState({ recipient: {
                 firstname: this.refs.firstname.value,
                 lastname: this.refs.lastname.value,
                 phone: this.refs.phone.value,
@@ -121,6 +141,7 @@ class PaymentPage extends Component {
                 kodepos: this.refs.kodepos.value
             } })
         }
+        this.getShippingCost();
         alert('Edit Success');
         this.setState({ edit_modal: false });
         // } else {
@@ -321,7 +342,7 @@ class PaymentPage extends Component {
                             <Panel>
                                 <Panel.Body>
                                     <Row>
-                                        <Col xs={12} md={6}>
+                                        <Col xs={12} md={6} style={{marginTop:'3rem'}}>
                                             <label className="dropdown-container">
                                                 <select className="dropdown-select" ref="rekening" defaultValue={1} id="gender">
                                                     {this.renderRekeningList()}
@@ -403,8 +424,8 @@ class PaymentPage extends Component {
                             </form>
                         </Modal.Body>
                         <Modal.Footer>
-                            <input type="button" className="btn btn-danger" onClick={this.handleClose.bind(this)} value="Cancel"/>
-                            <input type="button" className="btn btn-success" onClick={()=>this.onEditSave()} value="Save"/>
+                            <input type="button" className="btn-orange-blue m-r" onClick={this.handleClose.bind(this)} value="Cancel"/>
+                            <input type="button" className="btn-blue-orange" onClick={()=>this.onEditSave()} value="Save"/>
                         </Modal.Footer>
                     </Modal>
                 </Grid>

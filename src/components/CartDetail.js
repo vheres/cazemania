@@ -7,8 +7,8 @@ class CartDetail extends Component {
     renderDeleteButton() {
         if (this.props.DeleteClick != undefined) {
             return (
-                <Col xs={2} md={1}>
-                        <input type="button" className="btn btn-danger" value="delete" onClick={()=>this.props.DeleteClick(this.props.id)}/>
+                <Col xs={2} md={2}>
+                    <input type="button" className="btn-orange-blue" value="delete" onClick={()=>this.props.DeleteClick(this.props.id)}/>
                 </Col>   
             )
         }
@@ -31,27 +31,29 @@ class CartDetail extends Component {
         return (
             <Row>
                 <Col xs={12}>
-                    <Col xs={1}>
-                        <h4>{this.props.count+1}</h4>
-                    </Col>
-                    <Col xs={10} md={3}>
-                        {this.renderImage()}
-                    </Col>
-                    <Col xs={6} md={4}>
-                        <Row>
-                            <h4>{this.props.name} | {this.props.code}</h4>
-                        </Row>
-                        <Row>
-                            <p>Details: {this.props.model}, {this.props.type} case</p>
-                        </Row>
-                        <Row>
-                            <p>Quantity: {this.props.quantity}</p>
-                        </Row>
-                    </Col>
-                    <Col xs={6} md={3}>
-                        <h4 style={{'font-weight':'bold'}}>Rp. {this.props.price.toLocaleString()}</h4>
-                    </Col>
-                    {this.renderDeleteButton()} 
+                    <Row>
+                        <Col xs={1}>
+                            <h4>{this.props.count+1}</h4>
+                        </Col>
+                        <Col xs={10} md={3}>
+                            {this.renderImage()}
+                        </Col>
+                        <Col xs={6} md={4}>
+                            <Row>
+                                <h4>{this.props.name} | {this.props.code}</h4>
+                            </Row>
+                            <Row>
+                                <p>Details: {this.props.model}, {this.props.type} case</p>
+                            </Row>
+                            <Row>
+                                <p>Quantity: {this.props.quantity}</p>
+                            </Row>
+                        </Col>
+                        <Col xs={6} md={2}>
+                            <h4 style={{'font-weight':'bold'}}>Rp. {this.props.price.toLocaleString()}</h4>
+                        </Col>
+                        {this.renderDeleteButton()} 
+                    </Row>
                 </Col>         
             </Row>  
         );   

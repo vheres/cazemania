@@ -58,7 +58,7 @@ class App extends Component {
             <Header />
           </Row>
           <Row>
-            <Col xs={12} className="no-margin no-padding">
+            <Col xs={12} className="no-margin no-padding" style={{minHeight:'61.5vh'}}>
               <Route exact path="/" component={HomePage}/>
               <Route path="/links" component={LinkTree}/>
               <Route path="/shop" component={ShopPage}/>

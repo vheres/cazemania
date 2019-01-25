@@ -38,11 +38,8 @@ class LoginPage extends Component {
         if(this.props.auth.email == "") {
             return(
                 <div>
-                    <Grid fluid className="margin-bot-15">
-                        {/* <Row className="no-margin">
-                            <img src={`${API_URL_1}/others/banner.jpg`} alt="banner" className="homepage-banner"></img>
-                        </Row> */}
-                        <Row className="margin-top-15">
+                    <Grid fluid>
+                        <Row style={{marginTop:'10px',marginBottom:'100px'}}>
                             <Col xsOffset={1} xs={10} mdOffset={2} md={4}>
                                 <Row>
                                     <Col xs={12} className="m-b-sm">
@@ -113,7 +110,6 @@ class LoginPage extends Component {
                                 </form>
                             </Col>
                         </Row>
-                        <hr />
                     </Grid>
                 </div>
             );

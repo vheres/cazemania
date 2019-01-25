@@ -47,7 +47,7 @@ class ProfileOrder extends Component {
 
     renderDataTableOrders(){
         if (this.state.orders.length === 0) {
-            return <div className="general-title-blue">There are no transactions yet!</div>
+            return <div className="general-title-blue" style={{marginTop:'2rem'}}>Kamu belum pernah transaksi apapun!</div>
         } else {
             var arrJSX = this.state.orders.map((item, count)=>{
                 return(

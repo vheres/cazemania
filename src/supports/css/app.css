@@ -4008,8 +4008,12 @@ textarea.form-control {
   width: 50px;
   height: 50px;
 }
+.btn-tosca:focus {
+  color: #fff !important;
+  background-color: rgb(30,190,203) !important;
+  outline: none !important;
+}
 .btn-tosca:hover,
-.btn-tosca:focus,
 .btn-tosca:active,
 .btn-tosca.active,
 .open .dropdown-toggle.btn-tosca {
