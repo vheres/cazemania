@@ -6805,8 +6805,8 @@ button.close {
 }
 @media (min-width:567px) {
   .homepage-banner {
-    object-fit: cover;
-    height: 93vh;
+    /* object-fit: cover; */
+    /* height: 93vh; */
   }
 }
 .homepage-button {
@@ -7032,7 +7032,7 @@ button.close {
 .Footer-css {
   /* background-color: rgb(30,190,203); */
   /* background-color: rgb(148, 148, 148); */
-  background-color: rgb(31, 31, 31);
+  background-color: #F9E7D7;
 }
 .footer-title {
   color: white;
@@ -7040,11 +7040,16 @@ button.close {
   letter-spacing: 0.3rem;
 }
 .footer-text {
-  color: white;
+  color: #666666;
   cursor: pointer;
+  font-weight: bold;
+  font-size: 14pt;
 }
 .footer-text:hover {
-  color: rgb(255, 181, 44);
+  color: rgb(30,190,203);
+}
+.instagram-text {
+  margin-left: 6px;
 }
 .facebook-text {
   margin-left: 10px;

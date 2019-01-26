@@ -50,10 +50,10 @@ class Header extends Component {
     }
     // CART SECTION
     getCartList() {
-        axios.get(API_URL_1 + `/cart/` + this.props.auth.id)
-        .then((response) => {
-            console.log(response.data.results)
-            this.setState({cart: response.data.results})
+        axios.get(`${API_URL_1}/cart/${this.props.auth.id}`)
+        .then(async (response) => {
+            console.log(response)
+            await this.setState({cart: response.data.results})
         })
     }
 
@@ -63,10 +63,9 @@ class Header extends Component {
     }
 
     onDeleteClick(id) {
-        axios.delete(API_URL_1 + `/cart/` + this.props.auth.id + "/" + id, )
-        .then((response) => {
-            this.getCartList();
-            // this.setState({cart: response.data.results1})
+        axios.delete(`${API_URL_1}/cart/${this.props.auth.id}/${id}`, )
+        .then(async (response) => {
+            this.setState({cart:response.data.results2})
             alert(`delete item success!`)
         }).catch((err) => {
             console.log(err);
@@ -74,9 +73,9 @@ class Header extends Component {
     }
 
     onClearCartClick() {
-        axios.delete(API_URL_1 + `/clear_cart/` + this.props.auth.id)
-        .then((response) => {
-            this.setState({cart:[]})
+        axios.delete(`${API_URL_1}/clear_cart/${this.props.auth.id}`)
+        .then(async (response) => {
+            await this.setState({cart:[]})
             alert(`clear cart success!`)
         }).catch((err) => {
             console.log(err);

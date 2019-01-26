@@ -31,6 +31,7 @@ class PaymentPage extends Component {
             })
             .then((response1) => {
                 console.log(response1)
+
                 this.setState({profile: response.data.user[0], cart: response.data.cart, rekening: response.data.rekening, shipping: response1.data.sicepat.results[0].tariff,
                     totalitems : totalitems,
                     recipient: {

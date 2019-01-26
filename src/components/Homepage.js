@@ -6,6 +6,7 @@ import CarouselInsta from './CarouselInsta';
 import { Link } from 'react-router-dom';
 import {API_URL_1} from '../supports/api-url/apiurl'
 import ReactPixel from 'react-facebook-pixel';
+import CarouselBanner from './CarouselBanner';
 
 class HomePage extends Component {
     componentDidMount() {
@@ -16,7 +17,7 @@ class HomePage extends Component {
         return(
                 <Grid fluid style={{'background-color':'white'}}>
                     <Row className="m-n">
-                        <img src={`${API_URL_1}/others/banner2.jpg`} alt="banner" className="homepage-banner"></img>
+                        <CarouselBanner/>
                     </Row>
                     <Row className="m-t-lg">
                         <Col xsOffset={0} xs={12} mdOffset={1} md={10}>

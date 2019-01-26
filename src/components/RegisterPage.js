@@ -177,11 +177,8 @@ class RegisterPage extends Component {
         const { selectedOption } = this.state;
         if(this.props.auth.email === "") {
             return(
-                <Grid fluid className="margin-bot-15">
-                    {/* <Row className="no-margin">
-                        <img src={`${API_URL_1}/others/banner.jpg`} alt="banner" className="homepage-banner"></img>
-                    </Row>         */}
-                    <Row className="margin-top-15">
+                <Grid fluid>
+                    <Row style={{marginTop:'50px',marginBottom:'50px'}}>
                         <Col xsOffset={1} xs={10} mdOffset={4} md={4}>
                             <Row className="m-b-md">
                                 <Col xs={12}>

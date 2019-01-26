@@ -68,6 +68,9 @@ class InformationPage extends Component {
             <Grid fluid className="HomePage-css">
                 <Row className="margin-top-15">
                     <Col mdOffset={1} md={2} xsHidden smHidden className="information-quick-link">
+                        <div className="general-title-blue">
+                            Menu
+                        </div>
                         <ButtonGroup vertical>
                             <Button onClick={()=>this.handleSelect('faq')} className={`${this.state.buttonCSS[0]}`}>FAQ</Button>
                             <Button onClick={()=>this.handleSelect('caraorder')} className={`${this.state.buttonCSS[1]}`}>Cara Order</Button>

@@ -39,7 +39,7 @@ class LoginPage extends Component {
             return(
                 <div>
                     <Grid fluid>
-                        <Row style={{marginTop:'10px',marginBottom:'100px'}}>
+                        <Row style={{marginTop:'100px',marginBottom:'100px'}}>
                             <Col xsOffset={1} xs={10} mdOffset={2} md={4}>
                                 <Row>
                                     <Col xs={12} className="m-b-sm">
