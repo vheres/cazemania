@@ -15,6 +15,7 @@ import ProfilePage from './components/ProfilePage';
 import LoginPage from './components/LoginPage';
 import RegisterPage from './components/RegisterPage';
 import RegisterRD from './components/RegisterRD';
+import ResetPassword from './components/ResetPassword';
 import LinkTree from './components/LinkTree';
 import { Grid, Row, Col } from 'react-bootstrap';
 import { connect } from 'react-redux';
@@ -76,6 +77,7 @@ class App extends Component {
               <Route path="/login" component={LoginPage}/>
               <Route path="/register" component={RegisterPage}/>
               <Route path="/register_reseller_dropshipper" component={RegisterRD}/>
+              <Route path="/reset-password" component={ResetPassword}/>
             </Col>
           </Row>
           <Row className="no-margin no-padding">

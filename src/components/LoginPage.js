@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import { Grid, Row, Col } from 'react-bootstrap';
 import { onLogin } from '../actions';
-import { Redirect } from 'react-router-dom';
+import { Redirect, Link } from 'react-router-dom';
 import { connect } from 'react-redux';
 import Cookies from 'universal-cookie';
 import ReactPixel from 'react-facebook-pixel';
@@ -39,8 +39,8 @@ class LoginPage extends Component {
             return(
                 <div>
                     <Grid fluid>
-                        <Row style={{marginTop:'100px',marginBottom:'100px'}}>
-                            <Col xsOffset={1} xs={10} mdOffset={2} md={4}>
+                        <Row className="m-b-xl">
+                            <Col xsOffset={1} xs={10} mdOffset={2} md={4} className="m-t-xl">
                                 <Row>
                                     <Col xs={12} className="m-b-sm">
                                         <span className="general-title-blue">Belum Punya Akun?</span><br/>
@@ -52,12 +52,12 @@ class LoginPage extends Component {
                                     </Col>
                                 </Row>
                                 <Row>
-                                    <Col xsOffset={1} xs={10} mdOffset={0} md={12}>
+                                    <Col xsOffset={0} xs={12}>
                                         <input type="button" className="btn-blue-orange" value="Register" onClick={()=>this.props.history.push('/register')}></input>
                                     </Col>
                                 </Row>
                             </Col>
-                            <Col xsOffset={1} xs={10} mdOffset={0} md={6}>
+                            <Col xsOffset={1} xs={10} mdOffset={0} md={6} className="m-t-xl">
                                 <Row className="m-b-md">
                                     <Col xs={12}>
                                         <span className="general-title-blue">Login Member</span>
@@ -92,7 +92,7 @@ class LoginPage extends Component {
                                         <Col xs={12} md={8}>
                                             <Row className="m-t">
                                                 <Col xsOffset={1} xs={10} mdOffset={0} md={12}>
-                                                    <a href="reset.html" className="pull-right general-link">Forgot password?</a>
+                                                    <Link to="/reset-password" className="pull-right general-link">Lupa Password?</Link>
                                                 </Col>
                                             </Row>
                                             <Row className="m-t">

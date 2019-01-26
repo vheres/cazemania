@@ -220,30 +220,16 @@ class CustomPage extends Component {
     
     renderCustomImage() {
         if(this.state.picture === "") {
-            if (this.state.inputfile.length == 0) {
-                return (
-                    <Col xs={12} className="upload_custom">
-                    <label for="custom_picture" className='inputlabel'><i className="fa fa-picture-o"/><p style={{'font-size': '30px'}}>Upload Picture</p></label>
-                        <div>
-                            <form encType="multipart/form-data">
-                            <input type="file" name="filename" id="custom_picture" accept="image/*" className="inputfile" onChange={()=>this.setState({inputfile: document.getElementById('custom_picture').files[0]})}/>
-                            </form>
-                        </div>
-                    </Col> 
-                )
-            } else {
-                return (
-                    <Col xs={12} className="upload_custom">
-                    <label for="custom_picture" className='inputlabel inputlabel_icon'><i className="fa fa-picture-o"/><p style={{'font-size': '30px'}}>Upload Picture</p></label><p className="text-ellipsis" style={{'font-size': '20px'}}><i className="fa fa-check"></i>{this.state.inputfile.name}</p>
-                        <div>
-                            <form encType="multipart/form-data">
-                            <input type="file" name="filename" id="custom_picture" accept="image/*" className="inputfile" onChange={()=>this.setState({inputfile: document.getElementById('custom_picture').files[0]})}/>
-                            </form>
-                        </div>
-                    </Col> 
-                )
-            }
-            
+            return (
+                <Col xs={12} className="upload_custom">
+                    <label for="custom_picture" className='inputlabel inputlabel_icon'><i className="fa fa-picture-o"/><p style={{'font-size': '30px'}}>{this.state.inputfile.length == 0?'Upload Picture':<p className="text-ellipsis" style={{'font-size': '20px'}}><i className="fa fa-check"></i>{this.state.inputfile.name}</p>}</p></label>
+                    <div>
+                        <form encType="multipart/form-data">
+                        <input type="file" name="filename" id="custom_picture" accept="image/*" className="inputfile" onChange={()=>this.setState({inputfile: document.getElementById('custom_picture').files[0]})}/>
+                        </form>
+                    </div>
+                </Col> 
+            )
         }
         else {
             return <Magnifier src={this.state.picture+'.jpg'} width={"100%"} />

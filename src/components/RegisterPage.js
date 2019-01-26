@@ -178,7 +178,7 @@ class RegisterPage extends Component {
         if(this.props.auth.email === "") {
             return(
                 <Grid fluid>
-                    <Row style={{marginTop:'50px',marginBottom:'50px'}}>
+                    <Row className="m-t-xl m-b-xl">
                         <Col xsOffset={1} xs={10} mdOffset={4} md={4}>
                             <Row className="m-b-md">
                                 <Col xs={12}>
