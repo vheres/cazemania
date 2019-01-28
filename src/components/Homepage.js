@@ -86,7 +86,7 @@ class HomePage extends Component {
                             </div>
                         </Col>
                     </Row>
-                    <Row style={{marginTop:'2rem',marginBottom:'200px'}}>
+                    <Row style={{marginTop:'2rem',marginBottom:'150px'}}>
                         <Col xs={12}>
                             <CarouselInsta/>
                         </Col>

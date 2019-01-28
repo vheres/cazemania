@@ -224,164 +224,174 @@ class Header extends Component {
         if(this.props.auth.email !== "") {
             return(
                 <Row>
-                    <Navbar fixedTop={true} collapseOnSelect fluid className="nav-style">
-                        <Navbar.Header>
-                            <Navbar.Brand>
-                                <Link to="/"><img src={`${API_URL_1}/others/logo.png`} alt="Caze Mania" className="nav-logo"></img></Link>
-                            </Navbar.Brand>
-                            <Navbar.Toggle />
-                        </Navbar.Header>
-                        <Navbar.Collapse>
-                                <Col xsHidden smHidden md={3} lg={4} style={{'padding':'0', 'margin':'0'}}>
-                                    <Nav>
-                                        <NavDropdown eventKey={3} title={<span className="orange-text header-button">Shop</span>}>
-                                            <MenuItem eventKey={3.1} onClick={()=>this.onLinkClick("/shop")}>Collections</MenuItem>
-                                            <MenuItem eventKey={3.2} onClick={()=>this.onLinkClick("/premium_cases")}>Premium Cases</MenuItem>
-                                            <MenuItem eventKey={3.3} onClick={()=>this.onLinkClick("/custom")}>Custom Cases</MenuItem>
-                                        </NavDropdown>
-                                        <NavItem>
-                                            <span className="orange-text header-button" onClick={()=>this.onLinkClick("/reseller-dropshipper")}>Reseller</span>
-                                        </NavItem>
-                                        <NavItem>
-                                            <span className="orange-text header-button" onClick={()=>this.onLinkClick("/admin/dashboard")}>Admin</span>
-                                        </NavItem>
-                                    </Nav>
-                                </Col>                   
-                                <Col xsHidden smHidden md={6} lg={6} style={{'padding':'0', 'margin':'0'}} className="pull-right">
-                                    <Nav style={{'width':'100%'}}>
-                                        <NavDropdown eventKey={6} title={<i class="fa fa-user"></i>} id="basic-nav-dropdown" className="m-r pull-right" style={{'font-size': '22px', 'margin-top':'6px'}}>
-                                            <MenuItem eventKey={6.1} onClick={()=>this.onLinkClick(`/profile`)}>
-                                                <span>Profile</span>
-                                            </MenuItem>
-                                            <MenuItem eventKey={6.1} onClick={()=>this.onLogoutClick()}>
-                                                <span>Logout</span>
-                                            </MenuItem>
-                                        </NavDropdown>
-                                        <NavItem eventKey={5} className="pull-right" >
-                                            <Button type="submit" className="btn btn-tosca" onClick={()=>this.handleShow()}><i class="fa fa-shopping-cart" ></i></Button>
-                                        </NavItem>
-                                        <NavItem eventKey={4} className="pull-right">
-                                            <Button type="submit" className="btn btn-tosca" onClick={()=>this.onSearchClick()}><i class="fa fa-search"></i></Button>
-                                        </NavItem>
-                                        <NavItem eventKey={4} className="pull-right">
-                                            <input type="text" id="search" placeholder="Cari" class="search-bar" onKeyPress={this.onKeyPress.bind(this)}/>{' '}
-                                        </NavItem>
-                                    </Nav>
-                                </Col>
-                                <Col xs={12} sm={10} mdHidden lgHidden style={{'padding':'0', 'margin':'0'}}>
-                                    <Nav style={{'width':'100%'}}>
-                                        <NavDropdown eventKey={3} title={<span className="orange-text header-button">Shop</span>}>
-                                            <MenuItem eventKey={3.1} onClick={()=>this.onLinkClick("/shop")}>Collections</MenuItem>
-                                            <MenuItem eventKey={3.2} onClick={()=>this.onLinkClick("/premium_cases")}>Premium Cases</MenuItem>
-                                            <MenuItem eventKey={3.3} onClick={()=>this.onLinkClick("/custom")}>Custom Cases</MenuItem>
-                                        </NavDropdown>
-                                        <NavItem>
-                                            <span className="orange-text header-button" onClick={()=>this.onLinkClick("/reseller-dropshipper")}>Reseller</span>
-                                        </NavItem>
-                                        <NavItem>
-                                            <span className="orange-text header-button" onClick={()=>this.onLinkClick("/admin/cases")}>Admin</span>
-                                        </NavItem>
-                                        <NavItem>
-                                            <span className="orange-text header-button" onClick={()=>this.onLinkClick(`/profile`)}>Profile</span>
-                                        </NavItem>
-                                        <NavItem>
-                                            <span className="orange-text header-button" onClick={()=>this.onLogoutClick()}>Logout</span>
-                                        </NavItem>
-                                    </Nav>
-                                </Col>
-                        </Navbar.Collapse>       
-                    </Navbar>
-                    <Col xs={12} mdHidden lgHidden style={{'padding-top':'0px'}}>
-                        <input type="text" id="mobilesearch" placeholder="Cari" class="search-bar-mobile" onKeyPress={this.onKeyPress.bind(this)}/>
-                        <Button type="submit" className="btn-mobile" onClick={()=>this.onSearchClick()}><i class="fa fa-search" style={{'color':'white'}}></i></Button>
-                        <Button type="submit" className="btn-mobile" onClick={()=>this.handleShow()}><i class="fa fa-shopping-cart" style={{'color':'white'}}></i></Button>
+                    <Col xs={12}>
+                        <Navbar fixedTop={true} collapseOnSelect fluid className="nav-style">
+                            <Navbar.Header>
+                                <Navbar.Brand>
+                                    <Link to="/"><img src={`${API_URL_1}/others/logo.png`} alt="Caze Mania" className="nav-logo"></img></Link>
+                                </Navbar.Brand>
+                                <Navbar.Toggle />
+                            </Navbar.Header>
+                            <Navbar.Collapse>
+                                    <Col xsHidden smHidden md={3} lg={4} style={{'padding':'0', 'margin':'0'}}>
+                                        <Nav>
+                                            <NavDropdown eventKey={3} title={<span className="orange-text header-button">Shop</span>}>
+                                                <MenuItem eventKey={3.1} onClick={()=>this.onLinkClick("/shop")}>Collections</MenuItem>
+                                                <MenuItem eventKey={3.2} onClick={()=>this.onLinkClick("/premium_cases")}>Premium Cases</MenuItem>
+                                                <MenuItem eventKey={3.3} onClick={()=>this.onLinkClick("/custom")}>Custom Cases</MenuItem>
+                                            </NavDropdown>
+                                            <NavItem>
+                                                <span className="orange-text header-button" onClick={()=>this.onLinkClick("/reseller-dropshipper")}>Reseller</span>
+                                            </NavItem>
+                                            <NavItem>
+                                                <span className="orange-text header-button" onClick={()=>this.onLinkClick("/admin/dashboard")}>Admin</span>
+                                            </NavItem>
+                                        </Nav>
+                                    </Col>                   
+                                    <Col xsHidden smHidden md={6} lg={6} style={{'padding':'0', 'margin':'0'}} className="pull-right">
+                                        <Nav style={{'width':'100%'}}>
+                                            <NavDropdown eventKey={6} title={<i class="fa fa-user"></i>} id="basic-nav-dropdown" className="m-r pull-right" style={{'font-size': '22px', 'margin-top':'6px'}}>
+                                                <MenuItem eventKey={6.1} onClick={()=>this.onLinkClick(`/profile`)}>
+                                                    <span>Profile</span>
+                                                </MenuItem>
+                                                <MenuItem eventKey={6.1} onClick={()=>this.onLogoutClick()}>
+                                                    <span>Logout</span>
+                                                </MenuItem>
+                                            </NavDropdown>
+                                            <NavItem eventKey={5} className="pull-right" >
+                                                <Button type="submit" className="btn btn-tosca" onClick={()=>this.handleShow()}><i class="fa fa-shopping-cart" ></i></Button>
+                                            </NavItem>
+                                            <NavItem eventKey={4} className="pull-right">
+                                                <Button type="submit" className="btn btn-tosca" onClick={()=>this.onSearchClick()}><i class="fa fa-search"></i></Button>
+                                            </NavItem>
+                                            <NavItem eventKey={4} className="pull-right">
+                                                <input type="text" id="search" placeholder="Cari" class="search-bar" onKeyPress={this.onKeyPress.bind(this)}/>{' '}
+                                            </NavItem>
+                                        </Nav>
+                                    </Col>
+                                    <Col xs={12} sm={10} mdHidden lgHidden style={{'padding':'0px', 'margin':'0px'}}>
+                                        <Nav style={{'width':'100%'}}>
+                                            <NavDropdown eventKey={3} title={<span className="orange-text">Shop</span>}>
+                                                <MenuItem eventKey={3.1} onClick={()=>this.onLinkClick("/shop")}>Collections</MenuItem>
+                                                <MenuItem eventKey={3.2} onClick={()=>this.onLinkClick("/premium_cases")}>Premium Cases</MenuItem>
+                                                <MenuItem eventKey={3.3} onClick={()=>this.onLinkClick("/custom")}>Custom Cases</MenuItem>
+                                            </NavDropdown>
+                                            <NavItem>
+                                                <span className="orange-text" onClick={()=>this.onLinkClick("/reseller-dropshipper")}>Reseller</span>
+                                            </NavItem>
+                                            <NavItem>
+                                                <span className="orange-text" onClick={()=>this.onLinkClick("/admin/cases")}>Admin</span>
+                                            </NavItem>
+                                            <NavItem>
+                                                <span className="orange-text" onClick={()=>this.onLinkClick(`/profile`)}>Profile</span>
+                                            </NavItem>
+                                            <NavItem>
+                                                <span className="orange-text" onClick={()=>this.onLogoutClick()}>Logout</span>
+                                            </NavItem>
+                                        </Nav>
+                                    </Col>
+                            </Navbar.Collapse>       
+                        </Navbar>
+                        <Row style={{marginTop:'0px',paddingTop:'0px'}}>
+                            <Col xs={12} mdHidden lgHidden style={{'padding-top':'0px'}}>
+                                <input type="text" id="mobilesearch" placeholder="Cari" class="search-bar-mobile" onKeyPress={this.onKeyPress.bind(this)}/>
+                                <Button type="submit" className="btn-mobile" onClick={()=>this.onSearchClick()}><i class="fa fa-search" style={{'color':'white'}}></i></Button>
+                                <Button type="submit" className="btn-mobile" onClick={()=>this.handleShow()}><i class="fa fa-shopping-cart" style={{'color':'white'}}></i></Button>
+                            </Col>
+                        </Row>
                     </Col>
                 </Row>
             );
         }
         return(
                 <Row>
-                    <Navbar fixedTop={true} collapseOnSelect fluid className="nav-style">
-                        <Navbar.Header>
-                            <Navbar.Brand>
-                                <Link to="/"><img src={`${API_URL_1}/others/logo.png`} alt="Caze Mania" className="nav-logo"></img></Link>
-                            </Navbar.Brand>
-                            <Navbar.Toggle />
-                        </Navbar.Header>
-                        <Navbar.Collapse>
-                                <Col xsHidden smHidden md={3} lg={5} style={{'padding':'0', 'margin':'0'}}>
-                                    <Nav>
-                                        <NavDropdown eventKey={3} title={<span className="orange-text header-button">Shop</span>}>
-                                            <MenuItem eventKey={3.1} onClick={()=>this.onLinkClick("/shop")}>Collections</MenuItem>
-                                            <MenuItem eventKey={3.2} onClick={()=>this.onLinkClick("/premium_cases")}>Premium Cases</MenuItem>
-                                            <MenuItem eventKey={3.3} onClick={()=>this.onLinkClick("/custom")}>Custom Cases</MenuItem>
-                                        </NavDropdown>
-                                        <NavItem>
-                                            <span className="orange-text header-button" onClick={()=>this.onLinkClick("/reseller-dropshipper")}>Reseller</span>
-                                        </NavItem>
-                                        <NavItem>
-                                            <span className="orange-text header-button" onClick={()=>this.onLinkClick("/admin/dashboard")}>Admin</span>
-                                        </NavItem>            
-                                    </Nav>
-                                </Col>                   
-                                <Col xsHidden smHidden md={6} lg={5} style={{'padding':'0', 'margin':'0'}} className="pull-right">
-                                    <Nav style={{'width':'100%'}}>
-                                        <NavDropdown eventKey={6} title={<i class="fa fa-user"></i>} id="basic-nav-dropdown" className="m-r pull-right" style={{'font-size': '22px', 'margin-top':'6px'}}>
-                                            <MenuItem eventKey={6.1} onClick={()=>this.onLinkClick("/login")}>
-                                                <span><i className="fa fa-sign-in"></i> Login</span>
-                                            </MenuItem>
-                                            <MenuItem eventKey={6.2} onClick={()=>this.onLinkClick("/register")}>
-                                                <span><i className="fa fa-user-plus"></i> Register</span>
-                                            </MenuItem>
-                                        </NavDropdown>
-                                        <NavItem eventKey={5} className="pull-right" >
-                                            <Button type="submit" className="btn btn-tosca" onClick={()=>{alert('Please Login First');this.onLinkClick("/login")}}><i class="fa fa-shopping-cart" ></i></Button>
-                                        </NavItem>
-                                        <NavItem eventKey={4} className="pull-right">
-                                            <Button type="submit" className="btn btn-tosca" onClick={()=>this.onSearchClick()}><i class="fa fa-search"></i></Button>
-                                        </NavItem>
-                                        <NavItem eventKey={4} className="pull-right">
-                                            <input type="text" id="search" placeholder="Cari" class="search-bar" onKeyPress={this.onKeyPress.bind(this)}/>{' '}
-                                        </NavItem>
-                                    </Nav>
-                                </Col>
-                                <Col xs={12} sm={6} mdHidden lgHidden style={{'padding':'0', 'margin':'0'}} className="pull-right">
-                                    <Nav style={{'width':'100%'}}>
-                                        <NavDropdown eventKey={3} title={<span className="orange-text">Shop</span>} id="basic-nav-dropdown" className="header-button">
-                                            <MenuItem eventKey={3.1} onClick={()=>this.onLinkClick("/shop")}>Collections</MenuItem>
-                                            <MenuItem eventKey={3.2} onClick={()=>this.onLinkClick("/premium_cases")}>Premium Cases</MenuItem>
-                                            <MenuItem eventKey={3.3} onClick={()=>this.onLinkClick("/custom")}>Custom Cases</MenuItem>
-                                        </NavDropdown>
-                                        <NavItem>
-                                            <span className="orange-text header-button" onClick={()=>this.onLinkClick("/reseller-dropshipper")}>Reseller</span>
-                                        </NavItem>
-                                        <NavItem>
-                                            <span className="orange-text header-button" onClick={()=>this.onLinkClick("/admin/dashboard")}>Admin</span>
-                                        </NavItem>
-                                        <NavItem>
-                                            <span className="orange-text header-button" onClick={()=>this.onLinkClick("/login")}>Login</span>
-                                        </NavItem>
-                                        <NavItem>
-                                            <span className="orange-text header-button" onClick={()=>this.onLinkClick("/register")}>Register</span>
-                                        </NavItem>
-                                    </Nav>
-                                </Col>
-                        </Navbar.Collapse>       
-                    </Navbar>
-                    <Col xs={12} mdHidden lgHidden style={{'padding-top':'0px'}}>
-                        <input type="text" id="mobilesearch" placeholder="Cari" class="search-bar-mobile" onKeyPress={this.onKeyPress.bind(this)}/>
-                        <Button type="button" className="btn-mobile" onClick={()=>this.onSearchClick()}><i class="fa fa-search" style={{'color':'white'}}></i></Button>
-                        <Button type="submit" className="btn-mobile" onClick={()=>{alert('Please Login First');this.onLinkClick("/login")}}><i class="fa fa-shopping-cart" style={{'color':'white'}}></i></Button>
-                    </Col>
+                    <Col xs={12}>
+                        <Navbar fixedTop={true} collapseOnSelect fluid className="nav-style">
+                            <Navbar.Header>
+                                <Navbar.Brand>
+                                    <Link to="/"><img src={`${API_URL_1}/others/logo.png`} alt="Caze Mania" className="nav-logo"></img></Link>
+                                </Navbar.Brand>
+                                <Navbar.Toggle />
+                            </Navbar.Header>
+                            <Navbar.Collapse>
+                                    <Col xsHidden smHidden md={3} lg={5} style={{'padding':'0', 'margin':'0'}}>
+                                        <Nav>
+                                            <NavDropdown eventKey={3} title={<span className="orange-text header-button">Shop</span>}>
+                                                <MenuItem eventKey={3.1} onClick={()=>this.onLinkClick("/shop")}>Collections</MenuItem>
+                                                <MenuItem eventKey={3.2} onClick={()=>this.onLinkClick("/premium_cases")}>Premium Cases</MenuItem>
+                                                <MenuItem eventKey={3.3} onClick={()=>this.onLinkClick("/custom")}>Custom Cases</MenuItem>
+                                            </NavDropdown>
+                                            <NavItem>
+                                                <span className="orange-text header-button" onClick={()=>this.onLinkClick("/reseller-dropshipper")}>Reseller</span>
+                                            </NavItem>
+                                            <NavItem>
+                                                <span className="orange-text header-button" onClick={()=>this.onLinkClick("/admin/dashboard")}>Admin</span>
+                                            </NavItem>            
+                                        </Nav>
+                                    </Col>                   
+                                    <Col xsHidden smHidden md={6} lg={5} style={{'padding':'0', 'margin':'0'}} className="pull-right">
+                                        <Nav style={{'width':'100%'}}>
+                                            <NavDropdown eventKey={6} title={<i class="fa fa-user"></i>} id="basic-nav-dropdown" className="m-r pull-right" style={{'font-size': '22px', 'margin-top':'6px'}}>
+                                                <MenuItem eventKey={6.1} onClick={()=>this.onLinkClick("/login")}>
+                                                    <span><i className="fa fa-sign-in"></i> Login</span>
+                                                </MenuItem>
+                                                <MenuItem eventKey={6.2} onClick={()=>this.onLinkClick("/register")}>
+                                                    <span><i className="fa fa-user-plus"></i> Register</span>
+                                                </MenuItem>
+                                            </NavDropdown>
+                                            <NavItem eventKey={5} className="pull-right" >
+                                                <Button type="submit" className="btn btn-tosca" onClick={()=>{alert('Please Login First');this.onLinkClick("/login")}}><i class="fa fa-shopping-cart" ></i></Button>
+                                            </NavItem>
+                                            <NavItem eventKey={4} className="pull-right">
+                                                <Button type="submit" className="btn btn-tosca" onClick={()=>this.onSearchClick()}><i class="fa fa-search"></i></Button>
+                                            </NavItem>
+                                            <NavItem eventKey={4} className="pull-right">
+                                                <input type="text" id="search" placeholder="Cari" class="search-bar" onKeyPress={this.onKeyPress.bind(this)}/>{' '}
+                                            </NavItem>
+                                        </Nav>
+                                    </Col>
+                                    <Col xs={12} sm={6} mdHidden lgHidden style={{'padding':'0px', 'margin':'0px'}} className="pull-right">
+                                        <Nav style={{'width':'100%'}}>
+                                            <NavDropdown title={<span className="orange-text">Shop</span>}>
+                                                <MenuItem onClick={()=>this.onLinkClick("/shop")}>Collections</MenuItem>
+                                                <MenuItem onClick={()=>this.onLinkClick("/premium_cases")}>Premium Cases</MenuItem>
+                                                <MenuItem onClick={()=>this.onLinkClick("/custom")}>Custom Cases</MenuItem>
+                                            </NavDropdown>
+                                            <NavItem>
+                                                <span className="orange-text" onClick={()=>this.onLinkClick("/reseller-dropshipper")}>Reseller</span>
+                                            </NavItem>
+                                            <NavItem>
+                                                <span className="orange-text" onClick={()=>this.onLinkClick("/admin/dashboard")}>Admin</span>
+                                            </NavItem>
+                                            <NavItem>
+                                                <span className="orange-text" onClick={()=>this.onLinkClick("/login")}>Login</span>
+                                            </NavItem>
+                                            <NavItem>
+                                                <span className="orange-text" onClick={()=>this.onLinkClick("/register")}>Register</span>
+                                            </NavItem>
+                                        </Nav>
+                                    </Col>
+                            </Navbar.Collapse>       
+                        </Navbar>
+                        <Row style={{marginTop:'0px',paddingTop:'0px'}}>
+                            <Col xs={12} mdHidden lgHidden style={{'padding-top':'0px'}}>
+                                <input type="text" id="mobilesearch" placeholder="Cari" class="search-bar-mobile" onKeyPress={this.onKeyPress.bind(this)}/>
+                                <Button type="button" className="btn-mobile" onClick={()=>this.onSearchClick()}><i class="fa fa-search" style={{'color':'white'}}></i></Button>
+                                <Button type="submit" className="btn-mobile" onClick={()=>{alert('Please Login First');this.onLinkClick("/login")}}><i class="fa fa-shopping-cart" style={{'color':'white'}}></i></Button>
+                            </Col>
+                        </Row>
+                    </Col> 
                 </Row>
         );
     }
     render() {
         return (
-            <div>
-                <Grid fluid>
-                {this.renderNavbar()} 
-                </Grid>              
+            <Col xs={12}>
+                <Row>
+                    <Col xs={12}>
+                        {this.renderNavbar()} 
+                    </Col>
+                </Row>            
                 <Modal show={this.state.edit_modal} onHide={this.handleClose.bind(this)} bsSize="large">
                 <Modal.Header closeButton>
                     <Modal.Title><span>Keranjang Anda</span><span><input type="button" style={{'margin-right':'30px'}} className="btn-blue-orange pull-right" value="Clear Cart" onClick={()=>this.onClearCartClick()}/></span></Modal.Title>
@@ -394,8 +404,7 @@ class Header extends Component {
                     {this.renderPaymentButton()}
                 </Modal.Footer>
                 </Modal>
-            </div>
-                
+            </Col>
         );
     }
 }
