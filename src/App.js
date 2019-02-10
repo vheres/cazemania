@@ -1,5 +1,4 @@
 import React, { Component } from 'react';
-import AdminDashboard from './components/AdminDashboard'
 import Header from './components/Header';
 import Footer from './components/Footer';
 import HomePage from './components/Homepage';
@@ -16,7 +15,6 @@ import LoginPage from './components/LoginPage';
 import RegisterPage from './components/RegisterPage';
 import RegisterRD from './components/RegisterRD';
 import ResetPassword from './components/ResetPassword';
-import LinkTree from './components/LinkTree';
 import { Grid, Row, Col } from 'react-bootstrap';
 import { connect } from 'react-redux';
 import { keepLogin, onLogout, cookieChecked } from './actions';
@@ -61,7 +59,6 @@ class App extends Component {
           <Row>
             <Col xs={12} className="no-margin no-padding" style={{minHeight:'61.5vh'}}>
               <Route exact path="/" component={HomePage}/>
-              <Route path="/links" component={LinkTree}/>
               <Route path="/shop" component={ShopPage}/>
               <Route path="/custom" component={CustomPage}/>
               <Route path="/premium_cases" component={PremiumPage}/>
@@ -70,9 +67,6 @@ class App extends Component {
               <Route path="/information" component={InformationPage}/>
               <Route path="/payment" component={PaymentPage}/>
               <Route path="/reseller-dropshipper" component={ResellerPage}/>
-              <Switch>
-                <Route path="/admin/dashboard" component={AdminDashboard}/>
-              </Switch>
               <Route path="/profile" component={ProfilePage}/>
               <Route path="/login" component={LoginPage}/>
               <Route path="/register" component={RegisterPage}/>

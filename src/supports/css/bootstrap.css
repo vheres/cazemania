@@ -7663,6 +7663,17 @@ color:#54b59f;
   background: rgb(9, 175, 204);
 }
 
+.premium-carousel-arrow {
+  height: 75%;
+  position: absolute;
+  display: none;
+}
+
+@media (min-width: 576px) {
+  .premium-carousel-arrow {
+    display: flex;
+  }
+}
 
 
 

@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import AliceCarousel from 'react-alice-carousel';
-import { Col } from 'react-bootstrap';
+import CarouselPremiumThumbs from './CarouselPremiumThumbs';
+import { Row, Col } from 'react-bootstrap';
 import 'react-alice-carousel/lib/alice-carousel.css';
 import {API_URL_1} from '../supports/api-url/apiurl'
 import Magnifier from 'react-magnifier';
@@ -12,7 +13,6 @@ class CarouselPremium extends Component {
         0: { items: 1 }
     };
 
-
     galleryItems() {
         return (
             this.props.images.map((item, index) => {
@@ -21,36 +21,32 @@ class CarouselPremium extends Component {
         )
     };
 
-    renderThumb() {
-        var arrJSX = []
-        this.props.images.map((item, index) => {
-            arrJSX.push(<img src={`${API_URL_1}/premium/${item.image}.jpg`} className="m-b carousel-thumbnail" key={index} onClick={() => this.Carousel._onDotClick(index)}/>)
-        })
-        return arrJSX;
-    }
-
     render() {
     const items = this.galleryItems();  
         return (
             <div>
-                <Col md={3} className="m-t">
-                    {this.renderThumb()}
-                </Col>
-                <Col md={9}>
-                    <AliceCarousel
-                    items={items}
-                    duration={400}
-                    autoPlay={false}
-                    fadeOutAnimation={true}
-                    autoPlayInterval={2000}
-                    responsive={this.responsive}
-                    autoPlayActionDisabled={true}
-                    dotsDisabled={true}
-                    buttonsDisabled={true}
-                    mouseDragEnabled={false}
-                    ref={ el => this.Carousel = el }
-                    />
-                </Col>  
+                <Row>
+                    <Col xs={12}>
+                        <AliceCarousel
+                        items={items}
+                        duration={400}
+                        autoPlay={false}
+                        fadeOutAnimation={true}
+                        autoPlayInterval={2000}
+                        responsive={this.responsive}
+                        autoPlayActionDisabled={true}
+                        dotsDisabled={true}
+                        buttonsDisabled={true}
+                        mouseDragEnabled={false}
+                        ref={ el => this.Carousel = el }
+                        />
+                    </Col>
+                </Row>
+                <Row className="m-t">
+                    <Col xs={12}>
+                        <CarouselPremiumThumbs images={this.props.images} thumbClick={(i)=>this.Carousel._onDotClick(i)}/>
+                    </Col>
+                </Row>
             </div>
         );     
     }
