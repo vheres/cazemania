@@ -9,7 +9,23 @@ import { withRouter } from 'react-router-dom';
 import ReactPixel from 'react-facebook-pixel';
 
 class DetailPage extends Component {
-    state={item: [], brands: [], types: [], typeselect: [""], caseselect: {soft: 0, hard: 0}, price: [], selected_price: ""}
+    constructor(props) {
+        super(props);
+        this.state = {
+            item: [], 
+            brands: [], 
+            phonemodels: [], 
+            price: [], 
+            filteredPhoneModels: [], 
+            caseselect: {soft: 0, hard: 0}, 
+            selected_price: "",
+            selectedBrandId: 0,
+            selectedBrand: {},
+            selectedPhoneModelId: 0,
+            selectedPhoneModel: {},
+            selectedCaseType: 0
+        };
+    }
 
     componentDidMount(){
         const params = new URLSearchParams(this.props.location.search);
@@ -17,7 +33,8 @@ class DetailPage extends Component {
         console.log(id)
         this.getProduct(id);
         this.getBrands();
-        this.getTypes();
+        this.getphonemodels();
+        this.getPrice()
         ReactPixel.pageView();
         ReactPixel.track('ViewContent');
     }
@@ -44,17 +61,77 @@ class DetailPage extends Component {
         })
     }
 
-    getTypes() {
+    getphonemodels() {
         axios.get(`${API_URL_1}/phonemodel/all`)
         .then(res => {
             console.log(res)
-            this.setState({types:res.data.result})
+            this.setState({phonemodels:res.data.result})
         })
         .catch(err => {
             console.log(err)
         })
     }
 
+    getPrice(){
+        axios.get(`${API_URL_1}/price/all`)
+        .then(res => {
+            console.log(res)
+            this.setState({price:res.data.result})
+        })
+        .catch(err => {
+            console.log(err)
+        })
+    }
+
+    onBrandSelect(brandId){
+        var brand = {}
+        this.state.brands.forEach((item, index) => {
+            if(item.id === parseInt(brandId)){
+                brand = item
+            }
+        })
+        this.setState({ selectedBrand: brand, selectedBrandId: brandId, selectedPhoneModelId: 0, selectedPhoneModel: {}, selectedCaseType: 0, selected_price: "" })
+        this.phoneModelFilter(brandId)
+    }
+
+    onPhoneModelSelect(phonemodelId){
+        var phonemodel = {}
+        this.state.filteredPhoneModels.forEach((item, index) => {
+            if(item.id === parseInt(phonemodelId)){
+                phonemodel = item
+            }
+        })
+        console.log(phonemodel)
+        this.setState({selectedPhoneModelId: phonemodelId, selectedPhoneModel: phonemodel, selectedCaseType: 0, selected_price: "" })
+    }
+
+    onCaseTypeSelect(caseType) {
+        console.log(this.state.price)
+        if (caseType === 'hard') {
+            this.setState({selected_price: this.state.price[1].price, selectedCaseType: caseType})
+        }
+        else if (caseType === 'soft') {
+            this.setState({selected_price: this.state.price[0].price , selectedCaseType: caseType})
+        }
+        else if (caseType == 0) {
+            this.setState({selected_price: "", selectedCaseType: 0})
+        }
+        console.log(this.state.selected_price)
+    }
+
+    phoneModelFilter(brandId){
+        const { phonemodels } = this.state
+        var tempArr = []
+        
+        phonemodels.forEach((item, map) => {
+            if(item.brandId === parseInt(brandId)){
+                tempArr.push(item)
+            }
+        })
+
+        this.setState({filteredPhoneModels: tempArr})   
+    }
+ 
     brandSelectOptions(){
         console.log(this.state.brands)
         var arrJSX = this.state.brands.map((item)=>{ 
@@ -62,41 +139,25 @@ class DetailPage extends Component {
                 <option value={item.id}>{item.name}</option>)
         })
         return(
-        <label className="dropdown-container">
-            <select className="dropdown-select" ref="brand_select"  onChange={()=>this.typeFilter()}>
-                <option value={0}>SELECT BRAND</option>
-                {arrJSX}
-            </select>
-            <div className="text">Brand</div>
-        </label>
+            <label className="dropdown-container">
+                <select className="dropdown-select" ref="brand_select"  value={this.state.selectedBrandId} onChange={()=>this.onBrandSelect(this.refs.brand_select.value)}>
+                    <option value={0}>SELECT BRAND</option>
+                    {arrJSX}
+                </select>
+                <div className="text">Brand</div>
+            </label>
         )
     }
 
-
-    typeFilter(){
-        var data = this.state.types
-        console.log(data)
-        var tempArr = []
-        for(var num in data){
-            if(data[num].brandId === parseInt(this.refs.brand_select.value)){
-                tempArr.push(data[num])
-            }
-        }
-        console.log(tempArr)
-        this.setState({typeselect: tempArr})   
-        document.getElementById("model_select").selectedIndex = "0";  
-        document.getElementById("case_select").selectedIndex = "0";
-        this.state.selected_case = 0; 
-        this.state.selected_price = ""
-    }
     modelSelectOptions(){
-        var arrJSX = this.state.typeselect.map((item)=>{ return(
-            <option value={item.id}>{item.name}</option>)
+        var arrJSX = this.state.filteredPhoneModels.map((item, index) => { 
+            return(
+                <option value={item.id}>{item.name}</option>
+            )
         })
-        console.log(this.state.typeselect)
         return(
         <label className="dropdown-container">
-            <select className="dropdown-select" id="model_select" ref="type_select"  onChange={()=>this.onModelSelect()}>
+            <select className="dropdown-select" id="phonemodel_select" ref="phonemodel_select" value={this.state.selectedPhoneModelId} onChange={()=>this.onPhoneModelSelect(this.refs.phonemodel_select.value)}>
                 <option value={0}>SELECT MODEL</option>
                 {arrJSX}
             </select>
@@ -105,87 +166,54 @@ class DetailPage extends Component {
         )
     }
 
-    onModelSelect(){
-        var data = this.state.types
-        var tempVar = {soft: 0, hard: 0}
-        for(var num in data){
-            console.log(data[num])
-            if(data[num].id === parseInt(this.refs.type_select.value)){
-                tempVar =  {soft: data[num].soft, hard: data[num].hard}
-            }
-        }
-        this.setState({caseselect: tempVar})
-        document.getElementById("case_select").selectedIndex = "0";
-        this.state.selected_case = 0;
-        this.state.selected_price = ""
-    }
-
     caseSelectOptions(){
-        return(
-            [
-                [
-                    <label className="dropdown-container">
-                        <select className="dropdown-select" id="case_select" ref="case_select" onChange={()=>this.onTypeSelect()}>
-                            <option value={0} selected>SELECT CASE</option>
-                            <option value="hard" disabled>HARD CASE -- unavailable</option>
-                            <option value="soft" disabled>SOFT CASE -- unavailable</option>
-                        </select>
-                        <div className="text">Type</div>
-                    </label>,
-                    <label className="dropdown-container">
-                        <select className="dropdown-select" id="case_select" ref="case_select" onChange={()=>this.onTypeSelect()}>
-                            <option value={0}>SELECT CASE</option>
-                            <option value="hard" disabled>HARD CASE -- unavailable</option>
-                            <option value="soft" >SOFT CASE</option>
-                        </select>
-                        <div className="text">Type</div>
-                    </label>
-                ],
-                [
-                    <label className="dropdown-container">
-                        <select className="dropdown-select" id="case_select" ref="case_select" onChange={()=>this.onTypeSelect()}>
-                            <option value={0}>SELECT CASE</option>
-                            <option value="hard">HARD CASE</option>
-                            <option value="soft"  disabled>SOFT CASE -- unavailable</option>
-                        </select>
-                        <div className="text">Type</div>
-                    </label>,
-                    <label className="dropdown-container">
-                        <select className="dropdown-select" id="case_select" ref="case_select" onChange={()=>this.onTypeSelect()}>
-                            <option value={0}>SELECT CASE</option>
-                            <option value="hard">HARD CASE</option>
-                            <option value="soft">SOFT CASE</option>
-                        </select>
-                        <div className="text">Type</div>
-                    </label>
-                ]
-            ]
-        )
-    }
+        var { selectedPhoneModel } = this.state
+        var hardOption = ""
+        var softOption = ""
 
-    onTypeSelect() {
-        if (this.refs.case_select.value === 'hard') {
-            this.setState({selected_price: this.state.price[1].price, selected_case: this.refs.case_select.value})
+        if(selectedPhoneModel.hard){
+            hardOption = <option value="hard">HARD CASE</option>
         }
-        else if (this.refs.case_select.value === 'soft') {
-            this.setState({selected_price: this.state.price[0].price , selected_case: this.refs.case_select.value})
+        else{
+            hardOption = <option value="hard" disabled>HARD CASE -- unavailable</option>
         }
-        else if (this.refs.case_select.value == 0) {
-            this.setState({selected_price: "", selected_case: 0})
+
+        if(selectedPhoneModel.soft){
+            softOption = <option value="soft">SOFT CASE</option>
         }
-        console.log(this.state.selected_price)
+        else{
+            softOption = <option value="soft" disabled>SOFT CASE -- unavailable</option>
+        }
+
+        return(
+            <label className="dropdown-container">
+                <select className="dropdown-select" id="case_select" ref="case_select" value={this.state.selectedCaseType} onChange={()=>this.onCaseTypeSelect(this.refs.case_select.value)}>
+                    <option value={0} selected>SELECT CASE</option>
+                    {hardOption}
+                    {softOption}
+                </select>
+                <div className="text">Type</div>
+            </label>
+        )
     }
 
     onAddToCart() {
         if (this.props.auth.email !== "") {
+
+            const token = this.props.auth.token
+            const headers = {
+                headers: { 
+                    'Authorization': `Bearer ${token}`,
+                }
+            };
             axios.post(API_URL_1 + `/cart`, {
-                user_id: this.props.auth.id,
-                catalogue_id: this.state.item.id,
-                brand_id: this.refs.brand_select.value,
-                model_id: this.refs.type_select.value,
-                case_type: this.refs.case_select.value,
+                catalogueId: this.state.item.id,
+                phonemodelId: this.state.selectedPhoneModelId,
+                brand: this.state.selectedBrand.name,
+                model: this.state.selectedPhoneModel.name,
+                caseType: this.state.selectedCaseType,
                 amount: document.getElementById("quantity").value
-            }).then((res) => {
+            }, headers).then((res) => {
                 alert('add to cart successful!')
                 ReactPixel.track('AddToCart', {
                     content_category: 'standard',
@@ -324,7 +352,7 @@ class DetailPage extends Component {
                                 <Col xsOffset={1} mdOffset={0} md={4}>
                                     <Row>
                                         <Col xs={10} md={12}>
-                                            {this.caseSelectOptions()[this.state.caseselect.hard][this.state.caseselect.soft]}
+                                            {this.caseSelectOptions()}
                                         </Col>
                                     </Row>
                                 </Col>
