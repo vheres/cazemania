@@ -21,9 +21,9 @@ class CarouselClass extends Component {
     }
 
     transformToArray() {
-        this.image_url = new Array();
-        this.image_url.push(new Array());
-        this.image_url.push(new Array());
+        this.image_url = [];
+        this.image_url.push([]);
+        this.image_url.push([]);
         for (var i = 0; i< this.state.photos.length; i++) {
             this.image_url[0].push(this.state.photos[i].images.standard_resolution.url)
             this.image_url[1].push(this.state.photos[i].link)
@@ -36,9 +36,9 @@ class CarouselClass extends Component {
       };
       
       galleryItems() {
-          var arrJSX = new Array();
+          var arrJSX = [];
         for (var i = 0; i < this.image_url[0].length; i++) {
-            arrJSX.push(<a href={this.image_url[1][i]} onClick={()=>ReactPixel.trackCustom('instagramClick')} className="best-holder" target="_blank"><img src={this.image_url[0][i]} className="instagram-box"/><div className="best-overlay"><i class="fa fa-instagram"></i></div></a>)
+            arrJSX.push(<a href={this.image_url[1][i]} onClick={()=>ReactPixel.trackCustom('instagramClick')} className="best-holder" target="_blank"><img src={this.image_url[0][i]} className="instagram-box"/><div className="best-overlay"><i className="fa fa-instagram"></i></div></a>)
         }
         return arrJSX;
       };

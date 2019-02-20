@@ -7,7 +7,7 @@ import PaginationClass from './Pagination';
 import ReactPixel from 'react-facebook-pixel';
 
 class ShopPage extends Component {
-    state = { catalogue: [], pagination: [], item_count: 0, pagecount: 0, search_status: [0], active: [0] }
+    state = { catalogue: [], pagination: [], item_count: 0, pagecount: 0, search_status: [0], active: 0 }
 
     componentDidMount() {
         if (this.state.pagination.length === 0) {
@@ -18,55 +18,54 @@ class ShopPage extends Component {
     }
 
     componentWillReceiveProps(newProps) {
-        this.state.active.shift();
-        this.state.active.push(0);
-        this.state.pagination.length = 0;
-        this.state.pagination.push(0, 20)
         const search = newProps.location.search;
         const params = new URLSearchParams(search);
-        if(search.length == 0) {
-            var searchIn = '';
+        var searchIn = '';
+        if(search.length === 0) {
+            searchIn = '';
         }
         else {
-            var searchIn = params.get('search');
+            searchIn = params.get('search');
         }
-        axios.get(API_URL_1 + "/catalogue", {
+        console.log(this.state.pagination)
+        console.log(this.state.active)
+        axios.get(`${API_URL_1}/catalogue/products`, {
             params: {
                 search: searchIn,
                 pagination: this.state.pagination
             }
         })
         .then((response)=>{
-            this.setState({ catalogue: response.data.catalogue, item_count: response.data.pagecount[0].count, pagecount: Math.ceil((response.data.pagecount[0].count/20)) })
+            console.log(response)
+            this.setState({ catalogue: response.data.result.data, item_count: response.data.result.count, pagecount: Math.ceil((response.data.result.count/20)) })
         })
     }
 
     getCatalogueList() {
         const search = this.props.location.search;
         const params = new URLSearchParams(search);
-        if(search.length == 0) {
-            var searchIn = '';
+        var searchIn = '';
+        if(search.length === 0) {
+            searchIn = '';
         }
         else {
-            var searchIn = params.get('search');
+            searchIn = params.get('search');
         }
-        axios.get(API_URL_1 + "/catalogue", {
+        console.log(this.state.active)
+        axios.get(API_URL_1 + "/catalogue/products", {
             params: {
                 search: searchIn,
-                pagination: this.state.pagination
+                pagination: this.state.active
             }
         })
         .then((response)=>{
-            this.setState({ catalogue: response.data.catalogue, item_count: response.data.pagecount[0].count, pagecount: Math.ceil((response.data.pagecount[0].count/20)) })
+            console.log(response.data)
+            this.setState({ catalogue: response.data.result.data, item_count: response.data.result.count, pagecount: Math.ceil((response.data.result.count/20)) })
         })
     }
 
-    onPageClick(page , active) {
-        this.state.active.shift();
-        this.state.active.push(active);
-        this.state.pagination.length = 0;
-        this.state.pagination.push(page, 20)
-        this.setState({})
+    async onPageClick(active) {
+        await this.setState({active: active})
         this.getCatalogueList();
     }
 
@@ -113,7 +112,7 @@ class ShopPage extends Component {
     //             </Row>
     //             <Row>
     //                 <Col xsOffset={1} xs={10} mdOffset={0}>
-    //                     <input type="button" class="btn btn-success" style={{width:100}} value="A P P L Y" onClick={()=>this.onSearchClick()}/>
+    //                     <input type="button" className="btn btn-success" style={{width:100}} value="A P P L Y" onClick={()=>this.onSearchClick()}/>
     //                 </Col>
     //             </Row>
     //         </section>
@@ -155,7 +154,7 @@ class ShopPage extends Component {
                                 {this.renderCatalogue()}
                             </Row>
                             <Row className="text-center">
-                            <PaginationClass count={this.state.pagecount} PageClick={(page, active)=>this.onPageClick(page, active)} active={this.state.active[0]}/>
+                            <PaginationClass count={this.state.pagecount} PageClick={(active)=>this.onPageClick(active)} active={this.state.active}/>
                             </Row>      
                     </Col>
                 </Grid>

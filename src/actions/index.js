@@ -2,15 +2,21 @@ import axios from 'axios';
 import { API_URL_1 } from '../supports/api-url/apiurl';
 import ReactPixel from 'react-facebook-pixel';
 
+const { encrypt } = require('../supports/helpers/encryption.js');
+const { appKey } = require('../supports/config')
+
 export const onLogin = (user) => {
+    const { email, password } = user
+    const ep = encrypt(appKey, password)
     return(dispatch) => {
-            axios.post(API_URL_1 +'/login', {
-                    email: user.email,
-                    password: user.password
+            axios.post(API_URL_1 +'/auth/login', {
+                    email: email,
+                    ep: ep
             }).then(user => {
+                localStorage.setItem("token", user.data.result.token || "");
                 dispatch ({
                     type: "USER_LOGIN_SUCCESS",
-                    payload: { firstname: user.data[0].firstname, email: user.data[0].email, error: "", id: user.data[0].id, cookieCheck: true }
+                    payload: { firstname: user.data.result.firstname, lastname: user.data.result.lastname, email: user.data.result.email, category: user.data.result.category, token: user.data.result.token, error: "", cookieCheck: true }
                 })       
             }).catch(err => {
                 console.log(err);
@@ -24,17 +30,22 @@ export const onLogin = (user) => {
 export const keepLogin = (email) => {
     console.log(email);
     return(dispatch) => {
+            const token = localStorage.getItem('token');
+            const headers = {
+                headers: { 
+                    'Authorization': `Bearer ${token}`,
+                }
+            };
             axios.get(API_URL_1 +'/keeplogin', {
                 params: {
                     email: email
                 }
-            }).then(user => {
+            })
+            .then(user => {
+                localStorage.setItem("token", user.data.result.token || "");
                 dispatch ({
                     type: "USER_LOGIN_SUCCESS",
-                    payload: { firstname: user.data[0].firstname, email: user.data[0].email, error: "", id: user.data[0].id, cookieCheck: true  }
-                })
-                dispatch ({
-                    type: "COOKIES_CHECKED"
+                    payload: { firstname: user.data.result.firstname, lastname: user.data.result.lastname, email: user.data.result.email, category: user.data.result.category, token: user.data.result.token, error: "", cookieCheck: true }
                 })       
             }).catch(err => {
                 console.log(err);
@@ -63,8 +74,21 @@ export const onLogout = () => {
 }
 
 export const onRegister = (user) =>{
+    const { firstName, lastName, gender, email, password, phone, address, destination_code, kota, kodepos  } = user
+    const ep = encrypt(appKey, password)
     return(dispatch) => {
-        axios.post(API_URL_1 + "/users", user)
+        axios.post(API_URL_1 + "/auth/register", {
+            firstname: firstName,
+            lastname: lastName,
+            ep: ep,
+            gender: gender,
+            email: email,
+            phone: phone,
+            address: address,
+            destination_code: destination_code,
+            kota: kota,
+            kodepos: kodepos
+        })
         .then((res) => {
             if(res.data.error === 1){
                 dispatch({
@@ -74,7 +98,7 @@ export const onRegister = (user) =>{
             else{
                 dispatch ({
                     type: "USER_LOGIN_SUCCESS",
-                    payload: { firstname: res.data.firstname, email: res.data.email, error: "", id: res.data.id, cookieCheck: true }
+                    payload: { firstname: user.data.result.firstname, lastname: user.data.result.lastname, email: user.data.result.email, category: user.data.result.category, token: user.data.result.token, error: "", cookieCheck: true }
                 })
                 ReactPixel.track('CompleteRegistration')
             }

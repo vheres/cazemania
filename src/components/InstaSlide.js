@@ -4,10 +4,10 @@ import Instafeed from 'react-instafeed';
 import 'react-alice-carousel/lib/alice-carousel.css';
 
 const instafeedTarget = 'instafeed';
-const myTemplate = `<a href='{{link}}' target='_blank' class='instafeed__item col-md-2'>
-                    <img class='instafeed__item__background' src='{{image}}' />
-                    <div class='instafeed__item__overlay'>
-                        <div class='instafeed__item__overlay--inner'>
+const myTemplate = `<a href='{{link}}' target='_blank' className='instafeed__item col-md-2'>
+                    <img className='instafeed__item__background' src='{{image}}' />
+                    <div className='instafeed__item__overlay'>
+                        <div className='instafeed__item__overlay--inner'>
                         </div>
                     </div>
                     </a>`

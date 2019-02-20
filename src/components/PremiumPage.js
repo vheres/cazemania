@@ -69,20 +69,20 @@ class PremiumPage extends Component {
                 <Row>
                     <Col xsOffset={1} xs={10} mdOffset={0} md={12}>
                         <p>Product's Code</p>
-                        <input type="text" ref="searchCode" class="form-control" id="inputSearchCode" placeholder="Product's Code" />
+                        <input type="text" ref="searchCode" className="form-control" id="inputSearchCode" placeholder="Product's Code" />
                         <br/>
                     </Col>
                 </Row>
                 <Row>
                     <Col xsOffset={1} xs={10} mdOffset={0} md={12}>
                         <p>Product's Name</p>
-                        <input type="text" ref="searchName" class="form-control" id="inputSearchName" placeholder="Product's Name" />
+                        <input type="text" ref="searchName" className="form-control" id="inputSearchName" placeholder="Product's Name" />
                         <br/>
                     </Col>
                 </Row>
                 <Row>
                     <Col xsOffset={1} xs={10} mdOffset={0}>
-                        <input type="button" class="btn btn-success" style={{width:100}} value="A P P L Y" onClick={()=>this.onSearchClick()}/>
+                        <input type="button" className="btn btn-success" style={{width:100}} value="A P P L Y" onClick={()=>this.onSearchClick()}/>
                     </Col>
                 </Row>
             </section>

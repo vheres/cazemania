@@ -222,7 +222,7 @@ class CustomPage extends Component {
         if(this.state.picture === "") {
             return (
                 <Col xs={12} className="upload_custom">
-                    <label for="custom_picture" className='inputlabel inputlabel_icon'><i className="fa fa-picture-o"/><p style={{'font-size': '30px'}}>{this.state.inputfile.length == 0?'Upload Picture':<p className="text-ellipsis" style={{'font-size': '20px'}}><i className="fa fa-check"></i>{this.state.inputfile.name}</p>}</p></label>
+                    <label for="custom_picture" className='inputlabel inputlabel_icon'><i className="fa fa-picture-o"/><p style={{fontSize: '30px'}}>{this.state.inputfile.length == 0?'Upload Picture':<p className="text-ellipsis" style={{fontSize: '20px'}}><i className="fa fa-check"></i>{this.state.inputfile.name}</p>}</p></label>
                     <div>
                         <form encType="multipart/form-data">
                         <input type="file" name="filename" id="custom_picture" accept="image/*" className="inputfile" onChange={()=>this.setState({inputfile: document.getElementById('custom_picture').files[0]})}/>

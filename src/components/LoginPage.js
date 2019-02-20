@@ -20,7 +20,7 @@ class LoginPage extends Component {
     }
 
     onKeyPress(x) {
-        if (x.which == 13) {
+        if (x.which === 13) {
             this.onLoginClick()
         }
     }
@@ -35,7 +35,7 @@ class LoginPage extends Component {
 
     render() {
         console.log(this.props.auth)
-        if(this.props.auth.email == "") {
+        if(this.props.auth.email === "") {
             return(
                 <div>
                     <Grid fluid>
@@ -69,7 +69,7 @@ class LoginPage extends Component {
                                         Email: 
                                         </Col> */}
                                         <Col xs={12} md={8}>
-                                            {/* <input type="email" ref="email" class="form-control" id="inputEmail" placeholder="Email Address" onKeyPress={this.onKeyPress.bind(this)}/><br/> */}
+                                            {/* <input type="email" ref="email" className="form-control" id="inputEmail" placeholder="Email Address" onKeyPress={this.onKeyPress.bind(this)}/><br/> */}
                                             <label className="general-input-container">
                                                 <div className="general-input-label">Email</div>
                                                 <input type="email" ref="email" id="inputEmail" className="general-input" placeholder="Your email" onKeyPress={this.onKeyPress.bind(this)}/>
@@ -85,7 +85,7 @@ class LoginPage extends Component {
                                                 <div className="general-input-label">Password</div>
                                                 <input type="password" ref="password" id="inputPassword" className="general-input" placeholder="Your password" onKeyPress={this.onKeyPress.bind(this)}/>
                                             </label> 
-                                            {/* <input type="password" ref="password" class="form-control" id="inputPassword" placeholder="Password" onKeyPress={this.onKeyPress.bind(this)}/><br/> */}
+                                            {/* <input type="password" ref="password" className="form-control" id="inputPassword" placeholder="Password" onKeyPress={this.onKeyPress.bind(this)}/><br/> */}
                                         </Col>
                                     </Row>
                                     <Row>
@@ -97,7 +97,7 @@ class LoginPage extends Component {
                                             </Row>
                                             <Row className="m-t">
                                                 <Col xsOffset={1} xs={10} mdOffset={0} md={12}>
-                                                    <input type="button" class="btn-blue-orange" style={{'float': 'right', 'width':'100%'}} value="Login" onClick={this.onLoginClick}/>
+                                                    <input type="button" className="btn-blue-orange" style={{'float': 'right', 'width':'100%'}} value="Login" onClick={this.onLoginClick}/>
                                                 </Col>
                                             </Row>
                                             <Row className="m-t">

@@ -15,7 +15,7 @@ class HomePage extends Component {
 
     renderHomePage() {
         return(
-                <Grid fluid style={{'background-color':'white'}}>
+                <Grid fluid style={{backgroundColor:'white'}}>
                     <Row className="m-n">
                         <CarouselBanner/>
                     </Row>
@@ -23,33 +23,87 @@ class HomePage extends Component {
                         <Col xsOffset={0} xs={12} mdOffset={1} md={10}>
                             <Row>
                                 <Col xs={4} className="homepage-button-padding">
-                                    <Link to="/shop" className="image-holder" style={{width:"100%"}}>
-                                        <img src={`${API_URL_1}/others/icons/icon1.png`} className="homepage-button" style={{backgroundColor:'#D4F4F2'}}/>
+                                    <Link to="/shop" className="image-holder" style={{width:"100%",paddingTop:'100%',backgroundColor:'#D4F4F2'}}>
+                                        <div style={{position:'absolute', top:'0px', width:'100%',height:'100%'}}>
+                                            <div style={{position:'absolute',top:'0px', width:'100%',height:'100%'}}>
+                                                <img src={`${API_URL_1}/others/icons/icon1.png`} style={{width:'100%'}}/>
+                                            </div>
+                                            <div style={{height:'100%',display:'flex',flexDirection:'column',justifyContent:'flex-start',alignItems:'center',paddingTop:'40px'}}>
+                                                <div style={{fontSize:'24pt',color:'rgb(255, 181, 44)',fontWeight:'bold'}}>
+                                                    Katalog Case
+                                                </div>
+                                            </div>
+                                        </div>
                                     </Link>
                                 </Col>
                                 <Col xs={4} className="homepage-button-padding">
-                                    <Link to="/shop" className="image-holder alt" style={{width:"100%"}}>
-                                        <img src={`${API_URL_1}/others/icons/icon2.png`} className="homepage-button" style={{backgroundColor:'#F9E7D7'}}/>
+                                    <Link to="/custom" className="image-holder alt" style={{width:"100%",paddingTop:'100%',backgroundColor:'#F9E7D7'}}>
+                                        <div style={{position:'absolute', top:'0px', width:'100%',height:'100%'}}>
+                                            <div style={{position:'absolute',top:'0px', width:'100%',height:'100%'}}>
+                                                <img src={`${API_URL_1}/others/icons/icon2.png`} style={{width:'100%'}}/>
+                                            </div>
+                                            <div style={{height:'100%',display:'flex',flexDirection:'column',justifyContent:'flex-start',alignItems:'center',paddingTop:'40px'}}>
+                                                <div style={{fontSize:'24pt',color:'rgb(9, 175, 204)',fontWeight:'bold'}}>
+                                                    Custom Case
+                                                </div>
+                                            </div>
+                                        </div>
                                     </Link>
                                 </Col>
                                 <Col xs={4} className="homepage-button-padding">
-                                    <Link to="/shop" className="image-holder" style={{width:"100%"}}>
-                                        <img src={`${API_URL_1}/others/icons/icon3.png`} className="homepage-button" style={{backgroundColor:'#D4F4F2'}}/>
+                                    <Link to="/premium_cases" className="image-holder" style={{width:"100%",paddingTop:'100%',backgroundColor:'#D4F4F2'}}>
+                                        <div style={{position:'absolute', top:'0px', width:'100%',height:'100%'}}>
+                                            <div style={{position:'absolute',top:'0px', width:'100%',height:'100%'}}>
+                                                <img src={`${API_URL_1}/others/icons/icon3.png`} style={{width:'100%'}}/>
+                                            </div>
+                                            <div style={{height:'100%',display:'flex',flexDirection:'column',justifyContent:'flex-start',alignItems:'center',paddingTop:'40px'}}>
+                                                <div style={{fontSize:'24pt',color:'rgb(255, 181, 44)',fontWeight:'bold'}}>
+                                                    Premium Case
+                                                </div>
+                                            </div>
+                                        </div>
                                     </Link>
                                 </Col>
                                 <Col xs={4} className="homepage-button-padding">
-                                    <Link to="/shop" className="image-holder alt" style={{width:"100%"}}>
-                                        <img src={`${API_URL_1}/others/icons/icon4.png`} className="homepage-button" style={{backgroundColor:'#F9E7D7'}}/>
+                                    <Link to="/reseller-dropshipper" className="image-holder alt" style={{width:"100%",paddingTop:'100%',backgroundColor:'#F9E7D7'}}>
+                                        <div style={{position:'absolute', top:'0px', width:'100%',height:'100%'}}>
+                                            <div style={{position:'absolute',top:'0px', width:'100%',height:'100%'}}>
+                                                <img src={`${API_URL_1}/others/icons/icon4.png`} style={{width:'100%'}}/>
+                                            </div>
+                                            <div style={{height:'100%',display:'flex',flexDirection:'column',justifyContent:'flex-start',alignItems:'center',paddingTop:'40px'}}>
+                                                <div style={{fontSize:'24pt',color:'rgb(9, 175, 204)',fontWeight:'bold'}}>
+                                                    Join Reseller
+                                                </div>
+                                            </div>
+                                        </div>
                                     </Link>
                                 </Col>
                                 <Col xs={4} className="homepage-button-padding">
-                                    <Link to="/shop" className="image-holder">
-                                        <img src={`${API_URL_1}/others/icons/icon5.png`} className="homepage-button" style={{backgroundColor:'#D4F4F2'}}/>
+                                    <Link to="/shop" className="image-holder" style={{width:"100%",paddingTop:'100%',backgroundColor:'#D4F4F2'}}>
+                                        <div style={{position:'absolute', top:'0px', width:'100%',height:'100%'}}>
+                                            <div style={{position:'absolute',top:'0px', width:'100%',height:'100%'}}>
+                                                <img src={`${API_URL_1}/others/icons/icon5.png`} style={{width:'100%'}}/>
+                                            </div>
+                                            <div style={{height:'100%',display:'flex',flexDirection:'column',justifyContent:'flex-start',alignItems:'center',paddingTop:'40px'}}>
+                                                <div style={{fontSize:'24pt',color:'rgb(255, 181, 44)',fontWeight:'bold'}}>
+                                                    List Tipe HP
+                                                </div>
+                                            </div>
+                                        </div>
                                     </Link>
                                 </Col>
                                 <Col xs={4} className="homepage-button-padding">
-                                    <Link to="/shop" className="image-holder alt" style={{width:"100%"}}>
-                                        <img src={`${API_URL_1}/others/icons/icon6.png`} className="homepage-button" style={{backgroundColor:'#F9E7D7'}}/>
+                                    <Link to="/shop" className="image-holder alt" style={{width:"100%",paddingTop:'100%',backgroundColor:'#F9E7D7'}}>
+                                        <div style={{position:'absolute', top:'0px', width:'100%',height:'100%'}}>
+                                            <div style={{position:'absolute',top:'0px', width:'100%',height:'100%'}}>
+                                                <img src={`${API_URL_1}/others/icons/icon6.png`} style={{width:'100%'}}/>
+                                            </div>
+                                            <div style={{height:'100%',display:'flex',flexDirection:'column',justifyContent:'flex-start',alignItems:'center',paddingTop:'40px'}}>
+                                                <div style={{fontSize:'24pt',color:'rgb(9, 175, 204)',fontWeight:'bold'}}>
+                                                    Canvas Bag Mania
+                                                </div>
+                                            </div>
+                                        </div>
                                     </Link>
                                 </Col>
                             </Row>
@@ -80,13 +134,13 @@ class HomePage extends Component {
                     <Row className="homepage-section-margin">
                         <Col xsOffset={1} xs={10}>
                             <div className="text-center font-bold homepage-section-title">
-                                <span className="icon" style={{color:'rgb(9, 175, 204)'}}><i class="fa fa-instagram"></i></span>
+                                <span className="icon" style={{color:'rgb(9, 175, 204)'}}><i className="fa fa-instagram"></i></span>
                                 <span style={{color:'#F9A044'}}> INSTAGRAM</span>
                                 <div className="border" style={{borderColor:'#D4F4F2',paddingTop:'0.5rem'}}/>
                             </div>
                         </Col>
                     </Row>
-                    <Row style={{marginTop:'2rem',marginBottom:'200px'}}>
+                    <Row style={{marginTop:'2rem',marginBottom:'150px'}}>
                         <Col xs={12}>
                             <CarouselInsta/>
                         </Col>

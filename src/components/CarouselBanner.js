@@ -12,11 +12,11 @@ class CarouselBanner extends Component {
       };
       
       galleryItems() {
-          var arrJSX = new Array();
+          var arrJSX = [];
         for (var i = 0; i < 3; i++) {
             arrJSX.push(
                 <div>
-                    <img src={`${API_URL_1}/others/banner${i+1}.jpg`} className="homepage-banner"/>
+                    <img src={`${API_URL_1}/banner/banner${i+1}.jpg`} alt="banner" className="homepage-banner"/>
                 </div>
             )
         }

@@ -22,7 +22,7 @@ class PaymentPage extends Component {
         .then((response) => {
             console.log(response)
             var totalitems = 0
-            response.data.cart.map(item => totalitems += parseInt(item.amount))
+            response.data.cart.map(item => totalitems += parseInt(item.amount, 10))
             axios.get(API_URL_1 + "/shipping", {
                 params: {
                     destination: response.data.user[0].destination_code,
@@ -88,7 +88,7 @@ class PaymentPage extends Component {
         axios.get(API_URL_1 + '/destination')
         .then(response => {
             var arrJSX = [];
-            response.data.map((item, count) => {
+            response.data.forEach((item, count) => {
                 arrJSX.push({value:item.destination_code, label:`${item.province}, ${item.city}, ${item.subdistrict}`})
             })
             this.setState({destination: arrJSX})
@@ -129,7 +129,7 @@ class PaymentPage extends Component {
     }
 
     async onEditSave() {
-        if(this.refs.firstname.value == '' || this.refs.lastname.value == '' || this.refs.alamat.value == '' || this.state.selectedOption.label == '' || this.refs.kodepos.value == '') {
+        if(this.refs.firstname.value === '' || this.refs.lastname.value === '' || this.refs.alamat.value === '' || this.state.selectedOption.label === '' || this.refs.kodepos.value === '') {
             alert('Please fill everything!');
         } else {
             await this.setState({ recipient: {
@@ -181,7 +181,7 @@ class PaymentPage extends Component {
                 </Col>
                 <Col md={4}>
                     <Row>
-                        <Button type="submit" onClick={this.handleShow.bind(this)} className="btn btn-default pull-right ganti-alamat-pengiriman"><span><i style={{'font-size': '20px'}} className="fa fa-edit"></i> Ganti Alamat</span></Button> 
+                        <Button type="submit" onClick={this.handleShow.bind(this)} className="btn btn-default pull-right ganti-alamat-pengiriman"><span><i style={{fontSize: '20px'}} className="fa fa-edit"></i> Ganti Alamat</span></Button> 
                     </Row>
                 </Col>
             </Row>
@@ -218,7 +218,6 @@ class PaymentPage extends Component {
     calculateTransactionSummary() {
         var discount = 0;
         var subTotal = 0;
-        var totalPrice = 0;
         var countHardCase = 0;
         var countSoftCase = 0;
         var totalCase = 0;
@@ -227,12 +226,12 @@ class PaymentPage extends Component {
         var freeHard = 0;
         var hardPrice = 75000;
         var softPrice = 50000;
-        this.state.cart.map((item,count) => {
-            if (item.case_type == "hard" || item.case_type =="customhard" || item.case_type =="premium") {
-                countHardCase += parseInt(item.amount);
+        this.state.cart.forEach((item,count) => {
+            if (item.case_type === "hard" || item.case_type ==="customhard" || item.case_type ==="premium") {
+                countHardCase += parseInt(item.amount, 10);
             }
             else {
-                countSoftCase += parseInt(item.amount)
+                countSoftCase += parseInt(item.amount, 10)
             }
             subTotal += item.amount * item.price;
         })
@@ -264,12 +263,12 @@ class PaymentPage extends Component {
         var freeHard = 0;
         var hardPrice = 75000;
         var softPrice = 50000;
-        this.state.cart.map((item,count) => {
-            if (item.case_type == "hard" || item.case_type =="customhard" || item.case_type =="premium") {
-                countHardCase += parseInt(item.amount);
+        this.state.cart.forEach((item,count) => {
+            if (item.case_type === "hard" || item.case_type ==="customhard" || item.case_type ==="premium") {
+                countHardCase += parseInt(item.amount, 10);
             }
             else {
-                countSoftCase += parseInt(item.amount)
+                countSoftCase += parseInt(item.amount, 10)
             }
             subTotal += item.amount * item.price;
             arrJSX.push(<tr><td style={{width:"5%"}}>{count +1}.</td><td><strong>{item.name} | {item.code}</strong>, {item.model_name}, {item.case_type} case</td><td className="text-right">(Qty:{item.amount}) Rp. {(item.amount * item.price).toLocaleString()}</td></tr>)
@@ -293,7 +292,7 @@ class PaymentPage extends Component {
         if(freeHard>0) {
             arrJSX.push(<tr><td/><td>Free Hard Case:</td><td className="text-right">(Qty:{freeHard}) - Rp. {(freeHard*hardPrice).toLocaleString()}</td></tr>)
         }
-        totalPrice = subTotal - (freeSoft*softPrice) - (freeHard*hardPrice) + parseInt(shipping)
+        totalPrice = subTotal - (freeSoft*softPrice) - (freeHard*hardPrice) + parseInt(shipping, 10)
         arrJSX.push(<tr><td/><td><strong>Shipping</strong></td><td className="text-right"><strong>Rp. {this.state.shipping.toLocaleString()}</strong></td></tr>)
         arrJSX.push(<br/>)
         arrJSX.push(<tr><td/><td><strong>Total Price</strong></td><td className="text-right"><strong>Rp. {totalPrice.toLocaleString()}</strong></td></tr>)
@@ -302,7 +301,7 @@ class PaymentPage extends Component {
 
     renderRekeningList() {
         var arrJSX = [];
-        this.state.rekening.map((item,index) => {
+        this.state.rekening.forEach((item,index) => {
             arrJSX.push(<option value={item.id}>{item.nama} {item.nomor_rekening}</option>)
         })
         return arrJSX;

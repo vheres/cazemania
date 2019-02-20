@@ -1,8 +1,6 @@
 import React, { Component } from 'react';
 import { Grid, Row, Col } from 'react-bootstrap';
 import ReactPixel from 'react-facebook-pixel';
-import axios from 'axios'
-import {API_URL_1} from '../supports/api-url/apiurl'
 import { connect } from 'react-redux';
 import { withRouter } from 'react-router-dom';
 
@@ -41,7 +39,7 @@ class InformationPage extends Component {
                         <div className="general-title">
                             Kenapa harus jual case hp?
                         </div>
-                        <div className="panel-container" style={{'padding-top':'60px'}}>
+                        <div className="panel-container" style={{paddingTop:'60px'}}>
                             Jaman sekarang ini case hp sudah menjadi kebutuhan banyak orang loh. Coba lihat orang2 di sekitar kk, pasti punya hp. Nah tingginya penggunaan hp / smartphone sekarang ini, menyebabkan tingginya kebutuhan case sebagai pelindung hp :D Selain itu, orang2 suka gonta ganti case loh! Jadi bisa kebayang kan kak berapa besar permintaan akan case hp?
                         </div> 
                     </Col>
@@ -57,7 +55,7 @@ class InformationPage extends Component {
                         <div className="general-title">
                             Kenapa harus join dan apa keuntungan menjadi reseller / dropsipper di @cazemania?
                         </div>
-                        <div className="panel-container" style={{'padding-top':'60px'}}>
+                        <div className="panel-container" style={{paddingTop:'60px'}}>
                             <ul>
                                 <li>Tanpa modal, karena tidak perlu stock. Hanya perlu pesan sesuai orderan yang diterima.</li>
                                 <li>Barang mudah dijual karena kebutuhan akan case sangat tinggi</li>
@@ -82,7 +80,7 @@ class InformationPage extends Component {
                         <div className="general-title">
                             Syarat menjadi reseller / dropsipper di Cazemania?
                         </div>
-                        <div className="panel-container" style={{'padding-top':'60px'}}>
+                        <div className="panel-container" style={{paddingTop:'60px'}}>
                         Biaya pendaftaran hanya 99rb cukup bayar sekali dan berlaku seumur hidup, setelah itu berhak menikmati fasilitas2 diatas.
                         </div> 
                     </Col>

@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import { Grid, Row, Col, FormGroup, InputGroup, Button, FormControl  } from 'react-bootstrap';
 import axios from 'axios'
-import {API_URL_1} from '../supports/api-url/apiurl'
+import { API_URL_1 } from '../supports/api-url/apiurl'
 import { connect } from 'react-redux';
 import Magnifier from 'react-magnifier';
 import CarouselSimilar from './CarouselSimilar';
@@ -14,13 +14,45 @@ class DetailPage extends Component {
     componentDidMount(){
         const params = new URLSearchParams(this.props.location.search);
         const id = params.get('id')
-        axios.get(API_URL_1 + "/item/" + id)
-        .then((res)=>{
-            console.log(res.data)
-            this.setState({item:res.data.item[0], brands: res.data.brands, type: res.data.type, price: res.data.price})
-        })
+        console.log(id)
+        this.getProduct(id);
+        this.getBrands();
+        this.getTypes();
         ReactPixel.pageView();
         ReactPixel.track('ViewContent');
+    }
+
+    getProduct(id) {
+        axios.get(`${API_URL_1}/catalogue/getproduct/${id}`)
+        .then((res)=>{
+            console.log(res)
+            this.setState({item:res.data.result})
+        })
+        .catch(err => {
+            console.log(err)
+        })
+    }
+
+    getBrands() {
+        axios.get(`${API_URL_1}/brand/all`)
+        .then((res)=>{
+            console.log(res)
+            this.setState({brands:res.data.result})
+        })
+        .catch(err => {
+            console.log(err)
+        })
+    }
+
+    getTypes() {
+        axios.get(`${API_URL_1}/phonemodel/all`)
+        .then(res => {
+            console.log(res)
+            this.setState({types:res.data.result})
+        })
+        .catch(err => {
+            console.log(err)
+        })
     }
 
     brandSelectOptions(){
@@ -42,14 +74,15 @@ class DetailPage extends Component {
 
 
     typeFilter(){
-        var data = this.state.type
+        var data = this.state.types
         console.log(data)
-        var tempArr = new Array
+        var tempArr = []
         for(var num in data){
-            if(data[num].brand_id === parseInt(this.refs.brand_select.value)){
+            if(data[num].brandId === parseInt(this.refs.brand_select.value)){
                 tempArr.push(data[num])
             }
         }
+        console.log(tempArr)
         this.setState({typeselect: tempArr})   
         document.getElementById("model_select").selectedIndex = "0";  
         document.getElementById("case_select").selectedIndex = "0";
@@ -73,11 +106,12 @@ class DetailPage extends Component {
     }
 
     onModelSelect(){
-        var data = this.state.type
+        var data = this.state.types
         var tempVar = {soft: 0, hard: 0}
         for(var num in data){
+            console.log(data[num])
             if(data[num].id === parseInt(this.refs.type_select.value)){
-                tempVar = data[num]
+                tempVar =  {soft: data[num].soft, hard: data[num].hard}
             }
         }
         this.setState({caseselect: tempVar})

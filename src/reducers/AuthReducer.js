@@ -1,4 +1,4 @@
-const INITIAL_STATE = { firstname: "", email: "", error: "", id: "", password: "", cookieCheck: false}
+const INITIAL_STATE = { firstname: "", lastname: "", email: "", category: "", token: "", error: "", id: "", password: "", cookieCheck: false}
 
 
 // INITIAL_STATE => default parameter, kalau state tidak menerima apa2 (belum ada state terakhir)

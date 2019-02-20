@@ -72,15 +72,15 @@ class ProfileRenderOrder extends Component {
             {
                 pendingPayment: () => {
                     return(
-                        <span class="label bg-info">Pending Payment</span> )
+                        <span className="label bg-info">Pending Payment</span> )
                     },
                 pendingDelivery: () => {
                     return(
-                        <span class="label bg-warning">Pending Delivery</span> )
+                        <span className="label bg-warning">Pending Delivery</span> )
                     },
                 complete : () =>{
                     return(
-                        <span class="label bg-success">Shipped</span> )
+                        <span className="label bg-success">Shipped</span> )
                     }
                 }
         )
@@ -89,7 +89,7 @@ class ProfileRenderOrder extends Component {
     renderHeader(){
         if(this.props.status === "pendingPayment"){
             return (
-                <header class="wrapper-md bg-light lter">
+                <header className="wrapper-md bg-light lter">
                     <div className="row">
                         <span className="col-xs-12 col-md-2">Bukti pembayaran: </span>
                         <span className="col-xs-8 col-md-8">
@@ -108,7 +108,7 @@ class ProfileRenderOrder extends Component {
         }
         else if(this.props.status === "pendingDelivery"){
             return (
-                <header class="wrapper-md bg-light lter">
+                <header className="wrapper-md bg-light lter">
                 <div className="row">
                     <span className="col-md-6">Order sedang di proses</span>
                     <span className="col-md-6">
@@ -120,8 +120,8 @@ class ProfileRenderOrder extends Component {
         }
         else if(this.props.status === "complete"){
             return (
-                <header class="wrapper-md bg-success lter">
-                <div style={{"font-size": "200%"}}>
+                <header className="wrapper-md bg-success lter">
+                <div style={{fontSize: "200%"}}>
                     ORDER SELESAI   ||   <strong>Nomor Resi: {this.props.resi}</strong>
                 </div>
                 </header>
@@ -160,22 +160,22 @@ class ProfileRenderOrder extends Component {
         return(
             <Panel eventKey={this.props.transaction_id} bsStyle={this.selectStyle()}>
               <Panel.Heading>
-                <Panel.Title toggle style={{'font-size':'10pt'}}>Order ID: <strong>CMW#{this.props.ordernumber}</strong><span style={{float: 'right'}}>{this.renderOrderStatus()[this.props.status]()}</span></Panel.Title>
+                <Panel.Title toggle style={{fontSize:'10pt'}}>Order ID: <strong>CMW#{this.props.ordernumber}</strong><span style={{float: 'right'}}>{this.renderOrderStatus()[this.props.status]()}</span></Panel.Title>
               </Panel.Heading>
               <Panel.Body collapsible>
-                <section id="content" style={{"font-size":"16px"}}> 
-                    <section class="vbox bg-white">
+                <section id="content" style={{fontSize:"16px"}}> 
+                    <section className="vbox bg-white">
                         {this.renderHeader()}
-                        <section class="scrollable wrapper" style={{"line-height":"20px"}}> 
-                        <div class="row">
-                            <p class="m-t m-b col-md-3" style={{"line-height":"20px"}}>
+                        <section className="scrollable wrapper" style={{"line-height":"20px"}}> 
+                        <div className="row">
+                            <p className="m-t m-b col-md-3" style={{"line-height":"20px"}}>
                                 <div style={{'margin-bottom': '5px'}}>Order date: <strong>{this.props.date}</strong></div>
                                 <div style={{'margin-bottom': '5px'}}>Order status: {this.renderOrderStatus()[this.props.status]()}</div>
                                 <div style={{'margin-bottom': '5px'}}>Order ID: <strong>CMW#{this.props.ordernumber}</strong></div>  
                             </p>
-                            <div class="well bg-light b m-t col-md-6">
-                                <div class="row">
-                                <div class="col-xs-12">
+                            <div className="well bg-light b m-t col-md-6">
+                                <div className="row">
+                                <div className="col-xs-12">
                                     <strong>SHIP TO:</strong>
                                     <h4>{this.props.firstname} {this.props.lastname}</h4>
                                     <p>
@@ -187,14 +187,14 @@ class ProfileRenderOrder extends Component {
                                 </div>
                                 </div>
                             </div>
-                            <div class="col-md-3 text-right">
-                            <p class="h4">CMW#{this.props.ordernumber}</p>
+                            <div className="col-md-3 text-right">
+                            <p className="h4">CMW#{this.props.ordernumber}</p>
                             <h5>{this.props.date}</h5>           
                             </div>
                         </div>          
-                        <div class="line"></div>
+                        <div className="line"></div>
                         <div style={{'overflow-x':'auto'}}>
-                            <table class="table">
+                            <table className="table">
                                 <thead className="table-head">
                                 <tr>
                                     <th style={{"width": "10%"}}>QTY</th>
@@ -206,19 +206,19 @@ class ProfileRenderOrder extends Component {
                                 <tbody className="table-body">
                                 {this.renderTransactionDetails()}
                                 <tr>
-                                    <td colspan="3" class="text-right"><strong>Subtotal</strong></td>
+                                    <td colspan="3" className="text-right"><strong>Subtotal</strong></td>
                                     <td>Rp. {this.props.subtotal}</td>
                                 </tr>
                                 <tr>
-                                    <td colspan="3" class="text-right"><strong>Discount</strong></td>
+                                    <td colspan="3" className="text-right"><strong>Discount</strong></td>
                                     <td>Rp. {this.props.discount}</td>
                                 </tr>
                                 <tr>
-                                    <td colspan="3" class="text-right no-border"><strong>Shipping</strong></td>
+                                    <td colspan="3" className="text-right no-border"><strong>Shipping</strong></td>
                                     <td>Rp. {this.props.shipping}</td>
                                 </tr>
                                 <tr>
-                                    <td colspan="3" class="text-right no-border"><strong>Total</strong></td>
+                                    <td colspan="3" className="text-right no-border"><strong>Total</strong></td>
                                     <td><strong>Rp. {this.props.total_price}</strong></td>
                                 </tr>
                                 </tbody>

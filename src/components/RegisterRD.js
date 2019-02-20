@@ -284,7 +284,7 @@ class RegisterRD extends Component {
                                 <Row>
                                     <Row>
                                         <Col xs={12}>
-                                            <input type="button" class="btn-orange-blue pull-right" style={{'width':'100%'}} value="Register" onClick={()=>this.onRegisterClick()}/>
+                                            <input type="button" className="btn-orange-blue pull-right" style={{'width':'100%'}} value="Register" onClick={()=>this.onRegisterClick()}/>
                                         </Col>
                                     </Row>
                                 </Row>                       
