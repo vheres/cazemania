@@ -16,10 +16,10 @@ class CarouselText extends Component {
       }
       
       getText() {
-        axios.get(API_URL_1 + "/testimonies")
+        axios.get(`http://localhost/testimony/all`)
         .then((response) => {
-          console.log(response.data.testimonies)
-            this.setState({testimonies: response.data.testimonies})
+          console.log(response.data.result)
+            this.setState({testimonies: response.data.result})
         })
       }
 
@@ -29,7 +29,7 @@ class CarouselText extends Component {
             return (
               <div className="carousel-text">
                 <div>
-                  {item.content}
+                  {item.comment}
                 </div>
                 <div style={{marginTop:'2rem'}}>
                   - {item.name} -

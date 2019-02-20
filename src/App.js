@@ -15,10 +15,11 @@ import LoginPage from './components/LoginPage';
 import RegisterPage from './components/RegisterPage';
 import RegisterRD from './components/RegisterRD';
 import ResetPassword from './components/ResetPassword';
+import ListPage from './components/ListPage';
 import { Grid, Row, Col } from 'react-bootstrap';
 import { connect } from 'react-redux';
 import { keepLogin, onLogout, cookieChecked } from './actions';
-import { Route, withRouter, Switch } from 'react-router-dom';
+import { Route, withRouter } from 'react-router-dom';
 import Cookies from 'universal-cookie';
 import './supports/css/bootstrap.css';
 import './App.css';
@@ -72,6 +73,7 @@ class App extends Component {
               <Route path="/register" component={RegisterPage}/>
               <Route path="/register_reseller_dropshipper" component={RegisterRD}/>
               <Route path="/reset-password" component={ResetPassword}/>
+              <Route path="/list" component={ListPage}/>
             </Col>
           </Row>
           <Row className="no-margin no-padding">

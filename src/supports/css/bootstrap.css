@@ -7263,7 +7263,7 @@ button.close {
 .information-quick-link {
   position: -webkit-sticky;
   position: sticky;
-  top: 15%;
+  top: 8%;
 }
 .information-list-title {
   font-size: 25px;

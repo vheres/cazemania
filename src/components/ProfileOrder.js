@@ -20,7 +20,7 @@ class ProfileOrder extends Component {
             if (res.data.length === 0) {
                 return null;
             } else {
-                if (this.state.orders[0].status == 'pendingPayment') {
+                if (this.state.orders[0].status === 'pendingPayment') {
                     this.setState({activeKey:this.state.orders[0].id})
                 }
             }
@@ -34,7 +34,7 @@ class ProfileOrder extends Component {
             if (res.data.length === 0) {
                 return null;
             } else {
-                if (this.state.orders[0].status == 'pendingPayment') {
+                if (this.state.orders[0].status === 'pendingPayment') {
                     this.setState({activeKey:this.state.orders[0].id})
                 }
             }

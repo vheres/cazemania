@@ -1,6 +1,5 @@
 import React, { Component } from 'react';
 import { Grid, Row, Col, Button, ButtonGroup } from 'react-bootstrap';
-import {API_URL_1} from '../supports/api-url/apiurl'
 import ReactPixel from 'react-facebook-pixel';
 
 class InformationPage extends Component {
@@ -86,7 +85,7 @@ class InformationPage extends Component {
                             </Col>
                         </Row>
                         <Row>
-                            <Col xs={12} id="faq" className="information-list-title" style={{'padding-top':'80px'}}>
+                            <Col xs={12} id="faq" className="information-list-title" style={{paddingTop:'80px'}}>
                                 FAQ
                             </Col>
                         </Row>
@@ -190,7 +189,7 @@ class InformationPage extends Component {
                             </Col>
                         </Row>
                         <Row>
-                            <Col xs={12} id="caraorder" className="information-list-title" style={{'padding-top':'80px'}}>
+                            <Col xs={12} id="caraorder" className="information-list-title" style={{paddingTtop:'80px'}}>
                             Cara Order
                             </Col>
                         </Row>
@@ -211,7 +210,7 @@ class InformationPage extends Component {
                             </Col>
                         </Row>
                         <Row>
-                            <Col xs={12} id="pembayaran" className="information-list-title" style={{'padding-top':'80px'}}>
+                            <Col xs={12} id="pembayaran" className="information-list-title" style={{paddingTop:'80px'}}>
                                 Pembayaran
                             </Col>
                         </Row>
@@ -232,7 +231,7 @@ class InformationPage extends Component {
                             </Col>
                         </Row>
                         <Row>
-                            <Col xs={12} id="informasipengiriman" className="information-list-title" style={{'padding-top':'80px'}}>
+                            <Col xs={12} id="informasipengiriman" className="information-list-title" style={{paddingTop:'80px'}}>
                                 Informasi Pengiriman
                             </Col>
                         </Row>
@@ -250,7 +249,7 @@ class InformationPage extends Component {
                             </Col>
                         </Row>
                         <Row>
-                            <Col xs={12} id="penukarandanpengembalian" className="information-list-title" style={{'padding-top':'80px'}}>
+                            <Col xs={12} id="penukarandanpengembalian" className="information-list-title" style={{paddingTop:'80px'}}>
                                 Penukaran dan Pengembalian
                             </Col>
                         </Row>

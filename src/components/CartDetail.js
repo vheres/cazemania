@@ -1,6 +1,5 @@
 import React, { Component } from 'react';
-import { Grid, Row, Col, Thumbnail  } from 'react-bootstrap';
-import axios from 'axios'
+import { Row, Col, Thumbnail  } from 'react-bootstrap';
 import {API_URL_1} from '../supports/api-url/apiurl'
 
 class CartDetail extends Component {

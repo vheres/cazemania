@@ -29,7 +29,7 @@ class RegisterPage extends Component {
         axios.get(API_URL_1 + '/destination')
         .then(response => {
             var arrJSX = [];
-            response.data.map((item, count) => {
+            response.data.result.forEach(item => {
                 arrJSX.push({value:item.destination_code, label:`${item.province}, ${item.city}, ${item.subdistrict}`})
             })
             this.setState({destination: arrJSX})
@@ -97,8 +97,8 @@ class RegisterPage extends Component {
             this.setState({input_style: inputArr})
         } else {
             this.props.onRegister({
-                firstname: this.refs.firstName.value,
-                lastname: this.refs.lastName.value,
+                firstName: this.refs.firstName.value,
+                lastName: this.refs.lastName.value,
                 gender: gender,
                 email: this.refs.email.value,
                 password: this.refs.password1.value,
@@ -208,7 +208,7 @@ class RegisterPage extends Component {
                                 </Row> */}
                                 <Row>
                                     <Col xs={12}>
-                                        <div style={{'font-size':'12pt', 'font-weight':'bold', 'color': 'rgb(100, 100, 100)', 'margin-top':'20px'}}>Gender</div>
+                                        <div style={{fontSize:'12pt', fontWeight:'bold', color: 'rgb(100, 100, 100)', marginTop:'20px'}}>Gender</div>
                                         <label className="container">Male
                                             <input type="radio" name="gender" id="male" value="male"/>
                                             <span className="checkmark"/>
@@ -284,12 +284,12 @@ class RegisterPage extends Component {
                                 <Row>
                                     <Row className="m-t">
                                         <Col xs={12}>
-                                            <input type="button" class="btn-blue-orange pull-right" style={{'width':'100%'}} value="Register" onClick={()=>this.onRegisterClick()}/>
+                                            <input type="button" className="btn-blue-orange pull-right" style={{'width':'100%'}} value="Register" onClick={()=>this.onRegisterClick()}/>
                                         </Col>
                                     </Row>
                                     <Row className="pull-right m-t-sm">
                                         <Col xs={12} className="general-text">
-                                            Sudah punya Akun? <Link to="/login" className="general-link" style={{'font-size':'12pt'}}>Login disini</Link>   
+                                            Sudah punya Akun? <Link to="/login" className="general-link" style={{fontSize:'12pt'}}>Login disini</Link>   
                                         </Col>
                                     </Row> 
                                 </Row>                       

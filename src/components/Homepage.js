@@ -15,7 +15,7 @@ class HomePage extends Component {
 
     renderHomePage() {
         return(
-                <Grid fluid style={{'background-color':'white'}}>
+                <Grid fluid style={{backgroundColor:'white'}}>
                     <Row className="m-n">
                         <CarouselBanner/>
                     </Row>
@@ -28,7 +28,7 @@ class HomePage extends Component {
                                             <div style={{position:'absolute',top:'0px', width:'100%',height:'100%'}}>
                                                 <img src={`${API_URL_1}/others/icons/icon1.png`} style={{width:'100%'}}/>
                                             </div>
-                                            <div style={{height:'100%',display:'flex',flexDirection:'column',justifyContent:'flex-end',alignItems:'center',paddingBottom:'30px'}}>
+                                            <div style={{height:'100%',display:'flex',flexDirection:'column',justifyContent:'flex-start',alignItems:'center',paddingTop:'40px'}}>
                                                 <div style={{fontSize:'24pt',color:'rgb(255, 181, 44)',fontWeight:'bold'}}>
                                                     Katalog Case
                                                 </div>
@@ -42,7 +42,7 @@ class HomePage extends Component {
                                             <div style={{position:'absolute',top:'0px', width:'100%',height:'100%'}}>
                                                 <img src={`${API_URL_1}/others/icons/icon2.png`} style={{width:'100%'}}/>
                                             </div>
-                                            <div style={{height:'100%',display:'flex',flexDirection:'column',justifyContent:'flex-end',alignItems:'center',paddingBottom:'30px'}}>
+                                            <div style={{height:'100%',display:'flex',flexDirection:'column',justifyContent:'flex-start',alignItems:'center',paddingTop:'40px'}}>
                                                 <div style={{fontSize:'24pt',color:'rgb(9, 175, 204)',fontWeight:'bold'}}>
                                                     Custom Case
                                                 </div>
@@ -56,7 +56,7 @@ class HomePage extends Component {
                                             <div style={{position:'absolute',top:'0px', width:'100%',height:'100%'}}>
                                                 <img src={`${API_URL_1}/others/icons/icon3.png`} style={{width:'100%'}}/>
                                             </div>
-                                            <div style={{height:'100%',display:'flex',flexDirection:'column',justifyContent:'flex-end',alignItems:'center',paddingBottom:'30px'}}>
+                                            <div style={{height:'100%',display:'flex',flexDirection:'column',justifyContent:'flex-start',alignItems:'center',paddingTop:'40px'}}>
                                                 <div style={{fontSize:'24pt',color:'rgb(255, 181, 44)',fontWeight:'bold'}}>
                                                     Premium Case
                                                 </div>
@@ -70,7 +70,7 @@ class HomePage extends Component {
                                             <div style={{position:'absolute',top:'0px', width:'100%',height:'100%'}}>
                                                 <img src={`${API_URL_1}/others/icons/icon4.png`} style={{width:'100%'}}/>
                                             </div>
-                                            <div style={{height:'100%',display:'flex',flexDirection:'column',justifyContent:'flex-end',alignItems:'center',paddingBottom:'30px'}}>
+                                            <div style={{height:'100%',display:'flex',flexDirection:'column',justifyContent:'flex-start',alignItems:'center',paddingTop:'40px'}}>
                                                 <div style={{fontSize:'24pt',color:'rgb(9, 175, 204)',fontWeight:'bold'}}>
                                                     Join Reseller
                                                 </div>
@@ -84,7 +84,7 @@ class HomePage extends Component {
                                             <div style={{position:'absolute',top:'0px', width:'100%',height:'100%'}}>
                                                 <img src={`${API_URL_1}/others/icons/icon5.png`} style={{width:'100%'}}/>
                                             </div>
-                                            <div style={{height:'100%',display:'flex',flexDirection:'column',justifyContent:'flex-end',alignItems:'center',paddingBottom:'30px'}}>
+                                            <div style={{height:'100%',display:'flex',flexDirection:'column',justifyContent:'flex-start',alignItems:'center',paddingTop:'40px'}}>
                                                 <div style={{fontSize:'24pt',color:'rgb(255, 181, 44)',fontWeight:'bold'}}>
                                                     List Tipe HP
                                                 </div>
@@ -98,7 +98,7 @@ class HomePage extends Component {
                                             <div style={{position:'absolute',top:'0px', width:'100%',height:'100%'}}>
                                                 <img src={`${API_URL_1}/others/icons/icon6.png`} style={{width:'100%'}}/>
                                             </div>
-                                            <div style={{height:'100%',display:'flex',flexDirection:'column',justifyContent:'flex-end',alignItems:'center',paddingBottom:'30px'}}>
+                                            <div style={{height:'100%',display:'flex',flexDirection:'column',justifyContent:'flex-start',alignItems:'center',paddingTop:'40px'}}>
                                                 <div style={{fontSize:'24pt',color:'rgb(9, 175, 204)',fontWeight:'bold'}}>
                                                     Canvas Bag Mania
                                                 </div>
@@ -134,7 +134,7 @@ class HomePage extends Component {
                     <Row className="homepage-section-margin">
                         <Col xsOffset={1} xs={10}>
                             <div className="text-center font-bold homepage-section-title">
-                                <span className="icon" style={{color:'rgb(9, 175, 204)'}}><i class="fa fa-instagram"></i></span>
+                                <span className="icon" style={{color:'rgb(9, 175, 204)'}}><i className="fa fa-instagram"></i></span>
                                 <span style={{color:'#F9A044'}}> INSTAGRAM</span>
                                 <div className="border" style={{borderColor:'#D4F4F2',paddingTop:'0.5rem'}}/>
                             </div>

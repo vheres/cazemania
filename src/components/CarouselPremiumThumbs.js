@@ -3,7 +3,6 @@ import AliceCarousel from 'react-alice-carousel';
 import { Row, Col } from 'react-bootstrap';
 import 'react-alice-carousel/lib/alice-carousel.css';
 import {API_URL_1} from '../supports/api-url/apiurl'
-import Magnifier from 'react-magnifier';
 import "react-alice-carousel/lib/alice-carousel.css";
 
 class CarouselPremiumThumbs extends Component {
@@ -15,16 +14,16 @@ class CarouselPremiumThumbs extends Component {
 
     renderThumb() {
         var arrJSX = []
-            this.props.images.map((item, index) => {
+            this.props.images.forEach((item, index) => {
                 if (this.props.images.length < 6) {
                     arrJSX.push(
                         <Col xs={2}>
-                            <img src={`${API_URL_1}/premium/${item.image}.jpg`} className="m-b carousel-thumbnail" style={{width:'100%'}} key={index} onClick={() => this.props.thumbClick(index)}/>
+                            <img src={`${API_URL_1}/premium/${item.image}.jpg`} alt={item.image} className="m-b carousel-thumbnail" style={{width:'100%'}} key={index} onClick={() => this.props.thumbClick(index)}/>
                         </Col>
                     )
                 } else {
                     arrJSX.push(
-                        <img src={`${API_URL_1}/premium/${item.image}.jpg`} className="m-b carousel-thumbnail" style={{width:'90%',marginLeft:'5%'}} key={index} onClick={() => this.props.thumbClick(index)}/>
+                        <img src={`${API_URL_1}/premium/${item.image}.jpg`} alt={item.image} className="m-b carousel-thumbnail" style={{width:'90%',marginLeft:'5%'}} key={index} onClick={() => this.props.thumbClick(index)}/>
                     )
                 }
             })

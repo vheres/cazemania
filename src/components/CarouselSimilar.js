@@ -15,7 +15,12 @@ class CarouselSimilar extends Component {
   }
 
   componentWillReceiveProps(newProps) {
-    axios.get(`${API_URL_1}/similarproducts?name=${newProps.name}&id=${newProps.id}`)
+    axios.get(`${API_URL_1}/catalogue/similarproducts`, {
+      params: {
+        name: newProps.name,
+        id: newProps.id
+      }
+    })
         .then((response) => {
           console.log(response)
             this.setState({similar_product: response.data})
@@ -25,7 +30,12 @@ class CarouselSimilar extends Component {
   }
 
   getSimilarProduct() {
-    axios.get(`${API_URL_1}/similarproducts?name=${this.props.name}&id=${this.props.id}`)
+    axios.get(`${API_URL_1}/catalogue/similarproducts`, {
+      params: {
+        name: this.props.name,
+        id: this.props.id
+      }
+    })
         .then((response) => {
           console.log(response)
             this.setState({similar_product: response.data})
@@ -70,7 +80,7 @@ class CarouselSimilar extends Component {
               autoPlayActionDisabled={true}
               dotsDisabled={true}
               buttonsDisabled={true}
-              mouseDragEnabled={true}
+              mouseDragEnabled={false}
               ref={ el => this.Carousel = el }
               />
             </Col>

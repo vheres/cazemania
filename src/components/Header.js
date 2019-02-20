@@ -250,7 +250,7 @@ class Header extends Component {
                                     </Col>                   
                                     <Col xsHidden smHidden md={6} lg={6} style={{'padding':'0', 'margin':'0'}} className="pull-right">
                                         <Nav style={{'width':'100%'}}>
-                                            <NavDropdown eventKey={6} title={<i class="fa fa-user"></i>} id="basic-nav-dropdown" className="m-r pull-right" style={{'font-size': '22px', 'margin-top':'6px'}}>
+                                            <NavDropdown eventKey={6} title={<i className="fa fa-user"></i>} id="basic-nav-dropdown" className="m-r pull-right" style={{fontSize: '22px', marginTop:'6px'}}>
                                                 <MenuItem eventKey={6.1} onClick={()=>this.onLinkClick(`/profile`)}>
                                                     <span>Profile</span>
                                                 </MenuItem>
@@ -259,13 +259,13 @@ class Header extends Component {
                                                 </MenuItem>
                                             </NavDropdown>
                                             <NavItem eventKey={5} className="pull-right" >
-                                                <Button type="submit" className="btn btn-tosca" onClick={()=>this.handleShow()}><i class="fa fa-shopping-cart" ></i></Button>
+                                                <Button type="submit" className="btn btn-tosca" onClick={()=>this.handleShow()}><i className="fa fa-shopping-cart" ></i></Button>
                                             </NavItem>
                                             <NavItem eventKey={4} className="pull-right">
-                                                <Button type="submit" className="btn btn-tosca" onClick={()=>this.onSearchClick()}><i class="fa fa-search"></i></Button>
+                                                <Button type="submit" className="btn btn-tosca" onClick={()=>this.onSearchClick()}><i className="fa fa-search"></i></Button>
                                             </NavItem>
                                             <NavItem eventKey={4} className="pull-right">
-                                                <input type="text" id="search" placeholder="Cari" class="search-bar" onKeyPress={this.onKeyPress.bind(this)}/>{' '}
+                                                <input type="text" id="search" placeholder="Cari" className="search-bar" onKeyPress={this.onKeyPress.bind(this)}/>{' '}
                                             </NavItem>
                                         </Nav>
                                     </Col>
@@ -293,10 +293,10 @@ class Header extends Component {
                             </Navbar.Collapse>       
                         </Navbar>
                         <Row style={{marginTop:'0px',paddingTop:'0px'}}>
-                            <Col xs={12} mdHidden lgHidden style={{'padding-top':'0px'}}>
-                                <input type="text" id="mobilesearch" placeholder="Cari" class="search-bar-mobile" onKeyPress={this.onKeyPress.bind(this)}/>
-                                <Button type="submit" className="btn-mobile" onClick={()=>this.onSearchClick()}><i class="fa fa-search" style={{'color':'white'}}></i></Button>
-                                <Button type="submit" className="btn-mobile" onClick={()=>this.handleShow()}><i class="fa fa-shopping-cart" style={{'color':'white'}}></i></Button>
+                            <Col xs={12} mdHidden lgHidden style={{paddingTop:'0px'}}>
+                                <input type="text" id="mobilesearch" placeholder="Cari" className="search-bar-mobile" onKeyPress={this.onKeyPress.bind(this)}/>
+                                <Button type="submit" className="btn-mobile" onClick={()=>this.onSearchClick()}><i className="fa fa-search" style={{'color':'white'}}></i></Button>
+                                <Button type="submit" className="btn-mobile" onClick={()=>this.handleShow()}><i className="fa fa-shopping-cart" style={{'color':'white'}}></i></Button>
                             </Col>
                         </Row>
                     </Col>
@@ -331,7 +331,7 @@ class Header extends Component {
                                     </Col>                   
                                     <Col xsHidden smHidden md={6} lg={5} style={{'padding':'0', 'margin':'0'}} className="pull-right">
                                         <Nav style={{'width':'100%'}}>
-                                            <NavDropdown eventKey={6} title={<i class="fa fa-user"></i>} id="basic-nav-dropdown" className="m-r pull-right" style={{'font-size': '22px', 'margin-top':'6px'}}>
+                                            <NavDropdown eventKey={6} title={<i className="fa fa-user"></i>} id="basic-nav-dropdown" className="m-r pull-right" style={{fontSize: '22px', marginTop:'6px'}}>
                                                 <MenuItem eventKey={6.1} onClick={()=>this.onLinkClick("/login")}>
                                                     <span><i className="fa fa-sign-in"></i> Login</span>
                                                 </MenuItem>
@@ -340,13 +340,13 @@ class Header extends Component {
                                                 </MenuItem>
                                             </NavDropdown>
                                             <NavItem eventKey={5} className="pull-right" >
-                                                <Button type="submit" className="btn btn-tosca" onClick={()=>{alert('Please Login First');this.onLinkClick("/login")}}><i class="fa fa-shopping-cart" ></i></Button>
+                                                <Button type="submit" className="btn btn-tosca" onClick={()=>{alert('Please Login First');this.onLinkClick("/login")}}><i className="fa fa-shopping-cart" ></i></Button>
                                             </NavItem>
                                             <NavItem eventKey={4} className="pull-right">
-                                                <Button type="submit" className="btn btn-tosca" onClick={()=>this.onSearchClick()}><i class="fa fa-search"></i></Button>
+                                                <Button type="submit" className="btn btn-tosca" onClick={()=>this.onSearchClick()}><i className="fa fa-search"></i></Button>
                                             </NavItem>
                                             <NavItem eventKey={4} className="pull-right">
-                                                <input type="text" id="search" placeholder="Cari" class="search-bar" onKeyPress={this.onKeyPress.bind(this)}/>{' '}
+                                                <input type="text" id="search" placeholder="Cari" className="search-bar" onKeyPress={this.onKeyPress.bind(this)}/>{' '}
                                             </NavItem>
                                         </Nav>
                                     </Col>
@@ -374,10 +374,10 @@ class Header extends Component {
                             </Navbar.Collapse>       
                         </Navbar>
                         <Row style={{marginTop:'0px',paddingTop:'0px'}}>
-                            <Col xs={12} mdHidden lgHidden style={{'padding-top':'0px'}}>
-                                <input type="text" id="mobilesearch" placeholder="Cari" class="search-bar-mobile" onKeyPress={this.onKeyPress.bind(this)}/>
-                                <Button type="button" className="btn-mobile" onClick={()=>this.onSearchClick()}><i class="fa fa-search" style={{'color':'white'}}></i></Button>
-                                <Button type="submit" className="btn-mobile" onClick={()=>{alert('Please Login First');this.onLinkClick("/login")}}><i class="fa fa-shopping-cart" style={{'color':'white'}}></i></Button>
+                            <Col xs={12} mdHidden lgHidden style={{paddingTop:'0px'}}>
+                                <input type="text" id="mobilesearch" placeholder="Cari" className="search-bar-mobile" onKeyPress={this.onKeyPress.bind(this)}/>
+                                <Button type="button" className="btn-mobile" onClick={()=>this.onSearchClick()}><i className="fa fa-search" style={{'color':'white'}}></i></Button>
+                                <Button type="submit" className="btn-mobile" onClick={()=>{alert('Please Login First');this.onLinkClick("/login")}}><i className="fa fa-shopping-cart" style={{'color':'white'}}></i></Button>
                             </Col>
                         </Row>
                     </Col> 

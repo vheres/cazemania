@@ -1,5 +1,4 @@
 import React, {Component} from 'react';
-import Upload from 'rc-upload';
 import {API_URL_1} from '../supports/api-url/apiurl'
 import axios from 'axios'
 

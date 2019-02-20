@@ -4,7 +4,7 @@ import ProfileOrder from './ProfileOrder';
 import {API_URL_1} from '../supports/api-url/apiurl'
 import axios from 'axios'
 import { connect } from 'react-redux';
-import { Redirect, Link } from 'react-router-dom';
+import { Redirect } from 'react-router-dom';
 import Select from 'react-select';
 import ReactPixel from 'react-facebook-pixel';
 
@@ -101,7 +101,7 @@ class ProfilePage extends Component {
         if (this.state.profile.gender == 'male') {
             return (
                 <Col xs={12} mdOffset={2} md={8}>
-                    <div style={{'font-size':'12pt', 'font-weight':'bold', 'color': 'rgb(100, 100, 100)', 'margin-top':'20px'}}>Gender</div>
+                    <div style={{fontSize:'12pt', fontWeight:'bold', color: 'rgb(100, 100, 100)', marginTop:'20px'}}>Gender</div>
                     <label className="container">Male
                     <input type="radio" name="gender" id="male" value="male" checked/>
                     <span className="checkmark"/>
@@ -115,7 +115,7 @@ class ProfilePage extends Component {
         } else {
             return (
                 <Col xs={12} mdOffset={2} md={8}>
-                    <div style={{'font-size':'12pt', 'font-weight':'bold', 'color': 'rgb(100, 100, 100)', 'margin-top':'20px'}}>Gender</div>
+                    <div style={{fontSize:'12pt', fontWeight:'bold', color: 'rgb(100, 100, 100)', marginTop:'20px'}}>Gender</div>
                     <label className="container">Male
                     <input type="radio" name="gender" id="male" value="male"/>
                     <span className="checkmark"/>
@@ -134,7 +134,7 @@ class ProfilePage extends Component {
             <Col xsOffset={1} xs={10} lgOffset={1} lg={3}>
                 <Row>
                     <Col md={12}>
-                        <span style={{"font-size": "28px"}}>My Profile</span><span className="profile-edit-button"><i class="fa fa-edit" title="Edit Profile" onClick={this.handleShow.bind(this)}></i></span>
+                        <span style={{fontSize: "28px"}}>My Profile</span><span className="profile-edit-button"><i className="fa fa-edit" title="Edit Profile" onClick={this.handleShow.bind(this)}></i></span>
                     </Col>
                 </Row>
                 <Row>
@@ -142,7 +142,7 @@ class ProfilePage extends Component {
                 </Row>
                 <Row>
                     <Col md={12}>
-                        <span style={{"font-size": "22px"}}>{this.state.profile.firstname} {this.state.profile.lastname}</span><span class="label bg-info profile-category-label">{this.state.profile.category}</span>
+                        <span style={{fontSize: "22px"}}>{this.state.profile.firstname} {this.state.profile.lastname}</span><span className="label bg-info profile-category-label">{this.state.profile.category}</span>
                     </Col>
                 </Row>
                 <Row>
@@ -191,7 +191,7 @@ class ProfilePage extends Component {
                     <Col xsOffset={1} xs={10} lgOffset={0} lg={7}>
                         <Row>
                             <Col md={12}>
-                                <span style={{"font-size": "28px"}}>My Transactions</span>
+                                <span style={{fontSize: "28px"}}>My Transactions</span>
                             </Col>
                         </Row>
                         <Row>
