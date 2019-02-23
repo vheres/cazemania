@@ -15,30 +15,20 @@ class CarouselSimilar extends Component {
   }
 
   componentWillReceiveProps(newProps) {
-    axios.get(`${API_URL_1}/catalogue/similarproducts`, {
-      params: {
-        name: newProps.name,
-        id: newProps.id
-      }
-    })
+    axios.get(`${API_URL_1}/catalogue/similarproducts/${newProps.id}`)
         .then((response) => {
           console.log(response)
-            this.setState({similar_product: response.data})
+            this.setState({similar_product: response.data.result})
         }).catch((err) => {
             console.log(err)
         })
   }
 
   getSimilarProduct() {
-    axios.get(`${API_URL_1}/catalogue/similarproducts`, {
-      params: {
-        name: this.props.name,
-        id: this.props.id
-      }
-    })
+    axios.get(`${API_URL_1}/catalogue/similarproducts/${this.props.id}`)
         .then((response) => {
           console.log(response)
-            this.setState({similar_product: response.data})
+            this.setState({similar_product: response.data.result})
         }).catch((err) => {
             console.log(err)
         })
@@ -52,12 +42,12 @@ class CarouselSimilar extends Component {
 
       galleryItems() {
           var images = [];
-          this.state.similar_product.map((item, count) => {
+          this.state.similar_product.forEach((item, count) => {
             images.push([item.id, item.image, item.name])
           })
         return (
           images.map((item, count) => (
-                <Link to={`/product?id=${item[0]}`} onClick={()=>{this.props.SimilarClick(`/product?id=${item[0]}`);ReactPixel.trackCustom('similarClick')}} className="best-holder"><img src={API_URL_1+'/normal/'+item[1]+'.jpg'} style={{width:"100%"}}/><div className="best-overlay">{item[2]}</div></Link>
+                <Link to={`/product?id=${item[0]}`} onClick={()=>{this.props.SimilarClick(`/product?id=${item[0]}`);ReactPixel.trackCustom('similarClick')}} className="best-holder"><img src={API_URL_1+item[1]} style={{width:"100%"}}/><div className="best-overlay">{item[2]}</div></Link>
           ))
         )
       };

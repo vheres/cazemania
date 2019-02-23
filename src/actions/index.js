@@ -96,6 +96,7 @@ export const onRegister = (user) =>{
                 })
             }
             else{
+                localStorage.setItem("token", user.data.result.token || "");
                 dispatch ({
                     type: "USER_LOGIN_SUCCESS",
                     payload: { firstname: user.data.result.firstname, lastname: user.data.result.lastname, email: user.data.result.email, category: user.data.result.category, token: user.data.result.token, error: "", cookieCheck: true }

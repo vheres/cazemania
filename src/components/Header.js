@@ -50,10 +50,16 @@ class Header extends Component {
     }
     // CART SECTION
     getCartList() {
-        axios.get(`${API_URL_1}/cart/${this.props.auth.id}`)
+        const token = this.props.auth.token
+            const headers = {
+                headers: { 
+                    'Authorization': `Bearer ${token}`,
+            }
+        };
+        axios.get(`${API_URL_1}/transaction/getcart`, headers)
         .then(async (response) => {
-            console.log(response)
-            await this.setState({cart: response.data.results})
+            console.log(response.data.result)
+            await this.setState({cart: response.data.result})
         })
     }
 
@@ -63,9 +69,15 @@ class Header extends Component {
     }
 
     onDeleteClick(id) {
-        axios.delete(`${API_URL_1}/cart/${this.props.auth.id}/${id}`, )
+        const token = this.props.auth.token
+            const headers = {
+                headers: { 
+                    'Authorization': `Bearer ${token}`,
+            }
+        };
+        axios.delete(`${API_URL_1}/transaction/cart/${id}`, headers)
         .then(async (response) => {
-            this.setState({cart:response.data.results2})
+            this.getCartList();
             alert(`delete item success!`)
         }).catch((err) => {
             console.log(err);
@@ -73,7 +85,13 @@ class Header extends Component {
     }
 
     onClearCartClick() {
-        axios.delete(`${API_URL_1}/clear_cart/${this.props.auth.id}`)
+        const token = this.props.auth.token
+            const headers = {
+                headers: { 
+                    'Authorization': `Bearer ${token}`,
+            }
+        };
+        axios.delete(`${API_URL_1}/transaction/clearcart`, headers)
         .then(async (response) => {
             await this.setState({cart:[]})
             alert(`clear cart success!`)
@@ -85,7 +103,7 @@ class Header extends Component {
     renderCartList() {
         var arrJSX = [];
         arrJSX = this.state.cart.map((item,count) => {
-            return <CartDetail key={item.id} id={item.id} category={item.category} count={count} name={item.name} code={item.code} image={item.image} brand={item.brand_name} model={item.model_name} type={item.case_type} quantity={item.amount} price={item.price} DeleteClick={(temp)=>this.onDeleteClick(temp)}></CartDetail>
+            return <CartDetail key={item.id} item={item} count={count} DeleteClick={(temp)=>this.onDeleteClick(temp)}></CartDetail>
         })
         return arrJSX
     }
@@ -122,7 +140,7 @@ class Header extends Component {
                 </Row>
                 <Row>
                     <Col md={12}>
-                        <h3>Ringkasang Belanja</h3>
+                        <h3>Ringkasan Belanja</h3>
                     </Col>
                 </Row>
                 <Row>
@@ -149,15 +167,15 @@ class Header extends Component {
             var freeHard = 0;
             var hardPrice = 75000;
             var softPrice = 50000;
-            this.state.cart.map((item,count) => {
-                if (item.case_type == "hard" || item.case_type =="customhard" || item.case_type =="premium") {
+            this.state.cart.forEach((item,count) => {
+                if (item.caseType == "hard" || item.caseType =="customhard" || item.caseType =="premium") {
                     countHardCase += parseInt(item.amount);
                 }
                 else {
                     countSoftCase += parseInt(item.amount)
                 }
                 subTotal += item.amount * item.price;
-                arrJSX.push(<tr><td style={{width:"5%"}}>{count +1}.</td><td style={{width:"50%"}}><strong>{item.name} | {item.code}</strong>, {item.model_name}, {item.case_type}</td><td style={{width:"45%"}} className="text-right">(Qty:{item.amount}) Rp. {(item.amount * item.price).toLocaleString()}</td></tr>)
+                arrJSX.push(<tr><td style={{width:"5%"}}>{count +1}.</td><td style={{width:"50%"}}><strong>{item.catalogue.name} | {item.catalogue.code}</strong>, {item.model}, {item.caseType}</td><td style={{width:"45%"}} className="text-right">(Qty:{item.amount}) Rp. {(item.amount * item.price).toLocaleString()}</td></tr>)
             })
             arrJSX.push(<br/>)
             arrJSX.push(<tr><td/><td><strong>Sub Total</strong></td><td className="text-right"><strong>Rp. {subTotal.toLocaleString()}</strong></td></tr>)

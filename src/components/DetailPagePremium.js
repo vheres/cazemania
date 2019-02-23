@@ -8,7 +8,17 @@ import { withRouter } from 'react-router-dom';
 import ReactPixel from 'react-facebook-pixel';
 
 class DetailPagePremium extends Component {
-    state={item: [], images: [], brands: [], types: [], premiumselect: 0, modelselect: 0}
+    constructor(props) {
+        super(props);
+        this.state = {
+            item: [],
+            images: [],
+            brands: [],
+            types: [],
+            premiumselect: 0,
+            modelselect: 0
+        }
+    }
 
     componentDidMount(){
         const params = new URLSearchParams(this.props.location.search);

@@ -7,26 +7,15 @@ class CartDetail extends Component {
         if (this.props.DeleteClick != undefined) {
             return (
                 <Col xs={2} md={2}>
-                    <input type="button" className="btn-orange-blue" value="delete" onClick={()=>this.props.DeleteClick(this.props.id)}/>
+                    <input type="button" className="btn-orange-blue" value="delete" onClick={()=>this.props.DeleteClick(this.props.item.id)}/>
                 </Col>   
             )
         }
         return
     }
 
-    renderImage(){
-        if(this.props.category === "normal"){
-            return <Thumbnail src={API_URL_1+'/normal/'+this.props.image+'.jpg'}></Thumbnail>
-        }
-        else if(this.props.category === "custom"){
-            return <Thumbnail src={API_URL_1+'/custom/'+this.props.image+'.jpg'}></Thumbnail>
-        }
-        else if(this.props.category === "premium"){
-            return <Thumbnail src={API_URL_1+'/premium/'+this.props.image+'.jpg'}></Thumbnail>
-        }
-    }
-
     render() {
+        const { item } = this.props
         return (
             <Row>
                 <Col xs={12}>
@@ -35,21 +24,21 @@ class CartDetail extends Component {
                             <h4>{this.props.count+1}</h4>
                         </Col>
                         <Col xs={10} md={3}>
-                            {this.renderImage()}
+                            <Thumbnail src={`${API_URL_1}${item.catalogue.image}`}/>
                         </Col>
                         <Col xs={6} md={4}>
                             <Row>
-                                <h4>{this.props.name} | {this.props.code}</h4>
+                                <h4>{item.catalogue.name} | {item.catalogue.code}</h4>
                             </Row>
                             <Row>
-                                <p>Details: {this.props.model}, {this.props.type} case</p>
+                                <p>Details: {item.model}, {item.caseType} case</p>
                             </Row>
                             <Row>
-                                <p>Quantity: {this.props.quantity}</p>
+                                <p>Quantity: {item.amount}</p>
                             </Row>
                         </Col>
                         <Col xs={6} md={2}>
-                            <h4 style={{'font-weight':'bold'}}>Rp. {this.props.price.toLocaleString()}</h4>
+                            <h4 style={{'font-weight':'bold'}}>Rp. {item.price.toLocaleString()}</h4>
                         </Col>
                         {this.renderDeleteButton()} 
                     </Row>

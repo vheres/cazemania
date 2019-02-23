@@ -75,7 +75,6 @@ class DetailPage extends Component {
     getPrice(){
         axios.get(`${API_URL_1}/price/all`)
         .then(res => {
-            console.log(res)
             this.setState({price:res.data.result})
         })
         .catch(err => {
@@ -199,20 +198,20 @@ class DetailPage extends Component {
 
     onAddToCart() {
         if (this.props.auth.email !== "") {
-
             const token = this.props.auth.token
             const headers = {
                 headers: { 
                     'Authorization': `Bearer ${token}`,
                 }
             };
-            axios.post(API_URL_1 + `/cart`, {
+            axios.put(API_URL_1 + `/transaction/addtocart`, {
                 catalogueId: this.state.item.id,
                 phonemodelId: this.state.selectedPhoneModelId,
                 brand: this.state.selectedBrand.name,
                 model: this.state.selectedPhoneModel.name,
                 caseType: this.state.selectedCaseType,
-                amount: document.getElementById("quantity").value
+                amount: document.getElementById("quantity").value,
+                price: parseInt(this.state.selected_price)
             }, headers).then((res) => {
                 alert('add to cart successful!')
                 ReactPixel.track('AddToCart', {
@@ -244,10 +243,10 @@ class DetailPage extends Component {
         const params = new URLSearchParams(this.props.location.search);
         const id = params.get('id')
         console.log(id);
-        axios.get(API_URL_1 + "/item/" + id)
+        axios.get(`${API_URL_1}/catalogue/getproduct/${id}`)
         .then((res)=>{
-            console.log(res.data)
-            this.setState({item:res.data.item[0], brands: res.data.brands, type: res.data.type, price: res.data.price})
+            console.log(res.data.result)
+            this.setState({item:res.data.result})
         })
     }
 
@@ -267,7 +266,7 @@ class DetailPage extends Component {
             return
         }
         else {
-            return <Magnifier src={API_URL_1+'/normal/'+this.state.item.image+'.jpg'} width={"100%"} />
+            return <Magnifier src={API_URL_1+this.state.item.image} width={"100%"} />
         }
     }
 
@@ -313,7 +312,8 @@ class DetailPage extends Component {
     }
 
     renderAddToCartButton() {
-        if(this.state.selected_case === undefined || this.state.selected_case === 0) {
+        console.log(this.state.selectedCaseType)
+        if(this.state.selectedCaseType === undefined || this.state.selectedCaseType === 0) {
             return <input type="button" className="btn-orange-blue disabled" title="Please select Brand, Model and Type First" value="Add to Cart" onClick={()=>this.onAddToCart()} style={{width:"100%"}} disabled></input>
         }
         else {

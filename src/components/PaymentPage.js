@@ -9,53 +9,69 @@ import Select from 'react-select';
 import ReactPixel from 'react-facebook-pixel';
 
 class PaymentPage extends Component {
-    state = ({ profile: [], recipient: {}, cart: [], rekening: [], subTotal: 0, discount: 0, edit_modal: false, selectedOption: [], destination: [], filtered_destination: [], shipping: 0, totalitems: 0 })
+    state = ({ profile: [], recipient: {}, cart: [], rekening: [], subTotal: 0, discount: 0, edit_modal: false, selectedOption: [], destination: [], filtered_destination: [], shipping: 0 })
 
-    componentDidMount() {
-        this.getUserInfo()
+    async componentDidMount() {
+        await this.getUserInfo();
+        await this.getCart();
+        await this.getBank();
+        await this.getShippingCost();
         ReactPixel.pageView();
         ReactPixel.track( 'InitiateCheckout' )
     }
 
     getUserInfo() {
-        axios.get(API_URL_1 + "/checkout/" + this.props.auth.id)
-        .then((response) => {
-            console.log(response)
-            var totalitems = 0
-            response.data.cart.map(item => totalitems += parseInt(item.amount, 10))
-            axios.get(API_URL_1 + "/shipping", {
-                params: {
-                    destination: response.data.user[0].destination_code,
-                    weight: totalitems*0.085
-                }
-            })
-            .then((response1) => {
-                console.log(response1)
+        const token = this.props.auth.token
+            const headers = {
+                headers: { 
+                    'Authorization': `Bearer ${token}`,
+            }
+        };
+        axios.get(`${API_URL_1}/auth/profile`, headers)
+        .then(async (response) => {
+            console.log(response.data.result)
+            await this.setState({profile: response.data.result, recipient: response.data.result})
+        })
+        .catch(err => {
+            console.log(err)
+        })
+    }
 
-                this.setState({profile: response.data.user[0], cart: response.data.cart, rekening: response.data.rekening, shipping: response1.data.sicepat.results[0].tariff,
-                    totalitems : totalitems,
-                    recipient: {
-                    firstname: response.data.user[0].firstname,
-                    lastname: response.data.user[0].lastname,
-                    phone: response.data.user[0].phone,
-                    address: response.data.user[0].address,
-                    destination_code: response.data.user[0].destination_code,
-                    kota: response.data.user[0].kota,
-                    kodepos: response.data.user[0].kodepos,
-                }})
-                this.calculateTransactionSummary()
-            })
-            .catch(err => {
-                console.log(err)
-            })
+    getCart() {
+        const token = this.props.auth.token
+            const headers = {
+                headers: { 
+                    'Authorization': `Bearer ${token}`,
+            }
+        };
+        axios.get(`${API_URL_1}/transaction/getcart`, headers)
+        .then(async (response) => {
+            console.log(response.data.result)
+            await this.setState({cart: response.data.result})
+        })
+        .catch(err => {
+            console.log(err)
+        })
+    }
+
+    getBank() {
+        axios.get(`${API_URL_1}/bank/all`)
+        .then(res => {
+            console.log(res);
+            this.setState({rekening: res.data.result});
+        })
+        .catch(err => {
+            console.log(err);
         })
     }
 
     getShippingCost() {
-        axios.get(API_URL_1 + "/shipping", {
+        console.log(this.state.recipient.destination_code)
+        console.log(this.state.cart.length)
+        axios.get(`${API_URL_1}/destination/shipping`, {
             params: {
                 destination: this.state.recipient.destination_code,
-                weight: this.state.totalitems
+                weight: this.state.cart.length*0.2
             }
         })
         .then(async res => {
@@ -68,15 +84,17 @@ class PaymentPage extends Component {
     }
 
     onCheckOutClick() {
-        axios.post(API_URL_1 + "/transaction", {
-            id: this.props.auth.id,
-            subtotal: this.state.subTotal,
-            discount: this.state.discount,
+        const token = this.props.auth.token
+            const headers = {
+                headers: { 
+                    'Authorization': `Bearer ${token}`,
+            }
+        };
+        axios.post(`${API_URL_1}/transaction/purchase`, {
             shipping: this.state.shipping,
-            target_bank: this.refs.rekening.value,
-            cart: this.state.cart,
+            bankId: this.refs.rekening.value,
             recipient: this.state.recipient
-        })
+        }, headers)
         .then(response => {
             alert('transaction success')
             ReactPixel.track('Purchase')
@@ -88,7 +106,7 @@ class PaymentPage extends Component {
         axios.get(API_URL_1 + '/destination')
         .then(response => {
             var arrJSX = [];
-            response.data.forEach((item, count) => {
+            response.data.result.forEach((item, count) => {
                 arrJSX.push({value:item.destination_code, label:`${item.province}, ${item.city}, ${item.subdistrict}`})
             })
             this.setState({destination: arrJSX})
@@ -160,6 +178,7 @@ class PaymentPage extends Component {
     }
 
     renderUserInfo() {
+        console.log(this.state.recipient)
         return (
             <Row>
                 <Col md={8} className="alamat-pengiriman">
@@ -191,7 +210,7 @@ class PaymentPage extends Component {
     renderCartList() {
         var arrJSX = [];
         arrJSX = this.state.cart.map((item,count) => {
-            return <CartDetail key={item.id} id={item.id} count={count} name={item.name} code={item.code} category={item.category} image={item.image} brand={item.brand_name} model={item.model_name} type={item.case_type} quantity={item.amount} price={item.price}></CartDetail>
+            return <CartDetail key={item.id} item={item} count={count}></CartDetail>
         })
         console.log(arrJSX)
         return arrJSX
@@ -227,7 +246,7 @@ class PaymentPage extends Component {
         var hardPrice = 75000;
         var softPrice = 50000;
         this.state.cart.forEach((item,count) => {
-            if (item.case_type === "hard" || item.case_type ==="customhard" || item.case_type ==="premium") {
+            if (item.caseType === "hard" || item.caseType ==="customhard" || item.caseType ==="premium") {
                 countHardCase += parseInt(item.amount, 10);
             }
             else {
@@ -264,14 +283,14 @@ class PaymentPage extends Component {
         var hardPrice = 75000;
         var softPrice = 50000;
         this.state.cart.forEach((item,count) => {
-            if (item.case_type === "hard" || item.case_type ==="customhard" || item.case_type ==="premium") {
+            if (item.caseType === "hard" || item.caseType ==="customhard" || item.caseType ==="premium") {
                 countHardCase += parseInt(item.amount, 10);
             }
             else {
                 countSoftCase += parseInt(item.amount, 10)
             }
             subTotal += item.amount * item.price;
-            arrJSX.push(<tr><td style={{width:"5%"}}>{count +1}.</td><td><strong>{item.name} | {item.code}</strong>, {item.model_name}, {item.case_type} case</td><td className="text-right">(Qty:{item.amount}) Rp. {(item.amount * item.price).toLocaleString()}</td></tr>)
+            arrJSX.push(<tr><td style={{width:"5%"}}>{count +1}.</td><td><strong>{item.catalogue.name} | {item.catalogue.code}</strong>, {item.model}, {item.caseType} case</td><td className="text-right">(Qty:{item.amount}) Rp. {(item.amount * item.price).toLocaleString()}</td></tr>)
         })
         arrJSX.push(<br/>)
         arrJSX.push(<tr><td/><td><strong>Sub Total</strong></td><td className="text-right"><strong>Rp. {subTotal.toLocaleString()}</strong></td></tr>)
@@ -302,7 +321,7 @@ class PaymentPage extends Component {
     renderRekeningList() {
         var arrJSX = [];
         this.state.rekening.forEach((item,index) => {
-            arrJSX.push(<option value={item.id}>{item.nama} {item.nomor_rekening}</option>)
+            arrJSX.push(<option value={item.id}>{item.name} {item.accountNumber}</option>)
         })
         return arrJSX;
     }

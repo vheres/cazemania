@@ -18,13 +18,15 @@ class ProfilePage extends Component {
     }
 
     getUserInfo = () => {
-        axios.get(API_URL_1 + "/profile", {
-            params: {
-                id: this.props.auth.id
+        const token = this.props.auth.token
+            const headers = {
+                headers: { 
+                    'Authorization': `Bearer ${token}`,
             }
-        })
+        };
+        axios.get(`${API_URL_1}/auth/profile`, headers)
         .then((response) => {
-            this.setState({profile: response.data.profile[0]})
+            this.setState({profile: response.data.result})
         })
     }
 
@@ -32,7 +34,7 @@ class ProfilePage extends Component {
         axios.get(API_URL_1 + '/destination')
         .then(response => {
             var arrJSX = [];
-            response.data.map((item, count) => {
+            response.data.result.forEach((item, count) => {
                 arrJSX.push({value:item.destination_code, label:`${item.province}, ${item.city}, ${item.subdistrict}`})
             })
             this.setState({destination: arrJSX})
@@ -82,14 +84,20 @@ class ProfilePage extends Component {
         if(this.refs.phone.value == '' || this.refs.alamat.value == '' || this.state.selectedOption.label == '' || this.refs.kodepos.value == '') {
             alert('Please fill everything!');
         } else {
-            axios.put(API_URL_1 + '/users/' + this.props.auth.id, {
+            const token = this.props.auth.token
+            const headers = {
+                headers: { 
+                    'Authorization': `Bearer ${token}`,
+                }
+            };
+            axios.put(`${API_URL_1}/auth/editprofile`, {
                 gender: gender,
                 phone: this.refs.phone.value,
                 address: this.refs.alamat.value,
                 destination_code: this.state.selectedOption.value,
                 kota: this.state.selectedOption.label,
                 kodepos: this.refs.kodepos.value
-            }).then((response) => {
+            }, headers).then((response) => {
                 alert('Edit Success')
                 this.getUserInfo()
                 this.setState({ edit_modal: false });

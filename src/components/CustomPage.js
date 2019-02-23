@@ -8,19 +8,121 @@ import { withRouter } from 'react-router-dom';
 import ReactPixel from 'react-facebook-pixel';
 
 class CustomPage extends Component {
-    state={picture: '', brands: [], types: [], typeselect: [""], caseselect: {soft: 0, hard: 0}, price: [], selected_price: "", inputfile: []}
+    constructor(props) {
+        super(props);
+        this.state = {
+            picture: '',
+            brands: [],
+            phonemodels: [],
+            price: [],
+            filteredPhoneModels: [],
+            caseselect: {soft: 0, hard: 0},
+            selected_price: "",
+            selectedBrandId: 0,
+            selectedBrand: {},
+            selectedPhoneModelId: 0,
+            selectedPhoneModel: {},
+            selectedCaseType: 0,
+            inputfile: []
+        }
+    }
 
     componentDidMount(){
         const params = new URLSearchParams(this.props.location.search);
         const id = params.get('id')
-        axios.get(API_URL_1 + "/custom")
-        .then((res)=>{
-            console.log(res.data)
-            this.setState({brands: res.data.brands, type: res.data.type, price: res.data.price})
-        })
+        this.getBrands();
+        this.getphonemodels();
+        this.getPrice();
+        // axios.get(API_URL_1 + "/custom")
+        // .then((res)=>{
+        //     console.log(res.data)
+        //     this.setState({brands: res.data.brands, type: res.data.type, price: res.data.price})
+        // })
         ReactPixel.pageView();
     }
 
+    getBrands() {
+        axios.get(`${API_URL_1}/brand/all`)
+        .then((res)=>{
+            console.log(res)
+            this.setState({brands:res.data.result})
+        })
+        .catch(err => {
+            console.log(err);
+        })
+    }
+
+    getphonemodels() {
+        axios.get(`${API_URL_1}/phonemodel/all`)
+        .then(res => {
+            console.log(res)
+            this.setState({phonemodels:res.data.result})
+        })
+        .catch(err => {
+            console.log(err)
+        })
+    }
+
+    getPrice(){
+        axios.get(`${API_URL_1}/price/all`)
+        .then(res => {
+            this.setState({price:res.data.result})
+        })
+        .catch(err => {
+            console.log(err)
+        })
+    }
+
+    
+    onBrandSelect(brandId){
+        var brand = {}
+        this.state.brands.forEach((item, index) => {
+            if(item.id === parseInt(brandId)){
+                brand = item
+            }
+        })
+        this.setState({ selectedBrand: brand, selectedBrandId: brandId, selectedPhoneModelId: 0, selectedPhoneModel: {}, selectedCaseType: 0, selected_price: "" })
+        this.phoneModelFilter(brandId)
+    }
+
+    onPhoneModelSelect(phonemodelId){
+        var phonemodel = {}
+        this.state.filteredPhoneModels.forEach((item, index) => {
+            if(item.id === parseInt(phonemodelId)){
+                phonemodel = item
+            }
+        })
+        console.log(phonemodel)
+        this.setState({selectedPhoneModelId: phonemodelId, selectedPhoneModel: phonemodel, selectedCaseType: 0, selected_price: "" })
+    }
+
+    onCaseTypeSelect(caseType) {
+        console.log(this.state.price)
+        if (caseType === 'hard') {
+            this.setState({selected_price: this.state.price[1].price, selectedCaseType: caseType})
+        }
+        else if (caseType === 'soft') {
+            this.setState({selected_price: this.state.price[0].price , selectedCaseType: caseType})
+        }
+        else if (caseType == 0) {
+            this.setState({selected_price: "", selectedCaseType: 0})
+        }
+        console.log(this.state.selected_price)
+    }
+
+    phoneModelFilter(brandId){
+        const { phonemodels } = this.state
+        var tempArr = []
+        
+        phonemodels.forEach((item, map) => {
+            if(item.brandId === parseInt(brandId)){
+                tempArr.push(item)
+            }
+        })
+
+        this.setState({filteredPhoneModels: tempArr})   
+    }
+ 
     brandSelectOptions(){
         console.log(this.state.brands)
         var arrJSX = this.state.brands.map((item)=>{ 
@@ -29,7 +131,7 @@ class CustomPage extends Component {
         })
         return(
             <label className="dropdown-container">
-                <select className="dropdown-select" ref="brand_select"  onChange={()=>this.typeFilter()}>
+                <select className="dropdown-select" ref="brand_select"  value={this.state.selectedBrandId} onChange={()=>this.onBrandSelect(this.refs.brand_select.value)}>
                     <option value={0}>SELECT BRAND</option>
                     {arrJSX}
                 </select>
@@ -38,106 +140,52 @@ class CustomPage extends Component {
         )
     }
 
-    typeFilter(){
-        var data = this.state.type
-        console.log(data)
-        var tempArr = new Array
-        for(var num in data){
-            if(data[num].brand_id === parseInt(this.refs.brand_select.value)){
-                tempArr.push(data[num])
-            }
-        }
-        this.setState({typeselect: tempArr})   
-        document.getElementById("model_select").selectedIndex = "0";  
-        document.getElementById("case_select").selectedIndex = "0";
-        this.state.selected_case = 0; 
-        this.state.selected_price = ""
-    }
-
     modelSelectOptions(){
-        var arrJSX = this.state.typeselect.map((item)=>{ return(
-            <option value={item.id}>{item.name}</option>)
+        var arrJSX = this.state.filteredPhoneModels.map((item, index) => { 
+            return(
+                <option value={item.id}>{item.name}</option>
+            )
         })
-        console.log(this.state.typeselect)
         return(
-            <label className="dropdown-container">
-                <select className="dropdown-select" id="model_select" ref="type_select"  onChange={()=>this.onModelSelect()}>
-                    <option value={0}>SELECT MODEL</option>
-                    {arrJSX}
-                </select>
-                <div className="text">Model</div>
-            </label>
+        <label className="dropdown-container">
+            <select className="dropdown-select" id="phonemodel_select" ref="phonemodel_select" value={this.state.selectedPhoneModelId} onChange={()=>this.onPhoneModelSelect(this.refs.phonemodel_select.value)}>
+                <option value={0}>SELECT MODEL</option>
+                {arrJSX}
+            </select>
+            <div className="text">Model</div>
+        </label>
         )
-    }
-
-    onModelSelect(){
-        var data = this.state.type
-        var tempVar = {soft: 0, hard: 0}
-        for(var num in data){
-            if(data[num].id === parseInt(this.refs.type_select.value)){
-                tempVar = data[num]
-            }
-        }
-        this.setState({caseselect: tempVar})
-        document.getElementById("case_select").selectedIndex = "0";
-        this.state.selected_case = 0;
-        this.state.selected_price = ""
     }
 
     caseSelectOptions(){
-        return(
-            [
-                [
-                    <label className="dropdown-container">
-                        <select className="dropdown-select" id="case_select" ref="case_select" onChange={()=>this.onTypeSelect()}>
-                            <option value={0} selected>SELECT CASE</option>
-                            <option value="customhard" disabled>HARD CASE -- unavailable</option>
-                            <option value="customsoft" disabled>SOFT CASE -- unavailable</option>
-                        </select>
-                        <div className="text">Type</div>
-                    </label>,
-                    <label className="dropdown-container">
-                        <select className="dropdown-select" id="case_select" ref="case_select" onChange={()=>this.onTypeSelect()}>
-                            <option value={0}>SELECT CASE</option>
-                            <option value="customhard" disabled>HARD CASE -- unavailable</option>
-                            <option value="customsoft" >SOFT CASE</option>
-                        </select>
-                        <div className="text">Type</div>
-                    </label>
-                ],
-                [
-                    <label className="dropdown-container">
-                        <select className="dropdown-select" id="case_select" ref="case_select" onChange={()=>this.onTypeSelect()}>
-                            <option value={0}>SELECT CASE</option>
-                            <option value="customhard">HARD CASE</option>
-                            <option value="customsoft"  disabled>SOFT CASE -- unavailable</option>
-                        </select>
-                        <div className="text">Type</div>
-                    </label>,
-                    <label className="dropdown-container">
-                        <select className="dropdown-select" id="case_select" ref="case_select" onChange={()=>this.onTypeSelect()}>
-                            <option value={0}>SELECT CASE</option>
-                            <option value="customhard">HARD CASE</option>
-                            <option value="customsoft">SOFT CASE</option>
-                        </select>
-                        <div className="text">Type</div>
-                    </label>
-                ]
-            ]
-        )
-    }
+        var { selectedPhoneModel } = this.state
+        var hardOption = ""
+        var softOption = ""
 
-    onTypeSelect() {
-        console.log(this.state.inputfile);
-        if (this.refs.case_select.value === 'customhard') {
-            this.setState({selected_price: this.state.price[1].price, selected_case: this.refs.case_select.value})
+        if(selectedPhoneModel.hard){
+            hardOption = <option value="hard">HARD CASE</option>
         }
-        else if (this.refs.case_select.value === 'customsoft') {
-            this.setState({selected_price: this.state.price[0].price , selected_case: this.refs.case_select.value})
+        else{
+            hardOption = <option value="hard" disabled>HARD CASE -- unavailable</option>
         }
-        else if (this.refs.case_select.value == 0) {
-            this.setState({selected_price: "", selected_case: 0})
+
+        if(selectedPhoneModel.soft){
+            softOption = <option value="soft">SOFT CASE</option>
         }
+        else{
+            softOption = <option value="soft" disabled>SOFT CASE -- unavailable</option>
+        }
+
+        return(
+            <label className="dropdown-container">
+                <select className="dropdown-select" id="case_select" ref="case_select" value={this.state.selectedCaseType} onChange={()=>this.onCaseTypeSelect(this.refs.case_select.value)}>
+                    <option value={0} selected>SELECT CASE</option>
+                    {hardOption}
+                    {softOption}
+                </select>
+                <div className="text">Type</div>
+            </label>
+        )
     }
 
     onAddToCart() {
@@ -181,18 +229,6 @@ class CustomPage extends Component {
             this.props.history.push('/login')
         }
     }
-
-    // async onSimilarClick(target) {
-    //     await this.props.history.push(target)
-    //     const params = new URLSearchParams(this.props.location.search);
-    //     const id = params.get('id')
-    //     console.log(id);
-    //     axios.get(API_URL_1 + "/item/" + id)
-    //     .then((res)=>{
-    //         console.log(res.data)
-    //         this.setState({item:res.data.item[0], brands: res.data.brands, type: res.data.type, price: res.data.price})
-    //     })
-    // }
 
     PlusMinus(action) {
         if (action == "plus") {
@@ -311,7 +347,7 @@ class CustomPage extends Component {
                                 <Col xsOffset={1} mdOffset={0} md={4}>
                                     <Row>
                                         <Col xs={10} md={12}>
-                                            {this.caseSelectOptions()[this.state.caseselect.hard][this.state.caseselect.soft]}
+                                            {this.caseSelectOptions()}
                                         </Col>
                                     </Row>
                                 </Col>
