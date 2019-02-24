@@ -1,9 +1,5 @@
 import React, { Component } from 'react';
 import { Grid, Row, Col, Button, ButtonGroup } from 'react-bootstrap';
-import axios from 'axios'
-import {API_URL_1} from '../supports/api-url/apiurl'
-import ItemDetail from './ItemDetail';
-import PaginationClass from './Pagination';
 import ReactPixel from 'react-facebook-pixel';
 
 class ListPage extends Component {

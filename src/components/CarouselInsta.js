@@ -38,7 +38,7 @@ class CarouselClass extends Component {
       galleryItems() {
           var arrJSX = [];
         for (var i = 0; i < this.image_url[0].length; i++) {
-            arrJSX.push(<a href={this.image_url[1][i]} onClick={()=>ReactPixel.trackCustom('instagramClick')} className="best-holder" target="_blank"><img src={this.image_url[0][i]} className="instagram-box"/><div className="best-overlay"><i className="fa fa-instagram"></i></div></a>)
+            arrJSX.push(<a href={this.image_url[1][i]} onClick={()=>ReactPixel.trackCustom('instagramClick')} className="best-holder" target="_blank" rel="noopener noreferrer"><img src={this.image_url[0][i]} alt="instagram" className="instagram-box"/><div className="best-overlay"><i className="fa fa-instagram"></i></div></a>)
         }
         return arrJSX;
       };

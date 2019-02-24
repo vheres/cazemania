@@ -26,7 +26,7 @@ class HomePage extends Component {
                                     <Link to="/shop" className="image-holder" style={{width:"100%",paddingTop:'100%',backgroundColor:'#D4F4F2'}}>
                                         <div style={{position:'absolute', top:'0px', width:'100%',height:'100%'}}>
                                             <div style={{position:'absolute',top:'0px', width:'100%',height:'100%'}}>
-                                                <img src={`${API_URL_1}/others/icons/icon1.png`} style={{width:'100%'}}/>
+                                                <img src={`${API_URL_1}/others/icons/icon1.png`} alt="katalog case" style={{width:'100%'}}/>
                                             </div>
                                             <div style={{height:'100%',display:'flex',flexDirection:'column',justifyContent:'flex-start',alignItems:'center',paddingTop:'40px'}}>
                                                 <div style={{fontSize:'24pt',color:'rgb(255, 181, 44)',fontWeight:'bold'}}>
@@ -40,7 +40,7 @@ class HomePage extends Component {
                                     <Link to="/custom" className="image-holder alt" style={{width:"100%",paddingTop:'100%',backgroundColor:'#F9E7D7'}}>
                                         <div style={{position:'absolute', top:'0px', width:'100%',height:'100%'}}>
                                             <div style={{position:'absolute',top:'0px', width:'100%',height:'100%'}}>
-                                                <img src={`${API_URL_1}/others/icons/icon2.png`} style={{width:'100%'}}/>
+                                                <img src={`${API_URL_1}/others/icons/icon2.png`} alt="custom case" style={{width:'100%'}}/>
                                             </div>
                                             <div style={{height:'100%',display:'flex',flexDirection:'column',justifyContent:'flex-start',alignItems:'center',paddingTop:'40px'}}>
                                                 <div style={{fontSize:'24pt',color:'rgb(9, 175, 204)',fontWeight:'bold'}}>
@@ -54,7 +54,7 @@ class HomePage extends Component {
                                     <Link to="/premium_cases" className="image-holder" style={{width:"100%",paddingTop:'100%',backgroundColor:'#D4F4F2'}}>
                                         <div style={{position:'absolute', top:'0px', width:'100%',height:'100%'}}>
                                             <div style={{position:'absolute',top:'0px', width:'100%',height:'100%'}}>
-                                                <img src={`${API_URL_1}/others/icons/icon3.png`} style={{width:'100%'}}/>
+                                                <img src={`${API_URL_1}/others/icons/icon3.png`} alt="premium case" style={{width:'100%'}}/>
                                             </div>
                                             <div style={{height:'100%',display:'flex',flexDirection:'column',justifyContent:'flex-start',alignItems:'center',paddingTop:'40px'}}>
                                                 <div style={{fontSize:'24pt',color:'rgb(255, 181, 44)',fontWeight:'bold'}}>
@@ -68,7 +68,7 @@ class HomePage extends Component {
                                     <Link to="/reseller-dropshipper" className="image-holder alt" style={{width:"100%",paddingTop:'100%',backgroundColor:'#F9E7D7'}}>
                                         <div style={{position:'absolute', top:'0px', width:'100%',height:'100%'}}>
                                             <div style={{position:'absolute',top:'0px', width:'100%',height:'100%'}}>
-                                                <img src={`${API_URL_1}/others/icons/icon4.png`} style={{width:'100%'}}/>
+                                                <img src={`${API_URL_1}/others/icons/icon4.png`} alt="join reseller" style={{width:'100%'}}/>
                                             </div>
                                             <div style={{height:'100%',display:'flex',flexDirection:'column',justifyContent:'flex-start',alignItems:'center',paddingTop:'40px'}}>
                                                 <div style={{fontSize:'24pt',color:'rgb(9, 175, 204)',fontWeight:'bold'}}>
@@ -82,7 +82,7 @@ class HomePage extends Component {
                                     <Link to="/shop" className="image-holder" style={{width:"100%",paddingTop:'100%',backgroundColor:'#D4F4F2'}}>
                                         <div style={{position:'absolute', top:'0px', width:'100%',height:'100%'}}>
                                             <div style={{position:'absolute',top:'0px', width:'100%',height:'100%'}}>
-                                                <img src={`${API_URL_1}/others/icons/icon5.png`} style={{width:'100%'}}/>
+                                                <img src={`${API_URL_1}/others/icons/icon5.png`} alt="list tipe hp" style={{width:'100%'}}/>
                                             </div>
                                             <div style={{height:'100%',display:'flex',flexDirection:'column',justifyContent:'flex-start',alignItems:'center',paddingTop:'40px'}}>
                                                 <div style={{fontSize:'24pt',color:'rgb(255, 181, 44)',fontWeight:'bold'}}>
@@ -96,7 +96,7 @@ class HomePage extends Component {
                                     <Link to="/shop" className="image-holder alt" style={{width:"100%",paddingTop:'100%',backgroundColor:'#F9E7D7'}}>
                                         <div style={{position:'absolute', top:'0px', width:'100%',height:'100%'}}>
                                             <div style={{position:'absolute',top:'0px', width:'100%',height:'100%'}}>
-                                                <img src={`${API_URL_1}/others/icons/icon6.png`} style={{width:'100%'}}/>
+                                                <img src={`${API_URL_1}/others/icons/icon6.png`} alt="canvas bag mania" style={{width:'100%'}}/>
                                             </div>
                                             <div style={{height:'100%',display:'flex',flexDirection:'column',justifyContent:'flex-start',alignItems:'center',paddingTop:'40px'}}>
                                                 <div style={{fontSize:'24pt',color:'rgb(9, 175, 204)',fontWeight:'bold'}}>

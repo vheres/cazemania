@@ -3,7 +3,6 @@ import AliceCarousel from 'react-alice-carousel';
 import 'react-alice-carousel/lib/alice-carousel.css';
 import { Row, Col } from 'react-bootstrap';
 import axios from 'axios';
-import {API_URL_1} from '../supports/api-url/apiurl'
  
 class CarouselText extends Component {
   state = {testimonies: []}

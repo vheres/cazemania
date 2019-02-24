@@ -7,7 +7,7 @@ import PaginationClass from './Pagination';
 import ReactPixel from 'react-facebook-pixel';
 
 class PremiumPage extends Component {
-    state = { premiumcatalogue: [], pagination: [], item_count: 0, pagecount: 0, search_status: [0], active: [0] }
+    state = { premiumcatalogue: [], pagination: 0, item_count: 0, pagecount: 0, search_status: [0], active: [0] }
 
     componentWillMount() {
         if (this.state.pagination.length === 0) {
@@ -19,75 +19,71 @@ class PremiumPage extends Component {
     }
 
     getCatalogueList() {
-        axios.get(API_URL_1 + "/premiumcatalogue", {
+        axios.get(`${API_URL_1}/catalogue/premiumgroups`, {
             params: {
-                pagination: this.state.pagination
+                pagination: 0
             }
         })
         .then((response)=>{
             console.log(response)
-            this.setState({ premiumcatalogue: response.data.catalogue,item_count:response.data.item_count[0].count, pagecount: Math.ceil((response.data.catalogue.length/20)) })
+            this.setState({ premiumcatalogue: response.data.result.data,item_count:response.data.result.count, pagecount: Math.ceil((response.data.result.count/20)) })
         })
     }
 
-    onPageClick(page , active) {
-        this.state.active.shift();
-        this.state.active.push(active);
-        this.state.pagination.length = 0;
-        this.state.pagination.push(page, 20)
-        this.setState({})
+    async onPageClick(active) {
+        await this.setState({active: active})
         this.getCatalogueList();
     }
 
-    onSearchClick() {
-        this.state.pagination.length = 0;
-        this.state.pagination.push(0, 20)
-        this.state.active.shift();
-        this.state.active.push(0);
-        this.pushPage();
-    }
+    // onSearchClick() {
+    //     this.state.pagination.length = 0;
+    //     this.state.pagination.push(0, 20)
+    //     this.state.active.shift();
+    //     this.state.active.push(0);
+    //     this.pushPage();
+    // }
 
-    async pushPage() {
-        if( this.refs.searchCode.value != "" && this.refs.searchName.value != "" ) {
-            await (this.props.history.push(`/shop?code=${this.refs.searchCode.value}&name=${this.refs.searchName.value}`));
-        }
-        else if ( this.refs.searchCode.value != "" && this.refs.searchName.value == "" ) {
-            await (this.props.history.push(`/shop?code=${this.refs.searchCode.value}`));
-        }
-        else if ( this.refs.searchCode.value == "" && this.refs.searchName.value != "" ) {
-            await (this.props.history.push(`/shop?name=${this.refs.searchName.value}`));
-        }
-        else {
-            await (this.props.history.push(`/shop`));
-        }
-        this.getCatalogueList();
-    }
+    // async pushPage() {
+    //     if( this.refs.searchCode.value != "" && this.refs.searchName.value != "" ) {
+    //         await (this.props.history.push(`/shop?code=${this.refs.searchCode.value}&name=${this.refs.searchName.value}`));
+    //     }
+    //     else if ( this.refs.searchCode.value != "" && this.refs.searchName.value == "" ) {
+    //         await (this.props.history.push(`/shop?code=${this.refs.searchCode.value}`));
+    //     }
+    //     else if ( this.refs.searchCode.value == "" && this.refs.searchName.value != "" ) {
+    //         await (this.props.history.push(`/shop?name=${this.refs.searchName.value}`));
+    //     }
+    //     else {
+    //         await (this.props.history.push(`/shop`));
+    //     }
+    //     this.getCatalogueList();
+    // }
 
-    renderFilterMenu() {
-        return(
-            <section>
-                <Row>
-                    <Col xsOffset={1} xs={10} mdOffset={0} md={12}>
-                        <p>Product's Code</p>
-                        <input type="text" ref="searchCode" className="form-control" id="inputSearchCode" placeholder="Product's Code" />
-                        <br/>
-                    </Col>
-                </Row>
-                <Row>
-                    <Col xsOffset={1} xs={10} mdOffset={0} md={12}>
-                        <p>Product's Name</p>
-                        <input type="text" ref="searchName" className="form-control" id="inputSearchName" placeholder="Product's Name" />
-                        <br/>
-                    </Col>
-                </Row>
-                <Row>
-                    <Col xsOffset={1} xs={10} mdOffset={0}>
-                        <input type="button" className="btn btn-success" style={{width:100}} value="A P P L Y" onClick={()=>this.onSearchClick()}/>
-                    </Col>
-                </Row>
-            </section>
-        );
-    }
+    // renderFilterMenu() {
+    //     return(
+    //         <section>
+    //             <Row>
+    //                 <Col xsOffset={1} xs={10} mdOffset={0} md={12}>
+    //                     <p>Product's Code</p>
+    //                     <input type="text" ref="searchCode" className="form-control" id="inputSearchCode" placeholder="Product's Code" />
+    //                     <br/>
+    //                 </Col>
+    //             </Row>
+    //             <Row>
+    //                 <Col xsOffset={1} xs={10} mdOffset={0} md={12}>
+    //                     <p>Product's Name</p>
+    //                     <input type="text" ref="searchName" className="form-control" id="inputSearchName" placeholder="Product's Name" />
+    //                     <br/>
+    //                 </Col>
+    //             </Row>
+    //             <Row>
+    //                 <Col xsOffset={1} xs={10} mdOffset={0}>
+    //                     <input type="button" className="btn btn-success" style={{width:100}} value="A P P L Y" onClick={()=>this.onSearchClick()}/>
+    //                 </Col>
+    //             </Row>
+    //         </section>
+    //     );
+    // }
 
     renderCatalogue() {
         var arrJSX = this.state.premiumcatalogue.map(item => {
@@ -116,7 +112,7 @@ class PremiumPage extends Component {
                                 {this.renderCatalogue()}
                             </Row>
                             <Row className="text-center">
-                            <PaginationClass count={this.state.pagecount} PageClick={(page, active)=>this.onPageClick(page, active)} active={this.state.active[0]}/>
+                            <PaginationClass count={this.state.pagecount} PageClick={(active)=>this.onPageClick(active)} active={this.state.active}/>
                             </Row>      
                     </Col>
                 </Grid>

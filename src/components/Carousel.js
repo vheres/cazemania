@@ -30,9 +30,9 @@ class CarouselClass extends Component {
         return (
           this.state.best_seller.map((item, index) => {
             if (item.premium_id !== null) {
-              return <Link to={"/premium?id="+item.premium_id} onClick={()=>ReactPixel.trackCustom('bestSellerClick')} className="best-holder"><img src={`${API_URL_1}${item.image}`} style={{width:"100%"}}/><div className="best-overlay">{item.name}</div></Link>
+              return <Link to={"/premium?id="+item.premium_id} onClick={()=>ReactPixel.trackCustom('bestSellerClick')} className="best-holder"><img src={`${API_URL_1}${item.image}`} alt={item.name} style={{width:"100%"}}/><div className="best-overlay">{item.name}</div></Link>
             } else {
-              return <Link to={"/product?id="+item.id} onClick={()=>ReactPixel.trackCustom('bestSellerClick')} className="best-holder"><img src={`${API_URL_1}${item.image}`} style={{width:"100%"}}/><div className="best-overlay">{item.name}</div></Link>
+              return <Link to={"/product?id="+item.id} onClick={()=>ReactPixel.trackCustom('bestSellerClick')} className="best-holder"><img src={`${API_URL_1}${item.image}`} alt={item.name} style={{width:"100%"}}/><div className="best-overlay">{item.name}</div></Link>
             }
           })
         )

@@ -27,7 +27,7 @@ class RegisterRD extends Component {
         axios.get(API_URL_1 + '/destination')
         .then(response => {
             var arrJSX = [];
-            response.data.map((item, count) => {
+            response.data.forEach((item, count) => {
                 arrJSX.push({value:item.destination_code, label:`${item.province}, ${item.city}, ${item.subdistrict}`})
             })
             this.setState({destination: arrJSX})
@@ -57,7 +57,7 @@ class RegisterRD extends Component {
     }   
 
     onKeyPress(x) {
-        if (x.which == 13 ) {
+        if (x.which === 13 ) {
             this.onRegisterClick();
         }
     }
@@ -67,12 +67,13 @@ class RegisterRD extends Component {
         this.selectClass();
         var errIndicator = false;
         var gender = '';
-        if (document.getElementById('male').checked == true) {
+        var inputArr = [];
+        if (document.getElementById('male').checked === true) {
             gender = document.getElementById('male').value
         } else {
             gender = document.getElementById('female').value
         }
-        this.state.empty_input.map((item, index) => {
+        this.state.empty_input.forEach((item, index) => {
             if (item) {
                 errIndicator = true;
                 return;
@@ -83,13 +84,13 @@ class RegisterRD extends Component {
             return
         } else if (this.refs.password1.value !== this.refs.password2.value) {
             alert('Your passwords does not match!')
-            var inputArr = this.state.input_style.slice();
+            inputArr = this.state.input_style.slice();
             inputArr[3] = 'password_diff'
             inputArr[4] = 'password_diff'
             this.setState({input_style: inputArr})
         } else if(this.refs.password1.value.length < 5) {
             alert('Password must be at least 5 characters long!')
-            var inputArr = this.state.input_style.slice();
+            inputArr = this.state.input_style.slice();
             inputArr[3] = 'password_diff'
             inputArr[4] = 'password_diff'
             this.setState({input_style: inputArr})
@@ -111,47 +112,47 @@ class RegisterRD extends Component {
 
     checkInput() {
         var tempArr = [];
-        if (this.refs.firstName.value == '') {
+        if (this.refs.firstName.value === '') {
             tempArr[0] = true;
         } else {
             tempArr[0] = false;
         }
-        if (this.refs.lastName.value == '') {
+        if (this.refs.lastName.value === '') {
             tempArr[1] = true;
         } else {
             tempArr[1] = false;
         }
-        if (this.refs.email.value == '') {
+        if (this.refs.email.value === '') {
             tempArr[2] = true;
         } else {
             tempArr[2] = false;
         }
-        if (this.refs.password1.value == '') {
+        if (this.refs.password1.value === '') {
             tempArr[3] = true;
         } else {
             tempArr[3] = false;
         }
-        if (this.refs.password2.value == '') {
+        if (this.refs.password2.value === '') {
             tempArr[4] = true;
         } else {
             tempArr[4] = false;
         }
-        if (this.refs.phone.value == '') {
+        if (this.refs.phone.value === '') {
             tempArr[5] = true;
         } else {
             tempArr[5] = false;
         }
-        if (this.refs.alamat.value == '') {
+        if (this.refs.alamat.value === '') {
             tempArr[6] = true;
         } else {
             tempArr[6] = false;
         }
-        if (this.state.selectedOption.value == undefined) {
+        if (this.state.selectedOption.value === undefined) {
             tempArr[7] = true;
         } else {
             tempArr[7] = false;
         }
-        if (this.refs.kodepos.value == '') {
+        if (this.refs.kodepos.value === '') {
             tempArr[8] = true;
         } else {
             tempArr[8] = false;
@@ -161,8 +162,8 @@ class RegisterRD extends Component {
 
     selectClass() {
         var inputArr = this.state.input_style.slice()
-        this.state.empty_input.map((item, index) => {
-            if (this.state.empty_input[index] == true) {
+        this.state.empty_input.forEach((item, index) => {
+            if (this.state.empty_input[index] === true) {
                 inputArr[index] = 'empty_input'
             } else {
                 inputArr[index] = ''

@@ -13,22 +13,33 @@ export const onLogin = (user) => {
                     email: email,
                     ep: ep
             }).then(user => {
-                localStorage.setItem("token", user.data.result.token || "");
+                const {firstname, lastname, email, category, token} = user.data.result
+                localStorage.setItem("token", token || "");
                 dispatch ({
                     type: "USER_LOGIN_SUCCESS",
-                    payload: { firstname: user.data.result.firstname, lastname: user.data.result.lastname, email: user.data.result.email, category: user.data.result.category, token: user.data.result.token, error: "", cookieCheck: true }
+                    payload: {
+                        firstname: firstname,
+                        lastname: lastname,
+                        email: email,
+                        category: category,
+                        token: token,
+                        error: "",
+                        cookieCheck: true }
                 })       
             }).catch(err => {
                 console.log(err);
+                const { message } = err.response.data
                 dispatch ({
-                    type: "USER_LOGIN_FAIL"
+                    type: "USER_LOGIN_FAIL",
+                    payload: {
+                        error: message
+                    }
                 });
             })
         }
     }
 
-export const keepLogin = (email) => {
-    console.log(email);
+export const keepLogin = () => {
     return(dispatch) => {
             const token = localStorage.getItem('token');
             const headers = {
@@ -36,21 +47,29 @@ export const keepLogin = (email) => {
                     'Authorization': `Bearer ${token}`,
                 }
             };
-            axios.get(API_URL_1 +'/keeplogin', {
-                params: {
-                    email: email
-                }
-            })
+            axios.get(API_URL_1 +'/auth/userinfo', headers)
             .then(user => {
-                localStorage.setItem("token", user.data.result.token || "");
+                const {firstname, lastname, email, category, token} = user.data.result
+                localStorage.setItem("token", token || "");
                 dispatch ({
                     type: "USER_LOGIN_SUCCESS",
-                    payload: { firstname: user.data.result.firstname, lastname: user.data.result.lastname, email: user.data.result.email, category: user.data.result.category, token: user.data.result.token, error: "", cookieCheck: true }
+                    payload: {
+                        firstname: firstname,
+                        lastname: lastname,
+                        email: email,
+                        category: category,
+                        token: token,
+                        error: "",
+                        cookieCheck: true }
                 })       
             }).catch(err => {
                 console.log(err);
+                const { message } = err.response.data
                 dispatch ({
-                    type: "USER_LOGIN_FAIL"
+                    type: "USER_LOGIN_FAIL",
+                    payload: {
+                        error: message
+                    }
                 });
             })
         }
@@ -64,6 +83,7 @@ export const cookieChecked = () => {
 
 export const onLogout = () => {
     return(dispatch) => {
+        localStorage.removeItem("token");
         dispatch ({
             type: "USER_LOGOUT"
         });
@@ -96,11 +116,19 @@ export const onRegister = (user) =>{
                 })
             }
             else{
-                localStorage.setItem("token", user.data.result.token || "");
+                const {firstname, lastname, email, category, token} = res.data.result
+                localStorage.setItem("token", token || "");
                 dispatch ({
                     type: "USER_LOGIN_SUCCESS",
-                    payload: { firstname: user.data.result.firstname, lastname: user.data.result.lastname, email: user.data.result.email, category: user.data.result.category, token: user.data.result.token, error: "", cookieCheck: true }
-                })
+                    payload: {
+                        firstname: firstname,
+                        lastname: lastname,
+                        email: email,
+                        category: category,
+                        token: token,
+                        error: "",
+                        cookieCheck: true }
+                })     
                 ReactPixel.track('CompleteRegistration')
             }
         })

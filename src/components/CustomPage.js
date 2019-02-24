@@ -11,7 +11,6 @@ class CustomPage extends Component {
     constructor(props) {
         super(props);
         this.state = {
-            picture: '',
             brands: [],
             phonemodels: [],
             price: [],
@@ -23,13 +22,13 @@ class CustomPage extends Component {
             selectedPhoneModelId: 0,
             selectedPhoneModel: {},
             selectedCaseType: 0,
-            inputfile: []
+            fileName: '',
+            fileObj: [],
+            fileURL: ''
         }
     }
 
     componentDidMount(){
-        const params = new URLSearchParams(this.props.location.search);
-        const id = params.get('id')
         this.getBrands();
         this.getphonemodels();
         this.getPrice();
@@ -66,6 +65,7 @@ class CustomPage extends Component {
     getPrice(){
         axios.get(`${API_URL_1}/price/all`)
         .then(res => {
+            console.log(res.data.result)
             this.setState({price:res.data.result})
         })
         .catch(err => {
@@ -97,17 +97,15 @@ class CustomPage extends Component {
     }
 
     onCaseTypeSelect(caseType) {
-        console.log(this.state.price)
         if (caseType === 'hard') {
-            this.setState({selected_price: this.state.price[1].price, selectedCaseType: caseType})
+            this.setState({selected_price: this.state.price[4].price, selectedCaseType: caseType})
         }
         else if (caseType === 'soft') {
-            this.setState({selected_price: this.state.price[0].price , selectedCaseType: caseType})
+            this.setState({selected_price: this.state.price[3].price , selectedCaseType: caseType})
         }
-        else if (caseType == 0) {
+        else if (caseType === 0) {
             this.setState({selected_price: "", selectedCaseType: 0})
         }
-        console.log(this.state.selected_price)
     }
 
     phoneModelFilter(brandId){
@@ -191,20 +189,20 @@ class CustomPage extends Component {
     onAddToCart() {
         if (this.props.auth.email !== "") {
             var formData = new FormData()
-            var data =  {
-                user_id: this.props.auth.id,
-                brand_id: this.refs.brand_select.value,
-                model_id: this.refs.type_select.value,
-                case_type: this.refs.case_select.value,
-                amount: document.getElementById("quantity").value
-            }
-            formData.append('file', this.state.inputfile)
-            formData.append('data', JSON.stringify(data))
-            var config = {
+            formData.append('customImage', this.state.fileObj)
+            formData.append('phonemodelId', this.state.selectedPhoneModelId)
+            formData.append('brand', this.state.selectedBrand.name)
+            formData.append('model', this.state.selectedPhoneModel.name)
+            formData.append('caseType', this.state.selectedCaseType)
+            formData.append('amount', document.getElementById("quantity").value,)
+            formData.append('price', parseInt(this.state.selected_price))
+            const token = this.props.auth.token
+            const headers = {
                 headers: 
-                {'Content-Type': 'multipart/form-data'}
+                {'Authorization': `Bearer ${token}`,
+                'Content-Type': 'multipart/form-data'}
             }
-            axios.post(API_URL_1 + `/custom_cart`, formData, config)
+            axios.put(`${API_URL_1}/transaction/addtocartcustom`, formData, headers)
             .then((res) => {
                 alert('add to cart successful!')
                 ReactPixel.track('AddToCart', {
@@ -231,10 +229,10 @@ class CustomPage extends Component {
     }
 
     PlusMinus(action) {
-        if (action == "plus") {
+        if (action === "plus") {
             document.getElementById("quantity").value = parseInt(document.getElementById("quantity").value) + 1;
         }
-        else if (action == "minus") {
+        else if (action === "minus") {
             if(document.getElementById("quantity").value > 1) {
                 document.getElementById("quantity").value = parseInt(document.getElementById("quantity").value) - 1;
             }         
@@ -253,23 +251,48 @@ class CustomPage extends Component {
         .then((res)=>{console.log(res)})
       }
 
+      handleFile() {
+          var file = document.getElementById('custom_picture').files[0];
+          if (file) {
+              this.setState({
+                  fileName: file.name,
+                  fileObj: file,
+                  fileURL: URL.createObjectURL(file)
+              })
+          }
+      }
+
     
     renderCustomImage() {
-        if(this.state.picture === "") {
-            return (
-                <Col xs={12} className="upload_custom">
-                    <label for="custom_picture" className='inputlabel inputlabel_icon'><i className="fa fa-picture-o"/><p style={{fontSize: '30px'}}>{this.state.inputfile.length == 0?'Upload Picture':<p className="text-ellipsis" style={{fontSize: '20px'}}><i className="fa fa-check"></i>{this.state.inputfile.name}</p>}</p></label>
+        var renderLabel = () => {
+            if (this.state.fileName.length === 0) {
+                return (
+                    <Col xs={12} className="upload_custom">
+                        <label for="custom_picture" className='inputlabel inputlabel_icon'><i className="fa fa-picture-o"/><p style={{fontSize: '30px'}}>Upload Picture</p></label>
+                    </Col> 
+                )
+            } else {
+                return (
                     <div>
-                        <form encType="multipart/form-data">
-                        <input type="file" name="filename" id="custom_picture" accept="image/*" className="inputfile" onChange={()=>this.setState({inputfile: document.getElementById('custom_picture').files[0]})}/>
-                        </form>
+                        <Magnifier zoomFactor={1.1} mgWidth={300} mgHeight={300} src={this.state.fileURL} width={"100%"} />
+                        <p className="text-ellipsis" style={{fontSize: '20px'}}><i className="fa fa-check"></i>{this.state.fileName}</p>
+                        <label for="custom_picture" className="btn-orange-blue">
+                            Upload Gambar Lain
+                        </label>
                     </div>
-                </Col> 
-            )
+                )
+            }
         }
-        else {
-            return <Magnifier src={this.state.picture+'.jpg'} width={"100%"} />
-        }
+        return (
+            <div>
+                {renderLabel()}
+                <div>
+                    <form encType="multipart/form-data">
+                    <input type="file" name="filename" id="custom_picture" accept="image/*" className="inputfile" onChange={()=>this.handleFile()}/>
+                    </form>
+                </div>
+            </div>
+        )
     }
 
     // renderCarouselSimilar() {
@@ -301,7 +324,7 @@ class CustomPage extends Component {
                             <Col xsOffset={1} mdOffset={0} md={12}><h3 className="alternate-title">Custom Case</h3></Col>
                         </Row>
                         <Row>
-                            <Col xsOffset={1} mdOffset={0} md={12}><h2 className="price-text">Rp {(this.state.selected_price + 10000).toLocaleString()}</h2></Col> 
+                            <Col xsOffset={1} mdOffset={0} md={12}><h2 className="price-text">Rp {(this.state.selected_price).toLocaleString()}</h2></Col> 
                         </Row>
                     </section>
                 )
@@ -309,7 +332,7 @@ class CustomPage extends Component {
         }
 
     renderAddToCartButton() {
-        if(this.state.selected_case === undefined || this.state.selected_case === 0 || this.state.namafile === "") {
+        if(this.state.selectedCaseType === undefined || this.state.selectedCaseType === 0 || this.state.fileName === "") {
             return <input type="button" className="btn-orange-blue disabled" title="Please select Brand, Model and Type First" value="Add to Cart" onClick={()=>this.onAddToCart()} style={{width:"100%"}} disabled></input>
         }
         else {

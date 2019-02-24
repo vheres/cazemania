@@ -47,10 +47,10 @@ class Footer extends Component { //kalo gak pake destructuring, tulisnya React.C
                                         </div>
                                         <div className="border" style={{borderColor:'white',paddingTop:'0.5rem'}}/>
                                         <div className="m-t-xl">
-                                            <a href="https://www.instagram.com/cazemania/?hl=en" target="_blank"><img src="https://diylogodesigns.com/wp-content/uploads/2016/05/instagram-Logo-PNG-Transparent-Background-download-768x768.png" alt="instagram" style={{width:"30px"}}></img><h5 className="footer-text instagram-text" style={{display:'inline-block'}}>@Cazemania</h5></a>
+                                            <a href="https://www.instagram.com/cazemania/?hl=en" target="_blank" rel="noopener noreferrer"><img src="https://diylogodesigns.com/wp-content/uploads/2016/05/instagram-Logo-PNG-Transparent-Background-download-768x768.png" alt="instagram" style={{width:"30px"}}></img><h5 className="footer-text instagram-text" style={{display:'inline-block'}}>@Cazemania</h5></a>
                                         </div>
                                         <div className="m-t-sm">
-                                            <a href="https://www.facebook.com/Cazemania-145129639470441/" target="_blank"><img src="http://www.dfmalherbe.co.za/wp-content/uploads/2016/01/facebook-logo-png-transparent-background.png" alt="facebook" style={{width:"25px", 'marginLeft':'2px'}}></img><h5 className="footer-text facebook-text" style={{display:'inline-block'}}>Cazemania</h5></a>
+                                            <a href="https://www.facebook.com/Cazemania-145129639470441/" target="_blank" rel="noopener noreferrer"><img src="http://www.dfmalherbe.co.za/wp-content/uploads/2016/01/facebook-logo-png-transparent-background.png" alt="facebook" style={{width:"25px", 'marginLeft':'2px'}}></img><h5 className="footer-text facebook-text" style={{display:'inline-block'}}>Cazemania</h5></a>
                                         </div>
                                     </Col>
                                 </Row>
@@ -63,10 +63,10 @@ class Footer extends Component { //kalo gak pake destructuring, tulisnya React.C
                                         </div>
                                         <div className="border" style={{borderColor:'white',paddingTop:'0.5rem'}}/>
                                         <div className="m-t-xl">
-                                            <a href="https://www.instagram.com/cazemania/?hl=en" target="_blank"><img src="http://www.stickpng.com/assets/images/580b57fcd9996e24bc43c523.png" alt="line" style={{width:"30px"}}></img></a>
+                                            <a href="https://www.instagram.com/cazemania/?hl=en" target="_blank" rel="noopener noreferrer"><img src="http://www.stickpng.com/assets/images/580b57fcd9996e24bc43c523.png" alt="line" style={{width:"30px"}}></img></a>
                                         </div>
                                         <div className="m-t-sm">
-                                            <a href="https://www.facebook.com/Cazemania-145109639470441/" target="_blank"><img src="https://images.sftcdn.net/images/t_optimized,f_auto/p/cc03a0ea-96d0-11e6-9905-00163ed833e7/1398466786/whatsapp-logo.png" alt="whatsapp" style={{width:"30px"}}></img></a>
+                                            <a href="https://www.facebook.com/Cazemania-145109639470441/" target="_blank" rel="noopener noreferrer"><img src="https://images.sftcdn.net/images/t_optimized,f_auto/p/cc03a0ea-96d0-11e6-9905-00163ed833e7/1398466786/whatsapp-logo.png" alt="whatsapp" style={{width:"30px"}}></img></a>
                                         </div>
                                     </Col>
                                 </Row>

@@ -4,7 +4,7 @@ import {API_URL_1} from '../supports/api-url/apiurl'
 
 class CartDetail extends Component {
     renderDeleteButton() {
-        if (this.props.DeleteClick != undefined) {
+        if (this.props.DeleteClick !== undefined) {
             return (
                 <Col xs={2} md={2}>
                     <input type="button" className="btn-orange-blue" value="delete" onClick={()=>this.props.DeleteClick(this.props.item.id)}/>
@@ -38,7 +38,7 @@ class CartDetail extends Component {
                             </Row>
                         </Col>
                         <Col xs={6} md={2}>
-                            <h4 style={{'font-weight':'bold'}}>Rp. {item.price.toLocaleString()}</h4>
+                            <h4 style={{fontWeight:'bold'}}>Rp. {item.price.toLocaleString()}</h4>
                         </Col>
                         {this.renderDeleteButton()} 
                     </Row>

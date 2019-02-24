@@ -18,12 +18,12 @@ class CarouselPremiumThumbs extends Component {
                 if (this.props.images.length < 6) {
                     arrJSX.push(
                         <Col xs={2}>
-                            <img src={`${API_URL_1}/premium/${item.image}.jpg`} alt={item.image} className="m-b carousel-thumbnail" style={{width:'100%'}} key={index} onClick={() => this.props.thumbClick(index)}/>
+                            <img src={`${API_URL_1}${item}`} alt={item} className="m-b carousel-thumbnail" style={{width:'100%'}} key={index} onClick={() => this.props.thumbClick(index)}/>
                         </Col>
                     )
                 } else {
                     arrJSX.push(
-                        <img src={`${API_URL_1}/premium/${item.image}.jpg`} alt={item.image} className="m-b carousel-thumbnail" style={{width:'90%',marginLeft:'5%'}} key={index} onClick={() => this.props.thumbClick(index)}/>
+                        <img src={`${API_URL_1}${item}`} alt={item} className="m-b carousel-thumbnail" style={{width:'90%',marginLeft:'5%'}} key={index} onClick={() => this.props.thumbClick(index)}/>
                     )
                 }
             })

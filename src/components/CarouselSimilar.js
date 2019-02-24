@@ -47,7 +47,7 @@ class CarouselSimilar extends Component {
           })
         return (
           images.map((item, count) => (
-                <Link to={`/product?id=${item[0]}`} onClick={()=>{this.props.SimilarClick(`/product?id=${item[0]}`);ReactPixel.trackCustom('similarClick')}} className="best-holder"><img src={API_URL_1+item[1]} style={{width:"100%"}}/><div className="best-overlay">{item[2]}</div></Link>
+                <Link to={`/product?id=${item[0]}`} onClick={()=>{this.props.SimilarClick(`/product?id=${item[0]}`);ReactPixel.trackCustom('similarClick')}} className="best-holder"><img src={API_URL_1+item[1]} alt={item[2]} style={{width:"100%"}}/><div className="best-overlay">{item[2]}</div></Link>
           ))
         )
       };
@@ -80,10 +80,10 @@ class CarouselSimilar extends Component {
         </div>
         );
       }
-      else if (this.state.similar_product.length == 1) {
+      else if (this.state.similar_product.length === 1) {
         return <Col xsOffset={0} xs={12} mdOffset={4} md={4}>{items}</Col>;
       }
-      else if (this.state.similar_product.length ==2) {
+      else if (this.state.similar_product.length ===2) {
           var arrJSX=[];
           arrJSX.push(<Col xsOffset={0} xs={12} mdOffset={2} md={4}>{items[0]}</Col>)
           arrJSX.push(<Col xs={12} md={4}>{items[1]}</Col>)

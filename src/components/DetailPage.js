@@ -112,7 +112,7 @@ class DetailPage extends Component {
         else if (caseType === 'soft') {
             this.setState({selected_price: this.state.price[0].price , selectedCaseType: caseType})
         }
-        else if (caseType == 0) {
+        else if (caseType === 0) {
             this.setState({selected_price: "", selectedCaseType: 0})
         }
         console.log(this.state.selected_price)
@@ -251,10 +251,10 @@ class DetailPage extends Component {
     }
 
     PlusMinus(action) {
-        if (action == "plus") {
+        if (action === "plus") {
             document.getElementById("quantity").value = parseInt(document.getElementById("quantity").value) + 1;
         }
-        else if (action == "minus") {
+        else if (action === "minus") {
             if(document.getElementById("quantity").value > 1) {
                 document.getElementById("quantity").value = parseInt(document.getElementById("quantity").value) - 1;
             }         
@@ -266,7 +266,7 @@ class DetailPage extends Component {
             return
         }
         else {
-            return <Magnifier src={API_URL_1+this.state.item.image} width={"100%"} />
+            return <Magnifier zoomFactor={1.1} mgWidth={300} mgHeight={300} src={API_URL_1+this.state.item.image} width={"100%"} />
         }
     }
 

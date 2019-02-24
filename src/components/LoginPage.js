@@ -14,8 +14,8 @@ class LoginPage extends Component {
     }
 
     componentWillReceiveProps(newProps) {
-        if(newProps.auth.email !== "") {
-            cookies.set('myCookie', newProps.auth.email, { path: '/' });
+        if(newProps.auth.token !== "") {
+            cookies.set('JWT', newProps.auth.token, { path: '/' });
         }
     }
 

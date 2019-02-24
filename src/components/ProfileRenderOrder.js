@@ -2,19 +2,14 @@ import React, {Component} from 'react';
 import axios from 'axios'
 import {API_URL_1} from '../supports/api-url/apiurl'
 import {Panel, Modal, Button} from 'react-bootstrap'
+import { withRouter } from 'react-router-dom';
+import { connect } from 'react-redux';
+const moment = require('moment');
 
 class ProfileRenderOrder extends Component {
     constructor(props) {
         super(props);
         this.state = {show: false, items: [], namafile: 'Pilih Gambar'}
-    }
-
-    componentWillMount(){
-        axios.get(API_URL_1 + "/users/transactions/details/" + this.props.transaction_id)
-        .then((res)=>{
-            console.log(res.data)
-            this.setState({items: res.data})
-        })
     }
 
     handleClose() {
@@ -27,34 +22,32 @@ class ProfileRenderOrder extends Component {
 
         
     selectStyle(){
-        if(this.props.status === "pendingPayment"){
+        if(this.props.item.status === "pendingProof"){
             return "info"
         }
-        else if(this.props.status === "pendingDelivery"){
+        else if(this.props.item.status === "pendingDelivery"){
             return "warning"
         }
-        else if(this.props.status === "complete"){
+        else if(this.props.item.status === "complete"){
             return "success"
         }
     }
 
     onUpLoadClick() {
-        console.log(document.getElementById('bukti_pembayaran').files[0])
-        var data = {
-            transaction_id: this.props.transaction_id
-        }
+        const token = this.props.auth.token
         var formData = new FormData()
-        formData.append('file', document.getElementById('bukti_pembayaran').files[0])
-        formData.append('data', JSON.stringify(data))
-        console.log(formData)
-        var config = {
-            headers: 
-              {'Content-Type': 'multipart/form-data'}
+        formData.append('proof', document.getElementById('bukti_pembayaran').files[0])
+        const headers = {
+            headers:
+              {'Authorization': `Bearer ${token}`,
+              'Content-Type': 'multipart/form-data'}
         }
-          axios.post(API_URL_1 + `/bukti_pembayaran`, formData, config).then((res) => {
+        axios.post(`${API_URL_1}/transaction/uploadproof/${this.props.item.id}`, formData, headers)
+            .then((res) => {
             alert('upload success!');
             this.props.refresh();
-        }).catch((err) => {
+        })
+        .catch((err) => {
             alert(err);
         })
     }
@@ -70,9 +63,9 @@ class ProfileRenderOrder extends Component {
     renderOrderStatus(){
         return(
             {
-                pendingPayment: () => {
+                pendingProof: () => {
                     return(
-                        <span className="label bg-info">Pending Payment</span> )
+                        <span className="label bg-info">Pending Proof</span> )
                     },
                 pendingDelivery: () => {
                     return(
@@ -87,7 +80,7 @@ class ProfileRenderOrder extends Component {
     }
 
     renderHeader(){
-        if(this.props.status === "pendingPayment"){
+        if(this.props.item.status === "pendingProof"){
             return (
                 <header className="wrapper-md bg-light lter">
                     <div className="row">
@@ -106,7 +99,7 @@ class ProfileRenderOrder extends Component {
                 </header>
             )        
         }
-        else if(this.props.status === "pendingDelivery"){
+        else if(this.props.item.status === "pendingDelivery"){
             return (
                 <header className="wrapper-md bg-light lter">
                 <div className="row">
@@ -118,7 +111,7 @@ class ProfileRenderOrder extends Component {
                 </header>
             )
         }
-        else if(this.props.status === "complete"){
+        else if(this.props.item.status === "complete"){
             return (
                 <header className="wrapper-md bg-success lter">
                 <div style={{fontSize: "200%"}}>
@@ -130,11 +123,11 @@ class ProfileRenderOrder extends Component {
     }
 
     renderTransactionDetails(){
-        var arrJSX = this.state.items.map((item) =>{
+        var arrJSX = this.props.item.transactionDetails.map((item) =>{
             return(
             <tr>
                 <td>{item.amount}</td>
-                <td>{item.code}-{item.name} || {item.brand_name} {item.type_name} - {item.case_type}</td>
+                <td>{item.code}-{item.name} || {item.brand} {item.model} - {item.caseType}</td>
                 <td>Rp. {item.price}</td>
                 <td>Rp. {item.price * item.amount}</td>
             </tr>)
@@ -144,9 +137,9 @@ class ProfileRenderOrder extends Component {
     }
 
     renderBukti(){
-        if(this.props.proof !== null){
+        if(this.props.item.proof !== null){
             return(
-                <img src={API_URL_1 + `/bukti/${this.props.proof}.jpg`} alt="buktipembayaran" style={{width: "100%"}}/>
+                <img src={`${API_URL_1}${this.props.item.proof}`} alt="buktipembayaran" style={{width: "100%"}}/>
             )
         }
         else{
@@ -158,9 +151,9 @@ class ProfileRenderOrder extends Component {
     
     renderPage(){
         return(
-            <Panel eventKey={this.props.transaction_id} bsStyle={this.selectStyle()}>
+            <Panel eventKey={this.props.item.id} bsStyle={this.selectStyle()}>
               <Panel.Heading>
-                <Panel.Title toggle style={{fontSize:'10pt'}}>Order ID: <strong>CMW#{this.props.ordernumber}</strong><span style={{float: 'right'}}>{this.renderOrderStatus()[this.props.status]()}</span></Panel.Title>
+                <Panel.Title toggle style={{fontSize:'10pt'}}>Order ID: <strong>CMW#{this.props.ordernumber}</strong><span style={{float: 'right'}}>{this.renderOrderStatus()[this.props.item.status]()}</span></Panel.Title>
               </Panel.Heading>
               <Panel.Body collapsible>
                 <section id="content" style={{fontSize:"16px"}}> 
@@ -169,27 +162,27 @@ class ProfileRenderOrder extends Component {
                         <section className="scrollable wrapper" style={{"line-height":"20px"}}> 
                         <div className="row">
                             <p className="m-t m-b col-md-3" style={{"line-height":"20px"}}>
-                                <div style={{'margin-bottom': '5px'}}>Order date: <strong>{this.props.date}</strong></div>
-                                <div style={{'margin-bottom': '5px'}}>Order status: {this.renderOrderStatus()[this.props.status]()}</div>
-                                <div style={{'margin-bottom': '5px'}}>Order ID: <strong>CMW#{this.props.ordernumber}</strong></div>  
+                                <div style={{'margin-bottom': '5px'}}>Order date: <strong>{moment(this.props.item.purchaseDate).format('DD MMM YYYY')}</strong></div>
+                                <div style={{'margin-bottom': '5px'}}>Order status: {this.renderOrderStatus()[this.props.item.status]()}</div>
+                                <div style={{'margin-bottom': '5px'}}>Order ID: <strong>CMW#0000</strong></div>  
                             </p>
                             <div className="well bg-light b m-t col-md-6">
                                 <div className="row">
                                 <div className="col-xs-12">
                                     <strong>SHIP TO:</strong>
-                                    <h4>{this.props.firstname} {this.props.lastname}</h4>
+                                    <h4>{this.props.item.firstname} {this.props.item.lastname}</h4>
                                     <p>
-                                    {this.props.address}<br/>
-                                    {this.props.kota} {this.props.kodepos}<br/>
-                                    Phone: {this.props.phone}<br/>
+                                    {this.props.item.address}<br/>
+                                    {this.props.item.kota} {this.props.item.kodepos}<br/>
+                                    Phone: {this.props.item.phone}<br/>
                                     {/* Email: {this.props.email}<br/> */}
                                     </p>
                                 </div>
                                 </div>
                             </div>
                             <div className="col-md-3 text-right">
-                            <p className="h4">CMW#{this.props.ordernumber}</p>
-                            <h5>{this.props.date}</h5>           
+                            <p className="h4">CMW#0000</p>
+                            <h5>{moment(this.props.item.purchaseDate).format('DD MMM YYYY')}</h5>           
                             </div>
                         </div>          
                         <div className="line"></div>
@@ -207,19 +200,19 @@ class ProfileRenderOrder extends Component {
                                 {this.renderTransactionDetails()}
                                 <tr>
                                     <td colspan="3" className="text-right"><strong>Subtotal</strong></td>
-                                    <td>Rp. {this.props.subtotal}</td>
+                                    <td>Rp. {this.props.item.subtotal}</td>
                                 </tr>
                                 <tr>
                                     <td colspan="3" className="text-right"><strong>Discount</strong></td>
-                                    <td>Rp. {this.props.discount}</td>
+                                    <td>Rp. {this.props.item.discount}</td>
                                 </tr>
                                 <tr>
                                     <td colspan="3" className="text-right no-border"><strong>Shipping</strong></td>
-                                    <td>Rp. {this.props.shipping}</td>
+                                    <td>Rp. {this.props.item.shipping}</td>
                                 </tr>
                                 <tr>
                                     <td colspan="3" className="text-right no-border"><strong>Total</strong></td>
-                                    <td><strong>Rp. {this.props.total_price}</strong></td>
+                                    <td><strong>Rp. {this.props.item.totalPrice}</strong></td>
                                 </tr>
                                 </tbody>
                             </table>  
@@ -230,7 +223,7 @@ class ProfileRenderOrder extends Component {
               </Panel.Body>
               <Modal show={this.state.show} onHide={()=>this.handleClose()}>
                 <Modal.Header closeButton>
-                    <Modal.Title>Bukti Pembayaran ORDER: CMW#{this.props.ordernumber}</Modal.Title>
+                    <Modal.Title>Bukti Pembayaran ORDER: CMW#0000</Modal.Title>
                 </Modal.Header>
                 <Modal.Body>
                     {this.renderBukti()}
@@ -250,4 +243,10 @@ class ProfileRenderOrder extends Component {
     }
 }
 
-export default ProfileRenderOrder
+const mapStateToProps = (state) => {
+    const auth = state.auth;
+
+    return { auth };
+}
+
+export default withRouter(connect(mapStateToProps, {})(ProfileRenderOrder));

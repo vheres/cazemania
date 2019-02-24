@@ -76,12 +76,12 @@ class ProfilePage extends Component {
 
     onEditSave() {
         var gender = '';
-        if (document.getElementById('male').checked == true) {
+        if (document.getElementById('male').checked === true) {
             gender = document.getElementById('male').value
         } else {
             gender = document.getElementById('female').value
         }
-        if(this.refs.phone.value == '' || this.refs.alamat.value == '' || this.state.selectedOption.label == '' || this.refs.kodepos.value == '') {
+        if(this.refs.phone.value === '' || this.refs.alamat.value === '' || this.state.selectedOption.label === '' || this.refs.kodepos.value === '') {
             alert('Please fill everything!');
         } else {
             const token = this.props.auth.token
@@ -106,7 +106,7 @@ class ProfilePage extends Component {
     }
 
     renderGenderOption() {
-        if (this.state.profile.gender == 'male') {
+        if (this.state.profile.gender === 'male') {
             return (
                 <Col xs={12} mdOffset={2} md={8}>
                     <div style={{fontSize:'12pt', fontWeight:'bold', color: 'rgb(100, 100, 100)', marginTop:'20px'}}>Gender</div>
@@ -297,7 +297,7 @@ class ProfilePage extends Component {
     }
 
     render() {
-        if(this.props.auth.email != "") {
+        if(this.props.auth.email !== "") {
             return (
             this.renderProfilePage()
             );

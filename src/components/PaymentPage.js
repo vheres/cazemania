@@ -292,7 +292,7 @@ class PaymentPage extends Component {
             subTotal += item.amount * item.price;
             arrJSX.push(<tr><td style={{width:"5%"}}>{count +1}.</td><td><strong>{item.catalogue.name} | {item.catalogue.code}</strong>, {item.model}, {item.caseType} case</td><td className="text-right">(Qty:{item.amount}) Rp. {(item.amount * item.price).toLocaleString()}</td></tr>)
         })
-        arrJSX.push(<br/>)
+        // arrJSX.push(<br/>)
         arrJSX.push(<tr><td/><td><strong>Sub Total</strong></td><td className="text-right"><strong>Rp. {subTotal.toLocaleString()}</strong></td></tr>)
         totalCase = countHardCase + countSoftCase;
         countFree = Math.floor(totalCase/3);
