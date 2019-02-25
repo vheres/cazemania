@@ -12,11 +12,13 @@ class DetailPagePremium extends Component {
         super(props);
         this.state = {
             item: [],
+            price: 0,
             images: [],
             models: [],
             selectedStock: 0,
             premiumselect: 0,
-            modelselect: 0,
+            modelselectId: 0,
+            modelselectName: '',
             quantity: 1
         }
     }
@@ -24,13 +26,27 @@ class DetailPagePremium extends Component {
     componentDidMount(){
         const params = new URLSearchParams(this.props.location.search);
         const id = params.get('id')
-        axios.get(`${API_URL_1}/catalogue/premiumdetails/${id}`)
-        .then((res)=>{
-            console.log(res);
-            this.setState({item:res.data.result})
-        })
+        this.getPremiumDetails(id)
+        this.getPrice()
         ReactPixel.pageView();
         ReactPixel.track('ViewContent');
+    }
+
+    getPremiumDetails(id) {
+        axios.get(`${API_URL_1}/catalogue/premiumdetails/${id}`)
+        .then((res)=>{
+            this.setState({item:res.data.result})
+        })
+    }
+
+    getPrice(){
+        axios.get(`${API_URL_1}/price/all`)
+        .then(res => {
+            this.setState({price:res.data.result[2].price})
+        })
+        .catch(err => {
+            console.log(err)
+        })
     }
 
     premiumSelectOptions() {
@@ -41,7 +57,7 @@ class DetailPagePremium extends Component {
                     model = item.phonemodels;
                 }
             })
-            this.setState({premiumselect: this.refs.premium_select.value, models: model, modelselect: 0, selectedStock: 0})
+            this.setState({premiumselect: this.refs.premium_select.value, models: model, modelselectId: 0, modelselectName: '', selectedStock: 0})
         }
         var arrJSX = [];
         this.state.item.catalogues.forEach((item, index) => {
@@ -61,12 +77,14 @@ class DetailPagePremium extends Component {
     modelSelectOptions(){
         var handleModelSelect = () => {
             var stock = 0;
+            var modelName = '';
             this.state.models.forEach((item, index) => {
                 if (parseInt(item.id) === parseInt(this.refs.model_select.value)) {
                     stock = item.premiumModel.stock
+                    modelName = item.name
                 }
             })
-            this.setState({modelselect: this.refs.model_select.value, selectedStock: stock})
+            this.setState({modelselectId: this.refs.model_select.value, modelselectName: modelName, selectedStock: stock})
         }
         var arrJSX = [];
         this.state.models.forEach((item, index) => {
@@ -85,36 +103,43 @@ class DetailPagePremium extends Component {
 
     onAddToCart() {
         if (this.props.auth.email !== "") {
-            axios.post(API_URL_1 + `/cart`, {
-                user_id: this.props.auth.id,
-                catalogue_id: this.state.premiumselect,
-                brand_id: '1',
-                model_id: this.state.modelselect,
-                case_type: "premium",
-                amount: document.getElementById("quantity").value
-            }).then((res) => {
-                alert('add to cart successful!')
-                ReactPixel.track('AddToCart', {
-                    content_category: 'premium',
-                    content_name: this.state.item[0].name,
-                    currency: 'IDR',
-                    value: (100000 * document.getElementById("quantity").value),
-                    contents: [
-                        {
-                            id: this.state.premiumselect,
-                            quantity: document.getElementById("quantity").value,
-                            item_price: 100000
-                        }
-                    ],
-                    content_type: 'product'
-                })
-            }).catch((err) => {
-                alert(err);
+            const token = this.props.auth.token
+            const headers = {
+                headers: { 
+                    'Authorization': `Bearer ${token}`,
+                }
+            };
+        axios.put(API_URL_1 + `/transaction/addtocart`, {
+            catalogueId: this.state.premiumselect,
+            phonemodelId: this.state.modelselectId,
+            brand: 'IPHONE',
+            model: this.state.modelselectName,
+            caseType: 'premium',
+            amount: document.getElementById("quantity").value,
+            price: parseInt(this.state.price)
+        }, headers).then((res) => {
+            alert('add to cart successful!')
+            ReactPixel.track('AddToCart', {
+                content_category: 'premium',
+                content_name: this.state.item.name,
+                currency: 'IDR',
+                value: (100000 * document.getElementById("quantity").value),
+                contents: [
+                    {
+                        id: this.state.premiumselect,
+                        quantity: document.getElementById("quantity").value,
+                        item_price: 100000
+                    }
+                ],
+                content_type: 'product'
             })
+        }).catch((err) => {
+            alert(err);
+        })
         } else {
             alert('Please Login First')
             this.props.history.push('/login')
-        }      
+        }     
     }
 
     PlusMinus(action) {
@@ -153,7 +178,7 @@ class DetailPagePremium extends Component {
     }
 
     renderAddToCartButton() {
-        if(this.state.premiumselect === 0 || this.state.modelselect === 0 || this.state.quantity > this.state.selectedStock) {
+        if(this.state.premiumselect === 0 || this.state.modelselectId === 0 || this.state.quantity > this.state.selectedStock) {
             return <input type="button" className="btn-orange-blue disabled" title="Please select Premium Code and Model first" value="Add to Cart" onClick={()=>this.onAddToCart()} style={{width:"100%"}} disabled></input>
         }
         else {
@@ -200,7 +225,7 @@ class DetailPagePremium extends Component {
                                     </Row>
                                     <Row>
                                         <Col xsOffset={1} xs={4} mdOffset={0} md={3}>
-                                            <div className="general-title-blue">{this.state.modelselect===0?'-':this.state.selectedStock}</div>
+                                            <div className="general-title-blue">{this.state.modelselectId===0?'-':this.state.selectedStock}</div>
                                         </Col>
                                     </Row>
                                 </Col>

@@ -7,12 +7,9 @@ import PaginationClass from './Pagination';
 import ReactPixel from 'react-facebook-pixel';
 
 class ShopPage extends Component {
-    state = { catalogue: [], pagination: [], item_count: 0, pagecount: 0, search_status: [0], active: 0 }
+    state = { catalogue: [], item_count: 0, pagecount: 0, search_status: [0], active: 0 }
 
     componentDidMount() {
-        if (this.state.pagination.length === 0) {
-            this.state.pagination.push(0, 20)
-        }
         this.getCatalogueList();
         ReactPixel.pageView();
     }
@@ -27,12 +24,10 @@ class ShopPage extends Component {
         else {
             searchIn = params.get('search');
         }
-        console.log(this.state.pagination)
-        console.log(this.state.active)
         axios.get(`${API_URL_1}/catalogue/products`, {
             params: {
                 search: searchIn,
-                pagination: this.state.pagination
+                pagination: this.state.active
             }
         })
         .then((response)=>{

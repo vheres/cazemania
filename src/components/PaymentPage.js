@@ -9,13 +9,27 @@ import Select from 'react-select';
 import ReactPixel from 'react-facebook-pixel';
 
 class PaymentPage extends Component {
-    state = ({ profile: [], recipient: {}, cart: [], rekening: [], subTotal: 0, discount: 0, edit_modal: false, selectedOption: [], destination: [], filtered_destination: [], shipping: 0 })
+    constructor(props) {
+        super(props);
+        this.state = {
+            recipient: {},
+            cart: [],
+            rekening: [],
+            subTotal: 0,
+            discount: 0,
+            edit_modal: false,
+            selectedOption: [],
+            destination: [],
+            filtered_destination: [],
+            shipping: 0,
+            init: false
+        };
+    }
 
     async componentDidMount() {
         await this.getUserInfo();
         await this.getCart();
         await this.getBank();
-        await this.getShippingCost();
         ReactPixel.pageView();
         ReactPixel.track( 'InitiateCheckout' )
     }
@@ -30,7 +44,7 @@ class PaymentPage extends Component {
         axios.get(`${API_URL_1}/auth/profile`, headers)
         .then(async (response) => {
             console.log(response.data.result)
-            await this.setState({profile: response.data.result, recipient: response.data.result})
+            await this.setState({recipient: response.data.result})
         })
         .catch(err => {
             console.log(err)
@@ -139,7 +153,7 @@ class PaymentPage extends Component {
     
     handleShow() {
         this.getDestinationList();
-        this.setState({ selectedOption:{value:this.state.profile.destination_code, label:this.state.profile.kota} ,edit_modal: true });
+        this.setState({ selectedOption:{value:this.state.recipient.destination_code, label:this.state.recipient.kota} ,edit_modal: true });
     }
 
     onKeyPress(enter) {
@@ -452,6 +466,10 @@ class PaymentPage extends Component {
     }
 
     render() {
+        if (this.state.init === false && this.state.cart.length > 0 && this.state.recipient.destination_code !== undefined) {
+            this.getShippingCost()
+            this.setState({init: true})
+        }
         return (
             this.renderPaymentPage()
         );   
