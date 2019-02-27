@@ -13,10 +13,11 @@ class CustomPage extends Component {
         this.state = {
             brands: [],
             phonemodels: [],
-            price: [],
+            softPrice: 0,
+            hardPrice: 0,
             filteredPhoneModels: [],
             caseselect: {soft: 0, hard: 0},
-            selected_price: "",
+            selected_price: 0,
             selectedBrandId: 0,
             selectedBrand: {},
             selectedPhoneModelId: 0,
@@ -65,8 +66,13 @@ class CustomPage extends Component {
     getPrice(){
         axios.get(`${API_URL_1}/price/all`)
         .then(res => {
-            console.log(res.data.result)
-            this.setState({price:res.data.result})
+            if (this.props.auth.category === 'customer') {
+                this.setState({softPrice: res.data.result[3].price, hardPrice: res.data.result[4].price})
+            } else if (this.props.auth.category === 'reseller') {
+                this.setState({softPrice: res.data.result[3].resellerPrice, hardPrice: res.data.result[4].resellerPrice})
+            } else {
+                this.setState({softPrice: res.data.result[3].price, hardPrice: res.data.result[4].price})
+            }
         })
         .catch(err => {
             console.log(err)
@@ -81,7 +87,7 @@ class CustomPage extends Component {
                 brand = item
             }
         })
-        this.setState({ selectedBrand: brand, selectedBrandId: brandId, selectedPhoneModelId: 0, selectedPhoneModel: {}, selectedCaseType: 0, selected_price: "" })
+        this.setState({ selectedBrand: brand, selectedBrandId: brandId, selectedPhoneModelId: 0, selectedPhoneModel: {}, selectedCaseType: 0, selected_price: 0 })
         this.phoneModelFilter(brandId)
     }
 
@@ -93,18 +99,18 @@ class CustomPage extends Component {
             }
         })
         console.log(phonemodel)
-        this.setState({selectedPhoneModelId: phonemodelId, selectedPhoneModel: phonemodel, selectedCaseType: 0, selected_price: "" })
+        this.setState({selectedPhoneModelId: phonemodelId, selectedPhoneModel: phonemodel, selectedCaseType: 0, selected_price: 0 })
     }
 
     onCaseTypeSelect(caseType) {
         if (caseType === 'hard') {
-            this.setState({selected_price: this.state.price[4].price, selectedCaseType: caseType})
+            this.setState({selected_price: this.state.hardPrice, selectedCaseType: caseType})
         }
         else if (caseType === 'soft') {
-            this.setState({selected_price: this.state.price[3].price , selectedCaseType: caseType})
+            this.setState({selected_price: this.state.softPrice , selectedCaseType: caseType})
         }
-        else if (caseType === 0) {
-            this.setState({selected_price: "", selectedCaseType: 0})
+        else {
+            this.setState({selected_price: 0, selectedCaseType: 0})
         }
     }
 
@@ -305,14 +311,14 @@ class CustomPage extends Component {
     // }
 
     renderProductDetail() {
-            if(this.state.selected_price.length === 0) {
+            if(parseInt(this.state.selected_price, 10) === 0) {
                 return (
                     <section>
                         <Row>
                             <Col xsOffset={1} mdOffset={0} md={12}><h3 className="alternate-title">Custom Case</h3></Col>
                         </Row>
                         <Row>
-                            <Col xsOffset={1} mdOffset={0} md={12}><h2 className="price-text">Rp 60,000 - Rp 85,000</h2></Col> 
+                            <Col xsOffset={1} mdOffset={0} md={12}><h2 className="price-text">Rp {this.state.softPrice.toLocaleString()} - Rp {this.state.hardPrice.toLocaleString()}</h2></Col> 
                         </Row>
                     </section>
                 )

@@ -15,10 +15,11 @@ class DetailPage extends Component {
             item: [], 
             brands: [], 
             phonemodels: [], 
-            price: [], 
+            softPrice: 0,
+            hardPrice: 0,
             filteredPhoneModels: [], 
             caseselect: {soft: 0, hard: 0}, 
-            selected_price: "",
+            selected_price: 0,
             selectedBrandId: 0,
             selectedBrand: {},
             selectedPhoneModelId: 0,
@@ -75,7 +76,13 @@ class DetailPage extends Component {
     getPrice(){
         axios.get(`${API_URL_1}/price/all`)
         .then(res => {
-            this.setState({price:res.data.result})
+            if (this.props.auth.category === 'customer') {
+                this.setState({softPrice: res.data.result[0].price, hardPrice: res.data.result[1].price})
+            } else if (this.props.auth.category === 'reseller') {
+                this.setState({softPrice: res.data.result[0].resellerPrice, hardPrice: res.data.result[1].resellerPrice})
+            } else {
+                this.setState({softPrice: res.data.result[0].price, hardPrice: res.data.result[1].price})
+            }
         })
         .catch(err => {
             console.log(err)
@@ -89,7 +96,7 @@ class DetailPage extends Component {
                 brand = item
             }
         })
-        this.setState({ selectedBrand: brand, selectedBrandId: brandId, selectedPhoneModelId: 0, selectedPhoneModel: {}, selectedCaseType: 0, selected_price: "" })
+        this.setState({ selectedBrand: brand, selectedBrandId: brandId, selectedPhoneModelId: 0, selectedPhoneModel: {}, selectedCaseType: 0, selected_price: 0 })
         this.phoneModelFilter(brandId)
     }
 
@@ -100,22 +107,19 @@ class DetailPage extends Component {
                 phonemodel = item
             }
         })
-        console.log(phonemodel)
-        this.setState({selectedPhoneModelId: phonemodelId, selectedPhoneModel: phonemodel, selectedCaseType: 0, selected_price: "" })
+        this.setState({selectedPhoneModelId: phonemodelId, selectedPhoneModel: phonemodel, selectedCaseType: 0, selected_price: 0 })
     }
 
     onCaseTypeSelect(caseType) {
-        console.log(this.state.price)
         if (caseType === 'hard') {
-            this.setState({selected_price: this.state.price[1].price, selectedCaseType: caseType})
+            this.setState({selected_price: this.state.hardPrice, selectedCaseType: caseType})
         }
         else if (caseType === 'soft') {
-            this.setState({selected_price: this.state.price[0].price , selectedCaseType: caseType})
+            this.setState({selected_price: this.state.softPrice , selectedCaseType: caseType})
         }
-        else if (caseType === 0) {
-            this.setState({selected_price: "", selectedCaseType: 0})
+        else {
+            this.setState({selected_price: 0, selectedCaseType: 0})
         }
-        console.log(this.state.selected_price)
     }
 
     phoneModelFilter(brandId){
@@ -211,7 +215,7 @@ class DetailPage extends Component {
                 model: this.state.selectedPhoneModel.name,
                 caseType: this.state.selectedCaseType,
                 amount: document.getElementById("quantity").value,
-                price: parseInt(this.state.selected_price)
+                price: parseInt(this.state.selected_price, 10)
             }, headers).then((res) => {
                 alert('add to cart successful!')
                 ReactPixel.track('AddToCart', {
@@ -284,14 +288,14 @@ class DetailPage extends Component {
             return
         }
         else {
-            if(this.state.selected_price.length === 0) {
+            if(parseInt(this.state.selected_price, 10) === 0) {
                 return (
                     <section>
                         <Row>
                             <Col xsOffset={1} mdOffset={0} md={12}><h3 className="alternate-title">{this.state.item.name} | {this.state.item.code}</h3></Col>
                         </Row>
                         <Row>
-                            <Col xsOffset={1} mdOffset={0} md={12}><h2 className="price-text">Rp 50,000 - Rp 75,000</h2></Col> 
+                            <Col xsOffset={1} mdOffset={0} md={12}><h2 className="price-text">Rp {this.state.softPrice.toLocaleString()} - Rp {this.state.hardPrice.toLocaleString()}</h2></Col> 
                         </Row>
                     </section>
                 )

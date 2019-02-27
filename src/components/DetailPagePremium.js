@@ -42,7 +42,13 @@ class DetailPagePremium extends Component {
     getPrice(){
         axios.get(`${API_URL_1}/price/all`)
         .then(res => {
-            this.setState({price:res.data.result[2].price})
+            if (this.props.auth.category === 'customer') {
+                this.setState({price: res.data.result[2].price})
+            } else if (this.props.auth.category === 'reseller') {
+                this.setState({price: res.data.result[2].resellerPrice})
+            } else {
+                this.setState({price: res.data.result[2].price})
+            }
         })
         .catch(err => {
             console.log(err)
@@ -170,7 +176,7 @@ class DetailPagePremium extends Component {
                         <Col xsOffset={1} mdOffset={0} md={12}><h3 className="alternate-title">{this.state.item.name}</h3></Col>
                     </Row>
                     <Row>
-                        <Col xsOffset={1} mdOffset={0} md={12}><h2 className="price-text">Rp 100,000</h2></Col> 
+                        <Col xsOffset={1} mdOffset={0} md={12}><h2 className="price-text">Rp {this.state.price.toLocaleString()}</h2></Col> 
                     </Row>
                 </section>
             )
