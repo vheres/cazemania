@@ -20,7 +20,6 @@ import { Grid, Row, Col } from 'react-bootstrap';
 import { connect } from 'react-redux';
 import { keepLogin, onLogout, cookieChecked } from './actions';
 import { Route, withRouter } from 'react-router-dom';
-import Cookies from 'universal-cookie';
 import './supports/css/bootstrap.css';
 import './App.css';
 import './supports/css/app.css';
@@ -28,26 +27,15 @@ import './supports/css/font-awesome.css';
 import './supports/css/simple-line-icons.css';
 import ReactPixel from 'react-facebook-pixel';
 
-const cookies = new Cookies();
-
 class App extends Component {  
   componentWillMount() {
-    const theCookie = cookies.get('myCookie');
-    if (theCookie !== undefined) {
-      this.props.keepLogin(theCookie);
-    }
-    else {
-      this.props.cookieChecked();
-    }
+    if (localStorage.getItem('token')) {
+			this.props.keepLogin();
+		}
+		console.log(this.props.auth);
     console.log(this.props.auth);
     ReactPixel.init('769774673361971', {}, { debug: true, autoConfig: false });
     ReactPixel.pageView(); 	
-  }
-
-  componentWillReceiveProps(newProps) {
-    if(newProps.auth.email === "") {
-      cookies.remove('myCookie');
-    }
   }
 
   render() {

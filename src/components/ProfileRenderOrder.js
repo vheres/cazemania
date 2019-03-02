@@ -9,7 +9,7 @@ const moment = require('moment');
 class ProfileRenderOrder extends Component {
     constructor(props) {
         super(props);
-        this.state = {show: false, items: [], namafile: 'Pilih Gambar'}
+        this.state = {show: false, items: [], namafile: 'Pilih Gambar', objfile: {}}
     }
 
     handleClose() {
@@ -25,6 +25,9 @@ class ProfileRenderOrder extends Component {
         if(this.props.item.status === "pendingProof"){
             return "info"
         }
+        if(this.props.item.status === "pendingConfirmation"){
+            return "primary"
+        }
         else if(this.props.item.status === "pendingDelivery"){
             return "warning"
         }
@@ -34,29 +37,34 @@ class ProfileRenderOrder extends Component {
     }
 
     onUpLoadClick() {
-        const token = this.props.auth.token
-        var formData = new FormData()
-        formData.append('proof', document.getElementById('bukti_pembayaran').files[0])
-        const headers = {
-            headers:
-              {'Authorization': `Bearer ${token}`,
-              'Content-Type': 'multipart/form-data'}
+        if (this.state.objfile.name !== undefined) {
+            const token = this.props.auth.token
+            var formData = new FormData()
+            formData.append('proof', this.state.objfile)
+            const headers = {
+                headers:
+                  {'Authorization': `Bearer ${token}`,
+                  'Content-Type': 'multipart/form-data'}
+            }
+            axios.post(`${API_URL_1}/transaction/uploadproof/${this.props.item.id}`, formData, headers)
+                .then((res) => {
+                alert('upload success!');
+                this.props.refresh();
+            })
+            .catch((err) => {
+                alert(err);
+            })
+        } else {
+            alert('input file first')
         }
-        axios.post(`${API_URL_1}/transaction/uploadproof/${this.props.item.id}`, formData, headers)
-            .then((res) => {
-            alert('upload success!');
-            this.props.refresh();
-        })
-        .catch((err) => {
-            alert(err);
-        })
     }
 
     handleInputFile() {
-        if (document.getElementById('bukti_pembayaran').files[0] === undefined) {
-            this.setState({namafile: 'Pilih Gambar'})
+        if (document.getElementById(this.props.item.orderId).files[0] === undefined) {
+            this.setState({namafile: 'Pilih Gambar', objfile: {}})
         } else {
-            this.setState({namafile: document.getElementById('bukti_pembayaran').files[0].name})
+            var file = document.getElementById(this.props.item.orderId).files[0]
+            this.setState({namafile: file.name, objfile: file})
         }
     }
 
@@ -65,36 +73,51 @@ class ProfileRenderOrder extends Component {
             {
                 pendingProof: () => {
                     return(
-                        <span className="label bg-info">Pending Proof</span> )
-                    },
+                        <span className="label bg-info">Pending Proof</span>
+                    )
+                },
+                pendingConfirmation: () => {
+                    return(
+                        <span className="label bg-primary">Pending Confirmation</span>
+                    )
+                },
                 pendingDelivery: () => {
                     return(
-                        <span className="label bg-warning">Pending Delivery</span> )
-                    },
+                        <span className="label bg-warning">Pending Delivery</span>
+                    )
+                },
                 complete : () =>{
                     return(
-                        <span className="label bg-success">Shipped</span> )
-                    }
+                        <span className="label bg-success">Shipped</span>
+                    )
                 }
+            }
         )
     }
 
     renderHeader(){
-        if(this.props.item.status === "pendingProof"){
+        var renderBuktiPembayaran = () => {
+            if (this.props.item.status !== 'pendingProof') {
+                return (
+                    <span className="col-xs-4 col-md-2">
+                        <input type="button" value="Bukti Pembayaran" onClick={()=>this.handleShow()} className="btn btn-sm btn-info pull-right"/>
+                    </span> 
+                )
+            }
+        }
+        if(this.props.item.status === "pendingProof" || this.props.item.status === "pendingConfirmation"){
             return (
                 <header className="wrapper-md bg-light lter">
                     <div className="row">
                         <span className="col-xs-12 col-md-2">Bukti pembayaran: </span>
                         <span className="col-xs-8 col-md-8">
-                            <label for="bukti_pembayaran" className="btn btn-sm btn-primary" style={{'width': '120px'}} title="pilih file, lalu klik upload">
+                            <label for={this.props.item.orderId} className="btn btn-sm btn-primary" style={{'width': '120px'}} title="pilih file, lalu klik upload">
                                 <span className="text-ellipsis">{this.state.namafile}</span>
                             </label>{' '}
                             <input type="button" value="Upload" className="btn btn-sm btn-success" title="pilih file, lalu klik upload" onClick={()=>this.onUpLoadClick()}></input>
                         </span>
-                            <input type="file" className="inputfile" name="filename" id="bukti_pembayaran" accept="image/*" onChange={()=>this.handleInputFile()}/>
-                        <span className="col-xs-4 col-md-2">
-                            <input type="button" value="Bukti Pembayaran" onClick={()=>this.handleShow()} className="btn btn-sm btn-info pull-right"/>
-                        </span>   
+                            <input type="file" className="inputfile" name="filename" id={this.props.item.orderId} accept="image/*" onChange={()=>this.handleInputFile()}/>
+                        {renderBuktiPembayaran()}
                     </div>
                 </header>
             )        
@@ -113,9 +136,9 @@ class ProfileRenderOrder extends Component {
         }
         else if(this.props.item.status === "complete"){
             return (
-                <header className="wrapper-md bg-success lter">
-                <div style={{fontSize: "200%"}}>
-                    ORDER SELESAI   ||   <strong>Nomor Resi: {this.props.resi}</strong>
+                <header className="wrapper-md bg-light lter">
+                <div style={{fontSize: "150%"}}>
+                    ORDER SELESAI || Nomor Resi: <strong>{this.props.item.resi}</strong>
                 </div>
                 </header>
             )
@@ -153,7 +176,7 @@ class ProfileRenderOrder extends Component {
         return(
             <Panel eventKey={this.props.item.id} bsStyle={this.selectStyle()}>
               <Panel.Heading>
-                <Panel.Title toggle style={{fontSize:'10pt'}}>Order ID: <strong>CMW#{this.props.ordernumber}</strong><span style={{float: 'right'}}>{this.renderOrderStatus()[this.props.item.status]()}</span></Panel.Title>
+                <Panel.Title toggle style={{fontSize:'10pt'}}>Order ID: <strong>{this.props.item.orderId}</strong><span style={{float: 'right'}}>{this.renderOrderStatus()[this.props.item.status]()}</span></Panel.Title>
               </Panel.Heading>
               <Panel.Body collapsible>
                 <section id="content" style={{fontSize:"16px"}}> 
@@ -164,7 +187,7 @@ class ProfileRenderOrder extends Component {
                             <p className="m-t m-b col-md-3" style={{"line-height":"20px"}}>
                                 <div style={{'margin-bottom': '5px'}}>Order date: <strong>{moment(this.props.item.purchaseDate).format('DD MMM YYYY')}</strong></div>
                                 <div style={{'margin-bottom': '5px'}}>Order status: {this.renderOrderStatus()[this.props.item.status]()}</div>
-                                <div style={{'margin-bottom': '5px'}}>Order ID: <strong>CMW#0000</strong></div>  
+                                <div style={{'margin-bottom': '5px'}}>Order ID: <strong>{this.props.item.orderId}</strong></div>  
                             </p>
                             <div className="well bg-light b m-t col-md-6">
                                 <div className="row">
@@ -181,7 +204,7 @@ class ProfileRenderOrder extends Component {
                                 </div>
                             </div>
                             <div className="col-md-3 text-right">
-                            <p className="h4">CMW#0000</p>
+                            <p className="h4">{this.props.item.orderId}</p>
                             <h5>{moment(this.props.item.purchaseDate).format('DD MMM YYYY')}</h5>           
                             </div>
                         </div>          

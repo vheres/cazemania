@@ -109,7 +109,7 @@ class ProfilePage extends Component {
         if (this.state.profile.gender === 'male') {
             return (
                 <Col xs={12} mdOffset={2} md={8}>
-                    <div style={{fontSize:'12pt', fontWeight:'bold', color: 'rgb(100, 100, 100)', marginTop:'20px'}}>Gender</div>
+                    <div style={{fontSize:'12pt', fontWeight:'bold', color: 'rgb(100, 100, 100)', marginTop:'10px'}}>Gender</div>
                     <label className="container">Male
                     <input type="radio" name="gender" id="male" value="male" checked/>
                     <span className="checkmark"/>
@@ -226,7 +226,7 @@ class ProfilePage extends Component {
                                         </label>
                                     </Col>
                                 </Row>
-                                <Row className="register-form">
+                                <Row>
                                     {this.renderGenderOption()}
                                 </Row>
                                 <Row>

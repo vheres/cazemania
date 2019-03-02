@@ -57,8 +57,9 @@ class ProfileOrder extends Component {
             return <div className="general-title-blue" style={{marginTop:'2rem'}}>Kamu belum pernah transaksi apapun!</div>
         } else {
             var arrJSX = this.state.orders.map((item, count)=>{
+                console.log(item)
                 return(
-                    <ProfileRenderOrder key={item.id} item={item} refresh={()=>this.refreshData()}/>
+                    <ProfileRenderOrder key={item.orderId} item={item} refresh={()=>this.refreshData()}/>
             )})
             return arrJSX
         } 
