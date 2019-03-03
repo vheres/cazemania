@@ -39,43 +39,37 @@ class App extends Component {
   }
 
   render() {
-    if (this.props.auth.cookieCheck === true) {
-      return (
-        <Grid fluid className="no-margin no-padding">
-          <Row>
-            <Header />
-          </Row>
-          <Row>
-            <Col xs={12} className="no-margin no-padding" style={{minHeight:'61.5vh'}}>
-              <Route exact path="/" component={HomePage}/>
-              <Route path="/shop" component={ShopPage}/>
-              <Route path="/custom" component={CustomPage}/>
-              <Route path="/premium_cases" component={PremiumPage}/>
-              <Route path="/product" component={DetailPage}/>
-              <Route path="/premium" component={DetailPagePremium}/>
-              <Route path="/information" component={InformationPage}/>
-              <Route path="/payment" component={PaymentPage}/>
-              <Route path="/reseller-dropshipper" component={ResellerPage}/>
-              <Route path="/profile" component={ProfilePage}/>
-              <Route path="/login" component={LoginPage}/>
-              <Route path="/register" component={RegisterPage}/>
-              <Route path="/register_reseller_dropshipper" component={RegisterRD}/>
-              <Route path="/reset-password" component={ResetPassword}/>
-              <Route path="/list" component={ListPage}/>
-            </Col>
-          </Row>
-          <Row className="no-margin no-padding">
-            <Footer />
-          </Row>
-          <Row>   
-          </Row>
-        </Grid>
-      );
-    }
-    else {
-      return <div className="general-title-blue text-center">Authentication Checking</div>
-    }
-    
+    return (
+      <Grid fluid className="no-margin no-padding">
+        <Row>
+          <Header />
+        </Row>
+        <Row>
+          <Col xs={12} className="no-margin no-padding" style={{minHeight:'61.5vh'}}>
+            <Route exact path="/" component={HomePage}/>
+            <Route path="/shop" component={ShopPage}/>
+            <Route path="/custom" component={CustomPage}/>
+            <Route path="/premium_cases" component={PremiumPage}/>
+            <Route path="/product" component={DetailPage}/>
+            <Route path="/premium" component={DetailPagePremium}/>
+            <Route path="/information" component={InformationPage}/>
+            <Route path="/payment" component={PaymentPage}/>
+            <Route path="/reseller-dropshipper" component={ResellerPage}/>
+            <Route path="/profile" component={ProfilePage}/>
+            <Route path="/login" component={LoginPage}/>
+            <Route path="/register" component={RegisterPage}/>
+            <Route path="/register_reseller_dropshipper" component={RegisterRD}/>
+            <Route path="/reset-password" component={ResetPassword}/>
+            <Route path="/list" component={ListPage}/>
+          </Col>
+        </Row>
+        <Row className="no-margin no-padding">
+          <Footer />
+        </Row>
+        <Row>   
+        </Row>
+      </Grid>
+    );
   }
 }
 

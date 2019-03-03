@@ -3,6 +3,8 @@ import { Grid, Row, Col } from 'react-bootstrap';
 import ReactPixel from 'react-facebook-pixel';
 import { connect } from 'react-redux';
 import { withRouter } from 'react-router-dom';
+import axios from 'axios';
+import {API_URL_1} from '../supports/api-url/apiurl'
 
 class InformationPage extends Component {
     componentDidMount() {
@@ -11,7 +13,21 @@ class InformationPage extends Component {
 
     onRegisterClick() {
         if (this.props.auth.email !== "") {
-            window.confirm(`Daftar menjadi Reseller / Dropshipper?`)
+            if(window.confirm(`Daftar menjadi Reseller / Dropshipper?`)) {
+                const token = this.props.auth.token
+                const headers = {
+                    headers: { 
+                        'Authorization': `Bearer ${token}`,
+                    }
+                };
+                axios.post(`${API_URL_1}/reseller/request`, headers)
+                .then(res => {
+                    alert('request untuk menjadi reseller telah di kirim')
+                })
+                .catch(err => {
+                    console.log(err)
+                })
+            }
         } else {
             alert('Please Login First')
             this.props.history.push('/login')
