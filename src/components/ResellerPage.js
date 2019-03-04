@@ -13,20 +13,24 @@ class InformationPage extends Component {
 
     onRegisterClick() {
         if (this.props.auth.email !== "") {
-            if(window.confirm(`Daftar menjadi Reseller / Dropshipper?`)) {
-                const token = this.props.auth.token
-                const headers = {
-                    headers: { 
-                        'Authorization': `Bearer ${token}`,
-                    }
-                };
-                axios.post(`${API_URL_1}/reseller/request`, headers)
-                .then(res => {
-                    alert('request untuk menjadi reseller telah di kirim')
-                })
-                .catch(err => {
-                    console.log(err)
-                })
+            if (this.props.auth.category !== 'reseller') {
+                if(window.confirm(`Daftar menjadi Reseller / Dropshipper?`)) {
+                    const token = this.props.auth.token
+                    const headers = {
+                        headers: { 
+                            'Authorization': `Bearer ${token}`,
+                        }
+                    };
+                    axios.post(`${API_URL_1}/reseller/request`, {}, headers)
+                    .then(res => {
+                        alert('request untuk menjadi reseller telah di kirim')
+                    })
+                    .catch(err => {
+                        console.log(err)
+                    })
+                }
+            } else {
+                alert('Anda sudah menjadi reseller di cazemania.id')
             }
         } else {
             alert('Please Login First')

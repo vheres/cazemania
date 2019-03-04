@@ -7074,7 +7074,7 @@ button.close {
   margin-left: 20px;
 }
 .badge-danger {
-  background-color: rgb(187, 59, 59);
+  background-color: rgb(187, 59, 59) !important;
 }
 .detail-option-text {
   color: rgb(255, 181, 44);
@@ -7458,6 +7458,13 @@ input[type="number"] {
     font-size: 14px;
   }
 }
+.general-input-container .general-input.password {
+  font-size: 14pt;
+  letter-spacing: 0.5px;
+}
+.general-input-container .general-input.password::placeholder {
+  font-size: 14px;
+}
 .general-input-container .general-input:focus {
   outline: none;
   border-color: rgb(9, 175, 204);
@@ -7673,6 +7680,10 @@ color:#54b59f;
   .premium-carousel-arrow {
     display: flex;
   }
+}
+
+.general-tooltip {
+  background-color: #53b59f !important;
 }
 
 

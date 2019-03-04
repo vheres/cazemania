@@ -8,11 +8,20 @@ import { Link } from 'react-router-dom';
 import Select from 'react-select';
 import axios from 'axios';
 import {API_URL_1} from '../supports/api-url/apiurl'
+import ReactPasswordStrength from 'react-password-strength'
 
 const cookies = new Cookies();
 
 class RegisterPage extends Component {
-    state = { selectedOption: [], destination: [], filtered_destination: [], empty_input: [], input_style: [] }
+    state = {
+        selectedOption: [],
+        destination: [],
+        filtered_destination:
+        [], empty_input: [],
+        input_style: [],
+        password: '',
+        validPassword: false
+    }
 
     componentWillMount() {
         this.getDestinationList();
@@ -41,7 +50,11 @@ class RegisterPage extends Component {
     handleChange = (selectedOption) => {
         this.setState({ selectedOption });
         console.log(`Option selected:`, selectedOption);
-      }
+    }
+
+    handlePassword(password) {
+        this.setState({password: password.password, validPassword: password.isValid})
+    }
 
     handleInputChange(selectedOption) {
         if (selectedOption.length >= 3) {
@@ -82,16 +95,12 @@ class RegisterPage extends Component {
             }
         })
         if (errIndicator === true) {
-            alert('Please fill everything!');
+            alert('Tolong isi semua kolom!');
             return
-        } else if (this.refs.password1.value !== this.refs.password2.value) {
-            alert('Your passwords does not match!')
-            inputArr = this.state.input_style.slice();
-            inputArr[3] = 'password_diff'
-            inputArr[4] = 'password_diff'
-            this.setState({input_style: inputArr})
-        } else if(this.refs.password1.value.length < 5) {
-            alert('Password must be at least 5 characters long!')
+        } else if (this.state.validPassword === false) {
+            alert('Gunakan password yang lebih kuat!')
+        } else if (this.state.password !== this.refs.password2.value) {
+            alert('Password anda tidak sesuai!')
             inputArr = this.state.input_style.slice();
             inputArr[3] = 'password_diff'
             inputArr[4] = 'password_diff'
@@ -102,7 +111,7 @@ class RegisterPage extends Component {
                 lastName: this.refs.lastName.value,
                 gender: gender,
                 email: this.refs.email.value,
-                password: this.refs.password1.value,
+                password: this.state.password,
                 phone: this.refs.phone.value,
                 address: this.refs.alamat.value,
                 destination_code: this.state.selectedOption.value,
@@ -112,7 +121,7 @@ class RegisterPage extends Component {
         }
     }
 
-    checkInput() {
+    async checkInput() {
         var tempArr = [];
         if (this.refs.firstName.value === '') {
             tempArr[0] = true;
@@ -159,7 +168,7 @@ class RegisterPage extends Component {
         } else {
             tempArr[8] = false;
         }
-        this.setState({empty_input: tempArr})
+        await this.setState({empty_input: tempArr})
     }
 
     selectClass() {
@@ -179,8 +188,8 @@ class RegisterPage extends Component {
         if(this.props.auth.email === "") {
             return(
                 <Grid fluid>
-                    <Row className="m-t-xl m-b-xl">
-                        <Col xsOffset={1} xs={10} mdOffset={4} md={4}>
+                    <Row>
+                        <Col xsOffset={1} xs={10} mdOffset={4} md={4} className="m-t-xl m-b-xl">
                             <Row className="m-b-md">
                                 <Col xs={12}>
                                     <span className="general-title-blue">Register</span>
@@ -191,14 +200,14 @@ class RegisterPage extends Component {
                                     <Col xs={12} md={6}>
                                         <label className="general-input-container">
                                             <div className="general-input-label">Nama Depan</div>
-                                            <input type="text" ref="firstName" id="inputUsername" className="general-input" placeholder="First Name" onKeyPress={this.onKeyPress.bind(this)}/>
-                                        </label> 
+                                            <input type="text" ref="firstName" id="inputFirstName" className="general-input" placeholder="First Name" onKeyPress={this.onKeyPress.bind(this)}/>
+                                        </label>
                                     </Col>
                                     <Col xs={12} md={6}>
                                         <label className="general-input-container">
                                             <div className="general-input-label">Nama Belakang</div>  
-                                            <input type="text" ref="lastName" id="inputUsername" className="general-input" placeholder="Last Name" onKeyPress={this.onKeyPress.bind(this)}/>
-                                        </label> 
+                                            <input type="text" ref="lastName" id="inputLastName" className="general-input" placeholder="Last Name" onKeyPress={this.onKeyPress.bind(this)}/>
+                                        </label>
                                     </Col>
                                 </Row>
                                 {/* <Row className="register-form">
@@ -225,16 +234,26 @@ class RegisterPage extends Component {
                                         <label className="general-input-container">
                                             <div className="general-input-label">Email</div>
                                             <input type="email" ref="email" id="inputEmail" className="general-input" placeholder="Email" onKeyPress={this.onKeyPress.bind(this)}/>
-                                        </label> 
+                                        </label>
                                     </Col>
                                 </Row>
                                 <Row>
                                     <Col xs={12}>
                                         <label className="general-input-container">
                                             <div className="general-input-label">Password</div>
-                                            <input type="password" ref="password1" id="inputPassword1" className="general-input" placeholder="Password" onKeyPress={this.onKeyPress.bind(this)}/>
-                                            <input type="password" ref="password2" id="inputPassword2" className="general-input" placeholder="Confirm Password" onKeyPress={this.onKeyPress.bind(this)}/>
-                                        </label> 
+                                            {/* <input type="password" ref="password1" id="inputPassword1" className="general-input" placeholder="Password" onKeyPress={this.onKeyPress.bind(this)}/> */}
+                                            <ReactPasswordStrength
+                                            style={{border:'none',fontSize:'10pt'}}
+                                                minLength={5}
+                                                minScore={2}
+                                                ref="password1"
+                                                changeCallback={this.handlePassword.bind(this)}
+                                                onKeyPress={this.onKeyPress.bind(this)}
+                                                scoreWords={['weak', 'okay', 'good', 'strong', 'stronger']}
+                                                inputProps={{ name: "password_input", autoComplete: "off", className: "general-input no-padding no-margin", placeholder: 'Password'}}
+                                            /> 
+                                            <input type="password" ref="password2" id="inputPassword2" className="general-input password" placeholder="Confirm Password" onKeyPress={this.onKeyPress.bind(this)}/>
+                                        </label>
                                     </Col>
                                 </Row>
                                 <Row>

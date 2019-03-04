@@ -7,7 +7,7 @@ export default (state = INITIAL_STATE, action) =>{
         case "USER_LOGIN_SUCCESS" :
             return {...action.payload, cookieCheck: true};
         case "USER_LOGIN_FAIL":
-            return {...state, error: "Authentication Error"}
+            return {...state, ...action.payload}
         case "USER_REGISTER_FAIL":
             return {...state, error: "Username/E-mail is already used"}
         case "COOKIES_CHECKED":

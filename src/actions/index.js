@@ -27,7 +27,6 @@ export const onLogin = (user) => {
                         cookieCheck: true }
                 })       
             }).catch(err => {
-                console.log(err);
                 const { message } = err.response.data
                 dispatch ({
                     type: "USER_LOGIN_FAIL",
@@ -63,7 +62,7 @@ export const keepLogin = () => {
                         cookieCheck: true }
                 })       
             }).catch(err => {
-                console.log(err);
+                console.log(err.response.data);
                 const { message } = err.response.data
                 dispatch ({
                     type: "USER_LOGIN_FAIL",

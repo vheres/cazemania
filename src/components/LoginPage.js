@@ -102,7 +102,7 @@ class LoginPage extends Component {
                                             </Row>
                                             <Row className="m-t">
                                                 <Col xsOffset={1} xs={10} mdOffset={0} md={12}>
-                                                    <h2 className="badge badge-danger pull-right">{this.props.auth.error}</h2>
+                                                    <h2 className="badge badge-danger pull-right">{this.props.auth.error!=="User not authorized."?this.props.auth.error:null}</h2>
                                                 </Col>
                                             </Row>
                                         </Col>
