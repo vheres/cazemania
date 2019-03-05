@@ -3,6 +3,8 @@ import { Grid, Row, Col } from 'react-bootstrap';
 import { Redirect } from 'react-router-dom';
 import { connect } from 'react-redux';
 import ReactPixel from 'react-facebook-pixel';
+import axios from 'axios';
+import {API_URL_1} from '../supports/api-url/apiurl'
 
 class ResetPassword extends Component {
     componentDidMount() {
@@ -15,8 +17,22 @@ class ResetPassword extends Component {
         }
     }
 
-    onResetClick = () => {
-        // var email = this.refs.email.value;
+    onResetClick() {
+        if (this.refs.email.value.length !== 0) {
+            axios.post(`${API_URL_1}/auth/forgotpassword`, {
+                email: this.refs.email.value
+            })
+            .then(res => {
+                alert('Email Anda telah diterima, kami telah mengirimkan email untuk mengubah password Anda')
+                this.props.history.push('/')
+            })
+            .catch(err => {
+                console.log(err)
+            })
+        } else {
+            alert('Masukkan email Anda')
+        }
+
     }
 
 
@@ -43,7 +59,7 @@ class ResetPassword extends Component {
                                             </label> 
                                         </div>
                                         <div className="m-t-lg">
-                                            <input type="button" className="btn-blue-orange" style={{width:'100%'}} value="Reset Password"/>
+                                            <input type="button" className="btn-blue-orange" style={{width:'100%'}} value="Reset Password" onClick={()=>this.onResetClick()}/>
                                         </div>
                                     </Col>
                                 </Row>
