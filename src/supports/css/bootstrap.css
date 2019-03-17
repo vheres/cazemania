@@ -7210,7 +7210,8 @@ button.close {
 @media (min-width: 567px) {
   .instagram-box {
     /* max-width: 198px; */
-    max-height: 198px;
+    min-height: 250px;
+    max-height: 250px;
   }
 }
 .carousel-best-button {
