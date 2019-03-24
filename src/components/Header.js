@@ -58,7 +58,6 @@ class Header extends Component {
         };
         axios.get(`${API_URL_1}/transaction/getcart`, headers)
         .then(async (response) => {
-            console.log(response.data.result)
             await this.setState({cart: response.data.result})
         })
     }
@@ -80,7 +79,7 @@ class Header extends Component {
             this.getCartList();
             alert(`delete item success!`)
         }).catch((err) => {
-            console.log(err);
+            // console.log(err);
         })
     }
 
@@ -96,7 +95,7 @@ class Header extends Component {
             await this.setState({cart:[]})
             alert(`clear cart success!`)
         }).catch((err) => {
-            console.log(err);
+            // console.log(err);
         })
     }
 

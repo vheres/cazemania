@@ -43,11 +43,10 @@ class PaymentPage extends Component {
         };
         axios.get(`${API_URL_1}/auth/profile`, headers)
         .then(async (response) => {
-            console.log(response.data.result)
             await this.setState({recipient: response.data.result})
         })
         .catch(err => {
-            console.log(err)
+            // console.log(err)
         })
     }
 
@@ -60,28 +59,24 @@ class PaymentPage extends Component {
         };
         axios.get(`${API_URL_1}/transaction/getcart`, headers)
         .then(async (response) => {
-            console.log(response.data.result)
             await this.setState({cart: response.data.result})
         })
         .catch(err => {
-            console.log(err)
+            // console.log(err)
         })
     }
 
     getBank() {
         axios.get(`${API_URL_1}/bank/all`)
         .then(res => {
-            console.log(res);
             this.setState({rekening: res.data.result});
         })
         .catch(err => {
-            console.log(err);
+            // console.log(err);
         })
     }
 
     getShippingCost() {
-        console.log(this.state.recipient.destination_code)
-        console.log(this.state.cart.length)
         axios.get(`${API_URL_1}/destination/shipping`, {
             params: {
                 destination: this.state.recipient.destination_code,
@@ -89,11 +84,11 @@ class PaymentPage extends Component {
             }
         })
         .then(async res => {
-            console.log(res)
+            // console.log(res)
             await this.setState({shipping: res.data.sicepat.results[0].tariff})
         })
         .catch(err => {
-            console.log(err)
+            console.log(err);
         })
     }
 
@@ -129,7 +124,6 @@ class PaymentPage extends Component {
 
     handleChange = (selectedOption) => {
         this.setState({ selectedOption });
-        console.log(`Option selected:`, selectedOption);
       }
 
     handleInputChange(selectedOption) {
@@ -157,7 +151,6 @@ class PaymentPage extends Component {
     }
 
     onKeyPress(enter) {
-        console.log(enter.which)
     }
 
     async onEditSave() {

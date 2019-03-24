@@ -31,7 +31,6 @@ class ShopPage extends Component {
             }
         })
         .then((response)=>{
-            console.log(response)
             this.setState({ catalogue: response.data.result.data, item_count: response.data.result.count, pagecount: Math.ceil((response.data.result.count/20)) })
         })
     }
@@ -46,7 +45,6 @@ class ShopPage extends Component {
         else {
             searchIn = params.get('search');
         }
-        console.log(this.state.active)
         axios.get(API_URL_1 + "/catalogue/products", {
             params: {
                 search: searchIn,
@@ -54,7 +52,6 @@ class ShopPage extends Component {
             }
         })
         .then((response)=>{
-            console.log(response.data)
             this.setState({ catalogue: response.data.result.data, item_count: response.data.result.count, pagecount: Math.ceil((response.data.result.count/20)) })
         })
     }
@@ -124,7 +121,7 @@ class ShopPage extends Component {
         } else {
             var arrJSX = this.state.catalogue.map(item => {
                 return (
-                    <ItemDetail id={item.id} name={item.name} image={item.image} sales={item.sales} category={'normal'} link={'product'}/>
+                    <ItemDetail key={item.id} id={item.id} name={item.name} image={item.image} sales={item.sales} category={'normal'} link={'product'}/>
                 );
             })
             return arrJSX

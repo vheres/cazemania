@@ -43,7 +43,6 @@ class ProfilePage extends Component {
 
     handleChange = (selectedOption) => {
         this.setState({ selectedOption });
-        console.log(`Option selected:`, selectedOption);
       }
 
     handleInputChange(selectedOption) {
@@ -71,7 +70,6 @@ class ProfilePage extends Component {
     }
 
     onKeyPress(enter) {
-        console.log(enter.which)
     }
 
     onEditSave() {

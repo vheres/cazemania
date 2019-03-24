@@ -6817,9 +6817,47 @@ button.close {
 .homepage-button-padding {
   padding: 2px;
 }
+.homepage-button-text-orange {
+  font-size: 14pt;
+  color: rgb(255,181,44);
+  font-weight: bold;
+}
+.homepage-button-text-blue {
+  font-size: 14pt;
+  color: rgb(9, 175, 204);
+  font-weight: bold;
+}
+.homepage-button-text-padding {
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start;
+  align-items: center;
+  padding-top: 10px;
+}
 @media (min-width: 567px) {
   .homepage-button-padding {
     padding: 6px;
+  }
+  .homepage-button-text-orange {
+    font-size: 18pt;
+  }
+  .homepage-button-text-blue {
+    font-size: 18pt;
+  }
+  .homepage-button-text-padding {
+    padding-top: 20px;
+  }
+}
+@media (min-width: 1367px) {
+  .homepage-button-text-orange {
+    font-size: 24pt;
+  }
+  .homepage-button-text-blue {
+    font-size: 24pt;
+  }
+  .homepage-button-text-padding {
+    padding-top: 40px;
   }
 }
 .homepage-section-margin {

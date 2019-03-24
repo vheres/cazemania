@@ -28,8 +28,8 @@ class HomePage extends Component {
                                             <div style={{position:'absolute',top:'0px', width:'100%',height:'100%'}}>
                                                 <img src={`${API_URL_1}/others/icons/icon1.png`} alt="katalog case" style={{width:'100%'}}/>
                                             </div>
-                                            <div style={{height:'100%',display:'flex',flexDirection:'column',justifyContent:'flex-start',alignItems:'center',paddingTop:'40px'}}>
-                                                <div style={{fontSize:'24pt',color:'rgb(255, 181, 44)',fontWeight:'bold'}}>
+                                            <div className="homepage-button-text-padding">
+                                                <div className="homepage-button-text-orange">
                                                     Katalog Case
                                                 </div>
                                             </div>
@@ -42,8 +42,8 @@ class HomePage extends Component {
                                             <div style={{position:'absolute',top:'0px', width:'100%',height:'100%'}}>
                                                 <img src={`${API_URL_1}/others/icons/icon2.png`} alt="custom case" style={{width:'100%'}}/>
                                             </div>
-                                            <div style={{height:'100%',display:'flex',flexDirection:'column',justifyContent:'flex-start',alignItems:'center',paddingTop:'40px'}}>
-                                                <div style={{fontSize:'24pt',color:'rgb(9, 175, 204)',fontWeight:'bold'}}>
+                                            <div className="homepage-button-text-padding">
+                                                <div className="homepage-button-text-blue">
                                                     Custom Case
                                                 </div>
                                             </div>
@@ -56,8 +56,8 @@ class HomePage extends Component {
                                             <div style={{position:'absolute',top:'0px', width:'100%',height:'100%'}}>
                                                 <img src={`${API_URL_1}/others/icons/icon3.png`} alt="premium case" style={{width:'100%'}}/>
                                             </div>
-                                            <div style={{height:'100%',display:'flex',flexDirection:'column',justifyContent:'flex-start',alignItems:'center',paddingTop:'40px'}}>
-                                                <div style={{fontSize:'24pt',color:'rgb(255, 181, 44)',fontWeight:'bold'}}>
+                                            <div className="homepage-button-text-padding">
+                                                <div className="homepage-button-text-orange">
                                                     Premium Case
                                                 </div>
                                             </div>
@@ -70,8 +70,8 @@ class HomePage extends Component {
                                             <div style={{position:'absolute',top:'0px', width:'100%',height:'100%'}}>
                                                 <img src={`${API_URL_1}/others/icons/icon4.png`} alt="join reseller" style={{width:'100%'}}/>
                                             </div>
-                                            <div style={{height:'100%',display:'flex',flexDirection:'column',justifyContent:'flex-start',alignItems:'center',paddingTop:'40px'}}>
-                                                <div style={{fontSize:'24pt',color:'rgb(9, 175, 204)',fontWeight:'bold'}}>
+                                            <div className="homepage-button-text-padding">
+                                                <div className="homepage-button-text-blue">
                                                     Join Reseller
                                                 </div>
                                             </div>
@@ -84,8 +84,8 @@ class HomePage extends Component {
                                             <div style={{position:'absolute',top:'0px', width:'100%',height:'100%'}}>
                                                 <img src={`${API_URL_1}/others/icons/icon5.png`} alt="list tipe hp" style={{width:'100%'}}/>
                                             </div>
-                                            <div style={{height:'100%',display:'flex',flexDirection:'column',justifyContent:'flex-start',alignItems:'center',paddingTop:'40px'}}>
-                                                <div style={{fontSize:'24pt',color:'rgb(255, 181, 44)',fontWeight:'bold'}}>
+                                            <div className="homepage-button-text-padding">
+                                                <div className="homepage-button-text-orange">
                                                     List Tipe HP
                                                 </div>
                                             </div>
@@ -98,8 +98,8 @@ class HomePage extends Component {
                                             <div style={{position:'absolute',top:'0px', width:'100%',height:'100%'}}>
                                                 <img src={`${API_URL_1}/others/icons/icon6.png`} alt="canvas bag mania" style={{width:'100%'}}/>
                                             </div>
-                                            <div style={{height:'100%',display:'flex',flexDirection:'column',justifyContent:'flex-start',alignItems:'center',paddingTop:'40px'}}>
-                                                <div style={{fontSize:'24pt',color:'rgb(9, 175, 204)',fontWeight:'bold'}}>
+                                            <div className="homepage-button-text-padding">
+                                                <div className="homepage-button-text-blue">
                                                     Canvas Bag Mania
                                                 </div>
                                             </div>

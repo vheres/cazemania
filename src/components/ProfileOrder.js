@@ -22,7 +22,6 @@ class ProfileOrder extends Component {
         };
         axios.get(`${API_URL_1}/transaction/transactionhistory`, headers)
         .then((res)=>{
-            console.log(res)
             this.setState({orders: res.data.result})
             // if (res.data.length === 0) {
             //     return null;
@@ -57,7 +56,6 @@ class ProfileOrder extends Component {
             return <div className="general-title-blue" style={{marginTop:'2rem'}}>Kamu belum pernah transaksi apapun!</div>
         } else {
             var arrJSX = this.state.orders.map((item, count)=>{
-                console.log(item)
                 return(
                     <ProfileRenderOrder key={item.orderId} item={item} refresh={()=>this.refreshData()}/>
             )})

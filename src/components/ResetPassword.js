@@ -27,7 +27,7 @@ class ResetPassword extends Component {
                 this.props.history.push('/')
             })
             .catch(err => {
-                console.log(err)
+                // console.log(err)
             })
         } else {
             alert('Masukkan email Anda')
@@ -37,7 +37,6 @@ class ResetPassword extends Component {
 
 
     render() {
-        console.log(this.props.auth)
         if(this.props.auth.email === "") {
             return(
                 <div>

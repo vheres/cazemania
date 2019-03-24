@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import { Grid, Row, Col, Button, ButtonGroup } from 'react-bootstrap';
 import ReactPixel from 'react-facebook-pixel';
+import { API_URL_1 } from '../supports/api-url/apiurl';
 
 class InformationPage extends Component {
     constructor(props, context) {
@@ -122,7 +123,7 @@ class InformationPage extends Component {
                         <Row>
                             <Col xs={12}>
                             <p>Bisa custom kak :) untuk custom ada biaya tambahan 10rb per case, & file design gambar dari kamu ya kak :)</p>
-                            <img src="https://lh6.googleusercontent.com/CgnwroILaqAQCxOCZvYWxAUZlT6xBwCRePrNBQkxeBXIp8DveHtgrlzaVYJZWPIa3a-8skA3vWZvC425eHE4rnTjYVhIKdG1uUL5PQk" alt="custom"></img>
+                            <img src={`${API_URL_1}/others/customimage.png`} alt="custom" style={{width:'300px'}}></img>
                             <p>File design harus seperti yang kiri ya kak bukan yg kanan. Jadi, harus berupa file design bukan foto case hp yang ada designnya</p>
                             <p>Tambahan:</p>
                             <ul>

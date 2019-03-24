@@ -16,7 +16,7 @@ class CarouselClass extends Component {
         axios.get('https://api.instagram.com/v1/users/self/media/recent/?access_token=4091682583.1677ed0.6b759821481d4bc4b8930e2d9da481f7')
         .then((res) => {
             this.setState({photos: res.data.data})
-            console.log(this.state.photos)
+            // console.log(this.state.photos)
         })
     }
 

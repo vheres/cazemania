@@ -1,7 +1,5 @@
 import React, { Component } from 'react';
 import { Grid, Row, Col } from 'react-bootstrap';
-import { Redirect } from 'react-router-dom';
-import { connect } from 'react-redux';
 import ReactPixel from 'react-facebook-pixel';
 import axios from 'axios';
 import {API_URL_1} from '../supports/api-url/apiurl'
@@ -24,7 +22,6 @@ class NewPassword extends Component {
         var ide = params.get('ide');
         this.setState({ide: ide})
         ReactPixel.pageView();
-        console.log('didmount')
     }
 
     onKeyPress(x) {
@@ -64,12 +61,12 @@ class NewPassword extends Component {
                 ep: ep
             }, headers)
             .then(res => {
-                console.log(res)
+                // console.log(res)
                 alert('Selamat, Password anda telah diperbaharui. Silahkan login melanjutkan!')
                 this.props.history.push('/login')
             })
             .catch(err => {
-                console.log(err)
+                // console.log(err)
                 alert('Perubahan password gagal, silahkan coba lagi atau hubungi admin kami')
             })
         }
@@ -92,7 +89,6 @@ class NewPassword extends Component {
 
 
     render() {
-        console.log('rendering')
         return(
             <div>
                 <Grid fluid>

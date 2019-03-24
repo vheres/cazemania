@@ -26,7 +26,8 @@ class InformationPage extends Component {
                         alert('request untuk menjadi reseller telah di kirim')
                     })
                     .catch(err => {
-                        console.log(err)
+                        alert('anda sudah pernah melakukan request untuk menjadi reseller, silahkan hubungi admin kami.')
+                        // console.log(err)
                     })
                 }
             } else {

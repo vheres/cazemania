@@ -3,6 +3,7 @@ import AliceCarousel from 'react-alice-carousel';
 import 'react-alice-carousel/lib/alice-carousel.css';
 import { Row, Col } from 'react-bootstrap';
 import axios from 'axios';
+import {API_URL_1} from '../supports/api-url/apiurl'
  
 class CarouselText extends Component {
   state = {testimonies: []}
@@ -15,9 +16,8 @@ class CarouselText extends Component {
       }
       
       getText() {
-        axios.get(`http://localhost/testimony/all`)
+        axios.get(`${API_URL_1}/testimony/all`)
         .then((response) => {
-          console.log(response.data.result)
             this.setState({testimonies: response.data.result})
         })
       }

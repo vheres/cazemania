@@ -33,9 +33,7 @@ class App extends Component {
     if (localStorage.getItem('token')) {
 			this.props.keepLogin();
 		}
-		console.log(this.props.auth);
-    console.log(this.props.auth);
-    ReactPixel.init('769774673361971', {}, { debug: true, autoConfig: false });
+    ReactPixel.init('445536802479637', {}, { debug: true, autoConfig: false });
     ReactPixel.pageView(); 	
   }
 

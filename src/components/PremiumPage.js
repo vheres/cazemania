@@ -25,7 +25,6 @@ class PremiumPage extends Component {
             }
         })
         .then((response)=>{
-            console.log(response)
             this.setState({ premiumcatalogue: response.data.result.data,item_count:response.data.result.count, pagecount: Math.ceil((response.data.result.count/20)) })
         })
     }

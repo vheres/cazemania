@@ -31,14 +31,11 @@ class RegisterRD extends Component {
                 arrJSX.push({value:item.destination_code, label:`${item.province}, ${item.city}, ${item.subdistrict}`})
             })
             this.setState({destination: arrJSX})
-            console.log(arrJSX)
-            console.log(this.state.destination)
         })
     }
 
     handleChange = (selectedOption) => {
         this.setState({ selectedOption });
-        console.log(`Option selected:`, selectedOption);
       }
 
     handleInputChange(selectedOption) {

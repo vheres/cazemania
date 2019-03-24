@@ -34,7 +34,6 @@ class LoginPage extends Component {
 
 
     render() {
-        console.log(this.props.auth)
         if(this.props.auth.email === "") {
             return(
                 <div>

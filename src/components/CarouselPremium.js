@@ -35,7 +35,6 @@ class CarouselPremium extends Component {
     };
 
     render() {
-        console.log(this.props.item)
         if (this.state.images.length > 0) {
             const items = this.galleryItems();  
             return (

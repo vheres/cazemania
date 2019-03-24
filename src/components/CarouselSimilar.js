@@ -17,20 +17,20 @@ class CarouselSimilar extends Component {
   componentWillReceiveProps(newProps) {
     axios.get(`${API_URL_1}/catalogue/similarproducts/${newProps.id}`)
         .then((response) => {
-          console.log(response)
+          // console.log(response)
             this.setState({similar_product: response.data.result})
         }).catch((err) => {
-            console.log(err)
+            // console.log(err)
         })
   }
 
   getSimilarProduct() {
     axios.get(`${API_URL_1}/catalogue/similarproducts/${this.props.id}`)
         .then((response) => {
-          console.log(response)
+          // console.log(response)
             this.setState({similar_product: response.data.result})
         }).catch((err) => {
-            console.log(err)
+            // console.log(err)
         })
   }
 

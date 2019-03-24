@@ -44,22 +44,22 @@ class CustomPage extends Component {
     getBrands() {
         axios.get(`${API_URL_1}/brand/all`)
         .then((res)=>{
-            console.log(res)
+            // console.log(res)
             this.setState({brands:res.data.result})
         })
         .catch(err => {
-            console.log(err);
+            // console.log(err);
         })
     }
 
     getphonemodels() {
         axios.get(`${API_URL_1}/phonemodel/all`)
         .then(res => {
-            console.log(res)
+            // console.log(res)
             this.setState({phonemodels:res.data.result})
         })
         .catch(err => {
-            console.log(err)
+            // console.log(err)
         })
     }
 
@@ -75,7 +75,7 @@ class CustomPage extends Component {
             }
         })
         .catch(err => {
-            console.log(err)
+            // console.log(err)
         })
     }
 
@@ -98,7 +98,6 @@ class CustomPage extends Component {
                 phonemodel = item
             }
         })
-        console.log(phonemodel)
         this.setState({selectedPhoneModelId: phonemodelId, selectedPhoneModel: phonemodel, selectedCaseType: 0, selected_price: 0 })
     }
 
@@ -128,7 +127,6 @@ class CustomPage extends Component {
     }
  
     brandSelectOptions(){
-        console.log(this.state.brands)
         var arrJSX = this.state.brands.map((item)=>{ 
             return(
                 <option value={item.id}>{item.name}</option>)

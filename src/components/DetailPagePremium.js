@@ -51,7 +51,7 @@ class DetailPagePremium extends Component {
             }
         })
         .catch(err => {
-            console.log(err)
+            // console.log(err)
         })
     }
 
@@ -219,6 +219,13 @@ class DetailPagePremium extends Component {
                                             {this.modelSelectOptions()}
                                         </Col>
                                     </Row>   
+                                </Col>
+                            </Row>
+                            <Row>
+                                <Col xs={12}>
+                                    <div style={{fontSize:'10pt',color:'#b3b3b3'}}>
+                                        * kode premium dapat dilihat pada gambar pertama
+                                    </div>
                                 </Col>
                             </Row>
                             <Row>

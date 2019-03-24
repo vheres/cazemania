@@ -31,7 +31,6 @@ class DetailPage extends Component {
     componentDidMount(){
         const params = new URLSearchParams(this.props.location.search);
         const id = params.get('id')
-        console.log(id)
         this.getProduct(id);
         this.getBrands();
         this.getphonemodels();
@@ -43,33 +42,33 @@ class DetailPage extends Component {
     getProduct(id) {
         axios.get(`${API_URL_1}/catalogue/getproduct/${id}`)
         .then((res)=>{
-            console.log(res)
+            // console.log(res)
             this.setState({item:res.data.result})
         })
         .catch(err => {
-            console.log(err)
+            // console.log(err)
         })
     }
 
     getBrands() {
         axios.get(`${API_URL_1}/brand/all`)
         .then((res)=>{
-            console.log(res)
+            // console.log(res)
             this.setState({brands:res.data.result})
         })
         .catch(err => {
-            console.log(err)
+            // console.log(err)
         })
     }
 
     getphonemodels() {
         axios.get(`${API_URL_1}/phonemodel/all`)
         .then(res => {
-            console.log(res)
+            // console.log(res)
             this.setState({phonemodels:res.data.result})
         })
         .catch(err => {
-            console.log(err)
+            // console.log(err)
         })
     }
 
@@ -85,7 +84,7 @@ class DetailPage extends Component {
             }
         })
         .catch(err => {
-            console.log(err)
+            // console.log(err)
         })
     }
 
@@ -136,7 +135,6 @@ class DetailPage extends Component {
     }
  
     brandSelectOptions(){
-        console.log(this.state.brands)
         var arrJSX = this.state.brands.map((item)=>{ 
             return(
                 <option value={item.id}>{item.name}</option>)
@@ -246,10 +244,8 @@ class DetailPage extends Component {
         await this.props.history.push(target)
         const params = new URLSearchParams(this.props.location.search);
         const id = params.get('id')
-        console.log(id);
         axios.get(`${API_URL_1}/catalogue/getproduct/${id}`)
         .then((res)=>{
-            console.log(res.data.result)
             this.setState({item:res.data.result})
         })
     }
@@ -316,7 +312,6 @@ class DetailPage extends Component {
     }
 
     renderAddToCartButton() {
-        console.log(this.state.selectedCaseType)
         if(this.state.selectedCaseType === undefined || this.state.selectedCaseType === 0) {
             return <input type="button" className="btn-orange-blue disabled" title="Please select Brand, Model and Type First" value="Add to Cart" onClick={()=>this.onAddToCart()} style={{width:"100%"}} disabled></input>
         }
