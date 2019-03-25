@@ -105,7 +105,7 @@ class PaymentPage extends Component {
             recipient: this.state.recipient
         }, headers)
         .then(response => {
-            alert('transaction success')
+            alert('Order kamu telah diterima, silahkan lakukan pembayaran di dashboard profile kamu.')
             ReactPixel.track('Purchase')
             this.props.history.push('/profile')
         })
@@ -235,7 +235,7 @@ class PaymentPage extends Component {
                     </Table>
                 </Row>
                 <Row>
-                    <input type="button" className="btn-orange-blue" onClick={()=>this.onCheckOutClick()} style={{width:"100%"}} value="Checkout"/>
+                    <input type="button" className="btn-orange-blue" onClick={()=>this.onCheckOutClick()} style={{width:"100%"}} value="Lanjutkan ke Pembayaran"/>
                 </Row>
             </Row>
         )     
