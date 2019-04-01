@@ -20,7 +20,7 @@ class HomePage extends Component {
                         <CarouselBanner/>
                     </Row>
                     <Row className="m-t-lg">
-                        <Col xsOffset={0} xs={12} mdOffset={1} md={10}>
+                        <Col xsOffset={0} xs={12} mdOffset={1} md={10} className="homepage-button-container">
                             <Row>
                                 <Col xs={4} className="homepage-button-padding">
                                     <Link to="/shop" className="image-holder" style={{width:"100%",paddingTop:'100%',backgroundColor:'#D4F4F2'}}>
@@ -127,7 +127,7 @@ class HomePage extends Component {
                         </Col>
                     </Row>
                     <Row style={{marginTop:'3rem',paddingTop:'5rem',paddingBottom:'5rem',backgroundColor:'#f2f2f2'}}>
-                        <Col xsOffset={0} xs={12} mdOffset={4} md={4}>
+                        <Col xsOffset={1} xs={10} mdOffset={4} md={4}>
                             <CarouselText/>
                         </Col>
                     </Row>

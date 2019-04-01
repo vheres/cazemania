@@ -7,7 +7,7 @@ class CartDetail extends Component {
         if (this.props.DeleteClick !== undefined) {
             return (
                 <Col xs={2} md={2}>
-                    <input type="button" className="btn-orange-blue" value="delete" onClick={()=>this.props.DeleteClick(this.props.item.id)}/>
+                    <input type="button" className="btn-orange-blue" value="Hapus" onClick={()=>this.props.DeleteClick(this.props.item.id)}/>
                 </Col>   
             )
         }

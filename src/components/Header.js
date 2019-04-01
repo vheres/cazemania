@@ -228,11 +228,11 @@ class Header extends Component {
     renderPaymentButton() {
         if (this.state.cart.length === 0) {
             return (
-                <input type="button" className="btn-blue-orange" onClick={()=>this.onPaymentClick()} value="Proceed to Payment" title="Your cart is empty!" disabled/>
+                <input type="button" className="btn-blue-orange" onClick={()=>this.onPaymentClick()} value="Lanjutkan ke Pembayaran" title="Keranjang Belanja Anda Masih Kosong!" disabled/>
             )
         } else {
             return (
-                <input type="button" className="btn-blue-orange" onClick={()=>this.onPaymentClick()} value="Proceed to Payment"/>
+                <input type="button" className="btn-blue-orange" onClick={()=>this.onPaymentClick()} value="Lanjutkan ke Pembayaran"/>
             )
         }
     }
@@ -399,13 +399,13 @@ class Header extends Component {
                 </Row>            
                 <Modal show={this.state.edit_modal} onHide={this.handleClose.bind(this)} bsSize="large">
                 <Modal.Header closeButton>
-                    <Modal.Title><span>Keranjang Anda</span><span><input type="button" style={{'margin-right':'30px'}} className="btn-blue-orange pull-right" value="Clear Cart" onClick={()=>this.onClearCartClick()}/></span></Modal.Title>
+                    <Modal.Title><span>Keranjang Anda</span><span><input type="button" style={{'margin-right':'30px'}} className="btn-blue-orange pull-right" value="Hapus Semua" onClick={()=>this.onClearCartClick()}/></span></Modal.Title>
                 </Modal.Header>
                 <Modal.Body>
                 {this.renderCartPage()}
                 </Modal.Body>
                 <Modal.Footer>
-                    <input type="button" className="btn-orange-blue m-r" onClick={this.handleClose.bind(this)} value="Back"/>
+                    <input type="button" className="btn-orange-blue m-r" onClick={this.handleClose.bind(this)} value="Kembali"/>
                     {this.renderPaymentButton()}
                 </Modal.Footer>
                 </Modal>

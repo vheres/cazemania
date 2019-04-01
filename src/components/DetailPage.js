@@ -142,10 +142,10 @@ class DetailPage extends Component {
         return(
             <label className="dropdown-container">
                 <select className="dropdown-select" ref="brand_select"  value={this.state.selectedBrandId} onChange={()=>this.onBrandSelect(this.refs.brand_select.value)}>
-                    <option value={0}>SELECT BRAND</option>
+                    <option value={0}>Merek HP</option>
                     {arrJSX}
                 </select>
-                <div className="text">Brand</div>
+                <div className="text">Merek HP</div>
             </label>
         )
     }
@@ -159,10 +159,10 @@ class DetailPage extends Component {
         return(
         <label className="dropdown-container">
             <select className="dropdown-select" id="phonemodel_select" ref="phonemodel_select" value={this.state.selectedPhoneModelId} onChange={()=>this.onPhoneModelSelect(this.refs.phonemodel_select.value)}>
-                <option value={0}>SELECT MODEL</option>
+                <option value={0}>Tipe HP</option>
                 {arrJSX}
             </select>
-            <div className="text">Model</div>
+            <div className="text">Tipe HP</div>
         </label>
         )
     }
@@ -189,11 +189,11 @@ class DetailPage extends Component {
         return(
             <label className="dropdown-container">
                 <select className="dropdown-select" id="case_select" ref="case_select" value={this.state.selectedCaseType} onChange={()=>this.onCaseTypeSelect(this.refs.case_select.value)}>
-                    <option value={0} selected>SELECT CASE</option>
+                    <option value={0} selected>Jenis Case</option>
                     {hardOption}
                     {softOption}
                 </select>
-                <div className="text">Type</div>
+                <div className="text">Jenis Case</div>
             </label>
         )
     }
@@ -313,11 +313,11 @@ class DetailPage extends Component {
 
     renderAddToCartButton() {
         if(this.state.selectedCaseType === undefined || this.state.selectedCaseType === 0) {
-            return <input type="button" className="btn-orange-blue disabled" title="Please select Brand, Model and Type First" value="Add to Cart" onClick={()=>this.onAddToCart()} style={{width:"100%"}} disabled></input>
+            return <input type="button" className="btn-orange-blue disabled" title="Please select Brand, Model and Type First" value="Masukkan ke Keranjang Belanja" onClick={()=>this.onAddToCart()} style={{width:"100%"}} disabled></input>
         }
         else {
             return (
-                <input type="button" className="btn-orange-blue" value="Add to Cart" onClick={()=>this.onAddToCart()} style={{width:"100%"}}></input>
+                <input type="button" className="btn-orange-blue" value="Masukkan ke Keranjang Belanja" onClick={()=>this.onAddToCart()} style={{width:"100%"}}></input>
             )
             
         }
