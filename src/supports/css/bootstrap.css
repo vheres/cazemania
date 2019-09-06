@@ -6814,16 +6814,20 @@ button.close {
   height: 100%;
   object-fit: cover;
 }
+.homepage-button-container {
+  padding-left: 30px !important;
+  padding-right: 30px !important;
+}
 .homepage-button-padding {
   padding: 2px;
 }
 .homepage-button-text-orange {
-  font-size: 14pt;
+  font-size: 9pt !important;
   color: rgb(255,181,44);
   font-weight: bold;
 }
 .homepage-button-text-blue {
-  font-size: 14pt;
+  font-size: 9pt !important;
   color: rgb(9, 175, 204);
   font-weight: bold;
 }
@@ -6833,9 +6837,13 @@ button.close {
   flex-direction: column;
   justify-content: flex-start;
   align-items: center;
-  padding-top: 10px;
+  padding-top: 5px;
 }
 @media (min-width: 567px) {
+  .homepage-button-container {
+    padding-left: 0px !important;
+    padding-right: 0px !important;
+  }
   .homepage-button-padding {
     padding: 6px;
   }
@@ -7723,6 +7731,9 @@ color:#54b59f;
 
 .general-tooltip {
   background-color: #53b59f !important;
+}
+.cursor-pointer {
+  cursor: pointer !important;
 }
 
 

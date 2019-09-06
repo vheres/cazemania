@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import { Grid, Row, Col, Button, ButtonGroup } from 'react-bootstrap';
 import ReactPixel from 'react-facebook-pixel';
 import { API_URL_1 } from '../supports/api-url/apiurl';
+import { Link } from 'react-router-dom';
 
 class InformationPage extends Component {
     constructor(props, context) {
@@ -100,31 +101,32 @@ class InformationPage extends Component {
                         </Row>
                         <Row>
                             <Col xs={12}>
-                            <p>Barang PO ya kak :) kurang lebih 7-14hr ya kak untuk proses cetak casenya (tidak termasuk tgl merah n hari Sabtu Minggu) :) kita usahakan secepatnya, tapi semua tergantung antrian cetak ya kak :)</p>
+                            <p>Untuk softcase & hardcase, PO kurang lebih 7-14 hari untuk proses mencetak case (tidak termasuk tanggal merah dan hari Sabtu Minggu). Caze Mania selalu mengusahakan agar case bisa jadi secepatnya, tetapi semua tergantung antrian cetak.</p>
+                            <p>Untuk premium case, barang ready stock.</p>
                             <hr/>
                             </Col>
                         </Row>
                         <Row>
                             <Col xs={12} className="information-list-subtitle">
-                            PO berapa lama kak?
+                            Berapa lama waktu PO?
                             </Col>
                         </Row>
                         <Row>
                             <Col xs={12}>
-                            <p>kurang lebih 7-14hr ya kak untuk proses cetak casenya (tidak termasuk tgl merah n hari Sabtu Minggu) :) kita usahakan secepatnya, tp semua tergantung antrian cetak ya kak :)</p>
+                            <p>kurang lebih 7-14 hari untuk proses cetak casenya (tidak termasuk tanggal merah dan hari Sabtu Minggu). Caze Mania selalu mengusahakan agar case bisa jadi secepatnya, tetapi semua tergantung antrian cetak.</p>
                             <hr/>
                             </Col>
                         </Row>
                         <Row>
                             <Col xs={12} className="information-list-subtitle">
-                            Bisa Custom? Syarat & Ketentuan Custom apa kak?
+                            Apakah bisa Custom? Apa Syarat & Ketentuan untuk custom case?
                             </Col>
                         </Row>
                         <Row>
                             <Col xs={12}>
-                            <p>Bisa custom kak :) untuk custom ada biaya tambahan 10rb per case, & file design gambar dari kamu ya kak :)</p>
+                            <p>Cazemania menerima pesanan custom case. Untuk custom ada biaya tambahan sebesar Rp 10.000,- per case, & file design gambar dari customer.</p>
                             <img src={`${API_URL_1}/others/customimage.png`} alt="custom" style={{width:'300px'}}></img>
-                            <p>File design harus seperti yang kiri ya kak bukan yg kanan. Jadi, harus berupa file design bukan foto case hp yang ada designnya</p>
+                            <p>File design harus seperti gambar sebelah kiri, tidak bisa seperti yang sebelah kanan. Jadi, harus berupa file design bukan foto case hp yang ada designnya.</p>
                             <p>Tambahan:</p>
                             <ul>
                                 <li>Sebaiknya file design memiliki resolusi yg tinggi (supaya hasil cetak tidak pecah)</li>
@@ -135,37 +137,41 @@ class InformationPage extends Component {
                         </Row>
                         <Row>
                             <Col xs={12} className="information-list-subtitle">
-                            Jenis casenya ada apa aja kak?
+                            Apa jenis case yang tersedia?
                             </Col>
                         </Row>
                         <Row>
                             <Col xs={12}>
-                            <p>Ada 2 jenis case kak:</p>
+                            <p>Caze Mania menjual 2 jenis case:</p>
                             <ul>
-                                <li>Softcase    : tidak full print, bahan elastis & bisa ditekuk-tekuk</li>
-                                <li>Hardcase	: full print, bahan kaku & tidak bisa ditekuk-tekuk</li>
+                                <li>Softcase    : Tidak full print, bahan elastis & bisa ditekuk-tekuk</li>
+                                <li>Hardcase	: Full print, bahan kaku & tidak bisa ditekuk-tekuk</li>
                             </ul>
                             <hr/>
                             </Col>
                         </Row>
                         <Row>
                             <Col xs={12} className="information-list-subtitle">
-                            Harganya berapa kak?
+                            Berapa Harganya?
                             </Col>
                         </Row>
                         <Row>
                             <Col xs={12}>
                             <ul>
-                                <li>Softcase	: Rp 50.000,-</li>
-                                <li>Hardcase	: Rp 70.000,-</li>
+                                <li>Softcase	: Rp. 50.000,-</li>
+                                <li>Hardcase	: Rp. 75.000,-</li>
                             </ul>
-                            <p>Beli 2 Gratis 1, bisa campur tipe hp & design case bisa beda-beda juga</p>
+                            <p>Beli 2 Gratis 1, bisa campur tipe hp & design case bisa berbeda.</p>
+                            <ul>
+                                <li>Premium Case    : Rp. 100.000,-</li>
+                            </ul>
+                            <p>Tidak berlaku beli 2 gratis 1</p>
                             <hr/>
                             </Col>
                         </Row>
                         <Row>
                             <Col xs={12} className="information-list-subtitle">
-                            Gratisnya hardcase atau softcase kak?
+                            Apakah gratisnya berupa softcase / hardcase?
                             </Col>
                         </Row>
                         <Row>
@@ -173,9 +179,9 @@ class InformationPage extends Component {
                             <p>Beli 2 gratis 1</p>
                             <ul>
                                 <li>Gratisnya adalah softcase</li>
-                                <li>Bisa gratis hardcase kok kak :)  Tapi, semua pesanan hardcase ya kak.</li>
+                                <li>Gratis hardcase hanya bisa didapatkan apabila semua pesanan adalah hardcase.</li>
                             </ul>
-                            <p>Contoh: kalau beli 6 pcs campur softcase & hardcase maka yg dianggap sebagai gratisnya adalah softcase, tp kl beli 6pcs dan semua hardcase maka bisa dapat hardcase sebagai freenya. :)</p>
+                            <p>Contoh: kalau beli 6 pcs campur softcase & hardcase maka yg dianggap sebagai gratisnya adalah softcase, tetapi jika membeli 6 pcs dan semua hardcase maka bisa dapat hardcase sebagai gratisnya.</p>
                             <hr/>
                             </Col>
                         </Row>
@@ -186,7 +192,7 @@ class InformationPage extends Component {
                         </Row>
                         <Row>
                             <Col xs={12}>
-                            <p>Silahkan chat admin melalui Line / Whatsapp :)</p>
+                            <p>Silahkan chat admin melalui Line / Whatsapp</p>
                             </Col>
                         </Row>
                         <Row>
@@ -220,15 +226,37 @@ class InformationPage extends Component {
                         </Row>
                         <Row>
                             <Col xs={12}>
-                            Anim pariatur cliche reprehenderit, enim eiusmod high life accusamus terry
-                            richardson ad squid. 3 wolf moon officia aute, non cupidatat skateboard
-                            dolor brunch. Food truck quinoa nesciunt laborum eiusmod. Brunch 3 wolf
-                            moon tempor, sunt aliqua put a bird on it squid single-origin coffee nulla
-                            assumenda shoreditch et. Nihil anim keffiyeh helvetica, craft beer labore
-                            wes anderson cred nesciunt sapiente ea proident. Ad vegan excepteur
-                            butcher vice lomo. Leggings occaecat craft beer farm-to-table, raw denim
-                            aesthetic synth nesciunt you probably haven't heard of them accusamus
-                            labore sustainable VHS.
+                                <ul>
+                                    <li>
+                                        Untuk cek order Anda & nominal yang perlu dibayarkan, Anda dapat melihat melalui halaman "My Transactions" <Link to="/profile" style={{color:'rgb(9, 175, 204)'}}>http://cazemania.id/profile</Link> atau Anda juga dapat mengecek kembali E-mail Anda.
+                                    </li>
+                                    <li>
+                                        Silahkan m elakukan pembayaran dengan cara transfer ke nomor rekening:
+                                        <ul>
+                                            <li>
+                                                BCA 5725203613 atas nama Catharina Evelyn
+                                            </li>
+                                            <li>
+                                                Mandiri 1330011915279 atas nama Catharina Evelyn
+                                            </li>
+                                        </ul>
+                                    </li>
+                                    <li>
+                                        Setelah melakukan pembayaran, langkah selanjutnya adalah mengkonfirmasi pembayaran
+                                    </li>
+                                    <li>
+                                        Pada halaman "My Transactions" / <Link to="/profile" style={{color:'rgb(9, 175, 204)'}}>http://cazemania.id/profile</Link> klik pada bagian nomor order ID dari transaksi yang sudah dibayarkan.
+                                    </li>
+                                    <li>
+                                        Klik tombol "pilih gambar" untuk memasukkan bukti pembayaran. Lau, klik upload untuk meng-upload bukti pembayaran Anda.
+                                    </li>
+                                    <li>
+                                        Setelah berhasil mengupload bukti pembayaran, admin Caze Mania akan melakukan pengecekan, apabila admin telah mengkonfirmasi pembayaran Anda, maka Anda akan mendapatkan e-mail konfirmasi pembayaran.
+                                    </li>
+                                    <li>
+                                        Selanjutnya mohon menunggu kurang lebih 7-14 hari kerja (tidak termasuk tanggal merah & hari Minggu) karena pesanan case akan kami proses cetak terlebih dahulu.
+                                    </li>
+                                </ul>
                             </Col>
                         </Row>
                         <Row>

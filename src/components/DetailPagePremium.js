@@ -72,10 +72,10 @@ class DetailPagePremium extends Component {
         return (
             <label className="dropdown-container">
                 <select className="dropdown-select" ref="premium_select" onChange={()=>handlePremiumSelect()}>
-                    <option value={0}>SELECT</option>
+                    <option value={0}>Kode Premium</option>
                     {arrJSX}
                 </select>
-                <div className="text">Premium Code</div>
+                <div className="text">Kode Premium</div>
             </label>
         )
     }
@@ -99,10 +99,10 @@ class DetailPagePremium extends Component {
         return(
             <label className="dropdown-container">
                 <select className="dropdown-select" ref="model_select" onChange={()=>handleModelSelect()}>
-                    <option value={0}>SELECT MODEL</option>
+                    <option value={0}>Tipe HP</option>
                     {arrJSX}
                 </select>
-                <div className="text">Model</div>
+                <div className="text">Tipe HP</div>
             </label>
         )
     }
@@ -185,11 +185,11 @@ class DetailPagePremium extends Component {
 
     renderAddToCartButton() {
         if(this.state.premiumselect === 0 || this.state.modelselectId === 0 || this.state.quantity > this.state.selectedStock) {
-            return <input type="button" className="btn-orange-blue disabled" title="Please select Premium Code and Model first" value="Add to Cart" onClick={()=>this.onAddToCart()} style={{width:"100%"}} disabled></input>
+            return <input type="button" className="btn-orange-blue disabled" title="Please select Premium Code and Model first" value="Masukkan ke Keranjang Belanja" onClick={()=>this.onAddToCart()} style={{width:"100%"}} disabled></input>
         }
         else {
             return (
-                <input type="button" className="btn-orange-blue" value="Add to Cart" onClick={()=>this.onAddToCart()} style={{width:"100%"}}/>
+                <input type="button" className="btn-orange-blue" value="Masukkan ke Keranjang Belanja" onClick={()=>this.onAddToCart()} style={{width:"100%"}}/>
             )
             
         }

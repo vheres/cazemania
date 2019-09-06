@@ -10,6 +10,7 @@ import { createStore, applyMiddleware } from 'redux';
 import reducers from './reducers';
 import ReduxThunk from 'redux-thunk';
 import ScrollToTop from './components/ScrollToTop';
+import HttpsRedirect from 'react-https-redirect';
 
 const store = createStore(reducers, {},  applyMiddleware(ReduxThunk));
 
@@ -17,7 +18,9 @@ ReactDOM.render(
     <Provider store={store}>
         <BrowserRouter>
             <ScrollToTop>
-                <App/>
+                <HttpsRedirect>
+                    <App/>
+                </HttpsRedirect>
             </ScrollToTop>
         </BrowserRouter>
     </Provider>,

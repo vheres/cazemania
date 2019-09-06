@@ -96,6 +96,14 @@ class ProfileRenderOrder extends Component {
     }
 
     renderHeader(){
+        var renderNamaFile = () => {
+            if (this.state.namafile.length > 15) {
+                return (this.state.namafile.split('').splice(0,15).join(''))
+            }
+            else {
+                return this.state.namafile
+            }
+        }
         var renderBuktiPembayaran = () => {
             if (this.props.item.status !== 'pendingProof') {
                 return (
@@ -109,13 +117,13 @@ class ProfileRenderOrder extends Component {
             return (
                 <header className="wrapper-md bg-light lter">
                     <div className="row">
-                        <span className="col-xs-12 col-md-2">Bukti pembayaran: </span>
-                        <span className="col-xs-8 col-md-8">
-                            <label for={this.props.item.orderId} className="btn btn-sm btn-primary" style={{'width': '120px'}} title="pilih file, lalu klik upload">
-                                <span className="text-ellipsis">{this.state.namafile}</span>
+                        <div className="col-xs-12 col-md-2">Bukti pembayaran: </div>
+                        <div className="col-xs-8 col-md-8">
+                            <label for={this.props.item.orderId} className="btn-blue-orange text-center cursor-pointer" style={{width: '160px'}} title="pilih file, lalu klik upload">
+                                {renderNamaFile()}
                             </label>{' '}
-                            <input type="button" value="Upload" className="btn btn-sm btn-success" title="pilih file, lalu klik upload" onClick={()=>this.onUpLoadClick()}></input>
-                        </span>
+                            <input type="button" value="Upload" className="btn-orange-blue" title="pilih file, lalu klik upload" onClick={()=>this.onUpLoadClick()}></input>
+                        </div>
                             <input type="file" className="inputfile" name="filename" id={this.props.item.orderId} accept="image/*" onChange={()=>this.handleInputFile()}/>
                         {renderBuktiPembayaran()}
                     </div>
