@@ -14,7 +14,7 @@
     "express-fileupload": "^1.0.0-alpha.1",
     "moment": "^2.22.2",
     "mysql": "github:mysqljs/mysql",
-    "nodemailer": "^4.6.8"
+    "nodemailer": "^6.4.16"
   },
   "description": ""
 }
